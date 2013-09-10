@@ -19,6 +19,11 @@ namespace coex
 	
 	struct config
 	{
+    config() 
+    { 
+      os = coex::ceUnknown;
+    };
+
 		QString inputFolder;
 		QString outputFolder;
 		typeOS os;

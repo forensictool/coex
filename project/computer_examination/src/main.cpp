@@ -2,37 +2,35 @@
 #include <iostream>
 #include <QString>
 #include <QVector>
-#include "task.h"
-#include "example_task.h"
+#include "coex.h"
+
+// ------------------------------------------------------------------
 
 int main( int argc, const char* argv[] )
 {
-	if(argc != 3)
+	if(argc < 3)
 	{
-		std::cout << "\nusage: " << argv[0] << " <input folder> <output folder>\n\n";
+		std::cout << "\nusage: " << argv[0] << " [OPTIONS] <input folder> <output folder>\n\n";
 		return -1;
 	};
 	
+  // fill config
 	coex::config cnf;
-	cnf.inputFolder = QString(argv[1]);
-	cnf.outputFolder = QString(argv[2]);
-	cnf.os = coex::ceUnknown;
+	cnf.inputFolder = QString(argv[argc-2]);
+	cnf.outputFolder = QString(argv[argc-1]);
 	
 	// detection system
-	cnf.os = coex::ceWindowsXP;
+  cnf.os = coex::detectOS(cnf.inputFolder);
 	
 	// print config
 	std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
 	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
 	std::cout << "\tType OS: " << cnf.os << "\n";
-			
-	
-	QVector<coex::task*> tasks;
-	
-	// creating tasks
-	coex::createTask<exampleTask>(cnf.os, tasks);
-	
-	
+
+  // init tasks	
+	QVector<coex::task*> tasks;	
+  coex::initTasks(cnf.os, tasks);
+  	
 	// executing tasks
 	for(int i = 0; i < tasks.size(); i++)
 	{

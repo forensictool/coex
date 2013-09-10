@@ -44,9 +44,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = src/main.cpp \
-		src/example_task.cpp 
+		src/example_task.cpp \
+    src/coex.cpp \
+    src/task_search_pidgin_win.cpp
 OBJECTS       = main.o \
-		example_task.o
+		example_task.o \
+    coex.o \
+    task_search_pidgin_win.o
 DIST          = /usr/share/qt4/mkspecs/common/unix.conf \
 		/usr/share/qt4/mkspecs/common/linux.conf \
 		/usr/share/qt4/mkspecs/common/gcc-base.conf \
@@ -167,7 +171,7 @@ qmake:  FORCE
 
 dist: 
 	@$(CHK_DIR_EXISTS) .tmp/computer_examination1.0.0 || $(MKDIR) .tmp/computer_examination1.0.0 
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/computer_examination1.0.0/ && $(COPY_FILE) --parents src/task.h src/example_task.h .tmp/computer_examination1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/example_task.cpp .tmp/computer_examination1.0.0/ && (cd `dirname .tmp/computer_examination1.0.0` && $(TAR) computer_examination1.0.0.tar computer_examination1.0.0 && $(COMPRESS) computer_examination1.0.0.tar) && $(MOVE) `dirname .tmp/computer_examination1.0.0`/computer_examination1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/computer_examination1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/computer_examination1.0.0/ && $(COPY_FILE) --parents src/task.h src/example_task.h .tmp/computer_examination1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/example_task.cpp src/coex.cpp src/task_search_pidgin_win.cpp .tmp/computer_examination1.0.0/ && (cd `dirname .tmp/computer_examination1.0.0` && $(TAR) computer_examination1.0.0.tar computer_examination1.0.0 && $(COMPRESS) computer_examination1.0.0.tar) && $(MOVE) `dirname .tmp/computer_examination1.0.0`/computer_examination1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/computer_examination1.0.0
 
 
 clean:compiler_clean 
@@ -209,12 +213,21 @@ compiler_clean:
 
 ####### Compile
 
-main.o: src/main.cpp src/task.h
+main.o: src/main.cpp src/coex.h src/task.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
 
 example_task.o: src/example_task.cpp src/example_task.h \
 		src/task.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o example_task.o src/example_task.cpp
+
+task_search_pidgin_win.o: src/task_search_pidgin_win.cpp src/task_search_pidgin_win.h \
+		src/task.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o task_search_pidgin_win.o src/task_search_pidgin_win.cpp
+
+coex.o: src/coex.cpp src/coex.h src/example_task.h src/task_search_pidgin_win.h  \
+		src/task.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coex.o src/coex.cpp
+
 
 ####### Install
 
