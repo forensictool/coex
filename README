@@ -1,5 +1,12 @@
 Folder 'project' has project for qt.
+	for build:
+	cd project/computer_examination
+	qmake && make
+
+
 Folder 'docs' has documentation.
+
+
 
 
 
