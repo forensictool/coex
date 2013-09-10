@@ -9,7 +9,7 @@ taskSearchPidginWin::taskSearchPidginWin()
 
 bool taskSearchPidginWin::supportOS(const coex::typeOS &os)
 {
-	return (os == coex::ceWindowsXP) || 
+	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
 };
 
 QString taskSearchPidginWin::name()
@@ -28,10 +28,13 @@ bool taskSearchPidginWin::test()
 	return true;
 };
 
-bool taskSearchPidgin::execute(const coex::config &config)
+bool taskSearchPidginWin::execute(const coex::config &config)
 {
   // TODO: 
 	std::cout << ">>>>>> same execute...\n\n";
+	std::cout << config.inputFolder.toStdString() << "\n";
+	std::cout << config.outputFolder.toStdString() << "\n";
+	
 	return true;
 };
 		

@@ -10,11 +10,10 @@ namespace coex {
     coex::createTask<taskSearchPidginWin>(os, tasks);    
   };  
 
-  coex::typeOS detectOS(QString inputFolder)
+  coex::typeOS detectOS(QString /*inputFolder*/)
   {
     // TODO: detect system
+    // inputFolder
     return coex::ceWindowsXP;  
   };  
 };
-
-#endif // __COEX_H__
