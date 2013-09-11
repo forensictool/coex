@@ -4,8 +4,6 @@
 #include <QString>
 #include <QVector>
 #include "task.h"
-#include "example_task.h"
-#include "task_search_pidgin_win.h"
 
 namespace coex {
 

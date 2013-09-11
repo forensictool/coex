@@ -1,7 +1,7 @@
 #ifndef __TASK_SEARCH_PIDGIN_WIN_H__
 #define __TASK_SEARCH_PIDGIN_WIN_H__
 
-#include "task.h"
+#include "../task.h"
 
 class taskSearchPidginWin : public coex::task 
 {

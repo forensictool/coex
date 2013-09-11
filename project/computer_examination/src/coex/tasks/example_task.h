@@ -1,7 +1,7 @@
 #ifndef __EXAMPLE_TASKS_H__
 #define __EXAMPLE_TASKS_H__
 
-#include "task.h"
+#include "../task.h"
 
 class exampleTask : public coex::task 
 {
