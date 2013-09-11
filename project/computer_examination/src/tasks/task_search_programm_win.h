@@ -1,12 +1,12 @@
-#ifndef __EXAMPLE_TASKS_H__
-#define __EXAMPLE_TASKS_H__
+#ifndef __TASK_SEARCH_PROGRAMM_WIN_H__
+#define __TASK_SEARCH_PROGRAMM_WIN_H__
 
-#include "../task.h"
+#include "../coex/task.h"
 
-class exampleTask : public coex::task 
+class taskSearchProgrammWin : public coex::task 
 {
 	public:
-		exampleTask();
+		taskSearchProgrammWin();
 	
 		// coex::Task 
 		virtual bool supportOS(const coex::typeOS &os);
@@ -20,4 +20,4 @@ class exampleTask : public coex::task
 		QString m_strDescription;
 };
 
-#endif // __EXAMPLE_TASKS_H__
+#endif // __TASK_SEARCH_PROGRAMM_WIN_H__

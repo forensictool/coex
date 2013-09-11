@@ -2,7 +2,7 @@
 #include <iostream>
 #include <QString>
 #include <QVector>
-#include "coex.h"
+#include "coex/coex.h"
 
 // ------------------------------------------------------------------
 
