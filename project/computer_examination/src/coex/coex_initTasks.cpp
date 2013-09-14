@@ -3,12 +3,14 @@
 #include "../tasks/example_task.h"
 #include "../tasks/task_search_pidgin_win.h"
 #include "../tasks/task_search_programm_win.h"
+#include "../tasks/task_search_pidgin_unix.h"
 
 namespace coex {
   void initTasks(const coex::typeOS &os, QVector<coex::task*> &tasks)
   {
     coex::createTask<exampleTask>(os, tasks);
     coex::createTask<taskSearchPidginWin>(os, tasks);
+    coex::createTask<taskSearchPidginUnix>(os, tasks);
     coex::createTask<taskSearchProgrammWin>(os, tasks);
   };
 };
