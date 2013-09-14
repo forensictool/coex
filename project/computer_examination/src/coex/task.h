@@ -9,6 +9,7 @@ namespace coex
 	enum typeOS
 	{
 		ceUnknown,
+		ceLinux,
 		ceWindows95,
 		ceWindows98,
 		ceWindowsXP,
