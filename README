@@ -3,8 +3,14 @@ Folder 'project' has project for qt.
 	cd project/computer_examination
 	qmake && make
 
-
 Folder 'docs' has documentation.
+
+You can find repo with test data:
+
+for example:
+$ git clone git@git.keva.su:gpo-testdata.git gpo-testdata.git
+
+
 
 
 
