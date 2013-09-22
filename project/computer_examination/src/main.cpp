@@ -25,7 +25,7 @@ int main( int argc, const char* argv[] )
 	// print config
 	std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
 	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
-	std::cout << "\tType OS: " << cnf.os << "\n";
+	std::cout << "\tType OS: " << typeOStoString(cnf.os).toStdString() << "\n";
 
   // init tasks	
 	QVector<coex::task*> tasks;	
