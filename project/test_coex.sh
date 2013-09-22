@@ -45,3 +45,9 @@ if [ -d "../gpo-testdata.git/Windows8_Pro" ]; then
   mkdir Win8Pro
   ./coex "../gpo-testdata.git/Windows8_Pro" "Win8Pro"
 fi
+
+echo ">>> test win 7 ult"
+if [ -d "../gpo-testdata.git/Windows7_Ult" ]; then
+  mkdir "Win7Ult"
+  ./coex "../gpo-testdata.git/Windows7_Ult" "Win7Ult"
+fi
