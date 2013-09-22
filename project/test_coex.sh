@@ -14,33 +14,34 @@ else
   cd ..
 fi
 
-# check folder gpo-tests
-if [ ! -d "gpo-testdata.git" ]
+echo ">>> check folder gpo-tests";
+
+if [ ! -d "gpo-testdata.git" ]; then
   echo "folder 'gpo-testdata.git' - not found"
   exit
 fi
 
 echo ">>> clean 'gpo-tests'";
 if [ ! -d "gpo-tests" ]; then
-  mkdir "gpo-tests"
+  mkdir "gpo-tests";
 else
-  rm -rf "gpo-tests"
-  mkdir "gpo-tests"
+  rm -rf "gpo-tests";
+  mkdir "gpo-tests";
 fi
 
-# check folder gpo-tests
-if [ ! -d "gpo-tests" ]
+echo ">>> check folder gpo-tests";
+if [ ! -d "gpo-tests" ]; then
   echo "folder 'gpo-tests' - not found"
-  exit
+  exit;
 else
-  cd "gpo-tests"
+  cd "gpo-tests";
 fi
 
-#copy coex
-cp gpo.git/project/coex ./
+echo ">>> copy coex";
+cp ../gpo.git/project/coex ./
 
-# test win8pro
-if[ -d "../gpo-testdata.git/Windows8_Pro" ]; then
+echo ">>> test win 8 pro";
+if [ -d "../gpo-testdata.git/Windows8_Pro" ]; then
   mkdir Win8Pro
-  ./coex "../gpo-testdata.git/Windows8_Pro" Win8Pro
+  ./coex "../gpo-testdata.git/Windows8_Pro" "Win8Pro"
 fi
