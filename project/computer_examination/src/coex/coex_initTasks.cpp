@@ -5,6 +5,7 @@
 #include "../tasks/task_search_programm_win.h"
 #include "../tasks/task_search_syslogs_lin.h"
 #include "../tasks/task_search_pidgin_unix.h"
+#include "../tasks/task_detect_os.h"
 
 namespace coex {
   void initTasks(const coex::typeOS &os, QVector<coex::task*> &tasks)
@@ -14,5 +15,6 @@ namespace coex {
     coex::createTask<taskSearchPidginUnix>(os, tasks);
     coex::createTask<taskSearchProgrammWin>(os, tasks);
     coex::createTask<taskSearchSyslogsLin>(os, tasks);
+    coex::createTask<taskDetectOs>(os, tasks);
   };
 };
