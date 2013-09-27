@@ -27,6 +27,12 @@ int main( int argc, const char* argv[] )
 	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
 	std::cout << "\tType OS: " << typeOStoString(cnf.os).toStdString() << "\n";
 
+  if(cnf.os == coex::ceUnknown)
+  {
+    std::cout << "\tCould not detected os!\n";
+    return -1;
+  };
+
   // init tasks	
 	QVector<coex::task*> tasks;	
   coex::initTasks(cnf.os, tasks);
