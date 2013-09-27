@@ -22,17 +22,23 @@ int main( int argc, const char* argv[] )
 	// detection system
   cnf.os = coex::detectOS(cnf.inputFolder);
 	
-	// print config
-	std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
-	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
-	std::cout << "\tType OS: " << typeOStoString(cnf.os).toStdString() << "\n";
+  // print config
+  coex::printConfig(cnf);
 
+  // check results after detect os
   if(cnf.os == coex::ceUnknown)
   {
     std::cout << "\tCould not detected os!\n";
     return -1;
   };
 
+  // write config to file
+  if(!coex::writeConfig(cnf))
+  {
+    std::cout << "\tCould not write config to file!\n";
+    return -2;
+  };  
+  
   // init tasks	
 	QVector<coex::task*> tasks;	
   coex::initTasks(cnf.os, tasks);

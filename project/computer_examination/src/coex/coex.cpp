@@ -1,4 +1,6 @@
 #include "coex.h"
+#include <stdio.h>
+#include <iostream>
 
 namespace coex {
 
@@ -24,4 +26,42 @@ namespace coex {
 		else 
 			return QString((int)os);
 	};
+
+  void printConfig(const coex::config& cnf)
+  {
+    // print config
+  	std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
+  	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
+  	std::cout << "\tType OS: " << coex::typeOStoString(cnf.os).toStdString() << "\n";
+  };
+
+  bool writeConfig(const coex::config& cnf)
+  {
+    QFile file(cnf.outputFolder + "//coex_config.xml");
+ 
+  	// open a file
+  	if (file.open(QIODevice::WriteOnly))
+  	{	
+  		QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
+  		xmlWriter->setDevice(&file);
+  		xmlWriter->writeStartDocument();
+
+  		xmlWriter->writeStartElement("InputFolder");
+      xmlWriter->writeCharacters(cnf.inputFolder);
+      xmlWriter->writeEndElement();
+
+      xmlWriter->writeStartElement("OutputFolder");
+      xmlWriter->writeCharacters(cnf.outputFolder);
+      xmlWriter->writeEndElement();
+
+      xmlWriter->writeStartElement("TypeOS");
+      xmlWriter->writeCharacters(coex::typeOStoString(cnf.os));
+      xmlWriter->writeEndElement();
+
+      xmlWriter->writeEndDocument();
+      delete xmlWriter;
+      return true;
+  	};
+    return false;
+  };
 };
