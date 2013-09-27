@@ -1,6 +1,8 @@
 #include "coex.h"
 #include <stdio.h>
 #include <iostream>
+#include <QFile>
+#include <QXmlStreamWriter>
 
 namespace coex {
 
