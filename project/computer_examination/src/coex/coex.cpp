@@ -29,41 +29,45 @@ namespace coex {
 			return QString((int)os);
 	};
 
-  void printConfig(const coex::config& cnf)
-  {
-    // print config
-  	std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
-  	std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
-  	std::cout << "\tType OS: " << coex::typeOStoString(cnf.os).toStdString() << "\n";
-  };
+	void printConfig(const coex::config& cnf)
+	{
+		// print config
+		std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
+		std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
+		std::cout << "\tType OS: " << coex::typeOStoString(cnf.os).toStdString() << "\n";
+	};
 
-  bool writeConfig(const coex::config& cnf)
-  {
-    QFile file(cnf.outputFolder + "//coex_config.xml");
- 
-  	// open a file
-  	if (file.open(QIODevice::WriteOnly))
-  	{	
-  		QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
-  		xmlWriter->setDevice(&file);
-  		xmlWriter->writeStartDocument();
+	bool writeConfig(const coex::config& cnf)
+	{
+		QFile file(cnf.outputFolder + "//coex_config.xml");
 
-  		xmlWriter->writeStartElement("InputFolder");
-      xmlWriter->writeCharacters(cnf.inputFolder);
-      xmlWriter->writeEndElement();
+		// open a file
+		if (file.open(QIODevice::WriteOnly))
+		{	
+			QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
+			xmlWriter->setDevice(&file);
+			xmlWriter->setAutoFormatting(true);
+			xmlWriter->writeStartDocument();
 
-      xmlWriter->writeStartElement("OutputFolder");
-      xmlWriter->writeCharacters(cnf.outputFolder);
-      xmlWriter->writeEndElement();
+			xmlWriter->writeStartElement("Config");
+			
+			xmlWriter->writeStartElement("InputFolder");
+			xmlWriter->writeCharacters(cnf.inputFolder);
+			xmlWriter->writeEndElement();
 
-      xmlWriter->writeStartElement("TypeOS");
-      xmlWriter->writeCharacters(coex::typeOStoString(cnf.os));
-      xmlWriter->writeEndElement();
+			xmlWriter->writeStartElement("OutputFolder");
+			xmlWriter->writeCharacters(cnf.outputFolder);
+			xmlWriter->writeEndElement();
 
-      xmlWriter->writeEndDocument();
-      delete xmlWriter;
-      return true;
-  	};
-    return false;
-  };
+			xmlWriter->writeStartElement("TypeOS");
+			xmlWriter->writeCharacters(coex::typeOStoString(cnf.os));
+			xmlWriter->writeEndElement();
+			
+			xmlWriter->writeEndElement();
+			xmlWriter->writeEndDocument();
+			delete xmlWriter;
+			return true;
+		};
+		return false;
+	};
 };
