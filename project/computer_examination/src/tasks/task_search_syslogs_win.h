@@ -3,10 +3,10 @@
 
 #include "../coex/task.h"
 
-class exampleTask : public coex::task 
+class taskSearchSyslogsWin : public coex::task 
 {
 	public:
-		exampleTask();
+		taskSearchSyslogsWin();
 	
 		// coex::Task 
 		virtual bool supportOS(const coex::typeOS &os);
