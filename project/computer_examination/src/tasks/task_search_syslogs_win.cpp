@@ -1,10 +1,12 @@
 #include "task_search_syslogs_win.h"
 #include <iostream>
+#include <QString>
+#include <QDir>
 
 taskSearchSyslogsWin::taskSearchSyslogsWin()
 {
 	m_strName = "taskSearchSyslogsWin";
-	m_strDescription = " It 's example task";
+    m_strDescription = " It's task searchin logs for WinOs";
 };
 
 bool taskSearchSyslogsWin::supportOS(const coex::typeOS &os)
@@ -32,7 +34,19 @@ bool taskSearchSyslogsWin::test()
 
 bool taskSearchSyslogsWin::execute(const coex::config &config)
 {
-	std::cout << ">>>>>> same execute...\n\n";
-	return true;
+    switch(config.os)
+    {
+    case coex::ceWindowsXP:
+        std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+        QString dirStr(config.inputFolder);             //folder with logs
+        dirStr += "/WINDOWS/system32";
+        QDir dir(dirStr);                               //open this folder and create filters
+            dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+            dir.setSorting(QDir::Size | QDir::Reversed);
+            QFileInfoList list = dir.entryInfoList();   //create list with files in folder
+        std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+        return true;
+    break;
+    }
 };
 		
