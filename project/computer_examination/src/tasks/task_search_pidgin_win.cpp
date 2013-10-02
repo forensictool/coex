@@ -34,8 +34,26 @@ bool taskSearchPidginWin::test()
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
+	{
+		QDir dir(config.outputFolder);
+		dir.mkdir("pidgin");
+	}
+	
+	QFile fileXML(config.outputFolder + "//pidgin/messages.xml");
+	// open a file
+	if (!fileXML.open(QIODevice::WriteOnly))
+	{
+		std::cout << " failed task\n";
+		return false;
+	}
+	QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
+	xmlWriter->setDevice(&fileXML);
+	xmlWriter->setAutoFormatting(true);
+	xmlWriter->writeStartDocument();
+	xmlWriter->writeStartElement("Messages");
+			
   // TODO: 
-
+	
 	std::cout << "===========================================\n\n";
 	// std::cout << config.inputFolder.toStdString() << "\n";
 	// std::cout << config.outputFolder.toStdString() << "\n";
@@ -58,23 +76,22 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     for(int i = 0; i < list.size(); ++i)
     {
         QFileInfo fileInfo = list.at(i);
-        std::cout << qPrintable(QString("%1 %2" ).arg(fileInfo.size(), 10).arg(fileInfo.fileName()));
-        std::cout << std::endl;
-        //QString fileName = fileInfo.fileName();
-    
-		//QFileInfo info(fileName);
-
-		std::cout << "FILE " << fileInfo.suffix().toStdString() << "\n\n";
+        
+        xmlWriter->writeStartElement("FoundFile");
+		xmlWriter->writeAttribute("size", QString::number(fileInfo.size()));
+		xmlWriter->writeAttribute("suffix", fileInfo.suffix());
+		xmlWriter->writeAttribute("name", fileInfo.fileName());
 
 		if (fileInfo.suffix() == "html") 
 		{
 			std::cout << "воу воу парень, полегше. есть тут HTML\n\n";
 
-			QFile file(fileInfo.absolutePath());
+			QFile file(fileInfo.absoluteFilePath());
 
 			// open a file
-			if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+			if (file.open(QIODevice::ReadOnly))
 			{	
+				QString title = "";
 				QXmlStreamReader xml(&file);
 				while(!xml.atEnd() && !xml.hasError())
 				{
@@ -87,31 +104,37 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
         			if(token == QXmlStreamReader::StartElement) 
         			{
-						//if(xml.name() == "title") {
-						///	continue;
-						//}
+						if(xml.name() == "title") {
+							xmlWriter->writeStartElement("Title");
+						   ///	continue;
+						}
 					}
 
 					if(token == QXmlStreamReader::Characters)
 					{
-						// if(xml.name() == "title") {
-							std::cout << QString(xml.text().data()).toStdString() << ".";
-						//}	
+						if(xml.name() == "title") {
+							title +=  QString(xml.text().data()) + ".";
+						}
 					}
-
-					 
 
 					if(token == QXmlStreamReader::EndElement)
 					{
 						if(xml.name() == "title")
 						{
-								std::cout << QString(xml.text().data()).toStdString() << ".";
+							xmlWriter->writeCharacters(title); 
+							// end title
+							xmlWriter->writeEndElement();
+							// std::cout << QString(xml.text().data()).toStdString() << ".";
 						}
 					}
-				}
+				};
 
 				if( xml.hasError())
 					std::cout << xml.errorString().toStdString();
+			}
+			else
+			{
+				std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
 			};
 
 		} 
@@ -134,10 +157,14 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			};
 
 		}
-
-		return true;
-	
+		// end foundfile
+		xmlWriter->writeEndElement();	
     }
+        
+    xmlWriter->writeEndElement();
+	xmlWriter->writeEndDocument();
+	delete xmlWriter;
     std::cout << "===========================================\n\n";	
+    return true;
 };
 		
