@@ -4,6 +4,7 @@
 #include <QString>
 #include <QFile>
 #include <QXmlStreamReader>
+#include <QRegExp>
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
@@ -92,6 +93,10 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			if (file.open(QIODevice::ReadOnly))
 			{	
 				QString title = "";
+				QString timeMessage = "";
+				QString textMessage = "";
+				QString autorMessage = "";
+				
 				QXmlStreamReader xml(&file);
 				while(!xml.atEnd() && !xml.hasError())
 				{
@@ -108,6 +113,11 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 							xmlWriter->writeStartElement("Title");
 						   ///	continue;
 						}
+						// QRegExp parseString("[>(] {8} "); //not full regexp, only to time
+
+						// xmlWriter->writeStartElement("TimeMessage");
+						// xmlWriter->writeStartElement("TextMessage");
+						// xmlWriter->writeStartElement("AutorMessage");
 					}
 
 					if(token == QXmlStreamReader::Characters)
@@ -115,13 +125,20 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 						if(xml.name() == "title") {
 							title +=  QString(xml.text().data()) + ".";
 						}
+						
+						// timeMessage += parseString.cap(0);
+						// textMessage += parseString.cap(1);
+						// autorMessage += parseString.cap(2);
 					}
 
 					if(token == QXmlStreamReader::EndElement)
 					{
 						if(xml.name() == "title")
 						{
-							xmlWriter->writeCharacters(title); 
+							// xmlWriter->writeCharacters(title); 
+							// xmlWriter->writeCharacters(timeMessage); 
+							// xmlWriter->writeCharacters(textMessage); 
+							// xmlWriter->writeCharacters(autorMessage);
 							// end title
 							xmlWriter->writeEndElement();
 							// std::cout << QString(xml.text().data()).toStdString() << ".";
