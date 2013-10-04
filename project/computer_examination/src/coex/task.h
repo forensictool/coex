@@ -2,6 +2,7 @@
 #define __TASK_H__
 
 #include <QString>
+#include <QStringList>
 #include <QVector>
 
 namespace coex
@@ -33,6 +34,9 @@ namespace coex
 	class task
 	{
 		public:
+			virtual QString manual() { return ""; };
+			virtual void setOption(QStringList list) {};
+			virtual QString command() { return ""; };
 			virtual bool supportOS(const coex::typeOS &os) = 0;
 			virtual QString name() = 0;
 			virtual QString description() = 0;
@@ -41,10 +45,10 @@ namespace coex
 	};
 	
 	template<typename T>
-	bool createTask(coex::typeOS os, QVector<coex::task*> &tasks)
+	bool createTask(coex::typeOS os, QVector<coex::task*> &tasks, bool bNeedAll)
 	{
 		T* t = new T();
-		if(t->supportOS(os))
+		if(t->supportOS(os) || bNeedAll)
 			tasks << (coex::task *)t;
 		else
 		{

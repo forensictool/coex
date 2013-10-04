@@ -7,6 +7,25 @@ exampleTask::exampleTask()
 	m_strDescription = " It 's example task";
 };
 
+QString exampleTask::manual()
+{
+		return "\t--debug - viewing debug messages"; 
+};
+
+void exampleTask::setOption(QStringList list)
+{
+	if(list.contains("--debug"))
+	{
+		
+	}
+};
+
+QString exampleTask::command()
+{
+	return "example_task";
+};
+
+
 bool exampleTask::supportOS(const coex::typeOS &os)
 {
 	if(os == coex::ceWindowsXP)

@@ -44,17 +44,17 @@ cp ../gpo.git/project/coex ./
 echo ">>> test win xp sp3 pro"
 if [ -d "../gpo-testdata.git/WindowsXP_SP3_Pro" ]; then
   mkdir "WinXPSP3Pro"
-  ./coex "../gpo-testdata.git/WindowsXP_SP3_Pro" "WinXPSP3Pro"
+  ./coex :all "../gpo-testdata.git/WindowsXP_SP3_Pro" "WinXPSP3Pro"
 fi
 
 echo ">>> test win 7 ult"
 if [ -d "../gpo-testdata.git/Windows7_Ult" ]; then
   mkdir "Win7Ult"
-  ./coex "../gpo-testdata.git/Windows7_Ult" "Win7Ult"
+  ./coex :all "../gpo-testdata.git/Windows7_Ult" "Win7Ult"
 fi
 
 echo ">>> test win 8 pro";
 if [ -d "../gpo-testdata.git/Windows8_Pro" ]; then
   mkdir Win8Pro
-  ./coex "../gpo-testdata.git/Windows8_Pro" "Win8Pro"
+  ./coex :all "../gpo-testdata.git/Windows8_Pro" "Win8Pro"
 fi

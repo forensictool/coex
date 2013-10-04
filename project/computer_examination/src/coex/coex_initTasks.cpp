@@ -9,14 +9,14 @@
 #include "../tasks/task_search_syslogs_win.h"
 
 namespace coex {
-  void initTasks(const coex::typeOS &os, QVector<coex::task*> &tasks)
+  void initTasks(const coex::typeOS &os, QVector<coex::task*> &tasks, bool bNeedAll)
   {
-    coex::createTask<exampleTask>(os, tasks);
-    coex::createTask<taskSearchPidginWin>(os, tasks);
-    coex::createTask<taskSearchPidginUnix>(os, tasks);
-    coex::createTask<taskSearchProgrammWin>(os, tasks);
-    coex::createTask<taskSearchSyslogsLin>(os, tasks);
-    coex::createTask<taskDetectOs>(os, tasks);
-    coex::createTask<taskSearchSyslogsWin>(os, tasks);
+    coex::createTask<exampleTask>(os, tasks, bNeedAll);
+    coex::createTask<taskSearchPidginWin>(os, tasks, bNeedAll);
+    coex::createTask<taskSearchPidginUnix>(os, tasks, bNeedAll);
+    coex::createTask<taskSearchProgrammWin>(os, tasks, bNeedAll);
+    coex::createTask<taskSearchSyslogsLin>(os, tasks, bNeedAll);
+    coex::createTask<taskDetectOs>(os, tasks, bNeedAll);
+    coex::createTask<taskSearchSyslogsWin>(os, tasks, bNeedAll);
   };
 };
