@@ -35,7 +35,7 @@ namespace coex
 	{
 		public:
 			virtual QString manual() { return ""; };
-			virtual void setOption(QStringList list) {};
+			virtual void setOption(QStringList) {};
 			virtual QString command() { return ""; };
 			virtual bool supportOS(const coex::typeOS &os) = 0;
 			virtual QString name() = 0;
