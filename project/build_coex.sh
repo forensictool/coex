@@ -1,6 +1,8 @@
 cd computer_examination
 QMAKE=""
 
+rm ../coex
+
 # usr/bin/qmake-qt4
 if [ -f "/usr/bin/qmake-qt4" ]; then
   QMAKE="qmake-qt4"

@@ -8,7 +8,10 @@ class taskSearchPidginWin : public coex::task
 	public:
 		taskSearchPidginWin();
 	
-		// coex::Task 
+		// coex::Task
+		virtual QString manual();
+		virtual void setOption(QStringList);
+		virtual QString command(); 
 		virtual bool supportOS(const coex::typeOS &os);
 		virtual QString name();
 		virtual QString description();

@@ -12,6 +12,21 @@ taskSearchPidginWin::taskSearchPidginWin()
 	m_strDescription = "Task is search logs of Pidgin for WINDOWS";
 };
 
+QString taskSearchPidginWin::manual()
+{
+	return "\t--debug - viewing debug messages";
+};
+
+void taskSearchPidginWin::setOption(QStringList)
+{
+	
+};
+
+QString taskSearchPidginWin::command()
+{
+	return "pidgin"; 
+};
+
 bool taskSearchPidginWin::supportOS(const coex::typeOS &os)
 {
 	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));

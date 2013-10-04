@@ -34,9 +34,9 @@ namespace coex
 	class task
 	{
 		public:
-			virtual QString manual() { return ""; };
-			virtual void setOption(QStringList) {};
-			virtual QString command() { return ""; };
+			virtual QString manual() = 0;
+			virtual void setOption(QStringList) = 0;
+			virtual QString command() = 0;
 			virtual bool supportOS(const coex::typeOS &os) = 0;
 			virtual QString name() = 0;
 			virtual QString description() = 0;

@@ -9,7 +9,7 @@ exampleTask::exampleTask()
 
 QString exampleTask::manual()
 {
-		return "\t--debug - viewing debug messages"; 
+		return "\t--debug - viewing debug messages";
 };
 
 void exampleTask::setOption(QStringList list)

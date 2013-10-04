@@ -7,6 +7,21 @@ taskDetectOs::taskDetectOs()
 	m_strDescription = " It 's example task";
 };
 
+QString taskDetectOs::manual()
+{
+	return "\t--debug - viewing debug messages"; 
+};
+
+void taskDetectOs::setOption(QStringList)
+{
+	
+};
+
+QString taskDetectOs::command()
+{
+	return "detectos";
+};
+
 bool taskDetectOs::supportOS(const coex::typeOS &os)
 {
 	if(os == coex::ceWindowsXP)
