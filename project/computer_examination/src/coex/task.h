@@ -21,10 +21,10 @@ namespace coex
 	
 	struct config
 	{
-    config() 
-    { 
-      os = coex::ceUnknown;
-    };
+		config() 
+		{ 
+			os = coex::ceUnknown;
+		};
 
 		QString inputFolder;
 		QString outputFolder;

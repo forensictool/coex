@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QVector>
+#include <QStringList>
+#include <QMap>
 #include "task.h"
 
 namespace coex {
@@ -12,7 +14,7 @@ namespace coex {
   QString typeOStoString(const coex::typeOS &os);
   void printConfig(const coex::config& cnf);
   bool writeConfig(const coex::config& cnf);
-  void parseArguments(int argc, const char* argv[], QStringList &list);
+  void parseArguments(int argc, const char* argv[], QStringList &list, QMap<QString, QStringList> &options);
   void printManual(const QString &nameProgram, QVector<coex::task*> &man_tasks);
 };
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QFile>
 #include <QXmlStreamWriter>
+#include <QChar>
 
 namespace coex {
 
@@ -72,13 +73,32 @@ namespace coex {
 		return false;
 	};
 	
-	void parseArguments(int argc, const char* argv[], QStringList &list)
+	void parseArguments(int argc, const char* argv[], QStringList &list, QMap<QString, QStringList> &options)
 	{
 		if(argc < 1) return;
 		
 		for(int i = 1; i < argc; i++)
 			list << QString(argv[i]);
-			
+		
+		QString lastTaskCommand = ":all";
+		QChar startChar = QString(":").at(0);
+		
+		for(int i = 0; i < list.size()-2; i++)
+		{
+			QString str = list[i];
+			if(str.at(0) == startChar)
+			{
+				lastTaskCommand = str;
+				// std::cout << " task -> " << str.toStdString() << "\n";
+			}
+			else
+			{
+				if(!options.contains(lastTaskCommand))
+					options[lastTaskCommand] = QStringList();
+				options[lastTaskCommand] << str;
+				// std::cout << "\tsub option -> " << str.toStdString() << "\n";
+			}
+		}
 		
 	};
 	

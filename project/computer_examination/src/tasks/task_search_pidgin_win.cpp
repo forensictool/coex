@@ -10,6 +10,7 @@ taskSearchPidginWin::taskSearchPidginWin()
 {
 	m_strName = "Search Pidgin (Win)";
 	m_strDescription = "Task is search logs of Pidgin for WINDOWS";
+	m_bDebug = false;
 };
 
 QString taskSearchPidginWin::manual()
@@ -17,14 +18,15 @@ QString taskSearchPidginWin::manual()
 	return "\t--debug - viewing debug messages";
 };
 
-void taskSearchPidginWin::setOption(QStringList)
+void taskSearchPidginWin::setOption(QStringList options)
 {
-	
+	if(options.contains("--debug"))
+		m_bDebug = true;
 };
 
 QString taskSearchPidginWin::command()
 {
-	return "pidgin"; 
+	return "pidgin";
 };
 
 bool taskSearchPidginWin::supportOS(const coex::typeOS &os)
@@ -50,6 +52,10 @@ bool taskSearchPidginWin::test()
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
+	// example usage options
+	if(m_bDebug)
+		std::cout << "  !!! debug mode on.\n";
+
 	{
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");

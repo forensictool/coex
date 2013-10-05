@@ -13,16 +13,16 @@ int main( int argc, const char* argv[] )
 	coex::config cnf;
 	bool bExecAllTasks = false;
 	QStringList listArgs;
+	QMap<QString, QStringList> options;
 	// parse and show help
 	{
 		// init tasks	
 		QVector<coex::task*> man_tasks;
 		coex::initTasks(cnf.os, man_tasks, true);
 		
-		coex::parseArguments(argc, argv, listArgs);
+		coex::parseArguments(argc, argv, listArgs, options);
 		if(listArgs.count() < 3)
 		{
-			// std::cout << "\nusage: " << nameprogram.toStdString() << " [OPTIONS] <input folder> <output folder>\n\n";
 			printManual(nameProgram, man_tasks);
 			return -1;
 		}
@@ -77,9 +77,8 @@ int main( int argc, const char* argv[] )
 	QVector<coex::task*> tasks;	
 	coex::initTasks(cnf.os, tasks);
   	
-	// executing tasks
-	
-	if(!bExecAllTasks)
+	// executing tasks	
+	if(cnf.os == coex::ceUnknown)
 	{
 		printManual(nameProgram, tasks);
 		return -4;
@@ -88,10 +87,13 @@ int main( int argc, const char* argv[] )
 	std::cout << "\n  Executing ALL tasks\n\n";
 	for(int i = 0; i < tasks.size(); i++)
 	{
-		if(bExecAllTasks || listArgs.contains(":"+tasks[i]->command()))
+		QString strCommandTask = ":" + tasks[i]->command();
+		if(bExecAllTasks || listArgs.contains(strCommandTask))
 		{
 			std::cout << "\tTask: " << tasks[i]->name().toStdString() << "\n";
 			std::cout << "\t\tDescription: " << tasks[i]->description().toStdString() << "\n";
+			if(options.contains(strCommandTask))
+				tasks[i]->setOption(options[strCommandTask]);
 			tasks[i]->execute(cnf);
 			std::cout << "\n\n";
 		}
