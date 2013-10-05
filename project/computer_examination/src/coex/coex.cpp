@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QFile>
 #include <QXmlStreamWriter>
+#include <QChar>
 
 namespace coex {
 
@@ -32,6 +33,7 @@ namespace coex {
 	void printConfig(const coex::config& cnf)
 	{
 		// print config
+		std::cout << "  Config\n";
 		std::cout << "\tInput Folder: " << cnf.inputFolder.toStdString() << "\n";
 		std::cout << "\tOutput Folder: " << cnf.outputFolder.toStdString() << "\n";
 		std::cout << "\tType OS: " << coex::typeOStoString(cnf.os).toStdString() << "\n";
@@ -69,5 +71,50 @@ namespace coex {
 			return true;
 		};
 		return false;
+	};
+	
+	void parseArguments(int argc, const char* argv[], QStringList &list, QMap<QString, QStringList> &options)
+	{
+		if(argc < 1) return;
+		
+		for(int i = 1; i < argc; i++)
+			list << QString(argv[i]);
+		
+		QString lastTaskCommand = ":all";
+		QChar startChar = QString(":").at(0);
+		
+		for(int i = 0; i < list.size()-2; i++)
+		{
+			QString str = list[i];
+			if(str.at(0) == startChar)
+			{
+				lastTaskCommand = str;
+				// std::cout << " task -> " << str.toStdString() << "\n";
+			}
+			else
+			{
+				if(!options.contains(lastTaskCommand))
+					options[lastTaskCommand] = QStringList();
+				options[lastTaskCommand] << str;
+				// std::cout << "\tsub option -> " << str.toStdString() << "\n";
+			}
+		}
+		
+	};
+	
+	void printManual(const QString &nameProgram, QVector<coex::task*> &man_tasks)
+	{
+		std::cout << "\nusage: " << nameProgram.toStdString() << " [OPTIONS]|:all <input folder> <output folder>\n\n";
+			
+		std::cout << "Number of tasks: " << man_tasks.size() << "\n\n";
+		for(int i=0; i < man_tasks.size(); i++)
+		{
+			std::cout << "  :" << man_tasks[i]->command().toStdString() << 
+				" - task name '" << man_tasks[i]->name().toStdString() << "'\n"
+				<< man_tasks[i]->manual().toStdString() << "\n\n";
+		}
+		
+		std::cout << "\n-------------\n" 
+		<< "\nexample usage: " << nameProgram.toStdString() << " :exampleTask --debug :pidgin --show /mnt/winxp /mnt/flashcard\n\n";	
 	};
 };

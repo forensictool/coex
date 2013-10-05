@@ -7,6 +7,21 @@ taskSearchProgrammWin::taskSearchProgrammWin()
 	m_strDescription = "Task is search installed prgramms in Windows";
 };
 
+QString taskSearchProgrammWin::manual()
+{
+	return "\t--debug - viewing debug messages";
+};
+
+void taskSearchProgrammWin::setOption(QStringList)
+{
+	
+};
+
+QString taskSearchProgrammWin::command()
+{
+	return "programs";
+};
+
 bool taskSearchProgrammWin::supportOS(const coex::typeOS &os)
 {
 	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));

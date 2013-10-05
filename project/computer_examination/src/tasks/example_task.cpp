@@ -5,7 +5,24 @@ exampleTask::exampleTask()
 {
 	m_strName = "exampleTask";
 	m_strDescription = " It 's example task";
+	m_bDebug = false;
 };
+
+QString exampleTask::manual()
+{
+		return "\t--debug - viewing debug messages";
+};
+
+void exampleTask::setOption(QStringList list)
+{
+	m_bDebug = list.contains("--debug");
+};
+
+QString exampleTask::command()
+{
+	return "example_task";
+};
+
 
 bool exampleTask::supportOS(const coex::typeOS &os)
 {
@@ -30,9 +47,11 @@ bool exampleTask::test()
 	return true;
 };
 
-bool exampleTask::execute(const coex::config &config)
+bool exampleTask::execute(const coex::config &/*config*/)
 {
-	std::cout << ">>>>>> same execute...\n\n";
+	if(m_bDebug)
+		std::cout << ">>>>>> same execute...\n\n";
+
 	return true;
 };
 		

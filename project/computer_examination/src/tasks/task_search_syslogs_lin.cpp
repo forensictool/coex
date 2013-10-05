@@ -7,6 +7,21 @@ taskSearchSyslogsLin::taskSearchSyslogsLin()
 	m_strDescription = " It 's example task";
 };
 
+QString taskSearchSyslogsLin::manual()
+{
+	return "\t--debug - viewing debug messages";
+};
+
+void taskSearchSyslogsLin::setOption(QStringList)
+{
+	
+};
+
+QString taskSearchSyslogsLin::command()
+{
+	return "syslogs";
+};
+
 bool taskSearchSyslogsLin::supportOS(const coex::typeOS &os)
 {
 	if(os == coex::ceLinux)
@@ -30,7 +45,7 @@ bool taskSearchSyslogsLin::test()
 	return true;
 };
 
-bool taskSearchSyslogsLin::execute(const coex::config &config)
+bool taskSearchSyslogsLin::execute(const coex::config &/*config*/)
 {
 	std::cout << ">>>>>> same execute...\n\n";
 	return true;

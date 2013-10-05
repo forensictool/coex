@@ -23,6 +23,10 @@ namespace coex {
      QString toString() {
        return "filePath: " + filePath + "; hash: " + hash + "; version: " + version + "; os: " + typeOStoString(os) + ";";
      };
+     
+     QString toBigString() {
+       return "\n\tFilePath: " + filePath + ";\n\tHash: " + hash + ";\n\tVersion: " + version + ";\n\tOS: " + typeOStoString(os) + ";\n";
+     };
   };
 
 
@@ -117,7 +121,8 @@ namespace coex {
 				};
 			if(nCounter == 0) 
 			{
-				std::cout << checkfiles[0].toString().toStdString() << "\n";
+				std::cout << "\n  OS was detected";
+				std::cout << checkfiles[0].toBigString().toStdString() << "\n";
 				os_result = checkfiles[0].os;
 			}
 		};

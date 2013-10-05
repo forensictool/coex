@@ -9,6 +9,9 @@ class exampleTask : public coex::task
 		exampleTask();
 	
 		// coex::Task 
+		virtual QString manual();
+		virtual void setOption(QStringList list);
+		virtual QString command();
 		virtual bool supportOS(const coex::typeOS &os);
 		virtual QString name();
 		virtual QString description();
@@ -18,6 +21,7 @@ class exampleTask : public coex::task
 	private:
 		QString m_strName;
 		QString m_strDescription;
+		bool m_bDebug;
 };
 
 #endif // __EXAMPLE_TASKS_H__

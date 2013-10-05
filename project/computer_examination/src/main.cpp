@@ -2,53 +2,101 @@
 #include <iostream>
 #include <QString>
 #include <QVector>
+#include <QDir>
 #include "coex/coex.h"
 
 // ------------------------------------------------------------------
 
 int main( int argc, const char* argv[] )
 {
-	if(argc < 3)
-	{
-		std::cout << "\nusage: " << argv[0] << " [OPTIONS] <input folder> <output folder>\n\n";
-		return -1;
-	};
-	
-  // fill config
+	QString nameProgram(argv[0]);
 	coex::config cnf;
+	bool bExecAllTasks = false;
+	QStringList listArgs;
+	QMap<QString, QStringList> options;
+	// parse and show help
+	{
+		// init tasks	
+		QVector<coex::task*> man_tasks;
+		coex::initTasks(cnf.os, man_tasks, true);
+		
+		coex::parseArguments(argc, argv, listArgs, options);
+		if(listArgs.count() < 3)
+		{
+			printManual(nameProgram, man_tasks);
+			return -1;
+		}
+		else
+		{
+			if(listArgs.contains("--help") || listArgs.contains("/?") || listArgs.contains("?"))
+			{
+				printManual(nameProgram, man_tasks);
+				return -2;
+			}
+			
+			cnf.inputFolder = listArgs[listArgs.count()-2];
+			cnf.outputFolder = listArgs[listArgs.count()-1];
+			QDir inputDir(cnf.inputFolder);
+			if(!inputDir.exists())
+			{
+				std::cout << "\nfolder '" << cnf.inputFolder.toStdString() << "' is not exists\n\n";
+				return -3;
+			};
+
+			bExecAllTasks = (listArgs[0] == ":all");
+			// coex::printConfig(cnf);
+		};
+	}
+	
+	// fill config
+	
 	cnf.inputFolder = QString(argv[argc-2]);
 	cnf.outputFolder = QString(argv[argc-1]);
 	
 	// detection system
-  cnf.os = coex::detectOS(cnf.inputFolder);
+	cnf.os = coex::detectOS(cnf.inputFolder);
 	
-  // print config
-  coex::printConfig(cnf);
+	// print config
+	coex::printConfig(cnf);
 
-  // check results after detect os
-  if(cnf.os == coex::ceUnknown)
-  {
-    std::cout << "\tCould not detected os!\n";
-    return -1;
-  };
+	// check results after detect os
+	if(cnf.os == coex::ceUnknown)
+	{
+		std::cout << "\tCould not detected os!\n";
+		return -1;
+	};
 
-  // write config to file
-  if(!coex::writeConfig(cnf))
-  {
-    std::cout << "\tCould not write config to file!\n";
-    return -2;
-  };  
-  
-  // init tasks	
+	// write config to file
+	if(!coex::writeConfig(cnf))
+	{
+		std::cout << "\tCould not write config to file!\n";
+		return -2;
+	};
+
+	// init tasks	
 	QVector<coex::task*> tasks;	
-  coex::initTasks(cnf.os, tasks);
+	coex::initTasks(cnf.os, tasks);
   	
-	// executing tasks
+	// executing tasks	
+	if(cnf.os == coex::ceUnknown)
+	{
+		printManual(nameProgram, tasks);
+		return -4;
+	}
+	
+	std::cout << "\n  Executing ALL tasks\n\n";
 	for(int i = 0; i < tasks.size(); i++)
 	{
-		std::cout << "Task: " << tasks[i]->name().toStdString() << "\n";
-		std::cout << "Description: " << tasks[i]->description().toStdString() << "\n";
-		tasks[i]->execute(cnf);
+		QString strCommandTask = ":" + tasks[i]->command();
+		if(bExecAllTasks || listArgs.contains(strCommandTask))
+		{
+			std::cout << "\tTask: " << tasks[i]->name().toStdString() << "\n";
+			std::cout << "\t\tDescription: " << tasks[i]->description().toStdString() << "\n";
+			if(options.contains(strCommandTask))
+				tasks[i]->setOption(options[strCommandTask]);
+			tasks[i]->execute(cnf);
+			std::cout << "\n\n";
+		}
 	}
 	
 	return 0;

@@ -9,6 +9,21 @@ taskSearchSyslogsWin::taskSearchSyslogsWin()
     m_strDescription = " It's task searchin logs for WinOs";
 };
 
+QString taskSearchSyslogsWin::manual()
+{
+	return "\t--debug - viewing debug messages";
+};
+
+void taskSearchSyslogsWin::setOption(QStringList)
+{
+	
+};
+
+QString taskSearchSyslogsWin::command()
+{
+	return "syslogs";
+};
+
 bool taskSearchSyslogsWin::supportOS(const coex::typeOS &os)
 {
 	if(os == coex::ceWindowsXP)
@@ -31,6 +46,14 @@ bool taskSearchSyslogsWin::test()
 	// unit test
 	return true;
 };
+
+/* 
+ * also look here for *.Evt files
+ * 
+ * http://www.whitehats.ca/main/members/Malik/malik_eventlogs/malik_eventlogs.html
+ * 
+ * and in thirdparty/grokevt (python scripts)
+ * */
 
 bool taskSearchSyslogsWin::execute(const coex::config &config)
 {

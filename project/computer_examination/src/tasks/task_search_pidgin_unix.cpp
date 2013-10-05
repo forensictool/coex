@@ -7,6 +7,21 @@ taskSearchPidginUnix::taskSearchPidginUnix()
 	m_strDescription = "Task is search logs of Pidgin for Unix/Linux";
 };
 
+QString taskSearchPidginUnix::manual()
+{
+	return "\t--debug - viewing debug messages";
+};
+
+void taskSearchPidginUnix::setOption(QStringList)
+{
+	
+};
+
+QString taskSearchPidginUnix::command()
+{
+	return "pidgin";
+};
+
 bool taskSearchPidginUnix::supportOS(const coex::typeOS &os)
 {
 	return (os == coex::ceLinux);
