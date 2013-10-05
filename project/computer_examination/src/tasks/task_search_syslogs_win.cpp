@@ -47,6 +47,14 @@ bool taskSearchSyslogsWin::test()
 	return true;
 };
 
+/* 
+ * also look here for *.Evt files
+ * 
+ * http://www.whitehats.ca/main/members/Malik/malik_eventlogs/malik_eventlogs.html
+ * 
+ * and in thirdparty/grokevt (python scripts)
+ * */
+
 bool taskSearchSyslogsWin::execute(const coex::config &config)
 {
     switch(config.os)
