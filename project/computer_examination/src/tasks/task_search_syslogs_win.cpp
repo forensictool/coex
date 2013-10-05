@@ -68,8 +68,8 @@ bool taskSearchSyslogsWin::execute(const coex::config &config)
                 logEvtFiles << str;
             }
         }
-        QDir(config.outputFolder).mkdir("LOGS"); //создаем диррикторию в выходном каталоге
-        QString outFolder = config.outputFolder + "/LOGS/";
+        QDir(config.outputFolder).mkdir("SYSWINLOGS"); //создаем диррикторию в выходном каталоге
+        QString outFolder = config.outputFolder + "/SYSWINLOGS/";
         for(int i = 0; i < logEvtFiles.size(); i++)
         {
             QStringList list = logEvtFiles.at(i).split("/", QString::SkipEmptyParts);
@@ -79,5 +79,6 @@ bool taskSearchSyslogsWin::execute(const coex::config &config)
         return true;
     break;
     }
+    return false;
 };
 		
