@@ -45,7 +45,7 @@ bool taskDetectOs::test()
 	return true;
 };
 
-bool taskDetectOs::execute(const coex::config &config)
+bool taskDetectOs::execute(const coex::config &/*config*/)
 {
 	std::cout << ">>>>>> same execute...\n\n";
 	return true;

@@ -5,6 +5,7 @@ exampleTask::exampleTask()
 {
 	m_strName = "exampleTask";
 	m_strDescription = " It 's example task";
+	m_bDebug = false;
 };
 
 QString exampleTask::manual()
@@ -14,10 +15,7 @@ QString exampleTask::manual()
 
 void exampleTask::setOption(QStringList list)
 {
-	if(list.contains("--debug"))
-	{
-		
-	}
+	m_bDebug = list.contains("--debug");
 };
 
 QString exampleTask::command()
@@ -49,9 +47,11 @@ bool exampleTask::test()
 	return true;
 };
 
-bool exampleTask::execute(const coex::config &config)
+bool exampleTask::execute(const coex::config &/*config*/)
 {
-	std::cout << ">>>>>> same execute...\n\n";
+	if(m_bDebug)
+		std::cout << ">>>>>> same execute...\n\n";
+
 	return true;
 };
 		

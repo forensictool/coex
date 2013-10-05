@@ -45,7 +45,7 @@ bool taskSearchSyslogsLin::test()
 	return true;
 };
 
-bool taskSearchSyslogsLin::execute(const coex::config &config)
+bool taskSearchSyslogsLin::execute(const coex::config &/*config*/)
 {
 	std::cout << ">>>>>> same execute...\n\n";
 	return true;
