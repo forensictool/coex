@@ -8,6 +8,8 @@ exampleTask::exampleTask()
 	m_bDebug = false;
 };
 
+exampleTask::~exampleTask(){}
+
 QString exampleTask::manual()
 {
 		return "\t--debug - viewing debug messages";

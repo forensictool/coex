@@ -6,7 +6,8 @@
 class exampleTask : public coex::task 
 {
 	public:
-		exampleTask();
+        exampleTask();
+        virtual ~exampleTask();
 	
 		// coex::Task 
 		virtual QString manual();
