@@ -10,7 +10,7 @@ class taskSearchSyslogsWin : public coex::task
 	
 		// coex::Task
 		virtual QString manual();
-		virtual void setOption(QStringList);
+        virtual void setOption(QStringList options);
 		virtual QString command();
 		virtual bool supportOS(const coex::typeOS &os);
 		virtual QString name();
@@ -21,6 +21,7 @@ class taskSearchSyslogsWin : public coex::task
 	private:
 		QString m_strName;
 		QString m_strDescription;
+        bool m_bDebug;
 };
 
 #endif // __TASK_SEARCH_SYSLOGS_WIN_H__
