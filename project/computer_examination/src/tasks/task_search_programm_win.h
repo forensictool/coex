@@ -7,10 +7,11 @@ class taskSearchProgrammWin : public coex::task
 {
 	public:
 		taskSearchProgrammWin();
+        virtual ~taskSearchProgrammWin();
 	
 		// coex::Task
 		virtual QString manual();
-		virtual void setOption(QStringList);
+        virtual void setOption(QStringList options);
 		virtual QString command();
 		virtual bool supportOS(const coex::typeOS &os);
 		virtual QString name();
@@ -21,6 +22,7 @@ class taskSearchProgrammWin : public coex::task
 	private:
 		QString m_strName;
 		QString m_strDescription;
+        bool m_bDebug;
 };
 
 #endif // __TASK_SEARCH_PROGRAMM_WIN_H__
