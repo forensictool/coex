@@ -7,6 +7,7 @@ class taskSearchSyslogsWin : public coex::task
 {
 	public:
 		taskSearchSyslogsWin();
+        virtual ~taskSearchSyslogsWin();
 	
 		// coex::Task
 		virtual QString manual();
@@ -17,6 +18,8 @@ class taskSearchSyslogsWin : public coex::task
 		virtual QString description();
 		virtual bool test();
 		virtual bool execute(const coex::config &config);
+        virtual void readLogFiles(QStringList logFiles, const coex::config& config);
+        virtual void readEvtFiles(QStringList evtFiles, const coex::config& config);
 		
 	private:
 		QString m_strName;
