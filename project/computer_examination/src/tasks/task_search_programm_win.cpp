@@ -1,5 +1,7 @@
 #include "task_search_programm_win.h"
 #include <iostream>
+#include <QDir>
+#include <QDirIterator>
 
 taskSearchProgrammWin::taskSearchProgrammWin()
 {
@@ -57,10 +59,31 @@ bool taskSearchProgrammWin::execute(const coex::config &config)
         case coex::ceWindowsXP:
         {
             QString dirStr(config.inputFolder);
-            dirStr += "/Program";
-            break;
+            dirStr += "/Program Files/";
+            std::cout << dirStr.toStdString() << std::endl;
+            QDirIterator dirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+            QStringList dirList;
+            while(dirit.hasNext())
+            {
+                QString str = QString("%1").arg(dirit.next());
+                dirList << str; //collect all parts for files in dolder
+                QStringList buf = str.split("Program Files", QString::SkipEmptyParts);
+                buf = buf.at(1).split("/", QString::SkipEmptyParts);
+                str = buf[0];
+                if(!programFiles->contains(str))
+                {
+                    *programFiles << str;
+                    //std::cout << programFiles->at(programFiles->size() - 1).toStdString() << std::endl; //for tests
+                }
+            }
+
+            std::cout << std::endl << std::endl;
+            for (int i = 0; i < dirList.size(); i++)
+                std::cout << programFiles->at(i).toStdString() << std::endl;
+            break;            
         }
         default:
+            std::cout << "Unknown system =(" << std::endl;
             break;
     }
     delete programFiles;
