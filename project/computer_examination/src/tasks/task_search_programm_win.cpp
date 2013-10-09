@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QDir>
 #include <QDirIterator>
+#include <QTextStream>
 
 taskSearchProgrammWin::taskSearchProgrammWin()
 {
@@ -49,37 +50,53 @@ bool taskSearchProgrammWin::test()
 	return true;
 }
 
+QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
+{
+    QStringList dirList;
+    QDirIterator dirit(dirStr, QDirIterator::Subdirectories);
+    while(dirit.hasNext())
+    {
+        QString str = QString("%1").arg(dirit.next());
+        QStringList buf = str.split(dirStr, QString::SkipEmptyParts);
+        buf = buf.at(0).split("/", QString::SkipEmptyParts);
+        if ((buf[0] == ".")|(buf[0] =="..")) continue;
+        if (buf[0].split(".").size() != 1) continue;
+        if (!dirList.contains(buf[0]))
+        {
+            dirList << buf[0];
+        }
+    }
+    return dirList;
+}
 bool taskSearchProgrammWin::execute(const coex::config &config)
 { 
     std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
     QStringList *programFiles = new QStringList();
-
     switch (config.os)
     {
         case coex::ceWindowsXP:
         {
             QString dirStr(config.inputFolder);
             dirStr += "/Program Files/";
-            std::cout << dirStr.toStdString() << std::endl;
-            QDirIterator dirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-            QStringList dirList;
-            while(dirit.hasNext())
+            *programFiles = getSubDirs(dirStr);
+            QFile file(config.outputFolder+"/programs.txt");
+            if(!file.open(QFile::WriteOnly | QFile::Text))
             {
-                QString str = QString("%1").arg(dirit.next());
-                dirList << str; //collect all parts for files in dolder
-                QStringList buf = str.split("Program Files", QString::SkipEmptyParts);
-                buf = buf.at(1).split("/", QString::SkipEmptyParts);
-                str = buf[0];
-                if(!programFiles->contains(str))
-                {
-                    *programFiles << str;
-                    //std::cout << programFiles->at(programFiles->size() - 1).toStdString() << std::endl; //for tests
-                }
+                std::cout << "File not found" << std::endl;
+                return false;
             }
-
-            std::cout << std::endl << std::endl;
+            QTextStream fout(&file);
             for (int i = 0; i < programFiles->size(); i++)
-                std::cout << programFiles->at(i).toStdString() << std::endl;
+            {
+                fout << programFiles->at(i) << '\n';
+                //std::cout << programFiles->at(i).toStdString() << std::endl;
+                /*QStringList qsl = getSubDirs(dirStr + programFiles->at(i) + "/");
+                for (int j = 0; j < qsl.size(); j++)
+                    std::cout << qsl.at(j).toStdString() << std::endl;
+                std::cout << std::endl;*/
+            }
+            file.flush();
+            file.close();
             break;            
         }
         default:

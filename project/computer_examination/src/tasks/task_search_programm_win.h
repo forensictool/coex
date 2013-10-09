@@ -18,6 +18,7 @@ class taskSearchProgrammWin : public coex::task
 		virtual QString description();
 		virtual bool test();
 		virtual bool execute(const coex::config &config);
+        virtual QStringList getSubDirs(QString dirStr);
 		
 	private:
 		QString m_strName;
