@@ -78,7 +78,7 @@ bool taskSearchProgrammWin::execute(const coex::config &config)
             }
 
             std::cout << std::endl << std::endl;
-            for (int i = 0; i < dirList.size(); i++)
+            for (int i = 0; i < programFiles->size(); i++)
                 std::cout << programFiles->at(i).toStdString() << std::endl;
             break;            
         }
