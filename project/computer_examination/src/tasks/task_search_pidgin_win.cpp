@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QXmlStreamReader>
 #include <QRegExp>
+#include <QTextStream>
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
@@ -117,55 +118,48 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 				QString timeMessage = "";
 				QString textMessage = "";
 				QString autorMessage = "";
+
+                QTextStream in(&file);
+                QStringList fieldsOne;
+                QStringList fieldsTwo;
+                QStringList fieldsEnd;
+                while(!in.atEnd())
+                {
+                    QString line = in.readLine();
+
+                    fieldsOne = line.split("<",QString::SkipEmptyParts);
+
+                    for (int y = 0; y < fieldsOne.size(); y++)
+                    {
+                        fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
+
+                        if (fieldsTwo.size() > 1)
+                        {
+                            fieldsEnd += fieldsTwo[1];
+                        }
+
+                        //for (int l = 0; l < fieldsEnd.size(); l++)
+                        //    std::cout << fieldsEnd.at(l).toStdString() << std::endl;
+                    }
+                }
 				
 				QXmlStreamReader xml(&file);
-				while(!xml.atEnd() && !xml.hasError())
+                while(!xml.atEnd() && !xml.hasError())
 				{
 					QXmlStreamReader::TokenType token = xml.readNext();
 					if(token == QXmlStreamReader::StartDocument) 
 					{
             			continue;
         			}
-        			
 
-        			if(token == QXmlStreamReader::StartElement) 
-        			{
-						if(xml.name() == "title") {
-							xmlWriter->writeStartElement("Title");
-						   ///	continue;
-						}
-						// QRegExp parseString("[>(] {8} "); //not full regexp, only to time
 
-						// xmlWriter->writeStartElement("TimeMessage");
-						// xmlWriter->writeStartElement("TextMessage");
-						// xmlWriter->writeStartElement("AutorMessage");
-					}
-
-					if(token == QXmlStreamReader::Characters)
-					{
-						if(xml.name() == "title") {
-							title +=  QString(xml.text().data()) + ".";
-						}
-						
-						// timeMessage += parseString.cap(0);
-						// textMessage += parseString.cap(1);
-						// autorMessage += parseString.cap(2);
-					}
-
-					if(token == QXmlStreamReader::EndElement)
-					{
-						if(xml.name() == "title")
-						{
-							// xmlWriter->writeCharacters(title); 
-							// xmlWriter->writeCharacters(timeMessage); 
-							// xmlWriter->writeCharacters(textMessage); 
-							// xmlWriter->writeCharacters(autorMessage);
-							// end title
-							xmlWriter->writeEndElement();
-							// std::cout << QString(xml.text().data()).toStdString() << ".";
-						}
-					}
-				};
+                    for (int l = 0; l < fieldsEnd.size(); l++)
+                    {
+                        xmlWriter->writeStartElement("parsing");
+                        xmlWriter->writeCharacters(fieldsEnd.at(l));
+                        xmlWriter->writeEndElement();
+                    }
+                };
 
 				if( xml.hasError())
 					std::cout << xml.errorString().toStdString();
