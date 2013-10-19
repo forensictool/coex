@@ -115,9 +115,9 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			if (file.open(QIODevice::ReadOnly))
 			{	
 				QString title = "";
-				QString timeMessage = "";
+                /*QString timeMessage = "";
 				QString textMessage = "";
-				QString autorMessage = "";
+                QString autorMessage = "";*/
 
                 QTextStream in(&file);
                 QStringList fieldsOne;
@@ -153,6 +153,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         			}
 
                     QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
+                    QRegExp rxAuthor (":$");
 
                     for (int l = 0; l < fieldsEnd.size(); l++)
                     {
@@ -163,20 +164,27 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                             xmlWriter->writeEndElement();
                             continue;
                         }
-                        if(fieldsEnd.at(l).contains(rxTime) )
+                        if(fieldsEnd.at(l).contains(rxTime))
                         {
                             xmlWriter->writeStartElement("time");
                             xmlWriter->writeCharacters(fieldsEnd.at(l));
                             xmlWriter->writeEndElement();
                             continue;
                         }
-                        /*if(fieldsEnd.at(l).contains("conversation", Qt::CaseInsensitive) )
+                        if(fieldsEnd.at(l).contains(rxAuthor))
                         {
-                            xmlWriter->writeStartElement("info");
+                            xmlWriter->writeStartElement("author");
                             xmlWriter->writeCharacters(fieldsEnd.at(l));
                             xmlWriter->writeEndElement();
                             continue;
-                        }*/
+                        }
+                        if( 1 )
+                        {
+                            xmlWriter->writeStartElement("all");
+                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeEndElement();
+                            continue;
+                        }
                     }
                 };
 
