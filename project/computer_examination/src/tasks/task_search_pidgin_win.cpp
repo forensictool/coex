@@ -152,12 +152,31 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             			continue;
         			}
 
+                    QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
 
                     for (int l = 0; l < fieldsEnd.size(); l++)
                     {
-                        xmlWriter->writeStartElement("parsing");
-                        xmlWriter->writeCharacters(fieldsEnd.at(l));
-                        xmlWriter->writeEndElement();
+                        if(fieldsEnd.at(l).contains("conversation", Qt::CaseInsensitive) )
+                        {
+                            xmlWriter->writeStartElement("info");
+                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeEndElement();
+                            continue;
+                        }
+                        if(fieldsEnd.at(l).contains(rxTime) )
+                        {
+                            xmlWriter->writeStartElement("time");
+                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeEndElement();
+                            continue;
+                        }
+                        /*if(fieldsEnd.at(l).contains("conversation", Qt::CaseInsensitive) )
+                        {
+                            xmlWriter->writeStartElement("info");
+                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeEndElement();
+                            continue;
+                        }*/
                     }
                 };
 
