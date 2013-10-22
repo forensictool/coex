@@ -51,6 +51,30 @@ bool taskSearchPidginWin::test()
 	return true;
 };
 
+/*void ListDirRecursive(QString directory)
+{
+    QDir dir(directory);
+    foreach(QString entry, dir.entryList())
+    {
+        if ((entry == ".") || (entry == ".."))
+            continue;
+        QDir subdir = QDir(dir.absoluteFilePath(entry));
+        if (subdir.exists())
+            ListDirRecursive(subdir.absolutePath());
+        qDebug() << subdir.absolutePath();
+    }
+}
+
+void ListDirRecursive2(QString directory)
+{
+    QDirIterator iterator (directory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    while(iterator.hasNext())
+    {
+        iterator.next();
+        qDebug() << iterator.fileInfo().absoluteFilePath();
+    }
+}*/
+
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
 	// example usage options
@@ -107,18 +131,10 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
 		if (fileInfo.suffix() == "html") 
 		{
-			std::cout << "воу воу парень, полегше. есть тут HTML\n\n";
-
 			QFile file(fileInfo.absoluteFilePath());
-
 			// open a file
 			if (file.open(QIODevice::ReadOnly))
 			{	
-				QString title = "";
-                /*QString timeMessage = "";
-				QString textMessage = "";
-                QString autorMessage = "";*/
-
                 QTextStream in(&file);
                 QStringList fieldsOne;
                 QStringList fieldsTwo;
@@ -126,23 +142,18 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 while(!in.atEnd())
                 {
                     QString line = in.readLine();
-
                     fieldsOne = line.split("<",QString::SkipEmptyParts);
-
                     for (int y = 0; y < fieldsOne.size(); y++)
                     {
                         fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
-
                         if (fieldsTwo.size() > 1)
                         {
                             fieldsEnd += fieldsTwo[1];
                         }
-
                         //for (int l = 0; l < fieldsEnd.size(); l++)
                         //    std::cout << fieldsEnd.at(l).toStdString() << std::endl;
                     }
                 }
-				
 				QXmlStreamReader xml(&file);
                 while(!xml.atEnd() && !xml.hasError())
 				{
