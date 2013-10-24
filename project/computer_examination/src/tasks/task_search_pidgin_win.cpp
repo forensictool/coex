@@ -109,12 +109,11 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     {
 
         QFileInfo fileInfo = dirPath.next();
-        std :: cout << fileInfo.absoluteFilePath().toStdString() << std::endl;
+        //std :: cout << fileInfo.absoluteFilePath().toStdString() << std::endl;
         if (fileInfo.suffix() == "html" || fileInfo.suffix() == "txt")
         {
-            std :: cout << fileInfo.baseName().toStdString() << std::endl;
+            //std :: cout << fileInfo.baseName().toStdString() << std::endl;
             foundFile << fileInfo.absoluteFilePath();
-
         }
     }
 
@@ -147,8 +146,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                         {
                             fieldsEnd += fieldsTwo[1];
                         }
-                        //for (int l = 0; l < fieldsEnd.size(); l++)
-                        //    std::cout << fieldsEnd.at(l).toStdString() << std::endl;
                     }
                 }
 				QXmlStreamReader xml(&file);
@@ -176,9 +173,9 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                         {
                             xmlWriter->writeStartElement("time");
 
-                            QString y = fieldsEnd.at(l).mid(1, 8);
+                            QString formatTime = fieldsEnd.at(l).mid(1, 8);
 
-                            xmlWriter->writeCharacters(y);
+                            xmlWriter->writeCharacters(formatTime);
                             xmlWriter->writeEndElement();
 
                             /*xmlWriter->writeStartElement("message");
