@@ -1,11 +1,13 @@
 #include "task_search_pidgin_win.h"
 #include <iostream>
 #include <QDir>
+#include <QDirIterator>
 #include <QString>
 #include <QFile>
 #include <QXmlStreamReader>
 #include <QRegExp>
 #include <QTextStream>
+#include <QDebug>
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
@@ -64,16 +66,7 @@ bool taskSearchPidginWin::test()
         qDebug() << subdir.absolutePath();
     }
 }
-
-void ListDirRecursive2(QString directory)
-{
-    QDirIterator iterator (directory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-    while(iterator.hasNext())
-    {
-        iterator.next();
-        qDebug() << iterator.fileInfo().absoluteFilePath();
-    }
-}*/
+*/
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
@@ -94,6 +87,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		return false;
 	}
 	QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
+
 	xmlWriter->setDevice(&fileXML);
 	xmlWriter->setAutoFormatting(true);
 	xmlWriter->writeStartDocument();
@@ -107,23 +101,26 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
     QString path = config.inputFolder + "/Users/Default/AppData/Roaming/.purple";
 
-    path = path + "/logs/jabber/fox.user.3@gmail.com/ctf@conference.jabber.ru.chat"; //hard code 
+    path = path + "/logs"; //hard code ... or not
 
-    QDir dir(path);
-
-    dir.setFilter(QDir::Files | QDir::Dirs  | QDir::NoSymLinks);
-    dir.setSorting(QDir::Size | QDir::Reversed);
-
-    QStringList filters;
-    filters << "*.html" << "*.txt";
-    dir.setNameFilters(filters);
-
-    QFileInfoList list = dir.entryInfoList();
-    std::cout << " Bytes FileName " << std::endl;
-    for(int i = 0; i < list.size(); ++i)
+    QStringList foundFile;
+    QDirIterator dirPath (path, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    while(dirPath.hasNext())
     {
-        QFileInfo fileInfo = list.at(i);
-        
+
+        QFileInfo fileInfo = dirPath.next();
+        std :: cout << fileInfo.absoluteFilePath().toStdString() << std::endl;
+        if (fileInfo.suffix() == "html" || fileInfo.suffix() == "txt")
+        {
+            std :: cout << fileInfo.baseName().toStdString() << std::endl;
+            foundFile << fileInfo.absoluteFilePath();
+
+        }
+    }
+
+    for(int i = 0; i < foundFile.size(); ++i)
+    {
+        QFileInfo fileInfo = foundFile.at(i);
         xmlWriter->writeStartElement("FoundFile");
 		xmlWriter->writeAttribute("size", QString::number(fileInfo.size()));
 		xmlWriter->writeAttribute("suffix", fileInfo.suffix());
@@ -178,21 +175,38 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                         if(fieldsEnd.at(l).contains(rxTime))
                         {
                             xmlWriter->writeStartElement("time");
-                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+
+                            QString y = fieldsEnd.at(l).mid(1, 8);
+
+                            xmlWriter->writeCharacters(y);
                             xmlWriter->writeEndElement();
+
+                            /*xmlWriter->writeStartElement("message");
+                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            a = l;
+                            xmlWriter->writeAttribute("time", fieldsEnd.at(a));
+                            //a++;
+                            xmlWriter->writeAttribute("author", fieldsEnd.at(a));
+                            //a++;
+                            xmlWriter->writeAttribute("text", fieldsEnd.at(a));
+                            xmlWriter->writeEndElement();*/
+
                             continue;
                         }
                         if(fieldsEnd.at(l).contains(rxAuthor))
                         {
                             xmlWriter->writeStartElement("author");
-                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            //QString y = fieldsEnd.at(l).mid(0, size.(fieldsEnd.at(l)));
+                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeAttribute("AUTHOR", fieldsEnd.at(l));
                             xmlWriter->writeEndElement();
                             continue;
                         }
                         if( 1 )
                         {
-                            xmlWriter->writeStartElement("all");
-                            xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeStartElement("text");
+                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
+                            xmlWriter->writeAttribute("TEXT", fieldsEnd.at(l));
                             xmlWriter->writeEndElement();
                             continue;
                         }
@@ -211,7 +225,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
 		if (fileInfo.suffix() == "txt") 
 		{
-			std::cout << "воу воу парень, полегше. есть тут txt\n\n";
 
 			QFile file(fileInfo.absolutePath());
 
