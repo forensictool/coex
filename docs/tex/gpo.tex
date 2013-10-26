@@ -6,7 +6,9 @@
 \usepackage[english,russian]{babel}%используем русский и английский языки с переносами
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float} %подключаем нужные пакеты расширений
 \makeatletter
-% \graphicspath{images/}%путь к рисункам
+\usepackage[dvips]{graphicx}
+\graphicspath{{images/}{images-arch/}}%пути к рисункам
+
 \renewcommand{\@biblabel}[1]{#1.}% Заменяем библиографию с квадратных скобок на точку:
 \makeatother
 \usepackage{geometry} % Меняем поля страницы
@@ -22,9 +24,18 @@
 \renewcommand{\theenumiii}{.\arabic{enumiii}}% Меняем везде перечисления на цифра.цифра
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}% Меняем везде перечисления на цифра.цифра
 
+% \arabic{section}
+
 \begin{document}
 \input{gpo-Title}% это титульный лист
 \tableofcontents % это оглавление, которое генерируется автоматически
+
+\input{gpo-Intro}% Это введение
+\input{gpo-Arch}% Про архитектуру
+
+
+
+\newpage
 
 \section*{Notes for My Paper}
 
@@ -59,21 +70,12 @@ I'll just assume a tree structure like (\ex{1}).
 }
 
 \subsection*{Mood}
+какая то хрень
 
 Mood changes when there is a topic, as well as when
 there is WH-movement.  \emph{Irrealis} is the mood when
 there is a non-subject topic or WH-phrase in Comp.
 \emph{Realis} is the mood when there is a subject topic
 or WH-phrase.
-
-\end{document}
-
-
-
-\begin{document}
-
-
-
-
 
 \end{document}
