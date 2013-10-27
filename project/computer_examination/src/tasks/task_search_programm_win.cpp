@@ -3,6 +3,8 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QTextStream>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 taskSearchProgrammWin::taskSearchProgrammWin()
 {
@@ -53,14 +55,14 @@ bool taskSearchProgrammWin::test()
 QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
 {
     QStringList dirList;
-    QDirIterator dirit(dirStr, QDirIterator::Subdirectories);
+    QDirIterator dirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     while(dirit.hasNext())
     {
         QString str = QString("%1").arg(dirit.next());
         QStringList buf = str.split(dirStr, QString::SkipEmptyParts);
         buf = buf.at(0).split("/", QString::SkipEmptyParts);
-        if ((buf[0] == ".")|(buf[0] =="..")) continue;
-        if (buf[0].split(".").size() != 1) continue;
+        if (buf[0].split(".").size() != 1) continue;  // посмореть такие фильтры при которых будут выводиться только субдирриктории
+        if (taskSearchProgrammWin::m_qslExcept.contains(buf[0])) continue;
         if (!dirList.contains(buf[0]))
         {
             dirList << buf[0];
@@ -71,6 +73,10 @@ QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
 bool taskSearchProgrammWin::execute(const coex::config &config)
 { 
     std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+    {
+        QDir dir(config.outputFolder);
+        dir.mkdir("programs");
+    }
     QStringList *programFiles = new QStringList();
     switch (config.os)
     {
@@ -79,26 +85,42 @@ bool taskSearchProgrammWin::execute(const coex::config &config)
             QString dirStr(config.inputFolder);
             dirStr += "/Program Files/";
             *programFiles = getSubDirs(dirStr);
-            QFile file(config.outputFolder+"/programs.txt");
-            if(!file.open(QFile::WriteOnly | QFile::Text))
+
+            QFile fileXML(config.outputFolder + "/programs/programs.xml");
+            if(!fileXML.open(QFile::WriteOnly))
             {
                 std::cout << "File not found" << std::endl;
                 return false;
             }
-            QTextStream fout(&file);
+
+            QXmlStreamWriter* xmlWrite = new QXmlStreamWriter();
+            xmlWrite->setDevice(&fileXML);
+            xmlWrite->setAutoFormatting(true);
+            xmlWrite->writeStartDocument();
+            xmlWrite->writeStartElement("programs");
+
             for (int i = 0; i < programFiles->size(); i++)
             {
-                fout << programFiles->at(i) << '\n';
+                //fout << programFiles->at(i) << '\n';
                 //std::cout << programFiles->at(i).toStdString() << std::endl;
                 /*QStringList qsl = getSubDirs(dirStr + programFiles->at(i) + "/");
                 for (int j = 0; j < qsl.size(); j++)
                     std::cout << qsl.at(j).toStdString() << std::endl;
                 std::cout << std::endl;*/
+                xmlWrite->writeStartElement("foundProgram");
+                xmlWrite->writeAttribute("name", programFiles->at(i));
+                xmlWrite->writeEndElement();
             }
-            file.flush();
-            file.close();
+
+
+            xmlWrite->writeEndElement();
+            xmlWrite->writeEndDocument();
+            delete xmlWrite;
+            //file.flush();
+            //file.close();
             break;            
         }
+
         default:
             std::cout << "Unknown system =(" << std::endl;
             break;
