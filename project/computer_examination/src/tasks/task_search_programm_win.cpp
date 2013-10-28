@@ -107,9 +107,27 @@ bool taskSearchProgrammWin::execute(const coex::config &config)
                 for (int j = 0; j < qsl.size(); j++)
                     std::cout << qsl.at(j).toStdString() << std::endl;
                 std::cout << std::endl;*/
-                xmlWrite->writeStartElement("foundProgram");
-                xmlWrite->writeAttribute("name", programFiles->at(i));
-                xmlWrite->writeEndElement();
+                if(!taskSearchProgrammWin::m_qslDirs.contains(programFiles->at(i)))
+                {
+                    xmlWrite->writeStartElement("foundProgram");
+                    xmlWrite->writeAttribute("name", programFiles->at(i));
+                    xmlWrite->writeEndElement();
+                }
+                else
+                {
+                    xmlWrite->writeStartElement("dir");
+                    QString dirStr(config.inputFolder);
+                    dirStr += ("/Program Files/" + programFiles->at(i));
+                    QStringList bufList = getSubDirs(dirStr);
+                    xmlWrite->writeAttribute("name", programFiles->at(i));
+                    for (int j = 0; j < bufList.size(); j++)
+                    {
+                        xmlWrite->writeStartElement("foundProgram");
+                        xmlWrite->writeAttribute("name", bufList.at(j));
+                        xmlWrite->writeEndElement();
+                    }
+                    xmlWrite->writeEndElement();
+                }
             }
 
 

@@ -33,6 +33,13 @@ class taskSearchProgrammWin : public coex::task
                                    << "Windows NT"
                                    << "WindowsUpdate"
                                    );
+        QStringList m_qslDirs = (QStringList()
+                                 << "AVAST Software"
+                                 << "Oracle"
+                                 << "Games"
+                                 << "ubisoft"
+                                 << "Microsoft Office"
+                                 );
 };
 
 #endif // __TASK_SEARCH_PROGRAMM_WIN_H__
