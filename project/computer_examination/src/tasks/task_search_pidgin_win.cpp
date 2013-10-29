@@ -53,20 +53,6 @@ bool taskSearchPidginWin::test()
 	return true;
 };
 
-/*void ListDirRecursive(QString directory)
-{
-    QDir dir(directory);
-    foreach(QString entry, dir.entryList())
-    {
-        if ((entry == ".") || (entry == ".."))
-            continue;
-        QDir subdir = QDir(dir.absoluteFilePath(entry));
-        if (subdir.exists())
-            ListDirRecursive(subdir.absolutePath());
-        qDebug() << subdir.absolutePath();
-    }
-}
-*/
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
@@ -99,23 +85,30 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 	// std::cout << config.inputFolder.toStdString() << "\n";
 	// std::cout << config.outputFolder.toStdString() << "\n";
 
-    QString path = config.inputFolder + "/Users/Default/AppData/Roaming/.purple";
+    QString path = config.inputFolder + "/Users/";
 
-    path = path + "/logs"; //hard code ... or not
-
+    QDir dir(path);
+    dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    QFileInfoList users = dir.entryInfoList();
     QStringList foundFile;
-    QDirIterator dirPath (path, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-    while(dirPath.hasNext())
-    {
 
-        QFileInfo fileInfo = dirPath.next();
-        //std :: cout << fileInfo.absoluteFilePath().toStdString() << std::endl;
-        if (fileInfo.suffix() == "html" || fileInfo.suffix() == "txt")
+    for( int i = 0; i < users.size();++i)
+    {
+        QFileInfo fileInfo = users.at(i);
+        path = fileInfo.absoluteFilePath() + "/AppData/Roaming/.purple/logs";
+
+        QDirIterator dirPath (path, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+        while(dirPath.hasNext())
         {
-            //std :: cout << fileInfo.baseName().toStdString() << std::endl;
-            foundFile << fileInfo.absoluteFilePath();
+            QFileInfo fileInfo = dirPath.next();
+            if (fileInfo.suffix() == "html" || fileInfo.suffix() == "txt")
+            {
+                foundFile << fileInfo.absoluteFilePath();
+            }
         }
-    }
+     }
+
+    std::cout << path.toStdString() << std::endl;
 
     for(int i = 0; i < foundFile.size(); ++i)
     {
@@ -177,17 +170,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
                             xmlWriter->writeCharacters(formatTime);
                             xmlWriter->writeEndElement();
-
-                            /*xmlWriter->writeStartElement("message");
-                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
-                            a = l;
-                            xmlWriter->writeAttribute("time", fieldsEnd.at(a));
-                            //a++;
-                            xmlWriter->writeAttribute("author", fieldsEnd.at(a));
-                            //a++;
-                            xmlWriter->writeAttribute("text", fieldsEnd.at(a));
-                            xmlWriter->writeEndElement();*/
-
                             continue;
                         }
                         if(fieldsEnd.at(l).contains(rxAuthor))
