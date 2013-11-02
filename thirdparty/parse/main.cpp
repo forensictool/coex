@@ -92,14 +92,20 @@ class winEventLog
 				{
 					char data[4];
 					stream.readRawData(data, 4);
-					for(int i = 0; i < 4; i++)
+					
+					if(data[0] == 0x00 && data[2] == 0x00)
+						bEnd = true;
+					else
 					{
-						if(data[i] == 0x00) bEnd = true;
-						if(!bEnd) 
-						{
-							res += QChar::fromAscii(data[i]);
-							std::cout << data[i];
-						};
+						if(data[0] != 0x00)
+							res += QChar::fromAscii(data[0]);
+						else 
+							res += " ";
+						
+						if(data[2] != 0x00)
+							res += QChar::fromAscii(data[2]);
+						else 
+							res += " ";
 					}
 				}
 				return res;
@@ -112,14 +118,14 @@ class winEventLog
 				std::cout << "date_cr: " << DateCreated << "; ";
 				std::cout << "date_wr: " << DateWritten << "; ";
 				std::cout << "EventID: " << EventID << "; ";
-				// std::cout << "Unknown1: " << Unknown1 << "; ";
-				// std::cout << "Unknown2: " << Unknown2 << "; ";
-				std::cout << "EventType: " << EventType << "; ";
+				std::cout << "Unknown1: " << (int)Unknown1 << "; ";
+				std::cout << "Unknown2: " << (int)Unknown2 << "; ";
+				std::cout << "EventType: " << (int)EventType << "; ";
 				std::cout << "StringCount: " << StringCount << "; ";
 				std::cout << "Category: " << Category << "; ";
-				// std::cout << "SID: " << SID << "; ";
-				// std::cout << "Unknown3: " << Unknown3 << "; ";
-				// std::cout << "Unknown4: " << Unknown4 << ";";
+				std::cout << "SID: " << SID << "; ";
+				std::cout << "Unknown3: " << Unknown3 << "; ";
+				std::cout << "Unknown4: " << Unknown4 << ";";
 				std::cout << "Message: " << Message.toStdString() << "; ";
 				std::cout << "SourceName: " << SourceName.toStdString() << "; ";
 				std::cout << "ComputerName: " << ComputerName.toStdString() << "; ";
@@ -136,10 +142,9 @@ class winEventLog
 			
 			// I don't know what is it:
 			
-			
-			/*char data[nOffset+1];
-			data[nOffset] = 0;
-			stream.readRawData(data, nOffset);*/
+			int nOffset = 32;
+			char data[nOffset];
+			stream.readRawData(data, nOffset);
 	
 			int countofmsg = 0;
 			while(!stream.atEnd())
@@ -210,9 +215,9 @@ class winEventLog
 					
 					evnt.print();
 					
-					countofmsg++;
+					/*countofmsg++;
 					if(countofmsg > 5)
-						return;
+						return;*/
 				}
 			}
 			
