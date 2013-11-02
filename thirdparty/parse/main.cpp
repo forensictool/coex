@@ -72,13 +72,15 @@ class winEventLog
 			quint8 Unknown1;
 			quint8 Unknown2;
 			quint8 EventType;
+			QString strEventType;
 			quint16 StringCount;
 			quint16 Category;
+			QString strCategory;
 			char SID[8];
 			char Unknown3[8];
 			char Unknown4[11];
 			QString Message;
-			QString SourceName;
+			QString Source;
 			QString ComputerName;
 			QString Message1;
 			
@@ -93,7 +95,10 @@ class winEventLog
 					char data[4];
 					stream.readRawData(data, 4);
 					
-					if(data[0] == 0x00 && data[2] == 0x00)
+					if(
+						(data[0] == 0x00 && data[2] == 0x00)
+						|| (data[2] == 0x00)
+					)
 						bEnd = true;
 					else
 					{
@@ -111,23 +116,89 @@ class winEventLog
 				return res;
 			}
 			
+			void read(QDataStream &stream)
+			{
+				// 1 Message Number (4 bytes - Padded with null characters from left to right to fill in the full 4 bytes. It is in little endian byte order)
+				stream >> MessageNumber;
+				
+				// 2 Date Created (4 bytes, little endian, decimal value in epoch)
+				stream >> DateCreated;
+				
+				// 3 Date Written (4 bytes, little endian, decimal value in epoch)
+				stream >> DateWritten;
+				
+				// 4 Event ID (2 bytes, little endian, decimal value)
+				stream >> EventID;
+				
+				// 5 Unknown? (1 byte)
+				stream >> Unknown1;
+				
+				// 6 Unknown? (1 byte)
+				stream >> Unknown2;
+
+				// 7 Event Type (1 byte - number - used as index to retrieve 'Event Name')
+				stream >> EventType;
+				if(EventType == 4) strEventType = "Information";
+				
+				// 8 String Count (2 bytes - The number of strings in the event in decimal)
+				stream >> StringCount;
+				
+				// 9 Category (2 bytes - decimal value)
+				stream >> Category;
+				if(Category == 0) strCategory = "None";
+				
+				
+				// 10 SID? (8 bytes - possibly the decimal value of the SID)
+				stream.readRawData(SID, sizeof(SID));
+				
+				// 11 Unknown? (8 bytes - possibly related to the SID)
+				stream.readRawData(Unknown3, sizeof(Unknown3));
+				
+				// 12 Unknown? (11 bytes)
+				stream.readRawData(Unknown4, sizeof(Unknown4));
+				
+				// 13 Source Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
+				Source = readString(stream);
+				
+				// 14 Computer Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
+				ComputerName = readString(stream);
+				
+				// 15 String1 (Variable Length - Also known as the 'Message' - Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word.)
+				Message = readString(stream);
+				
+				// 16 String'n' (Depending on the number of strings specified by
+				{
+					char *strn = new char[StringCount+1];
+					strn[StringCount] = 0x00;
+					stream.readRawData(strn, StringCount);
+					Message1 = QString(strn);
+				}
+				
+				// 17 Unknown? (8 bytes)
+				stream.readRawData(Unknown5, sizeof(Unknown5));
+			}
+			
 			void print()
 			{
-				std::cout << "-------------\r\n\t";
-				std::cout << "msg_num: " << MessageNumber << "; ";
-				std::cout << "date_cr: " << DateCreated << "; ";
-				std::cout << "date_wr: " << DateWritten << "; ";
-				std::cout << "EventID: " << EventID << "; ";
-				std::cout << "Unknown1: " << (int)Unknown1 << "; ";
+				
+				
+				std::cout << "/ Event \\____________________________________________________\r\n";
+				std::cout << "| Date: [" << DateWritten << "]\t Source: [" << Source.toStdString() << "] |\r\n";
+				std::cout << "| Time: [" << DateCreated << "]\t Category: (" << Category << ") " << strCategory.toStdString() << " |\r\n";
+				std::cout << "| Type: [" << (int)EventType << ") " << strEventType.toStdString() << "]\t EventID: [" << EventID << "] |\r\n";
+				
+				// MessageNumber
+				
+				
+				
+				std::cout << "| Unknown1: " << (int)Unknown1 << "; ";
 				std::cout << "Unknown2: " << (int)Unknown2 << "; ";
-				std::cout << "EventType: " << (int)EventType << "; ";
 				std::cout << "StringCount: " << StringCount << "; ";
 				std::cout << "Category: " << Category << "; ";
 				std::cout << "SID: " << SID << "; ";
 				std::cout << "Unknown3: " << Unknown3 << "; ";
 				std::cout << "Unknown4: " << Unknown4 << ";";
 				std::cout << "Message: " << Message.toStdString() << "; ";
-				std::cout << "SourceName: " << SourceName.toStdString() << "; ";
 				std::cout << "ComputerName: " << ComputerName.toStdString() << "; ";
 				std::cout << "Message1: " << Message1.toStdString() << "; ";
 			
@@ -145,8 +216,7 @@ class winEventLog
 			int nOffset = 32;
 			char data[nOffset];
 			stream.readRawData(data, nOffset);
-	
-			int countofmsg = 0;
+
 			while(!stream.atEnd())
 			{
 				quint32 unknown;
@@ -156,77 +226,10 @@ class winEventLog
 				if(unknown == 0x4c664c65) // !!! found separator
 				{
 					_EVENTLOGRECORD evnt;
-					
-					// 1 Message Number (4 bytes - Padded with null characters from left to right to fill in the full 4 bytes. It is in little endian byte order)
-					stream >> evnt.MessageNumber;
-		
-					// 2 Date Created (4 bytes, little endian, decimal value in epoch)
-					stream >> evnt.DateCreated;
-					
-					// 3 Date Written (4 bytes, little endian, decimal value in epoch)
-					stream >> evnt.DateWritten;
-					
-					// 4 Event ID (2 bytes, little endian, decimal value)
-					stream >> evnt.EventID;
-					
-					// 5 Unknown? (1 byte)
-					stream >> evnt.Unknown1;
-					
-					// 6 Unknown? (1 byte)
-					stream >> evnt.Unknown2;
-
-					// 7 Event Type (1 byte - number - used as index to retrieve 'Event Name')
-					stream >> evnt.EventType;
-					
-					// 8 String Count (2 bytes - The number of strings in the event in decimal)
-					stream >> evnt.StringCount;
-					
-					// 9 Category (2 bytes - decimal value)
-					stream >> evnt.Category;
-					
-					// 10 SID? (8 bytes - possibly the decimal value of the SID)
-					stream.readRawData(evnt.SID, sizeof(evnt.SID));
-					
-					// 11 Unknown? (8 bytes - possibly related to the SID)
-					stream.readRawData(evnt.Unknown3, sizeof(evnt.Unknown3));
-					
-					// 12 Unknown? (11 bytes)
-					stream.readRawData(evnt.Unknown4, sizeof(evnt.Unknown4));
-					
-					// 13 Source Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
-					evnt.SourceName = evnt.readString(stream);
-					
-					// 14 Computer Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
-					evnt.ComputerName = evnt.readString(stream);
-					
-					// 15 String1 (Variable Length - Also known as the 'Message' - Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word.)
-					evnt.Message = evnt.readString(stream);
-					
-					// 16 String'n' (Depending on the number of strings specified by
-					{
-						char *strn = new char[evnt.StringCount+1];
-						strn[evnt.StringCount] = 0x00;
-						stream.readRawData(strn, evnt.StringCount);
-						evnt.Message1 = QString(strn);
-					}
-					
-					// 17 Unknown? (8 bytes)
-					stream.readRawData(evnt.Unknown5, sizeof(evnt.Unknown5));
-					
+					evnt.read(stream);					
 					evnt.print();
-					
-					/*countofmsg++;
-					if(countofmsg > 5)
-						return;*/
 				}
 			}
-			
-			/*if(evnt.Length < 256 && evnt.Length != 0)
-			{
-				std::cout << "val: " << evnt.Length << "\r\n";
-				std::cout << data << ", offset: " << nOffset << "\r\n";
-				std::cout << "!!! found possible offset: " << nOffset << "\r\n";
-			}*/
 		}
 	
 	private:
