@@ -1,0 +1,2 @@
+qmake parser.pro
+make
