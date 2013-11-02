@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QDataStream>
 #include <QIODevice>
+#include <QVector>
 #include <QDirIterator>
 
 
@@ -15,43 +16,240 @@ int print_header = 1;
 QString DB_PATH;
 QString LOG;
 
-#define returnna return 0;
+/*
+typedef struct _EVENTLOGRECORD {
+DWORD Length;
+DWORD Reserved;
+DWORD RecordNumber;
+DWORD TimeGenerated;
+DWORD TimeWritten;
+DWORD EventID;
+WORD EventType;
+WORD NumStrings;
+WORD EventCategory;
+WORD ReservedFlags;
+DWORD ClosingRecordNumber;
+DWORD StringOffset;
+DWORD UserSidLength;
+DWORD UserSidOffset;
+DWORD DataLength;
+DWORD DataOffset;
+//
+// Then follow:
+//
+// TCHAR SourceName[]
+// TCHAR Computername[]
+// SID UserSid
+// TCHAR Strings[]
+// BYTE Data[]
+// CHAR Pad[]
+// DWORD Length;
+//
+
+}
+*/
+
+class winEventLog
+{
+	public:
+		winEventLog(QString filename)
+		{
+			m_file = new QFile(filename);
+			m_bOpen = m_file->open(QIODevice::ReadOnly);
+		}
+		
+		~winEventLog()
+		{
+			if(m_bOpen) m_file->close();
+		}
+		
+		struct _EVENTLOGRECORD 
+		{
+			quint32 MessageNumber;
+			quint32 DateCreated;
+			quint32 DateWritten;
+			quint16 EventID;
+			quint8 Unknown1;
+			quint8 Unknown2;
+			quint8 EventType;
+			quint16 StringCount;
+			quint16 Category;
+			char SID[8];
+			char Unknown3[8];
+			char Unknown4[11];
+			QString Message;
+			QString SourceName;
+			QString ComputerName;
+			QString Message1;
+			
+			char Unknown5[8];
+			
+			QString readString(QDataStream &stream)
+			{
+				bool bEnd = false;
+				QString res = "";
+				while(!bEnd)
+				{
+					char data[4];
+					stream.readRawData(data, 4);
+					for(int i = 0; i < 4; i++)
+					{
+						if(data[i] == 0x00) bEnd = true;
+						if(!bEnd) 
+						{
+							res += QChar::fromAscii(data[i]);
+							std::cout << data[i];
+						};
+					}
+				}
+				return res;
+			}
+			
+			void print()
+			{
+				std::cout << "-------------\r\n\t";
+				std::cout << "msg_num: " << MessageNumber << "; ";
+				std::cout << "date_cr: " << DateCreated << "; ";
+				std::cout << "date_wr: " << DateWritten << "; ";
+				std::cout << "EventID: " << EventID << "; ";
+				// std::cout << "Unknown1: " << Unknown1 << "; ";
+				// std::cout << "Unknown2: " << Unknown2 << "; ";
+				std::cout << "EventType: " << EventType << "; ";
+				std::cout << "StringCount: " << StringCount << "; ";
+				std::cout << "Category: " << Category << "; ";
+				// std::cout << "SID: " << SID << "; ";
+				// std::cout << "Unknown3: " << Unknown3 << "; ";
+				// std::cout << "Unknown4: " << Unknown4 << ";";
+				std::cout << "Message: " << Message.toStdString() << "; ";
+				std::cout << "SourceName: " << SourceName.toStdString() << "; ";
+				std::cout << "ComputerName: " << ComputerName.toStdString() << "; ";
+				std::cout << "Message1: " << Message1.toStdString() << "; ";
+			
+				std::cout << "\r\n";
+			}
+		};
+		
+		void read()
+		{
+			if(!m_bOpen) return;
+			QDataStream stream(m_file);
+			
+			// I don't know what is it:
+			
+			
+			/*char data[nOffset+1];
+			data[nOffset] = 0;
+			stream.readRawData(data, nOffset);*/
+	
+			int countofmsg = 0;
+			while(!stream.atEnd())
+			{
+				quint32 unknown;
+				stream >> unknown;
+
+				// 0 Message Separator (4 bytes - Separator is (1001100011001100100110001100101 - bin) or (4c664c65 - hex) or (LfLe - ascii))
+				if(unknown == 0x4c664c65) // !!! found separator
+				{
+					_EVENTLOGRECORD evnt;
+					
+					// 1 Message Number (4 bytes - Padded with null characters from left to right to fill in the full 4 bytes. It is in little endian byte order)
+					stream >> evnt.MessageNumber;
+		
+					// 2 Date Created (4 bytes, little endian, decimal value in epoch)
+					stream >> evnt.DateCreated;
+					
+					// 3 Date Written (4 bytes, little endian, decimal value in epoch)
+					stream >> evnt.DateWritten;
+					
+					// 4 Event ID (2 bytes, little endian, decimal value)
+					stream >> evnt.EventID;
+					
+					// 5 Unknown? (1 byte)
+					stream >> evnt.Unknown1;
+					
+					// 6 Unknown? (1 byte)
+					stream >> evnt.Unknown2;
+
+					// 7 Event Type (1 byte - number - used as index to retrieve 'Event Name')
+					stream >> evnt.EventType;
+					
+					// 8 String Count (2 bytes - The number of strings in the event in decimal)
+					stream >> evnt.StringCount;
+					
+					// 9 Category (2 bytes - decimal value)
+					stream >> evnt.Category;
+					
+					// 10 SID? (8 bytes - possibly the decimal value of the SID)
+					stream.readRawData(evnt.SID, sizeof(evnt.SID));
+					
+					// 11 Unknown? (8 bytes - possibly related to the SID)
+					stream.readRawData(evnt.Unknown3, sizeof(evnt.Unknown3));
+					
+					// 12 Unknown? (11 bytes)
+					stream.readRawData(evnt.Unknown4, sizeof(evnt.Unknown4));
+					
+					// 13 Source Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
+					evnt.SourceName = evnt.readString(stream);
+					
+					// 14 Computer Name (Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word)
+					evnt.ComputerName = evnt.readString(stream);
+					
+					// 15 String1 (Variable Length - Also known as the 'Message' - Variable Length in words (4 bytes) with at least the last two bytes being null and 0 or more bytes of null padding up to the length of a full word.)
+					evnt.Message = evnt.readString(stream);
+					
+					// 16 String'n' (Depending on the number of strings specified by
+					{
+						char *strn = new char[evnt.StringCount+1];
+						strn[evnt.StringCount] = 0x00;
+						stream.readRawData(strn, evnt.StringCount);
+						evnt.Message1 = QString(strn);
+					}
+					
+					// 17 Unknown? (8 bytes)
+					stream.readRawData(evnt.Unknown5, sizeof(evnt.Unknown5));
+					
+					evnt.print();
+					
+					countofmsg++;
+					if(countofmsg > 5)
+						return;
+				}
+			}
+			
+			/*if(evnt.Length < 256 && evnt.Length != 0)
+			{
+				std::cout << "val: " << evnt.Length << "\r\n";
+				std::cout << data << ", offset: " << nOffset << "\r\n";
+				std::cout << "!!! found possible offset: " << nOffset << "\r\n";
+			}*/
+		}
+	
+	private:
+		QVector<_EVENTLOGRECORD> m_evtlogs;
+		QFile *m_file;
+		bool m_bOpen;
+};
+
+
 
 int main(int argc, char *argv[])
 {
-/*	if(argc < 2)
+	if(argc < 2)
 	{
-		std::cout << argv[0] << " <log filename>" << std::endl;
-        return -1;
+		// std::cout << argv[0] << " <log filename>" << std::endl;
+        // return -1;
 	};
-	
-	
+
 	QString filename = QString(argv[1]);
-*/
-	QString filename = QString("system.LOG");
-	QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly))
-        return -2;
 
-    QDataStream stream(&file);
-
-	for(int i=0; i < 3; i++)
+	//for(int i = 0; i < 10; i++)
 	{
-		QChar h;
-		stream >> h;
-		std::cout << h.toChar();	
+		winEventLog log(QString("SysEvent.Evt"));
+		log.read();
 	}
 	
-	
-	qint32 val;
-	stream >> val;
-    std::cout << val;
-
-    file.close();
-    
-    std::cout << "\r\n fuck off \r\n";
+    std::cout << "\r\n fuck off \r\n";    
     return 0;
-	// DWORD f;
 	
     /*if((argc < 3) | !(strcmp(argv[1], "-?")) | !(strcmp(argv[1], "--help")))
     {
