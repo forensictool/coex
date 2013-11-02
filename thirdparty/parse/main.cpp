@@ -361,8 +361,7 @@ int main(int argc, char *argv[])
 		winEventLog log(QString("SysEvent.Evt"));
 		log.read();
 	}
-	
-    std::cout << "\r\n fuck off \r\n";    
+
     return 0;
 	
     /*if((argc < 3) | !(strcmp(argv[1], "-?")) | !(strcmp(argv[1], "--help")))
