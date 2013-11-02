@@ -2,6 +2,9 @@
 #include <iostream>
 #include <QStringList>
 #include <QString>
+#include <QFile>
+#include <QDataStream>
+#include <QIODevice>
 #include <QDirIterator>
 
 
@@ -12,10 +15,45 @@ int print_header = 1;
 QString DB_PATH;
 QString LOG;
 
+#define returnna return 0;
 
 int main(int argc, char *argv[])
 {
-    if((argc < 3) | !(strcmp(argv[1], "-?")) | !(strcmp(argv[1], "--help")))
+/*	if(argc < 2)
+	{
+		std::cout << argv[0] << " <log filename>" << std::endl;
+        return -1;
+	};
+	
+	
+	QString filename = QString(argv[1]);
+*/
+	QString filename = QString("system.LOG");
+	QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+        return -2;
+
+    QDataStream stream(&file);
+
+	for(int i=0; i < 3; i++)
+	{
+		QChar h;
+		stream >> h;
+		std::cout << h.toChar();	
+	}
+	
+	
+	qint32 val;
+	stream >> val;
+    std::cout << val;
+
+    file.close();
+    
+    std::cout << "\r\n fuck off \r\n";
+    return 0;
+	// DWORD f;
+	
+    /*if((argc < 3) | !(strcmp(argv[1], "-?")) | !(strcmp(argv[1], "--help")))
     {
         std::cout << "NO_1" << std::endl;
         return false;
@@ -78,6 +116,7 @@ int main(int argc, char *argv[])
         std::cout << "ERROR: Incorrect usage for log parse command" << std::endl;
         return false;
     }
+	
 
     if (mode_loglist)
     {
@@ -92,7 +131,7 @@ int main(int argc, char *argv[])
             //строка 161.
         }
     }
-
-
+	
+	*/
     return true;
 }
