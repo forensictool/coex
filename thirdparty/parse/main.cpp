@@ -10,6 +10,7 @@
 #include <QMap>
 #include <QDateTime>
 #include <QDirIterator>
+#include <QChar>
 
 
 int mode_loglist = 0;
@@ -87,6 +88,9 @@ QString readString(QDataStream &stream)
 	
 		if(data[0] != 0x00)
 			res += QChar::fromAscii(data[0]);
+        /*
+         * короче не знает он что такое этот фром аски, пробовал инклюды разные и доставлял либы, не помогло
+         */
 	}
 	return res;
 }
