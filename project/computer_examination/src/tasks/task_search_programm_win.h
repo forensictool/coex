@@ -24,22 +24,8 @@ class taskSearchProgrammWin : public coex::task
 		QString m_strName;
 		QString m_strDescription;
         bool m_bDebug;
-        QStringList m_qslExcept = (QStringList()
-                                   << "."
-                                   << ".."
-                                   << "Common Files"
-                                   << "Microsoft Analysis Services"   /*???*/
-                                   << "MSBuild"
-                                   << "Windows NT"
-                                   << "WindowsUpdate"
-                                   );
-        QStringList m_qslDirs = (QStringList()
-                                 << "AVAST Software"
-                                 << "Oracle"
-                                 << "Games"
-                                 << "ubisoft"
-                                 << "Microsoft Office"
-                                 );
+        QStringList m_qslExcept;
+        QStringList m_qslDirs;
 };
 
 #endif // __TASK_SEARCH_PROGRAMM_WIN_H__

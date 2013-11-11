@@ -11,6 +11,28 @@ taskSearchProgrammWin::taskSearchProgrammWin()
 	m_strName = "Search Programm (Win)";
 	m_strDescription = "Task is search installed prgramms in Windows";
     m_bDebug = false;
+    
+    m_qslExcept = (QStringList()
+	   << "."
+	   << ".."
+	   << "Common Files"
+	   << "Microsoft Analysis Services"   /*???*/
+	   << "MSBuild"
+	   << "Windows NT"
+	   << "WindowsUpdate"
+   );
+	   
+	m_qslExcept = (QStringList()
+		<< "."
+		<< ".."
+		<< "Common Files"
+		<< "Microsoft Analysis Services"   /*???*/
+		<< "MSBuild"
+		<< "Windows NT"
+		<< "WindowsUpdate"
+	);
+
+                                   
 }
 
 taskSearchProgrammWin::~taskSearchProgrammWin(){}
