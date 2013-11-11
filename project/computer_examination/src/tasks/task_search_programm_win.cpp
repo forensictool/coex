@@ -21,18 +21,14 @@ taskSearchProgrammWin::taskSearchProgrammWin()
 	   << "Windows NT"
 	   << "WindowsUpdate"
    );
-	   
-	m_qslExcept = (QStringList()
-		<< "."
-		<< ".."
-		<< "Common Files"
-		<< "Microsoft Analysis Services"   /*???*/
-		<< "MSBuild"
-		<< "Windows NT"
-		<< "WindowsUpdate"
-	);
-
-                                   
+	 
+    m_qslDirs = (QStringList()
+		<< "AVAST Software"
+		<< "Oracle"
+		<< "Games"
+		<< "ubisoft"
+		<< "Microsoft Office"
+	);                                   
 }
 
 taskSearchProgrammWin::~taskSearchProgrammWin(){}
