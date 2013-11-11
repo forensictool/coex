@@ -5,6 +5,7 @@
 #include <QString>
 #include <QFile>
 #include <QXmlStreamReader>
+#include <QtSql/QSqlDatabase>
 #include <QRegExp>
 #include <QTextStream>
 #include <QDebug>
@@ -88,7 +89,7 @@ bool taskSearchSkypeWin::execute(const coex::config &config)
 
     path = path + "/fox.user.3/main.db"; //hard code ... or not
 
-
+/*
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
 
@@ -100,7 +101,7 @@ bool taskSearchSkypeWin::execute(const coex::config &config)
 
       qDebug( "Connected!" );
 
-
+*/
     std::cout << "===========================================\n\n";	
     
     return true;
