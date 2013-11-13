@@ -37,7 +37,7 @@ QString readString(QDataStream &stream)
 			break;
 	
 		if(data[0] != 0x00)
-            res += data[0]; //QChar::fromAscii(data[0]); // deprecated method
+            res += QChar::fromLatin1(data[0]);
         /*
          * короче не знает он что такое этот фром аски, пробовал инклюды разные и доставлял либы, не помогло
          * sea-kg: беда... метод в ку5 морально устарел... может попробовать res += QChar::fromLatin1(data[0]) ???

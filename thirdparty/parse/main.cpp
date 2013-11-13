@@ -87,11 +87,11 @@ QString readString(QDataStream &stream)
 			break;
 	
 		if(data[0] != 0x00)
-			res += QChar::fromAscii(data[0]);
+            res += QChar::fromLatin1(data[0]);
         /*
          * короче не знает он что такое этот фром аски, пробовал инклюды разные и доставлял либы, не помогло
          */
-	}
+    }
 	return res;
 }
 
