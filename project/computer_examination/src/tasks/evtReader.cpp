@@ -37,9 +37,16 @@ QString readString(QDataStream &stream)
 			break;
 	
 		if(data[0] != 0x00)
-            res += data[0]; //QChar::fromAscii(data[0]);
+            res += data[0]; //QChar::fromAscii(data[0]); // deprecated method
         /*
          * короче не знает он что такое этот фром аски, пробовал инклюды разные и доставлял либы, не помогло
+         * sea-kg: беда... метод в ку5 морально устарел... может попробовать res += QChar::fromLatin1(data[0]) ???
+         * или res += QChar(QLatin1Char(data[0]).unicode());
+         * http://qt-project.org/doc/qt-5.0/qtcore/qchar.html
+         * Static Public Method
+         * QChar 	fromAscii(char c) (deprecated)
+         * Converts the ASCII character c to it's equivalent QChar. This is mainly useful for non-internationalized software.
+         * An alternative is to use QLatin1Char.
          */
     }
 	return res;
