@@ -8,7 +8,7 @@ class taskSearchSyslogsWin : public coex::task
 	public:
 		taskSearchSyslogsWin();
         virtual ~taskSearchSyslogsWin();
-	
+
 		// coex::Task
 		virtual QString manual();
         virtual void setOption(QStringList options);
