@@ -1,4 +1,5 @@
 #include "task_search_pidgin_win.h"
+#include "../coex/writerMessages.h"
 #include <iostream>
 #include <QDir>
 #include <QDirIterator>
@@ -53,13 +54,9 @@ bool taskSearchPidginWin::test()
 	return true;
 };
 
-void taskSearchPidginWin::writeToXml(QString text, QString textList)
-{
-
-}
-
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
+
 	// example usage options
 	if(m_bDebug)
 		std::cout << "  !!! debug mode on.\n";
@@ -68,22 +65,19 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-	
-	QFile fileXML(config.outputFolder + "//pidgin/messages.xml");
-	// open a file
-	if (!fileXML.open(QIODevice::WriteOnly))
-	{
+    coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml");
+    if(!msg.opened())
+    {
 		std::cout << " failed task\n";
 		return false;
 	}
-	QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
+/*	QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
 
 	xmlWriter->setDevice(&fileXML);
 	xmlWriter->setAutoFormatting(true);
 	xmlWriter->writeStartDocument();
 	xmlWriter->writeStartElement("Messages");
-			
-  // TODO: 
+*/
 	
 	std::cout << "===========================================\n\n";
 	// std::cout << config.inputFolder.toStdString() << "\n";
@@ -112,7 +106,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         }
      }
 
-    std::cout << path.toStdString() << std::endl;
+    if(m_bDebug)
+        std::cout << path.toStdString() << std::endl;
 
     for(int i = 0; i < foundFile.size(); ++i)
     {
@@ -228,8 +223,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     }
         
     xmlWriter->writeEndElement();
-	xmlWriter->writeEndDocument();
-	delete xmlWriter;
+    xmlWriter->writeEndDocument();
+    delete xmlWriter;
     std::cout << "===========================================\n\n";	
     return true;
 };

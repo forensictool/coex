@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QMap>
 #include "task.h"
+#include "writerMessages.h"
 
 namespace coex {
 
