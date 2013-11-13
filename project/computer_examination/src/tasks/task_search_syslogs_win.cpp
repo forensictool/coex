@@ -4,6 +4,8 @@
 #include <QDir>
 #include <QDirIterator>
 
+//#include "evtReader.cpp"
+
 taskSearchSyslogsWin::taskSearchSyslogsWin()
 {
     m_strName = "Search Syslogs (Win)";
@@ -58,13 +60,13 @@ void taskSearchSyslogsWin::readLogFiles(QStringList logFiles, const coex::config
     QString outFolder = config.outputFolder + "/SYSWINLOGS/";
 
     // output logfiles list in outputfolder //
-    /*
+
     for(int i = 0; i < logFiles.size(); i++)
     {
         QStringList list = logFiles.at(i).split("/", QString::SkipEmptyParts);
         QFile::copy(logFiles.at(i), outFolder + list.at(list.size() - 1));
     }
-    */
+
 
 
 }
@@ -73,11 +75,20 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
 {
     QDir(config.outputFolder).mkdir("SYSWINEVTS");
     QString outFolder = config.outputFolder + "/SYSWINEVTS/";
+    /*
     for(int i = 0; i < evtFiles.size(); i++)
     {
         QStringList list = evtFiles.at(i).split("/", QString::SkipEmptyParts);
         QFile::copy(evtFiles.at(i), outFolder + list.at(list.size() - 1));
     }
+    */
+    //
+    //ололо
+    //
+    //---------------------------------------------------------------------------------------
+    QString fileName = "./SysEvent.Evt";
+
+    //---------------------------------------------------------------------------------------
 }
 
 /* 
