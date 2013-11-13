@@ -53,6 +53,10 @@ bool taskSearchPidginWin::test()
 	return true;
 };
 
+void taskSearchPidginWin::writeToXml(QString text, QString textList)
+{
+
+}
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
