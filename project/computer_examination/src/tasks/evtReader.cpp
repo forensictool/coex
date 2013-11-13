@@ -2,12 +2,7 @@
 
 //флаги для параметров
 //скорее всего выпилить...
-int mode_loglist = 0;
-int mode_meta = 0;
-int print_verbose = 0;
-int print_header = 1;
-QString DB_PATH;
-QString LOG;
+
 
 // вспомогательные ридеры для чтения бинарыных последовательностей определенной длинны
 qint32 readQInt32asLittleEndian(QDataStream &stream)
@@ -68,39 +63,17 @@ QString EventCategoryToString(quint16 type)
 }
 
 //экземпляр записи в evt файле
-class _EVENTLOGRECORD 
-{
-	public:
-		_EVENTLOGRECORD() {};
-		~_EVENTLOGRECORD() 
+
+        _EVENTLOGRECORD::_EVENTLOGRECORD() {}
+        _EVENTLOGRECORD::~_EVENTLOGRECORD()
 		{
 				// delete Bytes;
-		};
+        }
 		
-		char *Bytes;
-		
-		quint32 Length;
-		quint32 Reserved;
-		quint32 RecordNumber;
-		quint32 TimeGenerated;
-		quint32 TimeWritten;
-		quint32 EventID;
-		quint16 EventType;
-		quint16 NumStrings;
-		quint16 EventCategory;
-		quint16 ReservedFlags;
-		quint32 ClosingRecordNumber;
-		quint32 StringOffset;
-		quint32 UserSidLength;
-		quint32 UserSidOffset;
-		quint32 DataLength;
-		quint32 DataOffset;
-
-		QMap<QString, QString> MapData;
 	
 		// http://msdn.microsoft.com/en-us/library/windows/desktop/aa363651%28v=vs.85%29.aspx
 		
-		void setEventID(quint32 id)
+        void _EVENTLOGRECORD::setEventID(quint32 id)
 		{
 			// TODO
 			quint8 Sev = id >> 30;
@@ -133,7 +106,7 @@ class _EVENTLOGRECORD
 			MapData["EventID_Code"] = QString::number(EventID);
 		}
 
-		void read(QDataStream &stream)
+        void _EVENTLOGRECORD::read(QDataStream &stream)
 		{
 			stream >> Reserved;				
 			if(Reserved != 0x4c664c65)
@@ -244,9 +217,9 @@ class _EVENTLOGRECORD
 
 			// 17 Unknown? (8 bytes)
 			// stream.readRawData(Unknown5, sizeof(Unknown5));
-		};
+        }
 	
-		void print()
+        void _EVENTLOGRECORD::print()
 		{
 			std::cout << "Event: \r\n";
 			QMapIterator<QString, QString> i(MapData);
@@ -254,26 +227,23 @@ class _EVENTLOGRECORD
 				i.next();
 				std::cout << "\t" << i.key().toStdString() << " = " << i.value().toStdString() << "\r\n";
 			}
-		};
-};
+        }
 
 //читалка файла
-class winEventLog
-{
-	public:
-		winEventLog(QString filename)
+
+        winEventLog::winEventLog(QString filename)
 		{
 			m_file = new QFile(filename);
 			m_bOpen = m_file->open(QIODevice::ReadOnly);
 		}
 		
-		~winEventLog()
+        winEventLog::~winEventLog()
 		{
 			m_evtlogs.clear();
 			if(m_bOpen) m_file->close();
 		}
 
-		void read()
+        void winEventLog::read()
 		{
 			if(!m_bOpen) return;
 			QDataStream stream(m_file);
@@ -298,8 +268,3 @@ class winEventLog
 			}
 		}
 
-	private:
-		QVector<_EVENTLOGRECORD> m_evtlogs;
-		QFile *m_file;
-		bool m_bOpen;
-};

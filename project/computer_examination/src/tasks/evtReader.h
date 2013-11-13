@@ -2,6 +2,10 @@
 #define EVT_READER_H
 
 #include "../coex/task.h"
+#include <QMap>
+#include <QFile>
+#include <QDateTime>
+#include <iostream>
 
 class _EVENTLOGRECORD 
 {

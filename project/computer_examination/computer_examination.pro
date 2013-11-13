@@ -10,7 +10,8 @@ SOURCES += src/main.cpp \
   src/tasks/task_search_programm_win.cpp \
   src/tasks/task_search_syslogs_lin.cpp \
   src/tasks/task_detect_os.cpp \
-  src/tasks/task_search_syslogs_win.cpp
+  src/tasks/task_search_syslogs_win.cpp \
+  src/tasks/evtReader.cpp
 
 HEADERS += src/coex/task.h \
   src/coex/coex.h \
@@ -21,7 +22,10 @@ HEADERS += src/coex/task.h \
   src/tasks/task_search_programm_win.h \
   src/tasks/task_search_syslogs_lin.h \
   src/tasks/task_detect_os.h \
-  src/tasks/task_search_syslogs_win.h
+  src/tasks/task_search_syslogs_win.h \
+  src/tasks/evtReader.h
+
+
 QT += core \
  xml \
  script \
