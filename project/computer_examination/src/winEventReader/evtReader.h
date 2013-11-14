@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QFile>
 #include <QDateTime>
+#include <QTextStream>
 #include <iostream>
 
 class _EVENTLOGRECORD 
@@ -36,14 +37,14 @@ class _EVENTLOGRECORD
 			
         virtual void setEventID(quint32 id);
         virtual void read(QDataStream &stream);
-        virtual void print();
+        virtual void print(QTextStream &stream);
 };
 
 //читалка файла
 class winEventLog
 {
 	public:
-        winEventLog(QString filename);
+        winEventLog(QString filename, QString outFilename);
         ~winEventLog();
 
         virtual void read();
@@ -51,7 +52,9 @@ class winEventLog
 	private:
 		QVector<_EVENTLOGRECORD> m_evtlogs;
 		QFile *m_file;
+        QFile *m_outFile;
 		bool m_bOpen;
+        bool m_bOutOpen;
 };
 
 #endif

@@ -226,22 +226,26 @@ QString EventCategoryToString(quint16 type)
 			// stream.readRawData(Unknown5, sizeof(Unknown5));
         }
 	
-        void _EVENTLOGRECORD::print()
+        void _EVENTLOGRECORD::print(QTextStream &stream)
 		{
-			std::cout << "Event: \r\n";
+            //std::cout << "Event: \r\n";
+            stream << "Event: \r\n";
 			QMapIterator<QString, QString> i(MapData);
 			while (i.hasNext()) {
 				i.next();
-				std::cout << "\t" << i.key().toStdString() << " = " << i.value().toStdString() << "\r\n";
+                //std::cout << "\t" << i.key().toStdString() << " = " << i.value().toStdString() << "\r\n";
+                stream << QString("\t %1 = %2\r\n").arg(i.key()).arg(i.value());
 			}
         }
 
 //читалка файла
 
-        winEventLog::winEventLog(QString filename)
+        winEventLog::winEventLog(QString filename, QString outFilename)
 		{
 			m_file = new QFile(filename);
 			m_bOpen = m_file->open(QIODevice::ReadOnly);
+            m_outFile = new QFile(outFilename);
+            m_bOutOpen = m_outFile->open(QIODevice::Append);
 		}
 		
         winEventLog::~winEventLog()
@@ -252,7 +256,16 @@ QString EventCategoryToString(quint16 type)
 
         void winEventLog::read()
 		{
-			if(!m_bOpen) return;
+            if(!m_bOpen)
+            {
+                std::cout << "input file not found" << std::endl;
+                return;
+            }
+            if(!m_bOutOpen)
+            {
+                std::cout << "output file not opened" << std::endl;
+                return;
+            }
 			QDataStream stream(m_file);
 			while(!stream.atEnd())
 			{
@@ -270,7 +283,8 @@ QString EventCategoryToString(quint16 type)
 				
 				QDataStream streamRecord(ba);
 				evnt.read(streamRecord);
-				evnt.print();
+                QTextStream output(m_outFile);
+                evnt.print(output);
 				m_evtlogs.push_back(evnt);
 			}
 		}

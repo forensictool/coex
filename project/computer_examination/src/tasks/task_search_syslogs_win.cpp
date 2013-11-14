@@ -74,24 +74,15 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
     QString outFolder = config.outputFolder + "/SYSWINEVTS/";
     for(int i = 0; i < evtFiles.size(); i++)
     {
-        /*
+
         QStringList list = evtFiles.at(i).split("/", QString::SkipEmptyParts);
-        QFile::copy(evtFiles.at(i), outFolder + list.at(list.size() - 1));
-        */
-        std::cout << "-----------------------------------------------------------------------" << std::endl;
-        winEventLog log(evtFiles.at(i));
-        //log.read();
+        //QFile::copy(evtFiles.at(i), outFolder + list.at(list.size() - 1));
+
+        std::cout << "-----------------------------------------------------" << std::endl;
+        winEventLog log(evtFiles.at(i), outFolder + list.at(list.size() - 1));
+        log.read();
+        //std::cout << evtFiles.at(i).toStdString() << std::endl;
     }
-    //
-    //ололо
-    //
-    //---------------------------------------------------------------------------------------
-    /*
-    QString fileName = "./SysEvent.Evt";
-    winEventLog log(fileName);
-    log.read();
-    */
-    //---------------------------------------------------------------------------------------
 }
 
 /* 
@@ -104,7 +95,7 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
 
 bool taskSearchSyslogsWin::execute(const coex::config& config)
 {
-    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
 
     if(m_bDebug)
         std::cout << "  !!! debug mode on.\n";
@@ -168,7 +159,7 @@ bool taskSearchSyslogsWin::execute(const coex::config& config)
     readEvtFiles(*evtFiles, config);
     delete evtFiles;
 
-    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
     return true;
 }
 
