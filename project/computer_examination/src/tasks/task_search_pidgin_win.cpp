@@ -100,6 +100,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     if(m_bDebug)
         std::cout << path.toStdString() << std::endl;
 
+    //std::cout << "debug not working" <<path.toStdString() << std::endl;
+
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
@@ -134,33 +136,36 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 while(!in.atEnd())
                 {
                     QString line = in.readLine();
-
                     fieldsOne = line.split("<",QString::SkipEmptyParts);
                     for (int y = 0; y < fieldsOne.size(); y++)
                     {
                         fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
+                    }
+                    for(int y = 0; y< fieldsTwo.size(); y++)
+                    {
                         if (fieldsTwo.size() > 1)
                         {
-                            if(fieldsTwo.at(1).contains(rxTime))
+                            if(fieldsTwo.at(y).contains(rxTime))
                             {
-                                time = fieldsTwo.at(1);
+                                time = fieldsTwo.at(y);
                             }
-                            if(fieldsTwo.at(1).contains(rxAuthor))
+                            if(fieldsTwo.at(y).contains(rxAuthor))
                             {
-                                author = fieldsTwo.at(1);
+                                author = fieldsTwo.at(y);
                             }
                             if(1)
                             {
-                                message = fieldsTwo.at(1);
+                                message = fieldsTwo.at(y);
                             }
-                            if(fieldsTwo.at(1).contains(rxAuthor))
+                            if(fieldsTwo.at(y).contains(rxAuthor))
                             {
-                                account = fieldsTwo.at(1);
+                                account = fieldsTwo.at(y);
                             }
                         }
                     }
                     ololo.writeMessage(author, time, message, account);
                 }
+            //ololo.~writerMessages();  я маленько не понял, нужно деструктор или нет? думаю что нет...
 			}
 			else
 			{
@@ -182,6 +187,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             };
 */
 		}
+
     }
     std::cout << "===========================================\n\n";
     return true;
