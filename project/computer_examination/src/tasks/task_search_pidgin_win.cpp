@@ -56,7 +56,6 @@ bool taskSearchPidginWin::test()
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
-
 	// example usage options
 	if(m_bDebug)
 		std::cout << "  !!! debug mode on.\n";
@@ -65,20 +64,12 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-    coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml");
+    coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml","pidgin");
     if(!msg.opened())
     {
 		std::cout << " failed task\n";
 		return false;
 	}
-/*	QXmlStreamWriter* xmlWriter = new QXmlStreamWriter();
-
-	xmlWriter->setDevice(&fileXML);
-	xmlWriter->setAutoFormatting(true);
-	xmlWriter->writeStartDocument();
-	xmlWriter->writeStartElement("Messages");
-*/
-	
 	std::cout << "===========================================\n\n";
 	// std::cout << config.inputFolder.toStdString() << "\n";
 	// std::cout << config.outputFolder.toStdString() << "\n";
@@ -112,10 +103,12 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
+/*
         xmlWriter->writeStartElement("FoundFile");
 		xmlWriter->writeAttribute("size", QString::number(fileInfo.size()));
 		xmlWriter->writeAttribute("suffix", fileInfo.suffix());
-		xmlWriter->writeAttribute("name", fileInfo.fileName());
+        xmlWriter->writeAttribute("name", fileInfo.fileName());
+*/
 
 		if (fileInfo.suffix() == "html") 
 		{
@@ -124,108 +117,73 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			if (file.open(QIODevice::ReadOnly))
 			{	
                 QTextStream in(&file);
+                coex::writerMessages ololo(fileInfo.absoluteFilePath(), "pidgin");
+                if(!msg.opened())
+                {
+                    std::cout << " failed task\n";
+                    return false;
+                }
                 QStringList fieldsOne;
                 QStringList fieldsTwo;
-                QStringList fieldsEnd;
+                QString time;
+                QString author;
+                QString message;
+                QString account;
+                QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
+                QRegExp rxAuthor (":$");
                 while(!in.atEnd())
                 {
                     QString line = in.readLine();
+
                     fieldsOne = line.split("<",QString::SkipEmptyParts);
                     for (int y = 0; y < fieldsOne.size(); y++)
                     {
                         fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
                         if (fieldsTwo.size() > 1)
                         {
-                            fieldsEnd += fieldsTwo[1];
+                            if(fieldsTwo.at(1).contains(rxTime))
+                            {
+                                time = fieldsTwo.at(1);
+                            }
+                            if(fieldsTwo.at(1).contains(rxAuthor))
+                            {
+                                author = fieldsTwo.at(1);
+                            }
+                            if(1)
+                            {
+                                message = fieldsTwo.at(1);
+                            }
+                            if(fieldsTwo.at(1).contains(rxAuthor))
+                            {
+                                account = fieldsTwo.at(1);
+                            }
                         }
                     }
+                    ololo.writeMessage(author, time, message, account);
                 }
-				QXmlStreamReader xml(&file);
-                while(!xml.atEnd() && !xml.hasError())
-				{
-					QXmlStreamReader::TokenType token = xml.readNext();
-					if(token == QXmlStreamReader::StartDocument) 
-					{
-            			continue;
-        			}
-
-                    QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
-                    QRegExp rxAuthor (":$");
-
-                    for (int l = 0; l < fieldsEnd.size(); l++)
-                    {
-                        if(fieldsEnd.at(l).contains("conversation", Qt::CaseInsensitive) )
-                        {
-                            xmlWriter->writeStartElement("info");
-                            xmlWriter->writeCharacters(fieldsEnd.at(l));
-                            xmlWriter->writeEndElement();
-                            continue;
-                        }
-                        if(fieldsEnd.at(l).contains(rxTime))
-                        {
-                            xmlWriter->writeStartElement("time");
-
-                            QString formatTime = fieldsEnd.at(l).mid(1, 8);
-
-                            xmlWriter->writeCharacters(formatTime);
-                            xmlWriter->writeEndElement();
-                            continue;
-                        }
-                        if(fieldsEnd.at(l).contains(rxAuthor))
-                        {
-                            xmlWriter->writeStartElement("author");
-                            //QString y = fieldsEnd.at(l).mid(0, size.(fieldsEnd.at(l)));
-                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
-                            xmlWriter->writeAttribute("AUTHOR", fieldsEnd.at(l));
-                            xmlWriter->writeEndElement();
-                            continue;
-                        }
-                        if( 1 )
-                        {
-                            xmlWriter->writeStartElement("text");
-                            //xmlWriter->writeCharacters(fieldsEnd.at(l));
-                            xmlWriter->writeAttribute("TEXT", fieldsEnd.at(l));
-                            xmlWriter->writeEndElement();
-                            continue;
-                        }
-                    }
-                };
-
-				if( xml.hasError())
-					std::cout << xml.errorString().toStdString();
 			}
 			else
 			{
 				std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
 			};
-
 		} 
 
 		if (fileInfo.suffix() == "txt") 
 		{
-
+/*
 			QFile file(fileInfo.absolutePath());
-
-			// open a file
 			if (file.open(QIODevice::ReadOnly))
 			{	
 				// QXmlStreamReader* xmlReader = new QXmlStreamReader();
 				// xmlReader->setDevice(&file);
 				// xmlReader->setAutoFormatting(true);
 				// xmlReader->writeStartDocument();
-
 				// delete xmlReader;
-			};
-
+            };
+*/
 		}
-		// end foundfile
-		xmlWriter->writeEndElement();	
     }
-        
-    xmlWriter->writeEndElement();
-    xmlWriter->writeEndDocument();
-    delete xmlWriter;
-    std::cout << "===========================================\n\n";	
+    std::cout << "===========================================\n\n";
     return true;
 };
 		

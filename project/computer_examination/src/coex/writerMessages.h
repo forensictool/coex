@@ -10,7 +10,7 @@ namespace coex
 	class writerMessages
 	{
 	public:
-		writerMessages(QString fileName);
+        writerMessages(QString fileName, QString messangerName);
 		~writerMessages();
 
         bool opened();

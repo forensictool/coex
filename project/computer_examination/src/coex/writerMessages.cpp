@@ -64,5 +64,14 @@ namespace coex
         )
         {
             if (!m_bOpened)return;
+            m_pXmlWriter->writeStartElement("message");
+            m_pXmlWriter->writeAttribute("actionType" ,actionType);
+            m_pXmlWriter->writeAttribute("actionTime" ,actionTime);
+            m_pXmlWriter->writeAttribute("userName" ,userName);
+            m_pXmlWriter->writeAttribute("displayName" ,displayName);
+            m_pXmlWriter->writeAttribute("chatMessage" ,chatMessage);
+            m_pXmlWriter->writeAttribute("chatID" ,chatID);
+            m_pXmlWriter->writeCharacters(chatMessage);
+            m_pXmlWriter->writeEndElement();
         };
 }
