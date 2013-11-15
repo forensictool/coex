@@ -1,0 +1,149 @@
+\documentclass[russian,utf8,14pt,simple]{eskdtext}
+
+% - Полуторный интервал
+\renewcommand{\baselinestretch}{1.50}
+% - Отступ красной строки
+\setlength{\parindent}{1.25cm}	
+% - Шрифт Times New Roman
+\renewcommand{\rmdefault}{ftm}
+
+% - Наименование документа
+\ESKDtitle{ }
+% - Обозначение документа
+\ESKDsignature{ФВС КР. Х.ХХХХХХХ 001 ПЗ}
+% - Наименование предприятия
+\ESKDcolumnIX{ТУСУР, ФВС, КИБЭВС-1208}
+% - Проверил
+\ESKDchecker{Давыдова Е.М.}	
+% - Литера 
+\ESKDletter{У}{}{}
+% - Разработал
+\ESKDauthor{КИБЭВС-1208}			
+
+% - Убирает точку в списке литературы
+\makeatletter
+\def\@biblabel#1{#1 }
+% - ГОСТ списка литературы
+\bibliographystyle{gost780s}
+
+\ESKDsectSkip{subsection}{1em}{1em}
+\ESKDsectSkip{section}{1em}{1em}
+
+% - Изменение заголовков
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize}{\thesection}{1.0em}{}
+\titleformat{\subsection}{\normalsize}{\thesubsection}{1.0em}{}
+\titleformat{\paragraph}{\normalsize}{\theparagraph}{1.0em}{}
+
+% - Для больших таблиц
+\usepackage{longtable}
+
+% - Используем графику в документе
+\usepackage{graphicx}
+
+% - Для вставки гиперссылок
+\usepackage[colorlinks]{hyperref}
+
+\begin{document}
+
+\newpage
+\ESKDthisStyle{empty}
+
+\begin{center}
+Министерство образования и науки Российской Федерации\\
+ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
+УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ\\
+ТОМСКИЙ ГОСУДАРСТВЕННЫЙ\\
+УНИВЕРСИТЕТ СИСТЕМ УПРАВЛЕНИЯ И РАДИОЭЛЕКТРОНИКИ\\
+(ФГБОУ ВПО ТУСУР)\\
+Кафедра комплексной информационной безопасности электронно-вычислительных систем (КИБЭВС)\\
+\end{center}
+
+\begin{tabbing}
+XXXXXXXXXXXXXXXXXXXXXXXXXXX \=
+XXXXXXXXXXXXXXXX\kill
+\> УТВЕРЖДАЮ\\
+\> заведующий каф.КИБЭВС\\
+\> \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } А.А. Шелупанов\\
+\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2013г.\\
+\end{tabbing}
+
+\begin{center}
+КОМПЬЮТЕРНАЯ ЭКСПЕРТИЗА\\
+Отчет по групповому проектному обучению\\
+Группа КИБЭВС-1208\\
+\end{center}
+
+\begin{tabbing}
+XXXXXXXXXXXXXXXXXXXXXXXXXXX \=
+XXXXXXXXXXXXXXXX\kill
+\> Ответственный исполнитель\\
+\> Студент гр. 520-1\\
+\> \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } Никифоров Д. С.\\
+\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2013г.\\
+\ \\
+\> Научный руководитель\\
+\> Аспирант каф.КИБЭВС\\
+\> \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } Гуляев А. И.\\
+\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2013г.\\
+\end{tabbing}
+\vfill
+\begin{center}
+2013
+\end{center}
+
+\newpage
+\ESKDthisStyle{empty}
+\paragraph{\hfill РЕФЕРАТ \hfill}
+Курсовая работа содержит  ХХ страниц,  Х таблиц,  ХХ источников.
+
+Пояснительная записка выполнена в текстовом редакторе nano 2.2.6.
+
+\newpage
+\ESKDthisStyle{empty}
+\paragraph{\hfill Список исполнителей \hfill}
+\begin{itemize}
+\item Никифоров Д.С. --
+\item Моргуненко А.В. --
+\item Поляков И.Ю. --
+\item Пономарёв А.К. --
+\end{itemize}
+
+\newpage
+\ESKDstyle{formII}
+\renewcommand\contentsname{\hfill Содержание \hfill}
+\tableofcontents
+
+\newpage
+\ESKDstyle{formIIab}
+\section{Введение}
+
+\newpage
+\section{}
+\subsection{}
+
+\section{Заключение}
+В результате проделанной работы были достигнуты следующие результаты:
+\begin{enumerate}
+\item[1)]
+\end{enumerate}
+
+В дальнейшей работе планируется:
+\begin{itemize}
+\item
+\end{itemize}
+
+\newpage
+% - Переименование списка литературы
+\renewcommand{\refname}{Список использованных источников}
+\bibliography{books}
+
+\ESKDappendix{Обязательное}{\normalfont Компакт-диск}
+Компакт-диск содержит: 
+\begin{itemize}
+\item электронную версию пояснительной записки в форматах *.tex и *.pdf;
+\item индивидуальные ежемесячные отчеты студентов;
+\item групповые ежемесячные отчёты.
+\end{itemize}
+
+\end{document}
