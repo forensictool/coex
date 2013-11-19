@@ -7,6 +7,7 @@
 #include <QDateTime>
 #include <QTextStream>
 #include <iostream>
+#include <QXmlStreamWriter>
 
 class _EVENTLOGRECORD 
 {
@@ -38,6 +39,7 @@ class _EVENTLOGRECORD
         virtual void setEventID(quint32 id);
         virtual void read(QDataStream &stream);
         virtual void print(QTextStream &stream);
+        virtual void xmlPrint(QXmlStreamWriter &stream);
 };
 
 //читалка файла

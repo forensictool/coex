@@ -238,6 +238,18 @@ QString EventCategoryToString(quint16 type)
 			}
         }
 
+        void _EVENTLOGRECORD::xmlPrint(QXmlStreamWriter &stream)
+        {
+            stream.writeStartElement("Event");
+            QMapIterator<QString, QString> i(MapData);
+            while(i.hasNext())
+            {
+                i.next();
+                stream.writeAttribute(i.key(), i.value());
+            }
+            stream.writeEndElement();
+        }
+
 //читалка файла
 
         winEventLog::winEventLog(QString filename, QString outFilename)
@@ -267,6 +279,9 @@ QString EventCategoryToString(quint16 type)
                 return;
             }
 			QDataStream stream(m_file);
+            QXmlStreamWriter xmlout(m_outFile);
+            xmlout.setAutoFormatting(true);
+            xmlout.writeStartDocument();
 			while(!stream.atEnd())
 			{
 				_EVENTLOGRECORD evnt;
@@ -283,9 +298,11 @@ QString EventCategoryToString(quint16 type)
 				
 				QDataStream streamRecord(ba);
 				evnt.read(streamRecord);
-                QTextStream output(m_outFile);
-                evnt.print(output);
+                //QTextStream output(m_outFile);
+                //evnt.print(output);
+                evnt.xmlPrint(xmlout);
 				m_evtlogs.push_back(evnt);
 			}
+            xmlout.writeEndDocument();
 		}
 
