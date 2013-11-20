@@ -14,4 +14,28 @@ winLogReader::~winLogReader()
     if (m_bOutFile) m_outFile->close();
 }
 
+void winLogReader::read()
+{
+    if(m_bOpen)
+    {
+        std::cout << "input file not found" << std::endl;
+        return;
+    }
 
+    if(m_bOutFile)
+    {
+        std::cout << "output file not created" << std::endl;
+        return;
+    }
+
+    QDataStream inStream(m_file);
+    QTextStream outStream(m_outFile);
+
+    while(!inStream.atEnd())
+    {
+        quint8 bute;
+        inStream >> bute;
+        outStream << bute;
+        outStream << "\n";
+    }
+}
