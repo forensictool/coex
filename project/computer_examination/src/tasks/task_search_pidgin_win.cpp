@@ -95,6 +95,12 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             }
         }
      }
+    coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
+    if(!msg.opened())
+    {
+        std::cout << " failed task\n";
+        return false;
+    }
 
     for(int i = 0; i < foundFile.size(); ++i)
     {
@@ -106,12 +112,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			// open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 			{	
-                coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
-                if(!msg.opened())
-                {
-                    std::cout << " failed task\n";
-                    return false;
-                }
+
                 QStringList fieldsOne;
                 QStringList fieldsTwo;
                 QString time;
@@ -120,6 +121,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 QString account;
                 QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
                 QRegExp rxAuthor (":$");
+                QRegExp rxMessage ("^ ");
+                QRegExp rxAccount ("on .*");
                 QTextStream in(&file);
                 while(!in.atEnd())
                 {
@@ -127,9 +130,13 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                     fieldsOne = line.split("<",QString::SkipEmptyParts);
                     for (int y = 0; y < fieldsOne.size(); y++)
                     {
-                        fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
+                        fieldsTwo += fieldsOne.at(y).split(">", QString::SkipEmptyParts);
                     }
- //std::cout << " !!!!!!!!!!!!!!!!!!cut is done\n";
+for (int y = 0; y < fieldsOne.size(); y++)
+        std::cout << "\nfieldsOne :: " << fieldsOne.at(y).toStdString() <<std::endl;
+for (int y = 0; y < fieldsTwo.size(); y++)
+        std::cout << "\nfieldsTwo :: " << fieldsTwo.at(y).toStdString() <<std::endl;
+
                     for(int y = 0; y< fieldsTwo.size(); y++)
                     {
                         if (fieldsTwo.size() > 1)
@@ -137,18 +144,23 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                             if(fieldsTwo.at(y).contains(rxTime))
                             {
                                 time = fieldsTwo.at(y);
+                                continue;
                             }
                             if(fieldsTwo.at(y).contains(rxAuthor))
                             {
                                 author = fieldsTwo.at(y);
+                                continue;
                             }
-                            if(1)
+                            if(fieldsTwo.at(y).contains(rxMessage))
                             {
                                 message = fieldsTwo.at(y);
+                                std::cout << "\nmessage :: " << message.toStdString() << std::endl;
+                                continue;
                             }
-                            if(fieldsTwo.at(y).contains(rxAuthor))
+                            if(fieldsTwo.at(y).contains(rxAccount))
                             {
                                 account = fieldsTwo.at(y);
+                                continue;
                             }
                         }
                     }

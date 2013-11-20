@@ -46,10 +46,11 @@ namespace coex
         {
             if (!m_bOpened)return;
             m_pXmlWriter->writeStartElement("message");
-            m_pXmlWriter->writeAttribute("author" ,author);
-            m_pXmlWriter->writeAttribute("dataTime" ,dataTime);
-            m_pXmlWriter->writeAttribute("account" ,account);
-            m_pXmlWriter->writeCharacters(message);
+            m_pXmlWriter->writeAttribute("author", author);
+            m_pXmlWriter->writeAttribute("dataTime", dataTime);
+            m_pXmlWriter->writeAttribute("account", account);
+            m_pXmlWriter->writeAttribute("message", message);
+            //m_pXmlWriter->writeCharacters(message);
             m_pXmlWriter->writeEndElement();
         }
 
