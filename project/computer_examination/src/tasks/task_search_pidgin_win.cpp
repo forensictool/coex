@@ -59,7 +59,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 	// example usage options
 	if(m_bDebug)
 		std::cout << "  !!! debug mode on.\n";
-
 	{
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
@@ -97,29 +96,17 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         }
      }
 
-    if(m_bDebug)
-        std::cout << path.toStdString() << std::endl;
-
-    //std::cout << "debug not working" <<path.toStdString() << std::endl;
-
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
-/*
-        xmlWriter->writeStartElement("FoundFile");
-		xmlWriter->writeAttribute("size", QString::number(fileInfo.size()));
-		xmlWriter->writeAttribute("suffix", fileInfo.suffix());
-        xmlWriter->writeAttribute("name", fileInfo.fileName());
-*/
-
 		if (fileInfo.suffix() == "html") 
 		{
-			QFile file(fileInfo.absoluteFilePath());
+            QFile file(fileInfo.absoluteFilePath());
+            std::cout << fileInfo.absoluteFilePath().toStdString() << std::endl; //
 			// open a file
-			if (file.open(QIODevice::ReadOnly))
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 			{	
-                QTextStream in(&file);
-                coex::writerMessages ololo(fileInfo.absoluteFilePath(), "pidgin");
+                coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
                 if(!msg.opened())
                 {
                     std::cout << " failed task\n";
@@ -133,6 +120,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 QString account;
                 QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
                 QRegExp rxAuthor (":$");
+                QTextStream in(&file);
                 while(!in.atEnd())
                 {
                     QString line = in.readLine();
@@ -141,6 +129,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                     {
                         fieldsTwo = fieldsOne.at(y).split(">", QString::SkipEmptyParts);
                     }
+ //std::cout << " !!!!!!!!!!!!!!!!!!cut is done\n";
                     for(int y = 0; y< fieldsTwo.size(); y++)
                     {
                         if (fieldsTwo.size() > 1)
