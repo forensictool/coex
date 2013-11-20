@@ -44,6 +44,9 @@
 % - Для вставки гиперссылок
 \usepackage[colorlinks]{hyperref}
 
+% - Счётчики
+\usepackage{eskdtotal}
+
 \begin{document}
 
 \newpage
@@ -95,7 +98,7 @@ XXXXXXXXXXXXXXXX\kill
 \newpage
 \ESKDthisStyle{empty}
 \paragraph{\hfill РЕФЕРАТ \hfill}
-Курсовая работа содержит  ХХ страниц,  Х таблиц,  ХХ источников.
+Курсовая работа содержит \ESKDtotal{page} страниц, \ESKDtotal{table} таблиц, \ESKDtotal{bibitem} источников.
 
 Пояснительная записка выполнена в текстовом редакторе nano 2.2.6.
 
@@ -103,8 +106,8 @@ XXXXXXXXXXXXXXXX\kill
 \ESKDthisStyle{empty}
 \paragraph{\hfill Список исполнителей \hfill}
 \begin{itemize}
-\item Никифоров Д.С. --
 \item Моргуненко А.В. --
+\item Никифоров Д.С. -- 
 \item Поляков И.Ю. --
 \item Пономарёв А.К. --
 \end{itemize}

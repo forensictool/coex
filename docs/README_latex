@@ -1,8 +1,0 @@
-debian (650 mb):
-# apt-get install texlive-full
-
-$ pdflatex example.tex
-
-
-and for convert from ODT to LaTex, see also: 
-# apt-get install writer2latex
