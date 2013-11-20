@@ -77,6 +77,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
     QDir dir(path);
     dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+
     QFileInfoList users = dir.entryInfoList();
     QStringList foundFile;
 
@@ -112,30 +113,45 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			// open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 			{	
-
+                QStringList fieldsZero;
                 QStringList fieldsOne;
                 QStringList fieldsTwo;
                 QString time;
                 QString author;
                 QString message;
                 QString account;
+                QString protocol;
+                QString chatID;
                 QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
                 QRegExp rxAuthor (":$");
                 QRegExp rxMessage ("^ ");
                 QRegExp rxAccount ("on .*");
                 QTextStream in(&file);
+
+                QString line = in.readLine();//read first line, get interesting info)
+                QStringList divs;
+                divs << " " << "<" << ">" << "\\";
+                fieldsZero = line.split(divs,QString::SkipEmptyParts);
+                protocol = fieldsZero.at(13);
+                chatID = fieldsZero.at(5);
+                account = fieldsZero.at(1);
+                //std::cout << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
+                //account <<x  fieldsZero.at(13).toStdString();
+                for (int y = 0; y < fieldsZero.size(); y++)
+                        std::cout << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
+
                 while(!in.atEnd())
                 {
-                    QString line = in.readLine();
+                    line = in.readLine(); // read all file
                     fieldsOne = line.split("<",QString::SkipEmptyParts);
                     for (int y = 0; y < fieldsOne.size(); y++)
                     {
                         fieldsTwo += fieldsOne.at(y).split(">", QString::SkipEmptyParts);
                     }
-for (int y = 0; y < fieldsOne.size(); y++)
+/*for (int y = 0; y < fieldsOne.size(); y++)
         std::cout << "\nfieldsOne :: " << fieldsOne.at(y).toStdString() <<std::endl;
 for (int y = 0; y < fieldsTwo.size(); y++)
-        std::cout << "\nfieldsTwo :: " << fieldsTwo.at(y).toStdString() <<std::endl;
+        std::cout << "\nfieldsTwo :: " << fieldsTwo.at(y).toStdString() <<std::endl;*/
 
                     for(int y = 0; y< fieldsTwo.size(); y++)
                     {
@@ -154,7 +170,6 @@ for (int y = 0; y < fieldsTwo.size(); y++)
                             if(fieldsTwo.at(y).contains(rxMessage))
                             {
                                 message = fieldsTwo.at(y);
-                                std::cout << "\nmessage :: " << message.toStdString() << std::endl;
                                 continue;
                             }
                             if(fieldsTwo.at(y).contains(rxAccount))
