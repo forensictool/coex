@@ -18,7 +18,7 @@ class winLogReader
         QFile *m_file;
         QFile *m_outFile;
         bool m_bOpen;
-        bool m_bOutFile;
+        bool m_bOutOpen;
 };
 
 #endif
