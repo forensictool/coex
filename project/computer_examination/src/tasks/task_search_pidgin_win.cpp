@@ -127,12 +127,15 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
                 QString line = in.readLine();//read first line, get interesting info)
                 fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
-                for (int y = 0; y < fieldsZero.size(); y++)
-                        std::cout << y << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
-                chatID = fieldsZero.at(10);
-                account = fieldsZero.at(18);
-                protocol = fieldsZero.at(19);
-                ololo.writeInfoLog(chatID, account, protocol);
+                /*for (int y = 0; y < fieldsZero.size(); y++)
+                        std::cout << y << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;*/
+                if(fieldsZero.size() > 19)
+                {
+                    chatID = fieldsZero.at(10);
+                    account = fieldsZero.at(18);
+                    protocol = fieldsZero.at(19);
+                    ololo.writeInfoLog(chatID, account, protocol);
+                }
 
                 while(!in.atEnd())
                 {
