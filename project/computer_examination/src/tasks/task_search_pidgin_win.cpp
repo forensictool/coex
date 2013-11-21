@@ -129,16 +129,14 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 QTextStream in(&file);
 
                 QString line = in.readLine();//read first line, get interesting info)
-                QStringList divs;
-                divs << " " << "<" << ">" << "\\";
-                fieldsZero = line.split(divs,QString::SkipEmptyParts);
-                protocol = fieldsZero.at(13);
-                chatID = fieldsZero.at(5);
-                account = fieldsZero.at(1);
-                //std::cout << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
-                //account <<x  fieldsZero.at(13).toStdString();
+                fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
                 for (int y = 0; y < fieldsZero.size(); y++)
-                        std::cout << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
+                        std::cout << y << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
+               chatID = fieldsZero.at(10);
+                account = fieldsZero.at(18);
+                protocol = fieldsZero.at(19);
+                std::cout << "11111111111111" << chatID.toStdString() <<  account.toStdString() << protocol.toStdString() <<std::endl;
+                ololo.writeMessage(chatID, account, protocol);
 
                 while(!in.atEnd())
                 {
@@ -179,7 +177,7 @@ for (int y = 0; y < fieldsTwo.size(); y++)
                             }
                         }
                     }
-                    ololo.writeMessage(author, time, message, account);
+                    ololo.writeMessage(author, time, message);
                 }
             //ololo.~writerMessages();  я маленько не понял, нужно деструктор или нет? думаю что нет...
 			}

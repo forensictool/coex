@@ -15,12 +15,18 @@ namespace coex
 
         bool opened();
 
+          //about log file
+        void writeMessage(
+            QString chathID,
+            QString account,
+            QString protocol
+        );
+
 		//like pidgin
 		void writeMessage(
 			QString author, 
 			QString dataTime, 
 			QString message, 
-			QString account
 		);
 
 		// like skype

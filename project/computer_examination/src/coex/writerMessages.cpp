@@ -9,7 +9,7 @@ namespace coex
         {
             m_bOpened = true;
             m_pFile = new QFile(fileName);
-            if (!m_pFile->open(QIODevice::WriteOnly))
+            if (!m_pFile->open(QIODevice::Append))
             {
                 //std::cout << " failed task\n";
                 m_bOpened = false;
@@ -36,19 +36,33 @@ namespace coex
         {
             return m_bOpened;
         }
+        //about log file
+        void writerMessages::writeMessage(
+            QString chathID,
+            QString account,
+            QString protocol
+        )
+        {
+            if (!m_bOpened)return;
+            m_pXmlWriter->writeStartElement("info");
+            m_pXmlWriter->writeAttribute("chathID", chathID);
+            m_pXmlWriter->writeAttribute("account", account);
+            m_pXmlWriter->writeAttribute("protocol", protocol);
+            //m_pXmlWriter->writeCharacters(message);
+            m_pXmlWriter->writeEndElement();
+        }
+
         //like pidgin
         void writerMessages::writeMessage(
             QString author,
             QString dataTime,
             QString message,
-            QString account
         )
         {
             if (!m_bOpened)return;
             m_pXmlWriter->writeStartElement("message");
             m_pXmlWriter->writeAttribute("author", author);
             m_pXmlWriter->writeAttribute("dataTime", dataTime);
-            m_pXmlWriter->writeAttribute("account", account);
             m_pXmlWriter->writeAttribute("message", message);
             //m_pXmlWriter->writeCharacters(message);
             m_pXmlWriter->writeEndElement();
