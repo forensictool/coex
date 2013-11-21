@@ -37,7 +37,7 @@ namespace coex
             return m_bOpened;
         }
         //about log file
-        void writerMessages::writeMessage(
+        void writerMessages::writeInfoLog(
             QString chathID,
             QString account,
             QString protocol
@@ -56,7 +56,7 @@ namespace coex
         void writerMessages::writeMessage(
             QString author,
             QString dataTime,
-            QString message,
+            QString message
         )
         {
             if (!m_bOpened)return;
@@ -86,7 +86,7 @@ namespace coex
             m_pXmlWriter->writeAttribute("displayName" ,displayName);
             m_pXmlWriter->writeAttribute("chatMessage" ,chatMessage);
             m_pXmlWriter->writeAttribute("chatID" ,chatID);
-            m_pXmlWriter->writeCharacters(chatMessage);
+            //m_pXmlWriter->writeCharacters(chatMessage);
             m_pXmlWriter->writeEndElement();
         };
 }

@@ -16,7 +16,7 @@ namespace coex
         bool opened();
 
           //about log file
-        void writeMessage(
+        void writeInfoLog(
             QString chathID,
             QString account,
             QString protocol
@@ -26,7 +26,7 @@ namespace coex
 		void writeMessage(
 			QString author, 
 			QString dataTime, 
-			QString message, 
+            QString message
 		);
 
 		// like skype

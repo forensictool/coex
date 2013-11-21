@@ -63,15 +63,13 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-    coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml","pidgin");
+   /* coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml","pidgin");
     if(!msg.opened())
     {
-		std::cout << " failed task\n";
-		return false;
-	}
-	std::cout << "===========================================\n\n";
-	// std::cout << config.inputFolder.toStdString() << "\n";
-	// std::cout << config.outputFolder.toStdString() << "\n";
+        std::cout << " failed task\n";
+        return false;
+    }*/
+    std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
 
@@ -97,7 +95,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         }
      }
     coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
-    if(!msg.opened())
+    if(!ololo.opened())
     {
         std::cout << " failed task\n";
         return false;
@@ -125,18 +123,16 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
                 QRegExp rxAuthor (":$");
                 QRegExp rxMessage ("^ ");
-                QRegExp rxAccount ("on .*");
                 QTextStream in(&file);
 
                 QString line = in.readLine();//read first line, get interesting info)
                 fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
                 for (int y = 0; y < fieldsZero.size(); y++)
                         std::cout << y << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;
-               chatID = fieldsZero.at(10);
+                chatID = fieldsZero.at(10);
                 account = fieldsZero.at(18);
                 protocol = fieldsZero.at(19);
-                std::cout << "11111111111111" << chatID.toStdString() <<  account.toStdString() << protocol.toStdString() <<std::endl;
-                ololo.writeMessage(chatID, account, protocol);
+                ololo.writeInfoLog(chatID, account, protocol);
 
                 while(!in.atEnd())
                 {
@@ -168,11 +164,6 @@ for (int y = 0; y < fieldsTwo.size(); y++)
                             if(fieldsTwo.at(y).contains(rxMessage))
                             {
                                 message = fieldsTwo.at(y);
-                                continue;
-                            }
-                            if(fieldsTwo.at(y).contains(rxAccount))
-                            {
-                                account = fieldsTwo.at(y);
                                 continue;
                             }
                         }
