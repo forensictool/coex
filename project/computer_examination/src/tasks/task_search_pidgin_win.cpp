@@ -63,12 +63,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-   /* coex::writerMessages msg(config.outputFolder + "//pidgin/messages.xml","pidgin");
-    if(!msg.opened())
-    {
-        std::cout << " failed task\n";
-        return false;
-    }*/
     std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
@@ -113,13 +107,9 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 			{	
                 QStringList fieldsZero;
                 QStringList fieldsOne;
-                QStringList fieldsTwo;
                 QString time;
                 QString author;
                 QString message;
-                QString account;
-                QString protocol;
-                QString chatID;
                 QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
                 QRegExp rxAuthor (":$");
                 QRegExp rxMessage ("^ ");
@@ -127,52 +117,42 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 
                 QString line = in.readLine();//read first line, get interesting info)
                 fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
-                /*for (int y = 0; y < fieldsZero.size(); y++)
-                        std::cout << y << "::fieldsZero :: " << fieldsZero.at(y).toStdString() <<std::endl;*/
-                if(fieldsZero.size() > 19)
+                if(fieldsZero.size() > 19) //костыль, спасибо Димке за это))
                 {
-                    chatID = fieldsZero.at(10);
-                    account = fieldsZero.at(18);
-                    protocol = fieldsZero.at(19);
-                    ololo.writeInfoLog(chatID, account, protocol);
+                    ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(19));
                 }
 
                 while(!in.atEnd())
                 {
                     line = in.readLine(); // read all file
-                    fieldsOne = line.split("<",QString::SkipEmptyParts);
-                    for (int y = 0; y < fieldsOne.size(); y++)
-                    {
-                        fieldsTwo += fieldsOne.at(y).split(">", QString::SkipEmptyParts);
-                    }
-/*for (int y = 0; y < fieldsOne.size(); y++)
-        std::cout << "\nfieldsOne :: " << fieldsOne.at(y).toStdString() <<std::endl;
-for (int y = 0; y < fieldsTwo.size(); y++)
-        std::cout << "\nfieldsTwo :: " << fieldsTwo.at(y).toStdString() <<std::endl;*/
+                    fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
+for (int y = 0; y < fieldsOne.size(); y++)
+        std::cout << y << " :: fieldsOne :: " << fieldsOne.at(y).toStdString() <<" \n"<<std::endl;
 
-                    for(int y = 0; y< fieldsTwo.size(); y++)
+                    for(int y = 0; y< fieldsOne.size(); y++)
                     {
-                        if (fieldsTwo.size() > 1)
+                        if (fieldsOne.size() > 1)
                         {
-                            if(fieldsTwo.at(y).contains(rxTime))
+                            if(fieldsOne.at(y).contains(rxAuthor))
                             {
-                                time = fieldsTwo.at(y);
+                                author = fieldsOne.at(y);
                                 continue;
                             }
-                            if(fieldsTwo.at(y).contains(rxAuthor))
+                            if(fieldsOne.at(y).contains(rxTime))
                             {
-                                author = fieldsTwo.at(y);
+                                time = fieldsOne.at(y);
                                 continue;
                             }
-                            if(fieldsTwo.at(y).contains(rxMessage))
+                            if(fieldsOne.at(y).contains(rxMessage))
                             {
-                                message = fieldsTwo.at(y);
+                                message = fieldsOne.at(y);
                                 continue;
                             }
                         }
                     }
-                    ololo.writeMessage(author, time, message);
+                    ololo.writeMessage(author,time,message);
                 }
+
             //ololo.~writerMessages();  я маленько не понял, нужно деструктор или нет? думаю что нет...
 			}
 			else
