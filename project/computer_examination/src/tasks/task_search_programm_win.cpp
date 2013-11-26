@@ -1,5 +1,6 @@
 #include "task_search_programm_win.h"
 #include <iostream>
+#include <QString>
 #include <QDir>
 #include <QDirIterator>
 #include <QTextStream>
@@ -21,22 +22,33 @@ taskSearchProgrammWin::taskSearchProgrammWin()
 	   << "Windows NT"
 	   << "WindowsUpdate"
    );
-	 
+	
+	
     m_qslDirs = (QStringList()
 		<< "AVAST Software"
 		<< "Oracle"
 		<< "Games"
 		<< "ubisoft"
 		<< "Microsoft Office"
-	);                                   
+	);
+
+	m_mapProgInfo["Microsoft Office"] = "Microsoft Office";
+	m_mapProgInfo["ubisoft"] = "unknown";
+	m_mapProgInfo["AVAST Software"] = "Antivirus";
+	m_mapProgInfo["Embarcadero"] = "http://www.embarcadero.com/";
+	
 }
 
 taskSearchProgrammWin::~taskSearchProgrammWin(){}
+
+// --------------------------------------------------------------------
 
 QString taskSearchProgrammWin::manual()
 {
 	return "\t--debug - viewing debug messages";
 }
+
+// --------------------------------------------------------------------
 
 void taskSearchProgrammWin::setOption(QStringList options)
 {
@@ -44,32 +56,45 @@ void taskSearchProgrammWin::setOption(QStringList options)
             m_bDebug = true;
 }
 
+// --------------------------------------------------------------------
+
 QString taskSearchProgrammWin::command()
 {
 	return "programs";
 }
+
+// --------------------------------------------------------------------
 
 bool taskSearchProgrammWin::supportOS(const coex::typeOS &os)
 {
 	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
 }
 
+// --------------------------------------------------------------------
+
 QString taskSearchProgrammWin::name()
 {
 	return m_strName;
 }
+
+// --------------------------------------------------------------------
 
 QString taskSearchProgrammWin::description()
 {
 	return m_strDescription;
 }
 
+// --------------------------------------------------------------------
+
 bool taskSearchProgrammWin::test()
 {
 	// unit test
 	return true;
-}
+};
 
+// --------------------------------------------------------------------
+
+/*
 QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
 {
     QStringList dirList;
@@ -87,74 +112,104 @@ QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
         }
     }
     return dirList;
-}
-bool taskSearchProgrammWin::execute(const coex::config &config)
-{ 
-	if(m_bDebug)
-      std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+};
+*/
+// --------------------------------------------------------------------
+
+void taskSearchProgrammWin::recourceDirs(
+	QString baseFolder, 
+	QString parentFolder, 
+	QString dirStr, 
+	QXmlStreamWriter* xmlWrite, 
+	int &idFolder, 
+	int depth, 
+	int maxdepth
+)
+{
+	if(depth >= maxdepth)
+		return;
+	
+    QStringList dirList;
+    QDir dir(baseFolder + "/" + dirStr);
     
+    xmlWrite->writeStartElement("folder");
+    xmlWrite->writeAttribute("id", QString::number(idFolder++,10));
+    xmlWrite->writeAttribute("name", dirStr);
+    
+    {
+		xmlWrite->writeStartElement("info");
+		{
+			xmlWrite->writeStartElement("param");
+			xmlWrite->writeAttribute("name", "parentFolder");
+			xmlWrite->writeAttribute("value", parentFolder);
+			xmlWrite->writeEndElement();
+			
+			xmlWrite->writeStartElement("param");
+			xmlWrite->writeAttribute("name", "depth");
+			xmlWrite->writeAttribute("value", QString::number(depth,10));
+			xmlWrite->writeEndElement();
+			
+			if(m_mapProgInfo.contains(dirStr))
+			{
+				xmlWrite->writeStartElement("param");
+				xmlWrite->writeAttribute("name", "description");
+				xmlWrite->writeAttribute("value", m_mapProgInfo[dirStr]);
+				xmlWrite->writeEndElement();
+			}
+		}
+		xmlWrite->writeEndElement();
+	}
+	xmlWrite->writeEndElement();
+
+    QStringList list = dir.entryList(QDir::AllDirs | QDir::NoSymLinks);
+    for(int i = 0; i < list.size(); i++)
+    {
+		QString str = list.at(i);
+		if(str != "." && str != "..")
+		{
+			recourceDirs(baseFolder + "/" + dirStr, parentFolder + "/" + dirStr, str, xmlWrite, idFolder, depth + 1, maxdepth);
+		}
+	}
+	
+	
+};
+
+// --------------------------------------------------------------------
+
+bool taskSearchProgrammWin::execute(const coex::config &config)
+{   
     {
         QDir dir(config.outputFolder);
         dir.mkdir("programs");
     }
-    QStringList *programFiles = new QStringList();
-	QString dirStr(config.inputFolder);
-	dirStr += "/Program Files/";
-	*programFiles = getSubDirs(dirStr);
+    
+    QStringList listOfDirsForProgramFiles;
 
-	QFile fileXML(config.outputFolder + "/programs/programs.xml");
+    listOfDirsForProgramFiles << "Program Files";
+    listOfDirsForProgramFiles << "Program Files (x86)";
+    listOfDirsForProgramFiles << "Program Files(x86)";
+    
+    QFile fileXML(config.outputFolder + "/programs/programs.xml");
 	if(!fileXML.open(QFile::WriteOnly))
 	{
 		std::cout << "File not found" << std::endl;
 		return false;
 	}
-
+    
 	QXmlStreamWriter* xmlWrite = new QXmlStreamWriter();
 	xmlWrite->setDevice(&fileXML);
 	xmlWrite->setAutoFormatting(true);
 	xmlWrite->writeStartDocument();
-	xmlWrite->writeStartElement("programs");
-
-	for (int i = 0; i < programFiles->size(); i++)
+	xmlWrite->writeStartElement("programfiles");
+	int idFolder = 0;
+	for (int i = 0; i < listOfDirsForProgramFiles.size(); i++)
 	{
-		//fout << programFiles->at(i) << '\n';
-		//std::cout << programFiles->at(i).toStdString() << std::endl;
-		/*QStringList qsl = getSubDirs(dirStr + programFiles->at(i) + "/");
-		for (int j = 0; j < qsl.size(); j++)
-			std::cout << qsl.at(j).toStdString() << std::endl;
-		std::cout << std::endl;*/
-		if(!taskSearchProgrammWin::m_qslDirs.contains(programFiles->at(i)))
-		{
-			xmlWrite->writeStartElement("foundProgram");
-			xmlWrite->writeAttribute("name", programFiles->at(i));
-			xmlWrite->writeEndElement();
-		}
-		else
-		{
-			xmlWrite->writeStartElement("dir");
-			QString dirStr(config.inputFolder);
-			dirStr += ("/Program Files/" + programFiles->at(i));
-			QStringList bufList = getSubDirs(dirStr);
-			xmlWrite->writeAttribute("name", programFiles->at(i));
-			for (int j = 0; j < bufList.size(); j++)
-			{
-				xmlWrite->writeStartElement("foundProgram");
-				xmlWrite->writeAttribute("name", bufList.at(j));
-				xmlWrite->writeEndElement();
-			}
-			xmlWrite->writeEndElement();
-		}
+		recourceDirs( config.inputFolder, "", listOfDirsForProgramFiles[i], xmlWrite, idFolder);
 	}
-
-
+	
 	xmlWrite->writeEndElement();
 	xmlWrite->writeEndDocument();
-	delete xmlWrite;
-    delete programFiles;
-
-	if(m_bDebug)
-		std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
-		
+	delete xmlWrite;	
 	return true;
 }
 		
