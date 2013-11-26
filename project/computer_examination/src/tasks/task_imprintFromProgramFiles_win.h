@@ -1,5 +1,5 @@
-#ifndef __TASK_SEARCH_PROGRAMM_WIN_H__
-#define __TASK_SEARCH_PROGRAMM_WIN_H__
+#ifndef __TASK_imprintFromProgramFiles_WIN_H__
+#define __TASK_imprintFromProgramFiles_WIN_H__
 
 #include "../coex/task.h"
 #include <QXmlStreamWriter>
@@ -42,4 +42,4 @@ class taskSearchProgrammWin : public coex::task
         QMap<QString, QString> m_mapProgInfo;
 };
 
-#endif // __TASK_SEARCH_PROGRAMM_WIN_H__
+#endif // __TASK_imprintFromProgramFiles_WIN_H__
