@@ -63,7 +63,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-    std::cout << "===========================================\n\n";
+	if(m_bDebug)
+      std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
 
@@ -101,7 +102,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		if (fileInfo.suffix() == "html") 
 		{
             QFile file(fileInfo.absoluteFilePath());
-            std::cout << fileInfo.absoluteFilePath().toStdString() << std::endl; //
+            if(m_bDebug)
+              std::cout << fileInfo.absoluteFilePath().toStdString() << std::endl; //
 			// open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 			{	
@@ -126,9 +128,13 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 {
                     line = in.readLine(); // read all file
                     fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
-for (int y = 0; y < fieldsOne.size(); y++)
-        std::cout << y << " :: fieldsOne :: " << fieldsOne.at(y).toStdString() <<" \n"<<std::endl;
-
+                    
+                    if(m_bDebug)
+                    {
+					  for (int y = 0; y < fieldsOne.size(); y++)
+					    std::cout << y << " :: fieldsOne :: " << fieldsOne.at(y).toStdString() <<" \n"<<std::endl;
+					}
+					
                     for(int y = 0; y< fieldsOne.size(); y++)
                     {
                         if (fieldsOne.size() > 1)
@@ -177,7 +183,8 @@ for (int y = 0; y < fieldsOne.size(); y++)
 		}
 
     }
-    std::cout << "===========================================\n\n";
+    if(m_bDebug)
+      std::cout << "===========================================\n\n";
     return true;
 };
 		

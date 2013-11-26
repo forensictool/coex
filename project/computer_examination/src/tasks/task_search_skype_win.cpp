@@ -81,7 +81,8 @@ bool taskSearchSkypeWin::execute(const coex::config &config)
 			
   // TODO: 
 	
-	std::cout << "===========================================\n\n";
+	if(m_bDebug)
+	  std::cout << "===========================================\n\n";
 	// std::cout << config.inputFolder.toStdString() << "\n";
 	// std::cout << config.outputFolder.toStdString() << "\n";
 
@@ -102,7 +103,8 @@ bool taskSearchSkypeWin::execute(const coex::config &config)
       qDebug( "Connected!" );
 
 */
-    std::cout << "===========================================\n\n";	
+    if(m_bDebug)
+      std::cout << "===========================================\n\n";	
     
     return true;
 };

@@ -6,7 +6,6 @@
 #include "../tasks/task_search_skype_win.h"
 #include "../tasks/task_search_programm_win.h"
 #include "../tasks/task_search_syslogs_lin.h"
-#include "../tasks/task_detect_os.h"
 #include "../tasks/task_search_syslogs_win.h"
 
 namespace coex {
@@ -18,7 +17,6 @@ namespace coex {
     coex::createTask<taskSearchPidginUnix>(os, tasks, bNeedAll);
     coex::createTask<taskSearchProgrammWin>(os, tasks, bNeedAll);
     coex::createTask<taskSearchSyslogsLin>(os, tasks, bNeedAll);
-    coex::createTask<taskDetectOs>(os, tasks, bNeedAll);
     coex::createTask<taskSearchSyslogsWin>(os, tasks, bNeedAll);
   };
 };

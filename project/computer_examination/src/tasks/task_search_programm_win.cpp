@@ -90,80 +90,71 @@ QStringList taskSearchProgrammWin::getSubDirs(QString dirStr)
 }
 bool taskSearchProgrammWin::execute(const coex::config &config)
 { 
-    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+	if(m_bDebug)
+      std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+    
     {
         QDir dir(config.outputFolder);
         dir.mkdir("programs");
     }
     QStringList *programFiles = new QStringList();
-    switch (config.os)
-    {
-        case coex::ceWindowsXP:
-        {
-            QString dirStr(config.inputFolder);
-            dirStr += "/Program Files/";
-            *programFiles = getSubDirs(dirStr);
+	QString dirStr(config.inputFolder);
+	dirStr += "/Program Files/";
+	*programFiles = getSubDirs(dirStr);
 
-            QFile fileXML(config.outputFolder + "/programs/programs.xml");
-            if(!fileXML.open(QFile::WriteOnly))
-            {
-                std::cout << "File not found" << std::endl;
-                return false;
-            }
+	QFile fileXML(config.outputFolder + "/programs/programs.xml");
+	if(!fileXML.open(QFile::WriteOnly))
+	{
+		std::cout << "File not found" << std::endl;
+		return false;
+	}
 
-            QXmlStreamWriter* xmlWrite = new QXmlStreamWriter();
-            xmlWrite->setDevice(&fileXML);
-            xmlWrite->setAutoFormatting(true);
-            xmlWrite->writeStartDocument();
-            xmlWrite->writeStartElement("programs");
+	QXmlStreamWriter* xmlWrite = new QXmlStreamWriter();
+	xmlWrite->setDevice(&fileXML);
+	xmlWrite->setAutoFormatting(true);
+	xmlWrite->writeStartDocument();
+	xmlWrite->writeStartElement("programs");
 
-            for (int i = 0; i < programFiles->size(); i++)
-            {
-                //fout << programFiles->at(i) << '\n';
-                //std::cout << programFiles->at(i).toStdString() << std::endl;
-                /*QStringList qsl = getSubDirs(dirStr + programFiles->at(i) + "/");
-                for (int j = 0; j < qsl.size(); j++)
-                    std::cout << qsl.at(j).toStdString() << std::endl;
-                std::cout << std::endl;*/
-                if(!taskSearchProgrammWin::m_qslDirs.contains(programFiles->at(i)))
-                {
-                    xmlWrite->writeStartElement("foundProgram");
-                    xmlWrite->writeAttribute("name", programFiles->at(i));
-                    xmlWrite->writeEndElement();
-                }
-                else
-                {
-                    xmlWrite->writeStartElement("dir");
-                    QString dirStr(config.inputFolder);
-                    dirStr += ("/Program Files/" + programFiles->at(i));
-                    QStringList bufList = getSubDirs(dirStr);
-                    xmlWrite->writeAttribute("name", programFiles->at(i));
-                    for (int j = 0; j < bufList.size(); j++)
-                    {
-                        xmlWrite->writeStartElement("foundProgram");
-                        xmlWrite->writeAttribute("name", bufList.at(j));
-                        xmlWrite->writeEndElement();
-                    }
-                    xmlWrite->writeEndElement();
-                }
-            }
+	for (int i = 0; i < programFiles->size(); i++)
+	{
+		//fout << programFiles->at(i) << '\n';
+		//std::cout << programFiles->at(i).toStdString() << std::endl;
+		/*QStringList qsl = getSubDirs(dirStr + programFiles->at(i) + "/");
+		for (int j = 0; j < qsl.size(); j++)
+			std::cout << qsl.at(j).toStdString() << std::endl;
+		std::cout << std::endl;*/
+		if(!taskSearchProgrammWin::m_qslDirs.contains(programFiles->at(i)))
+		{
+			xmlWrite->writeStartElement("foundProgram");
+			xmlWrite->writeAttribute("name", programFiles->at(i));
+			xmlWrite->writeEndElement();
+		}
+		else
+		{
+			xmlWrite->writeStartElement("dir");
+			QString dirStr(config.inputFolder);
+			dirStr += ("/Program Files/" + programFiles->at(i));
+			QStringList bufList = getSubDirs(dirStr);
+			xmlWrite->writeAttribute("name", programFiles->at(i));
+			for (int j = 0; j < bufList.size(); j++)
+			{
+				xmlWrite->writeStartElement("foundProgram");
+				xmlWrite->writeAttribute("name", bufList.at(j));
+				xmlWrite->writeEndElement();
+			}
+			xmlWrite->writeEndElement();
+		}
+	}
 
 
-            xmlWrite->writeEndElement();
-            xmlWrite->writeEndDocument();
-            delete xmlWrite;
-            //file.flush();
-            //file.close();
-            break;            
-        }
-
-        default:
-            std::cout << "Unknown system =(" << std::endl;
-            break;
-    }
+	xmlWrite->writeEndElement();
+	xmlWrite->writeEndDocument();
+	delete xmlWrite;
     delete programFiles;
 
-    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+	if(m_bDebug)
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+		
 	return true;
 }
 		
