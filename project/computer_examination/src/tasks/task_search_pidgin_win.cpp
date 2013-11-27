@@ -12,57 +12,57 @@
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
-	m_strName = "Search Pidgin (Win)";
-	m_strDescription = "Task is search logs of Pidgin for WINDOWS";
-	m_bDebug = false;
+    m_strName = "Search Pidgin (Win)";
+    m_strDescription = "Task is search logs of Pidgin for WINDOWS";
+    m_bDebug = false;
 };
 
 QString taskSearchPidginWin::manual()
 {
-	return "\t--debug - viewing debug messages";
+    return "\t--debug - viewing debug messages";
 };
 
 void taskSearchPidginWin::setOption(QStringList options)
 {
-	if(options.contains("--debug"))
-		m_bDebug = true;
+    if(options.contains("--debug"))
+        m_bDebug = true;
 };
 
 QString taskSearchPidginWin::command()
 {
-	return "pidgin";
+    return "pidgin";
 };
 
 bool taskSearchPidginWin::supportOS(const coex::typeOS &os)
 {
-	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
+    return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
 };
 
 QString taskSearchPidginWin::name()
 {
-	return m_strName;
+    return m_strName;
 };
 
 QString taskSearchPidginWin::description()
 {
-	return m_strDescription;
+    return m_strDescription;
 };
 
 bool taskSearchPidginWin::test()
 {
-	// unit test
-	return true;
+    // unit test
+    return true;
 };
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
-	// example usage options
-	if(m_bDebug)
-		std::cout << "  !!! debug mode on.\n";
-	{
-		QDir dir(config.outputFolder);
-		dir.mkdir("pidgin");
-	}
+    // example usage options
+    if(m_bDebug)
+        std::cout << "  !!! debug mode on.\n";
+    {
+        QDir dir(config.outputFolder);
+        dir.mkdir("pidgin");
+    }
     std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
@@ -87,7 +87,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 foundFile << fileInfo.absoluteFilePath();
             }
         }
-     }
+    }
     coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
     if(!ololo.opened())
     {
@@ -98,13 +98,12 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
-		if (fileInfo.suffix() == "html") 
-		{
+        if (fileInfo.suffix() == "html")
+        {
             QFile file(fileInfo.absoluteFilePath());
-            std::cout << fileInfo.absoluteFilePath().toStdString() << std::endl; //
-			// open a file
+            // open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-			{	
+            {
                 QStringList fieldsZero;
                 QStringList fieldsOne;
                 QString time;
@@ -126,8 +125,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 {
                     line = in.readLine(); // read all file
                     fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
-for (int y = 0; y < fieldsOne.size(); y++)
-        std::cout << y << " :: fieldsOne :: " << fieldsOne.at(y).toStdString() <<" \n"<<std::endl;
 
                     for(int y = 0; y< fieldsOne.size(); y++)
                     {
@@ -152,32 +149,38 @@ for (int y = 0; y < fieldsOne.size(); y++)
                     }
                     ololo.writeMessage(author,time,message);
                 }
+            }
+            else
+            {
+                std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+            }
+        }
+        if (fileInfo.suffix() == "txt")
+        {
+            QFile file(fileInfo.absoluteFilePath());
+            // open a file
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+                while(!file.atEnd())
+                {
+                    QString line = file.readLine();
+                    QRegExp rx("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
+                    //rx.setCaseSensitive( false );
+                    rx.indexIn(line);
+                    QString time = rx.cap(1);
+                    QString author = rx.cap(2);
+                    QString message = rx.cap(3);
+                    //std::cout <<"\n::time:: "<< time.toStdString() <<"\n ::author:: "<< author.toStdString() <<"\n ::message:: "<< message.toStdString() << std::endl;
+                    ololo.writeMessage(author,time,message);
+                }
+            }
 
-            //ololo.~writerMessages();  я маленько не понял, нужно деструктор или нет? думаю что нет...
-			}
-			else
-			{
-				std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
-			};
-		} 
-
-		if (fileInfo.suffix() == "txt") 
-		{
-/*
-			QFile file(fileInfo.absolutePath());
-			if (file.open(QIODevice::ReadOnly))
-			{	
-				// QXmlStreamReader* xmlReader = new QXmlStreamReader();
-				// xmlReader->setDevice(&file);
-				// xmlReader->setAutoFormatting(true);
-				// xmlReader->writeStartDocument();
-				// delete xmlReader;
-            };
-*/
-		}
-
+            else
+            {
+                std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+            }
+        }
     }
     std::cout << "===========================================\n\n";
     return true;
 };
-		
