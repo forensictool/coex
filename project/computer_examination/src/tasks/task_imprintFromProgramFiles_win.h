@@ -1,7 +1,10 @@
-#ifndef __TASK_SEARCH_PROGRAMM_WIN_H__
-#define __TASK_SEARCH_PROGRAMM_WIN_H__
+#ifndef __TASK_imprintFromProgramFiles_WIN_H__
+#define __TASK_imprintFromProgramFiles_WIN_H__
 
 #include "../coex/task.h"
+#include <QXmlStreamWriter>
+#include <QString>
+#include <QMap>
 
 class taskSearchProgrammWin : public coex::task 
 {
@@ -18,7 +21,17 @@ class taskSearchProgrammWin : public coex::task
 		virtual QString description();
 		virtual bool test();
 		virtual bool execute(const coex::config &config);
-        virtual QStringList getSubDirs(QString dirStr);
+		
+		// other
+		void recourceDirs(	QString baseFolder, 
+			QString parentFolder, 
+			QString dirStr, 
+			QXmlStreamWriter* xmlWrite, 
+			int &id, 
+			int depth = 0, 
+			int maxdepth = 5
+		);
+        // QStringList getSubDirs(QString dirStr);
 		
 	private:
 		QString m_strName;
@@ -26,6 +39,7 @@ class taskSearchProgrammWin : public coex::task
         bool m_bDebug;
         QStringList m_qslExcept;
         QStringList m_qslDirs;
+        QMap<QString, QString> m_mapProgInfo;
 };
 
-#endif // __TASK_SEARCH_PROGRAMM_WIN_H__
+#endif // __TASK_imprintFromProgramFiles_WIN_H__

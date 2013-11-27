@@ -56,14 +56,15 @@ bool taskSearchPidginWin::test()
 
 bool taskSearchPidginWin::execute(const coex::config &config)
 {
-    // example usage options
-    if(m_bDebug)
-        std::cout << "  !!! debug mode on.\n";
-    {
-        QDir dir(config.outputFolder);
-        dir.mkdir("pidgin");
-    }
-    std::cout << "===========================================\n\n";
+	// example usage options
+	if(m_bDebug)
+		std::cout << "  !!! debug mode on.\n";
+	{
+		QDir dir(config.outputFolder);
+		dir.mkdir("pidgin");
+	}
+	if(m_bDebug)
+      std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
 
@@ -101,7 +102,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         if (fileInfo.suffix() == "html")
         {
             QFile file(fileInfo.absoluteFilePath());
-            // open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
                 QStringList fieldsZero;
@@ -125,7 +125,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 {
                     line = in.readLine(); // read all file
                     fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
-
                     for(int y = 0; y< fieldsOne.size(); y++)
                     {
                         if (fieldsOne.size() > 1)
@@ -161,15 +160,20 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             // open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
+                QRegExp rxHead("\\w  \\w (.*) \\w (.*) \\w (.*) (\((.*)\))");
+                QString line = file.readLine();//read first line, get interesting info)
+                rxHead.indexIn(line);
+                std::cout <<"\n::1:: "<< rxHead(1).toStdString() <<"\n ::2:: "<< rxHead(3).toStdString() <<"\n ::3:: "<< rxHead(5).toStdString() << std::endl;
+                //ololo.writeInfoLog(rxHead.cap(1),rxHead(2),rxHead(3));
                 while(!file.atEnd())
                 {
-                    QString line = file.readLine();
-                    QRegExp rx("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
+                    line = file.readLine();
+                    QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
                     //rx.setCaseSensitive( false );
-                    rx.indexIn(line);
-                    QString time = rx.cap(1);
-                    QString author = rx.cap(2);
-                    QString message = rx.cap(3);
+                    rxBody.indexIn(line);
+                    QString time = rxBody.cap(1);
+                    QString author = rxBody.cap(2);
+                    QString message = rxBody.cap(3);
                     //std::cout <<"\n::time:: "<< time.toStdString() <<"\n ::author:: "<< author.toStdString() <<"\n ::message:: "<< message.toStdString() << std::endl;
                     ololo.writeMessage(author,time,message);
                 }
@@ -181,6 +185,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             }
         }
     }
-    std::cout << "===========================================\n\n";
+    if(m_bDebug)
+      std::cout << "===========================================\n\n";
     return true;
 };

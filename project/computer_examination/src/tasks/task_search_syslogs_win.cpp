@@ -78,12 +78,16 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
         QStringList list = evtFiles.at(i).split("/", QString::SkipEmptyParts);
         //QFile::copy(evtFiles.at(i), outFolder + list.at(list.size() - 1));
 
-        std::cout << "-----------------------------------------------------" << std::endl;
+		if(m_bDebug)
+			std::cout << "-----------------------------------------------------" << std::endl;
+			
         winEventLog log(evtFiles.at(i), outFolder + list.at(list.size() - 1));
         log.read();
         //std::cout << evtFiles.at(i).toStdString() << std::endl;
     }
 }
+
+
 
 /* 
  * also look here for *.Evt files
@@ -95,7 +99,8 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
 
 bool taskSearchSyslogsWin::execute(const coex::config& config)
 {
-    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+	if(m_bDebug)
+      std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
 
     if(m_bDebug)
         std::cout << "  !!! debug mode on.\n";
@@ -159,7 +164,9 @@ bool taskSearchSyslogsWin::execute(const coex::config& config)
     readEvtFiles(*evtFiles, config);
     delete evtFiles;
 
-    std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+	if(m_bDebug)
+      std::cout << "!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+      
     return true;
 }
 

@@ -82,74 +82,10 @@ QString taskSearchHosts::findFileHosts(QString dir)
 
 bool taskSearchHosts::execute(const coex::config& config)
 {
-    //std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
-
     if(m_bDebug)
         std::cout << "  !!! debug mode on.\n";
 
-    QString fileName = findFileHosts(config.inputFolder);
 
-
-    QStringList* logFiles = new QStringList();
-    QStringList* evtFiles = new QStringList();
-
-    switch(config.os)
-    {
-        case coex::ceWindowsXP:
-        {
-            //этот кусок кода находит все файлы типа *.log и *.evt в заданной дириктории
-            /*QString dirStr(config.inputFolder);             //folder with logs
-            dirStr += "/WINDOWS/system32/config";
-            QDir dir(dirStr);                               //open this folder and create filters
-            dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-            dir.setSorting(QDir::Size | QDir::Reversed);
-            QStringList filters;
-            filters << "*.log" << "*.evt";
-            dir.setNameFilters(filters);
-            QFileInfoList list = dir.entryInfoList();   //create list with files in folder
-            for (int i = 0; i < list.size(); i++)
-            {
-                QFileInfo info = list.at(i);
-                std::cout << qPrintable(QString("%1").arg(info.fileName())) << std::endl;
-            }*/
-
-            //этот кусок кода получает пути до всех *.log и *.evt файлов в дириктории (включая подкаталоги)
-            QString dirStr(config.inputFolder);
-            dirStr += "/WINDOWS";
-            QDirIterator dirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-
-            while(dirit.hasNext())
-            {
-                QString str = QString("%1").arg(dirit.next());
-                QStringList buf = str.split("/", QString::SkipEmptyParts);
-                buf = buf.at(buf.size() - 1).split(".", QString::SkipEmptyParts);
-                if (buf.at(buf.size() - 1).toLower() == "log")
-                {
-                    *logFiles << str;
-                }
-                if (buf.at(buf.size() - 1).toLower() == "evt")
-                {
-                    *evtFiles << str;
-                }
-            }
-
-            break;
-        }
-
-        default:
-        {
-            std::cout << "Unknown system =(" << std::endl;
-            break;
-        }
-    }
-
-    readLogFiles(*logFiles, config);
-    delete logFiles;
-
-    readEvtFiles(*evtFiles, config);
-    delete evtFiles;
-
-    //std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
     return true;
 }
 
