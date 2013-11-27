@@ -19,6 +19,7 @@ namespace coex
         void writeInfoLog(
             QString chathID,
             QString account,
+            QString data,
             QString protocol
         );
 

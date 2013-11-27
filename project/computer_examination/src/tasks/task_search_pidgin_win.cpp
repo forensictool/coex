@@ -118,7 +118,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
                 if(fieldsZero.size() > 19) //костыль, спасибо Димке за это))
                 {
-                    ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(19));
+                    ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(17) ,fieldsZero.at(19));
                 }
 
                 while(!in.atEnd())
@@ -160,11 +160,16 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             // open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
-                QRegExp rxHead("\\w  \\w (.*) \\w (.*) \\w (.*) (\((.*)\))");
+                QRegExp rxHead("Conversation with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
                 QString line = file.readLine();//read first line, get interesting info)
                 rxHead.indexIn(line);
-                std::cout <<"\n::1:: "<< rxHead(1).toStdString() <<"\n ::2:: "<< rxHead(3).toStdString() <<"\n ::3:: "<< rxHead(5).toStdString() << std::endl;
-                //ololo.writeInfoLog(rxHead.cap(1),rxHead(2),rxHead(3));
+                QString chatID = rxHead.cap(1);
+                QString account = rxHead.cap(2);
+                QString data = rxHead.cap(3);
+                QString protocol = rxHead.cap(4);
+                if(m_bDebug)
+                    std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
+                ololo.writeInfoLog(chatID, account, data, protocol);
                 while(!file.atEnd())
                 {
                     line = file.readLine();
@@ -178,7 +183,6 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                     ololo.writeMessage(author,time,message);
                 }
             }
-
             else
             {
                 std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
