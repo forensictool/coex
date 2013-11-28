@@ -96,6 +96,10 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         return false;
     }
 
+    QString time;
+    QString author;
+    QString message;
+
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
@@ -104,48 +108,24 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             QFile file(fileInfo.absoluteFilePath());
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
-                QStringList fieldsZero;
-                QStringList fieldsOne;
-                QString time;
-                QString author;
-                QString message;
-                QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
-                QRegExp rxAuthor (":$");
-                QRegExp rxMessage ("^ ");
+
                 QTextStream in(&file);
 
                 QString line = in.readLine();//read first line, get interesting info)
-                fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
+                /*fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
                 if(fieldsZero.size() > 19) //костыль, спасибо Димке за это))
                 {
                     ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(17) ,fieldsZero.at(19));
-                }
+                }*/
 
+                QRegExp rxBody(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
                 while(!in.atEnd())
                 {
                     line = in.readLine(); // read all file
-                    fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
-                    for(int y = 0; y< fieldsOne.size(); y++)
-                    {
-                        if (fieldsOne.size() > 1)
-                        {
-                            if(fieldsOne.at(y).contains(rxAuthor))
-                            {
-                                author = fieldsOne.at(y);
-                                continue;
-                            }
-                            if(fieldsOne.at(y).contains(rxTime))
-                            {
-                                time = fieldsOne.at(y);
-                                continue;
-                            }
-                            if(fieldsOne.at(y).contains(rxMessage))
-                            {
-                                message = fieldsOne.at(y);
-                                continue;
-                            }
-                        }
-                    }
+                    rxBody.indexIn(line);
+                    time = rxBody.cap(1);
+                    author = rxBody.cap(2);
+                    message = rxBody.cap(3);
                     ololo.writeMessage(author,time,message);
                 }
             }
@@ -170,15 +150,16 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 if(m_bDebug)
                     std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
                 ololo.writeInfoLog(chatID, account, data, protocol);
+                QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
                 while(!file.atEnd())
                 {
                     line = file.readLine();
-                    QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
+
                     //rx.setCaseSensitive( false );
                     rxBody.indexIn(line);
-                    QString time = rxBody.cap(1);
-                    QString author = rxBody.cap(2);
-                    QString message = rxBody.cap(3);
+                    time = rxBody.cap(1);
+                    author = rxBody.cap(2);
+                    message = rxBody.cap(3);
                     //std::cout <<"\n::time:: "<< time.toStdString() <<"\n ::author:: "<< author.toStdString() <<"\n ::message:: "<< message.toStdString() << std::endl;
                     ololo.writeMessage(author,time,message);
                 }
