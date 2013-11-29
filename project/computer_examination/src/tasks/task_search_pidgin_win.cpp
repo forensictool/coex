@@ -1,14 +1,11 @@
 #include "task_search_pidgin_win.h"
 #include "../coex/writerMessages.h"
 #include <iostream>
-#include <QDir>
 #include <QDirIterator>
 #include <QString>
-#include <QFile>
-#include <QXmlStreamReader>
 #include <QRegExp>
-#include <QTextStream>
-#include <QDebug>
+#include <QFile>
+#include<QTextStream>
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
@@ -99,6 +96,10 @@ bool taskSearchPidginWin::execute(const coex::config &config)
     QString time;
     QString author;
     QString message;
+    QString chatID;
+    QString account;
+    QString data;
+    QString protocol;
 
     for(int i = 0; i < foundFile.size(); ++i)
     {
@@ -108,16 +109,17 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             QFile file(fileInfo.absoluteFilePath());
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
-
+                QRegExp rxHead(".*h3.*with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
                 QTextStream in(&file);
-
-                QString line = in.readLine();//read first line, get interesting info)
-                /*fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
-                if(fieldsZero.size() > 19) //костыль, спасибо Димке за это))
-                {
-                    ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(17) ,fieldsZero.at(19));
-                }*/
-
+                QString line = file.readLine();//read first line, get interesting info)
+                rxHead.indexIn(line);
+                chatID = rxHead.cap(1);
+                account = rxHead.cap(2);
+                data = rxHead.cap(3);
+                protocol = rxHead.cap(4);
+                if(m_bDebug)
+                    std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
+                ololo.writeInfoLog(chatID, data, account, protocol);
                 QRegExp rxBody(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
                 while(!in.atEnd())
                 {
@@ -140,27 +142,24 @@ bool taskSearchPidginWin::execute(const coex::config &config)
             // open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
-                QRegExp rxHead("Conversation with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
+                QRegExp rxHead(".*with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
                 QString line = file.readLine();//read first line, get interesting info)
                 rxHead.indexIn(line);
-                QString chatID = rxHead.cap(1);
-                QString account = rxHead.cap(2);
-                QString data = rxHead.cap(3);
-                QString protocol = rxHead.cap(4);
+                chatID = rxHead.cap(1);
+                account = rxHead.cap(2);
+                data = rxHead.cap(3);
+                protocol = rxHead.cap(4);
                 if(m_bDebug)
                     std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
-                ololo.writeInfoLog(chatID, account, data, protocol);
+                ololo.writeInfoLog(chatID, data, account, protocol);
                 QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
                 while(!file.atEnd())
                 {
                     line = file.readLine();
-
-                    //rx.setCaseSensitive( false );
                     rxBody.indexIn(line);
                     time = rxBody.cap(1);
                     author = rxBody.cap(2);
                     message = rxBody.cap(3);
-                    //std::cout <<"\n::time:: "<< time.toStdString() <<"\n ::author:: "<< author.toStdString() <<"\n ::message:: "<< message.toStdString() << std::endl;
                     ololo.writeMessage(author,time,message);
                 }
             }
