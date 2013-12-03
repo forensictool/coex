@@ -1,57 +1,54 @@
 #include "task_search_pidgin_win.h"
 #include "../coex/writerMessages.h"
 #include <iostream>
-#include <QDir>
 #include <QDirIterator>
 #include <QString>
-#include <QFile>
-#include <QXmlStreamReader>
 #include <QRegExp>
-#include <QTextStream>
-#include <QDebug>
+#include <QFile>
+#include<QTextStream>
 
 taskSearchPidginWin::taskSearchPidginWin()
 {
-	m_strName = "Search Pidgin (Win)";
-	m_strDescription = "Task is search logs of Pidgin for WINDOWS";
-	m_bDebug = false;
+    m_strName = "Search Pidgin (Win)";
+    m_strDescription = "Task is search logs of Pidgin for WINDOWS";
+    m_bDebug = false;
 };
 
 QString taskSearchPidginWin::manual()
 {
-	return "\t--debug - viewing debug messages";
+    return "\t--debug - viewing debug messages";
 };
 
 void taskSearchPidginWin::setOption(QStringList options)
 {
-	if(options.contains("--debug"))
-		m_bDebug = true;
+    if(options.contains("--debug"))
+        m_bDebug = true;
 };
 
 QString taskSearchPidginWin::command()
 {
-	return "pidgin";
+    return "pidgin";
 };
 
 bool taskSearchPidginWin::supportOS(const coex::typeOS &os)
 {
-	return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
+    return ((os == coex::ceWindowsXP) || (os == coex::ceWindows7));
 };
 
 QString taskSearchPidginWin::name()
 {
-	return m_strName;
+    return m_strName;
 };
 
 QString taskSearchPidginWin::description()
 {
-	return m_strDescription;
+    return m_strDescription;
 };
 
 bool taskSearchPidginWin::test()
 {
-	// unit test
-	return true;
+    // unit test
+    return true;
 };
 
 bool taskSearchPidginWin::execute(const coex::config &config)
@@ -63,7 +60,8 @@ bool taskSearchPidginWin::execute(const coex::config &config)
 		QDir dir(config.outputFolder);
 		dir.mkdir("pidgin");
 	}
-    std::cout << "===========================================\n\n";
+	if(m_bDebug)
+      std::cout << "===========================================\n\n";
 
     QString path = config.inputFolder + "/Users/";
 
@@ -87,7 +85,7 @@ bool taskSearchPidginWin::execute(const coex::config &config)
                 foundFile << fileInfo.absoluteFilePath();
             }
         }
-     }
+    }
     coex::writerMessages ololo(config.outputFolder + "//pidgin/messages.xml", "pidgin");
     if(!ololo.opened())
     {
@@ -95,89 +93,83 @@ bool taskSearchPidginWin::execute(const coex::config &config)
         return false;
     }
 
+    QString time;
+    QString author;
+    QString message;
+    QString chatID;
+    QString account;
+    QString data;
+    QString protocol;
+
     for(int i = 0; i < foundFile.size(); ++i)
     {
         QFileInfo fileInfo = foundFile.at(i);
-		if (fileInfo.suffix() == "html") 
-		{
+        if (fileInfo.suffix() == "html")
+        {
             QFile file(fileInfo.absoluteFilePath());
-            std::cout << fileInfo.absoluteFilePath().toStdString() << std::endl; //
-			// open a file
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-			{	
-                QStringList fieldsZero;
-                QStringList fieldsOne;
-                QString time;
-                QString author;
-                QString message;
-                QRegExp rxTime ("([0-9][0-9]:[0-9][0-9]:[0-9][0-9])");
-                QRegExp rxAuthor (":$");
-                QRegExp rxMessage ("^ ");
+            {
+                QRegExp rxHead(".*h3.*with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
                 QTextStream in(&file);
-
-                QString line = in.readLine();//read first line, get interesting info)
-                fieldsZero = line.split(QRegExp(" |/|<|>"),QString::SkipEmptyParts);
-                if(fieldsZero.size() > 19) //костыль, спасибо Димке за это))
-                {
-                    ololo.writeInfoLog(fieldsZero.at(10), fieldsZero.at(18), fieldsZero.at(19));
-                }
-
+                QString line = file.readLine();//read first line, get interesting info)
+                rxHead.indexIn(line);
+                chatID = rxHead.cap(1);
+                account = rxHead.cap(2);
+                data = rxHead.cap(3);
+                protocol = rxHead.cap(4);
+                if(m_bDebug)
+                    std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
+                ololo.writeInfoLog(chatID, data, account, protocol);
+                QRegExp rxBody(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
                 while(!in.atEnd())
                 {
                     line = in.readLine(); // read all file
-                    fieldsOne = line.split(QRegExp("<|/|>"),QString::SkipEmptyParts);
-for (int y = 0; y < fieldsOne.size(); y++)
-        std::cout << y << " :: fieldsOne :: " << fieldsOne.at(y).toStdString() <<" \n"<<std::endl;
-
-                    for(int y = 0; y< fieldsOne.size(); y++)
-                    {
-                        if (fieldsOne.size() > 1)
-                        {
-                            if(fieldsOne.at(y).contains(rxAuthor))
-                            {
-                                author = fieldsOne.at(y);
-                                continue;
-                            }
-                            if(fieldsOne.at(y).contains(rxTime))
-                            {
-                                time = fieldsOne.at(y);
-                                continue;
-                            }
-                            if(fieldsOne.at(y).contains(rxMessage))
-                            {
-                                message = fieldsOne.at(y);
-                                continue;
-                            }
-                        }
-                    }
+                    rxBody.indexIn(line);
+                    time = rxBody.cap(1);
+                    author = rxBody.cap(2);
+                    message = rxBody.cap(3);
                     ololo.writeMessage(author,time,message);
                 }
-
-            //ololo.~writerMessages();  я маленько не понял, нужно деструктор или нет? думаю что нет...
-			}
-			else
-			{
-				std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
-			};
-		} 
-
-		if (fileInfo.suffix() == "txt") 
-		{
-/*
-			QFile file(fileInfo.absolutePath());
-			if (file.open(QIODevice::ReadOnly))
-			{	
-				// QXmlStreamReader* xmlReader = new QXmlStreamReader();
-				// xmlReader->setDevice(&file);
-				// xmlReader->setAutoFormatting(true);
-				// xmlReader->writeStartDocument();
-				// delete xmlReader;
-            };
-*/
-		}
-
+            }
+            else
+            {
+                std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+            }
+        }
+        if (fileInfo.suffix() == "txt")
+        {
+            QFile file(fileInfo.absoluteFilePath());
+            // open a file
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+                QRegExp rxHead(".*with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
+                QString line = file.readLine();//read first line, get interesting info)
+                rxHead.indexIn(line);
+                chatID = rxHead.cap(1);
+                account = rxHead.cap(2);
+                data = rxHead.cap(3);
+                protocol = rxHead.cap(4);
+                if(m_bDebug)
+                    std::cout <<"\n::1:: "<< chatID.toStdString() <<"\n ::2:: "<< account.toStdString() <<"\n ::3:: "<< data.toStdString() <<"\n ::4:: " << protocol.toStdString() <<"\n";
+                ololo.writeInfoLog(chatID, data, account, protocol);
+                QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
+                while(!file.atEnd())
+                {
+                    line = file.readLine();
+                    rxBody.indexIn(line);
+                    time = rxBody.cap(1);
+                    author = rxBody.cap(2);
+                    message = rxBody.cap(3);
+                    ololo.writeMessage(author,time,message);
+                }
+            }
+            else
+            {
+                std::cout << "could not opening file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+            }
+        }
     }
-    std::cout << "===========================================\n\n";
+    if(m_bDebug)
+      std::cout << "===========================================\n\n";
     return true;
 };
-		

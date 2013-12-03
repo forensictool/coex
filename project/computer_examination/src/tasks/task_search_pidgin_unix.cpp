@@ -5,6 +5,7 @@ taskSearchPidginUnix::taskSearchPidginUnix()
 {
 	m_strName = "Search Pidgin (Unix)";
 	m_strDescription = "Task is search logs of Pidgin for Unix/Linux";
+	m_bDebug = false;
 };
 
 QString taskSearchPidginUnix::manual()
@@ -46,9 +47,12 @@ bool taskSearchPidginUnix::test()
 bool taskSearchPidginUnix::execute(const coex::config &config)
 {
   // TODO: 
-	std::cout << ">>>>>> same execute...\n\n";
-	std::cout << config.inputFolder.toStdString() << "\n";
-	std::cout << config.outputFolder.toStdString() << "\n";
+    if(m_bDebug)
+    {
+	  std::cout << ">>>>>> same execute...\n\n";
+	  std::cout << config.inputFolder.toStdString() << "\n";
+	  std::cout << config.outputFolder.toStdString() << "\n";
+	}
 	
 	return true;
 };

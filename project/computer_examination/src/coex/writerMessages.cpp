@@ -40,6 +40,7 @@ namespace coex
         void writerMessages::writeInfoLog(
             QString chathID,
             QString account,
+            QString data,
             QString protocol
         )
         {
@@ -47,6 +48,7 @@ namespace coex
             m_pXmlWriter->writeStartElement("info");
             m_pXmlWriter->writeAttribute("chathID", chathID);
             m_pXmlWriter->writeAttribute("account", account);
+            m_pXmlWriter->writeAttribute("data", data);
             m_pXmlWriter->writeAttribute("protocol", protocol);
             //m_pXmlWriter->writeCharacters(message);
             m_pXmlWriter->writeEndElement();

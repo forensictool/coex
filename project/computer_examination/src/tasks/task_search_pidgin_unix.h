@@ -21,6 +21,7 @@ class taskSearchPidginUnix : public coex::task
 	private:
 		QString m_strName;
 		QString m_strDescription;
+		bool m_bDebug;
 };
 
 #endif // __TASK_SEARCH_PIDGIN_WIN_H__
