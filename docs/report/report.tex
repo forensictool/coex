@@ -40,12 +40,19 @@
 \usepackage{longtable}
 
 % - Используем графику в документе
+\usepackage[dvips]{graphicx}
+\graphicspath{{images/}}
 
 % - Для вставки гиперссылок
 \usepackage[colorlinks]{hyperref}
 
 % - Счётчики
 \usepackage{eskdtotal}
+
+% - Для переопределения списков
+\makeatletter
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\theenumi)}
 
 \begin{document}
 
@@ -131,8 +138,16 @@ XXXXXXXXXXXXXXXX\kill
 \section{Введение}
 
 \newpage
-\section{}
-\subsection{}
+\section{Отчёт Игоря}
+\input{individual_reports/Polyakov}
+
+\newpage
+\section{Отчёт Димы}
+\input{individual_reports/Nikiforov}
+
+\newpage
+\section{Отчёт Лёши}
+\input{individual_reports/Ponomarev}
 
 \section{Заключение}
 В результате проделанной работы были достигнуты следующие результаты:
