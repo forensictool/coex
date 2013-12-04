@@ -54,7 +54,7 @@ bool taskSearchSyslogsWin::test()
 	return true;
 }
 
-void taskSearchSyslogsWin::readLogFiles(QStringList logFiles, const coex::config &config)
+/*void taskSearchSyslogsWin::readLogFiles(QStringList logFiles, const coex::config &config)
 {
     QDir(config.outputFolder).mkdir("SYSWINLOGS"); //создаем диррикторию в выходном каталоге
     QString outFolder = config.outputFolder + "/SYSWINLOGS/";
@@ -66,24 +66,41 @@ void taskSearchSyslogsWin::readLogFiles(QStringList logFiles, const coex::config
         QStringList list = logFiles.at(i).split("/", QString::SkipEmptyParts);
         QFile::copy(logFiles.at(i), outFolder + list.at(list.size() - 1));
     }
-}
+}*/
 
 void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config &config)
 {
-    QDir(config.outputFolder).mkdir("SYSWINEVTS");
+    try
+    {
+        QDir(config.outputFolder).mkdir("SYSWINEVTS");
+    }
+    catch(...)
+    {
+        if(m_bDebug)
+            std::cout << "SYSWINEVT dir is not created" << std::endl;
+        return;
+    }
+
     QString outFolder = config.outputFolder + "/SYSWINEVTS/";
     for(int i = 0; i < evtFiles.size(); i++)
     {
-
         QStringList list = evtFiles.at(i).split("/", QString::SkipEmptyParts);
         //QFile::copy(evtFiles.at(i), outFolder + list.at(list.size() - 1));
 
 		if(m_bDebug)
 			std::cout << "-----------------------------------------------------" << std::endl;
 			
-        winEventLog log(evtFiles.at(i), outFolder + list.at(list.size() - 1));
-        log.read();
-        //std::cout << evtFiles.at(i).toStdString() << std::endl;
+        try
+        {
+            winEventLog log(evtFiles.at(i), outFolder + list.at(list.size() - 1) + ".xml");
+            log.read();
+        }
+        catch(...)
+        {
+            if(m_bDebug)
+                std::cout << "Error in " + evtFiles.at(i).toStdString() + " file" << std::endl;
+            continue;
+        }
     }
 }
 
@@ -95,7 +112,7 @@ void taskSearchSyslogsWin::readEvtFiles(QStringList evtFiles, const coex::config
  * http://www.whitehats.ca/main/members/Malik/malik_eventlogs/malik_eventlogs.html
  * 
  * and in thirdparty/grokevt (python scripts)
- * */
+ */
 
 bool taskSearchSyslogsWin::execute(const coex::config& config)
 {
@@ -105,47 +122,37 @@ bool taskSearchSyslogsWin::execute(const coex::config& config)
     if(m_bDebug)
         std::cout << "  !!! debug mode on.\n";
 
-    QStringList* logFiles = new QStringList();
+    //QStringList* logFiles = new QStringList();
     QStringList* evtFiles = new QStringList();
 
     switch(config.os)
     {
         case coex::ceWindowsXP:
         {
-            //этот кусок кода находит все файлы типа *.log и *.evt в заданной дириктории
-            /*QString dirStr(config.inputFolder);             //folder with logs
-            dirStr += "/WINDOWS/system32/config";
-            QDir dir(dirStr);                               //open this folder and create filters
-            dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-            dir.setSorting(QDir::Size | QDir::Reversed);
-            QStringList filters;
-            filters << "*.log" << "*.evt";
-            dir.setNameFilters(filters);
-            QFileInfoList list = dir.entryInfoList();   //create list with files in folder
-            for (int i = 0; i < list.size(); i++)
-            {
-                QFileInfo info = list.at(i);
-                std::cout << qPrintable(QString("%1").arg(info.fileName())) << std::endl;
-            }*/
-
-            //этот кусок кода получает пути до всех *.log и *.evt файлов в дириктории (включая подкаталоги)
             QString dirStr(config.inputFolder);
             dirStr += "/WINDOWS";
             QDirIterator dirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
 
-            while(dirit.hasNext())
+            try
             {
-                QString str = QString("%1").arg(dirit.next());
-                QStringList buf = str.split("/", QString::SkipEmptyParts);
-                buf = buf.at(buf.size() - 1).split(".", QString::SkipEmptyParts);
-                if (buf.at(buf.size() - 1).toLower() == "log")
+                while(dirit.hasNext())
                 {
-                    *logFiles << str;
+                    QString str = QString("%1").arg(dirit.next());
+                    QStringList buf = str.split("/", QString::SkipEmptyParts);
+                    buf = buf.at(buf.size() - 1).split(".", QString::SkipEmptyParts);
+                    /*if (buf.at(buf.size() - 1).toLower() == "log")
+                    {
+                        *logFiles << str;
+                    }*/
+                    if (buf.at(buf.size() - 1).toLower() == "evt")
+                    {
+                        *evtFiles << str;
+                    }
                 }
-                if (buf.at(buf.size() - 1).toLower() == "evt")
-                {
-                    *evtFiles << str;
-                }
+            }
+            catch(...)
+            {
+                if(m_bDebug) std::cout << "OOOOPS!" << std::endl;
             }
 
             break;
@@ -158,8 +165,8 @@ bool taskSearchSyslogsWin::execute(const coex::config& config)
         }
     }
 
-    readLogFiles(*logFiles, config);
-    delete logFiles;
+    //readLogFiles(*logFiles, config);
+    //delete logFiles;
 
     readEvtFiles(*evtFiles, config);
     delete evtFiles;
