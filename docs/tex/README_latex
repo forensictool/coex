@@ -8,6 +8,6 @@ and for convert from ODT to LaTex, see also:
 # apt-get install writer2latex
 
 for correct compilation
-$ latex example.tex
+$ pdflatex example.tex
 $ bibtexu example.tex
 $ pdflatex example.tex
