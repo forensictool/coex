@@ -23,6 +23,7 @@
 % - Убирает точку в списке литературы
 \makeatletter
 \def\@biblabel#1{#1 }
+
 % - ГОСТ списка литературы
 \bibliographystyle{gost780s}
 
@@ -39,13 +40,19 @@
 \usepackage{longtable}
 
 % - Используем графику в документе
-\usepackage{graphicx}
+\usepackage[dvips]{graphicx}
+\graphicspath{{images/}}
 
 % - Для вставки гиперссылок
 \usepackage[colorlinks]{hyperref}
 
 % - Счётчики
 \usepackage{eskdtotal}
+
+% - Для переопределения списков
+\makeatletter
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\theenumi)}
 
 \begin{document}
 
@@ -100,17 +107,26 @@ XXXXXXXXXXXXXXXX\kill
 \paragraph{\hfill РЕФЕРАТ \hfill}
 Курсовая работа содержит \ESKDtotal{page} страниц, \ESKDtotal{table} таблиц, \ESKDtotal{bibitem} источников.
 
+КОМПЬЮТЕРНАЯ ЭКСПЕРТИЗА, ФОРЕНЗИКА, ЛОГИ, QT, ЖУРНАЛЬНЫЕ ФАЙЛЫ, XML, GIT.
+
+Объектом разработки является автоматизированная система для исследования образов жёстких дисков.
+
+Цель работы - создание автоматизированной системы, предназначенной для экспертизы образов жёстких дисков.
+
+Достигнутые результаты: созданы части системы, извлекающие из операционной системы, установленной на жёстком диске, логи системы и логи мессенджеров.
+
 Пояснительная записка выполнена в текстовом редакторе nano 2.2.6.
 
 \newpage
 \ESKDthisStyle{empty}
 \paragraph{\hfill Список исполнителей \hfill}
-\begin{itemize}
-\item Моргуненко А.В. --
-\item Никифоров Д.С. -- 
-\item Поляков И.Ю. --
-\item Пономарёв А.К. --
-\end{itemize}
+Моргуненко А.В. -- документатор.
+
+Никифоров Д.С. -- программист, ответственный исполнитель, ответственный за написание части системы, работающей с логами системы.
+
+Поляков И.Ю. -- программист, ответственный за написание части системы, работающей с логами мессенджеров.
+
+Пономарёв А.К. -- аналитик.
 
 \newpage
 \ESKDstyle{formII}
@@ -122,8 +138,16 @@ XXXXXXXXXXXXXXXX\kill
 \section{Введение}
 
 \newpage
-\section{}
-\subsection{}
+\section{Отчёт Игоря}
+\input{individual_reports/Polyakov}
+
+\newpage
+\section{Отчёт Димы}
+\input{individual_reports/Nikiforov}
+
+\newpage
+\section{Отчёт Лёши}
+\input{individual_reports/Ponomarev}
 
 \section{Заключение}
 В результате проделанной работы были достигнуты следующие результаты:
@@ -131,15 +155,17 @@ XXXXXXXXXXXXXXXX\kill
 \item[1)]
 \end{enumerate}
 
+типа ссылка \cite{qtdoc}
+типа вторая ссылка \cite{fedotovforenzika}
+
 В дальнейшей работе планируется:
 \begin{itemize}
 \item
 \end{itemize}
 
 \newpage
-% - Переименование списка литературы
 \renewcommand{\refname}{Список использованных источников}
-\bibliography{books}
+\bibliography{biblio/lit}
 
 \ESKDappendix{Обязательное}{\normalfont Компакт-диск}
 Компакт-диск содержит: 

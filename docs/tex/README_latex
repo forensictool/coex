@@ -6,3 +6,8 @@ $ pdflatex example.tex
 
 and for convert from ODT to LaTex, see also: 
 # apt-get install writer2latex
+
+for correct compilation
+$ pdflatex example.tex
+$ bibtexu example.tex
+$ pdflatex example.tex

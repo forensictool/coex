@@ -245,8 +245,15 @@ QString EventCategoryToString(quint16 type)
             while(i.hasNext())
             {
                 i.next();
+                if(i.key() == "Data")
+                {
+                    continue;
+                }
                 stream.writeAttribute(i.key(), i.value());
             }
+            stream.writeStartElement("Data");
+            stream.writeCharacters(MapData["Data"]);
+            stream.writeEndElement();
             stream.writeEndElement();
         }
 

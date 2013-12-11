@@ -18,7 +18,7 @@ class taskSearchSyslogsWin : public coex::task
 		virtual QString description();
 		virtual bool test();
 		virtual bool execute(const coex::config &config);
-        virtual void readLogFiles(QStringList logFiles, const coex::config& config);
+        // virtual void readLogFiles(QStringList logFiles, const coex::config& config);
         virtual void readEvtFiles(QStringList evtFiles, const coex::config& config);
 		
 	private:
