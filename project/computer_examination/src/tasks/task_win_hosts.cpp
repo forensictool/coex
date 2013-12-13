@@ -59,10 +59,23 @@ QString taskSearchHosts::findFileHosts(QString dir)
     QFileInfoList list = dir.entryInfoList(); //create list with files in folder
     for (int i = 0; i < list.size(); i++)
     {
+        if ((entry == ".") || (entry == ".."))
+            continue;
+
         QFileInfo info = list.at(i);
         std::cout << qPrintable(QString("%1").arg(info.fileName())) << std::endl;
     };  
 };
+/*
+QDirIterator dirIt("/folder_path",QDirIterator::Subdirectories);
+while (dirIt.hasNext()) {
+    dirIt.next();
+    if (QFileInfo(dirIt.filePath()).isFile())
+        if (QFileInfo(dirIt.filePath()).suffix() == "txt")
+            qDebug()<<dirIt.filePath();
+}
+*/
+
 
 /*void ListDirRecursive(QString directory)
 {
