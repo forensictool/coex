@@ -1,4 +1,5 @@
 \documentclass[russian,utf8,14pt,simple]{eskdtext}
+\usepackage[numbertop, numbercenter]{eskdplain}
 
 % - Полуторный интервал
 \renewcommand{\baselinestretch}{1.50}
@@ -27,8 +28,14 @@
 % - ГОСТ списка литературы
 \bibliographystyle{gost780s}
 
+% - Верикальные отступы заголовков 
 \ESKDsectSkip{subsection}{1em}{1em}
 \ESKDsectSkip{section}{1em}{1em}
+
+% - Выравнивание заголовков
+\ESKDsectAlign{section}{center}
+\ESKDsectAlign{subsection}{center}
+\ESKDsectAlign{subsubsection}{center}
 
 % - Изменение заголовков
 \usepackage{titlesec}
@@ -36,6 +43,9 @@
 \titleformat{\subsection}{\normalsize}{\thesubsection}{1.0em}{}
 \titleformat{\subsubsection}{\normalsize}{\thesubsubsection}{1.0em}{}
 \titleformat{\paragraph}{\normalsize}{\theparagraph}{1.0em}{}
+
+% - Нумерация страниц
+%\setcounter{page}{4}
 
 % - Для больших таблиц
 \usepackage{longtable}
@@ -62,11 +72,8 @@
 
 \begin{center}
 Министерство образования и науки Российской Федерации\\
-ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
-УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ\\
-ТОМСКИЙ ГОСУДАРСТВЕННЫЙ\\
-УНИВЕРСИТЕТ СИСТЕМ УПРАВЛЕНИЯ И РАДИОЭЛЕКТРОНИКИ\\
-(ФГБОУ ВПО ТУСУР)\\
+Федеральное государственное бюджетное образовательное учреждение высшего профессионального образования\\
+ТОМСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ СИСТЕМ УПРАВЛЕНИЯ И РАДИОЭЛЕКТРОНИКИ (ТУСУР)\\
 Кафедра комплексной информационной безопасности электронно-вычислительных систем (КИБЭВС)\\
 \end{center}
 
@@ -100,13 +107,13 @@ XXXXXXXXXXXXXXXX\kill
 \end{tabbing}
 \vfill
 \begin{center}
-2013
+Томск -- 2013
 \end{center}
 
 \newpage
 \ESKDthisStyle{empty}
 \paragraph{\hfill РЕФЕРАТ \hfill}
-Курсовая работа содержит \ESKDtotal{page} страниц, \ESKDtotal{table} таблиц, \ESKDtotal{bibitem} источников.
+Курсовая работа содержит \ESKDtotal{page} страниц, \ESKDtotal{figure} рисунков, \ESKDtotal{table} таблиц, \ESKDtotal{bibitem} источников, \ESKDtotal{appendix} приложений.
 
 КОМПЬЮТЕРНАЯ ЭКСПЕРТИЗА, ФОРЕНЗИКА, ЛОГИ, QT, ЖУРНАЛЬНЫЕ ФАЙЛЫ, XML, GIT.
 
@@ -141,12 +148,12 @@ XXXXXXXXXXXXXXXX\kill
 Пономарёв А.К. -- аналитик.
 
 \newpage
-\ESKDstyle{formII}
+\ESKDstyle{plain}
 \renewcommand\contentsname{\hfill Содержание \hfill}
 \tableofcontents
 
 \newpage
-\ESKDstyle{formIIab}
+\ESKDstyle{plain}
 \section{Введение}
 \input{intro}
 

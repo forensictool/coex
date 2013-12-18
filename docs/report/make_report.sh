@@ -1,5 +1,5 @@
 #!/bin/bash
 
 pdflatex report.tex
-bibexu report.aux
+bibtexu report.aux
 pdflatex report.tex
