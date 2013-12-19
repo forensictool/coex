@@ -26,33 +26,30 @@
 \def\@biblabel#1{#1 }
 
 % - ГОСТ списка литературы
-\bibliographystyle{gost780s}
+\bibliographystyle{gost2008}
 
 % - Верикальные отступы заголовков 
-\ESKDsectSkip{subsection}{1em}{1em}
 \ESKDsectSkip{section}{1em}{1em}
-
-% - Выравнивание заголовков
-\ESKDsectAlign{section}{center}
-\ESKDsectAlign{subsection}{center}
-\ESKDsectAlign{subsubsection}{center}
+\ESKDsectSkip{subsection}{1em}{1em}
+\ESKDsectSkip{subsubsection}{1em}{1em}
 
 % - Изменение заголовков
 \usepackage{titlesec}
-\titleformat{\section}{\normalsize}{\thesection}{1.0em}{}
-\titleformat{\subsection}{\normalsize}{\thesubsection}{1.0em}{}
-\titleformat{\subsubsection}{\normalsize}{\thesubsubsection}{1.0em}{}
+\titleformat{\section}{\centering\normalfont\normalsize}{\thesection}{1.0em}{}
+\titleformat{\subsection}{\centering\normalfont\normalsize}{\thesubsection}{1.0em}{}
+\titleformat{\subsubsection}{\centering\normalfont\normalsize}{\thesubsubsection}{1.0em}{}
 \titleformat{\paragraph}{\normalsize}{\theparagraph}{1.0em}{}
 
-% - Нумерация страниц
-%\setcounter{page}{4}
+% - Оставим место под ТЗ 
+\setcounter{page}{4}
 
 % - Для больших таблиц
 \usepackage{longtable}
 
 % - Используем графику в документе
-\usepackage[dvips]{graphicx}
+\usepackage{graphicx}
 \graphicspath{{images/}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
 
 % - Для вставки гиперссылок
 \usepackage[colorlinks]{hyperref}
@@ -159,42 +156,46 @@ XXXXXXXXXXXXXXXX\kill
 
 \section{Назначение и область применения}
 Разрабатываемый комплекс предназначен для автоматизированного сбора информации из журналов операционных систем и приложений.
+\section{Постановка задачи}
+\setcounter{figure}{0}
+\input{problem_form}
+\section{Новые инструменты}
+\setcounter{figure}{0}
+\subsection{Система контроля версий Git}
+\input{git}
+\subsection{Система компьютерной вёрстки TeX}
+\input{tex}
+\subsection{Qt - кроссплатформенный инструментарий разработки ПО}
+\input{qt}
 
 \section{Технические характеристики}
-\subsection{Постановка задачи}
-\input{problem_form}
-
+\input{individual_reports/technical_attributes}
 \subsection{Выбор единого формата выходных файлов}
 \input{xml}
 
-\section{Архитектура}
-\input{individual_reports/architech}
-
 \section{Разработка программного обеспечения}
+\setcounter{figure}{0}
 
+\subsection{Архитектура}
+\setcounter{figure}{0}
+\input{individual_reports/architech}
 \subsection{Сбор и анализ системных журналов Windows} % - Отчёт Димы
-
+\setcounter{figure}{0}
 \input{individual_reports/Nikiforov}
-
 \subsection{Cбор и анализ истории переписки мессенджеров} % - Отчёт Игоря
-
+\setcounter{figure}{0}
 \input{individual_reports/Polyakov}
 
-\section{Некоторые аспекты сертификации программных средств объектов\\ информатизации по требованиям информационной безопасности}
-
+\section{Некоторые аспекты сертификации программных средств объектов\\ информатизации по требованиям информационной безопасности} % - Отчёт Лёши
+\setcounter{figure}{0}
 \input{individual_reports/Ponomarev}
 
 \newpage
-\section{Заключение}
-В результате проделанной работы были достигнуты следующие результаты:
+\section{Результаты}
 \input{result}
 
-типа ссылка \cite{qtdoc}
-
-В дальнейшей работе планируется:
-\begin{itemize}
-\item добавление части системы, работающей с логами браузеров.
-\end{itemize}
+\section{Цели следующего семестра}
+\input{individual_reports/next_semestr}
 
 \newpage
 \renewcommand{\refname}{Список использованных источников}
@@ -204,8 +205,7 @@ XXXXXXXXXXXXXXXX\kill
 Компакт-диск содержит: 
 \begin{itemize}
 \item электронную версию пояснительной записки в форматах *.tex и *.pdf;
-\item индивидуальные ежемесячные отчеты студентов;
-\item групповые ежемесячные отчёты.
+\item актуальную версию программного комплекса для проведения компьютерной экспертизы.
 \end{itemize}
 
 \end{document}
