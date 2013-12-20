@@ -1,11 +1,4 @@
-Задача на данный семестр:  
-
-\begin{enumerate}
-\item сбор и анализ истории переписки пользователей системы Windows из Pidgin и Skype;
-\item написание автоматизированных модулей для сбора истории переписки пользователей системы Windows из таких программ как Pidgin и Skype;
-\end{enumerate}
-
-Для упрощения разобьем задачу на подзадачи:
+Опишем задачу более подробно, разделив её на подзадачи:
 \begin{enumerate}
 \item определить места хранения файлов с личной перепиской пользователя;
 \item определить формат файлов переписки;
@@ -14,44 +7,18 @@
 \item производить сохранение полученных информации формат XML.
 \end{enumerate}
 
-\subsubsection{Определить места хранения файлов с личной перепиской пользователя}
-
-Pidgin
-
-Определение месторасположения файлов переписки происходит следующим образом. Для примонтированного образа запускается модуль, который сужает область поиска, сканируя только нужные директории образа. 
-
-По умолчанию файлы располагаются в директориях, для разных операционных систем возможны незначительные изменения (таблица \ref{tab:pidgin}). 
-
-\begin{table}[h!]
-\caption{Директории хранения логов pidgin}
-\label{tab:pidgin}
-\begin{tabularx}{\linewidth}{|l|X|}
-\hline
-Windows Vista/7/8 & C:\textbackslash\textbackslash  Users\textbackslash\textbackslash  username\textbackslash\textbackslash  AppData\textbackslash\textbackslash \tabularnewline &  Roaming\textbackslash\textbackslash .purple\textbackslash\textbackslash  logs \tabularnewline 
-\hline 
-Windows XP & C:\textbackslash\textbackslash  Documents and Settings\textbackslash\textbackslash  username\textbackslash\textbackslash \tabularnewline & Application Data\textbackslash\textbackslash .purple\tabularnewline
-\hline 
-Windows 98/ME 	& C:\textbackslash\textbackslash Windows\textbackslash\textbackslash Profiles\textbackslash\textbackslash username\textbackslash\textbackslash.purple \tabularnewline
-\hline 
-Linux(Ubuntu) &	/home/username/.purple/logs \tabularnewline 
-\hline
-\end{tabularx}
-\end{table}
-
-Основная интересующая нас информация хранится в файлах с маской имени YEAR-MONTH-DATE.TIME.html (например 2013-03-02.004915+0700NOVT.htm).
-
-Skype
+\subsubsection{Определение местоположения логов переписки мессенджера Skype}
 
 По умолчанию файлы располагаются в директориях, для разных операционных систем возможны незначительные изменения (таблица \ref{tab:skype}). 
 
 \begin{table}[h!]
-\caption{Директории хранения логов skype}
+\caption{Директории хранения логов Skype}
 \label{tab:skype}
 \begin{tabularx}{\linewidth}{|l|X|}
 \hline
-Windows Vista/7/8 & C:\textbackslash\textbackslash  Users\textbackslash\textbackslash  username\textbackslash\textbackslash\\ &  AppData\textbackslash\textbackslash  Roaming\textbackslash\textbackslash  Skype\\
+Windows Vista/7/8 & C:\textbackslash  Users\textbackslash  username\textbackslash\\ &  AppData\textbackslash  Roaming\textbackslash  Skype\\
 \hline
-Windows XP & C:\textbackslash\textbackslash  Documents and Settings\textbackslash\textbackslash  username\textbackslash\textbackslash\\ &  Application Data\textbackslash\textbackslash  Skype\\
+Windows XP & C:\textbackslash  Documents and Settings\textbackslash  username\textbackslash\\ &  Application Data\textbackslash  Skype\\
 \hline
 Linux(Ubuntu) & /home/username/.Skype\\
 \hline
@@ -67,11 +34,36 @@ Linux(Ubuntu) & /home/username/.Skype\\
 \label{pic:list_of_logs}
 \end{figure}
 
-\subsubsection{Определить формат хранения переписки}
+\subsubsection{Определение местоположения логов переписки мессенджера Pidgin}
+
+Определение месторасположения файлов переписки происходит следующим образом: для примонтированного образа запускается модуль, который сужает область поиска, сканируя только нужные директории образа. 
+
+По умолчанию файлы располагаются в директориях, для разных операционных систем возможны незначительные изменения (таблица \ref{tab:pidgin}). 
+
+\begin{table}[h!]
+\caption{Директории хранения логов pidgin}
+\label{tab:pidgin}
+\begin{tabularx}{\linewidth}{|l|X|}
+\hline
+Windows Vista/7/8 & C:\textbackslash Users\textbackslash username\textbackslash  AppData\textbackslash \tabularnewline &  Roaming\textbackslash .purple\textbackslash  logs \tabularnewline 
+\hline 
+Windows XP & C:\textbackslash  Documents and Settings\textbackslash  username\textbackslash \tabularnewline & Application Data\textbackslash .purple\tabularnewline
+\hline 
+Windows 98/ME 	& C:\textbackslash Windows\textbackslash Profiles\textbackslash username\textbackslash.purple \tabularnewline
+\hline 
+Linux(Ubuntu) &	/home/username/.purple/logs \tabularnewline 
+\hline
+\end{tabularx}
+\end{table}
+
+Основная интересующая нас информация хранится в файлах с маской имени YEAR-MONTH-DATE.TIME.html (например 2013-03-02.004915+0700NOVT.htm).
+
+\subsubsection{Формат хранения переписки мессенджера Skype}
 
 Приложение «skype» хранит переписку на локальных машинах пользователей или же возможна синхронизация с машин других пользователей \cite{skypechat}. Формат хранения: реляционная база данных основная на СУБД SQLite.
-Но база данных «main.db» не является единственным местом хранения информации, Skype сохраняет сведения о работе программы во временных файлах (chatsync). Эти файлы имеют расширение «.dat» и цифра-буквенные имена (например «0172b0a519e2c584»)\cite{cfl}.
+Но база данных «main.db» не является единственным местом хранения информации, Skype сохраняет сведения о работе программы во временных файлах (chatsync). Эти файлы имеют расширение «.dat» и цифробуквенные имена (например «0172b0a519e2c584»)\cite{cfl}.
 
+\subsubsection{Формат хранения переписки мессенджера Pidgin}
 Приложение «pidgin» поддерживает перечисленные ниже протоколы: \cite{ofpidgin}
 
 \begin{itemize}
@@ -93,15 +85,11 @@ Linux(Ubuntu) & /home/username/.Skype\\
 \item''Zephyr''
 \end{itemize}
 
-Соответтственно все подлюченные аккаунты всех выше перечисленных протоколов хранятся как лог файлы на локальной машине пользователя в формате HTML и TXT. По умолчанию лог файлы хранятся в .HTML файле. Настройки программы, пользователя и подключенных аккаунтов в XML.
+Соответственно, все подлюченные аккаунты всех вышеперечисленных протоколов хранятся как лог файлы на локальной машине пользователя в формате HTML и TXT. По умолчанию лог файлы хранятся в .HTML файле. Настройки программы, пользователя и подключенных аккаунтов хранятся в XML.
 
 Примечание: Кроме account.xml - он хранит нешифрованные пароли для всех подключенных чатов \cite{ofpidgin}.
 
-\subsubsection{Разбор найденных файлов}
-
-В зависимости от обрабатываемых логов, запускается нужный модуль. 
-
-Skype
+\subsubsection{Алгоритм работы модуля Skype}
 
 Структура рассматриваемого файла.
 
@@ -158,7 +146,7 @@ order by messages.timestamp
 
 Для доступа ко всему содержимому базы достаточно иметь доступ к самому файлу — содержимое базы никак не шифруется и не защищается, так что любой человек, который сможет получить доступ к вашему профилю Windows, сможет найти список контактов, просмотреть историю звонков и прочитать всю переписку. 
 
-Pidgin. 
+\subsubsection{Алгоритм работы модуля Pidgin}
 
 Структура рассматриваемого файла. 
 
@@ -173,7 +161,7 @@ Pidgin.
 Точно так же из полученного списка найденные файлы поочередно открываются для чтения. Разбор открытого файла решено осуществлять при помощи регулярных выражений, описанных в класс QRegExp.
 
 %Здесь блок схема алгоритма парсинга файлов пиджина
-Парсинг логов pidgin представлен на рисунке \ref{pic:Pars_pidgin_log}
+Парсинг логов pidgin представлен на рисунке \ref{pic:Pars_pidgin_log}.
 
 \begin{figure}[h]
 \center{\includegraphics[width=0.5\linewidth]{Pars_pidgin_log}}
@@ -181,44 +169,24 @@ Pidgin.
 \label{pic:Pars_pidgin_log}
 \end{figure}
 
-\subsubsection{Aвтоматизировать процесс поиска журнальных файлов}
+\subsubsection{Структура логов Skype, сохранённых в XML}
 
-Для автоматизации процесса решено написать программный комплекс с подключаемыми модулями. Основа комплекса написана на языке С++ с использованием кросс-платформенного фреймворка Qt.
+Все документы XML начинаются с пролога (prolog). Пролог сообщает, что документ написан на XML, а также указывает, какая версия XML при этом использовалась.  
 
-Qt позволяет запускать написанное с его помощью ПО в большинстве современных операционных систем путём простой компиляции программы для каждой ОС без изменения исходного кода.
+Следующий элемент Messages с атрибутом Messenger, ему присваивается имя рассматриваемого приложения.
 
-Данный фреймворк включает в себя все основные классы, которые могут потребоваться при разработке прикладного программного обеспечения, начиная от элементов графического интерфейса и заканчивая классами для работы с сетью, базами данных и XML. Qt является полностью объектно-ориентированным, легко расширяемым и поддерживающим технику компонентного программирования.
+Для каждого файла БД, находящейся в обрабатываемом списке, создается элемент info account содержащий атрибуты skypeName, fullName, emails, ipcountry которым присваивается, соответственно: логин пользователя Skype, его полное имя, email (не шифрованный), геолокация ip-адреса.  
 
-Для сканирования образа на наличие интересующих лог файлов использовался класс QDirIterator. После вызова происходит поочередный обход по каждому файлу в директории и под директории. Проверка полученного полного пути к файлу осуществляется регулярным выражением, если условие выполняется, происходит добавление в список обрабатываемых файлов. 
-
-\subsubsection{Сохранение полученного в XML}
-
-Сохранение полученных данных происходит в ранее выбранный формат XML(Extensible Markup Language). Для этого используется класс QXmlStreamReader и QxmlStreamWriter.
-Класс QXmlStreamWriter представляет XML писателя с простым потоковым API.
-
-QXmlStreamWriter работает в связке с QXmlStreamReader для записи XML. Как и связанный класс, он работает с QIODevice, определённым с помощью setDevice().
-
-Сохранение данных реализованно в классе WriteMessage. В методе WriteMessages, структура которого представлена на UML диаграмме в разделе Архитектура. %тут отсылка на диаграмму которую Димка херачил!)% 
-
-Стуктура сохраняемого документа:
-
-Pidgin
-
-Пролог XML документа. Все документы XML начинаются с пролога (prolog). Пролог сообщает, что документ написан на XML, а также указывает, какая версия XML при этом использовалась.  
-
-Элемент Messages с атрибутом Messenger, ему присваивается имя рассматриваемого приложения.
-
-Элемент INFO содержащий атрибуты chathID, account, data, protocol которым присваивается, соответственно: идентификатор чата, полная дата в формате День.Число Месяц. Год Час:Мин:Сек, аккаунт с которого происходил обмен сообщениями и протокол используемый для передачи сообщений. 
-
-Элемент MESSAGE содержащий атрибуты author, dataTime, message.
-
-Skype
-Пролог XML документа. Все документы XML начинаются с пролога (prolog). Пролог сообщает, что документ написан на XML, а также указывает, какая версия XML при этом использовалась.  
-
-Элемент Messages с атрибутом Messenger, ему присваивается имя рассматриваемого приложения.
-
-Для каждого файла БД находящейся в обрабатываемом списке создается элемент info account содержащий атрибуты skypeName, fullName, emails, ipcountry которым присваивается, соответственно: логин пользователя Skype, его полное имя, email (не шифрованный), геолокация ip-адреса.  
-
-Элемент contact содержащий атрибуты skypeName, fullName, languages, country, city.
+Далее следует элемент contact содержащий атрибуты skypeName, fullName, languages, country, city.
   
+\subsubsection{Структура логов Pidgin, сохранённых в XML}
+
+Все документы XML начинаются с пролога (prolog). Пролог сообщает, что документ написан на XML, а также указывает, какая версия XML при этом использовалась.  
+
+Следующий элемент Messages с атрибутом Messenger, которому присваивается имя рассматриваемого приложения.
+
+Далее следует элемент INFO содержащий атрибуты chathID, account, data, protocol которым присваивается, соответственно: идентификатор чата, полная дата в формате День.Число Месяц. Год Час:Мин:Сек, аккаунт с которого происходил обмен сообщениями и протокол используемый для передачи сообщений. 
+
+Последний элемент -- MESSAGE, содержащий атрибуты author, dataTime, message.
+
 На текущий момент полностью реализован импорт контактной книги из приложения Skype, импорт звонков и переписки находится в режиме разработки.
