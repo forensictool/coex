@@ -56,7 +56,7 @@ Linux(Ubuntu) &	/home/username/.purple/logs \tabularnewline
 \end{tabularx}
 \end{table}
 
-Основная интересующая нас информация хранится в файлах с маской имени YEAR-MONTH-DATE.TIME.html (например 2013-03-02.004915+0700NOVT.htm).
+Основная интересующая нас информация хранится в файлах с маской имени \ttfamily YEAR-MONTH-DATE.TIME.html\normalfont (например \ttfamily 2013-03-02.004915+0700NOVT.htm\normalfont).
 
 \subsubsection{Формат хранения переписки мессенджера Skype}
 
@@ -128,14 +128,19 @@ main.db  содержит 18 таблиц. и ещё немного статис
 
 В таблице Contacts находятся все контакты, причем даже те, что были удалены, и уже не показываются в клиенте.
 
+\ttfamily
 \noindent select skypename, fullname, languages, country, city from contacts
+\normalfont
 
 В таблицах Calls и CallMembers содержатся, соответственно, история звонков и их участников.
 
+\ttfamily
 \noindent select calls.id as ''ID разговора'', coalesce(contacts.displayname, accounts.fullname) as ''Инициатор'', strftime('\%d.\%m.\%Y \%H:\%M:\%S',calls.begin\_timestamp, 'unixepoch', 'localtime') as ''Дата начала'', time(calls.duration, 'unixepoch') as ''Длительность'', callmembers.dispname as ''Подключенный участник'', strftime('\%d.\%m.\%Y \%H:\%M:\%S',callmembers.start\_timestamp, 'unixepoch', 'localtime') as ''Дата подключения'', time(callmembers.call\_duration, 'unixepoch') as ''Длительность подключения'' from calls inner join callmembers on calls.id = callmembers.call\_db\_id left  join contacts on calls.host\_identity = contacts.skypename left  join accounts on calls.host\_identity = accounts.skypename
+\normalfont
 
 И, наконец, в таблицах Conversations и Messages содержатся данные переписки и сами сообщения.
 
+\ttfamily
 \noindent select conversations.id as ''ID переписки'', conversations.displayname as ''Участники переписки'', 
        messages.from\_dispname as ''Автор сообщения'',
        strftime('\%d.\%m.\%Y \%H:\%M:\%S',messages.timestamp, 'unixepoch', 'localtime') as ''Время сообщения'', 
@@ -143,6 +148,7 @@ main.db  содержит 18 таблиц. и ещё немного статис
   from conversations
        inner join messages on conversations.id = messages.convo\_id
 order by messages.timestamp
+\normalfont
 
 Для доступа ко всему содержимому базы достаточно иметь доступ к самому файлу — содержимое базы никак не шифруется и не защищается, так что любой человек, который сможет получить доступ к вашему профилю Windows, сможет найти список контактов, просмотреть историю звонков и прочитать всю переписку. 
 
@@ -154,9 +160,9 @@ order by messages.timestamp
 
 Затем идет ''тело'' в котором описывается обмен сообщениями в формате, время, автор сообщения и сообщение.
 
-Пример ''Заголовка'' <head><meta http-equiv = ''content-type''\\ content= ''text/html; charset=UTF-8''> <title>\\ Conversation with 0dpkhcz6clufs2kozj82uqif30@public.talk.google.com at Чт. 24 окт. 2013 23:40:21 on user.fox@gmail.com/ (jabber)</title></head>
+Пример ''Заголовка'' \ttfamily <head><meta http-equiv = ''content-type'' content= ''text/html; charset=UTF-8''> <title> Conversation with 0dpkhcz6clufs2kozj82uqif30@public.talk.google.com at Чт. 24 окт. 2013 23:40:21 on user.fox@gmail.com/ (jabber)</title></head>\normalfont
 
-Пример ''Тела'' <font color=''\#16569E''> <font size=''2''> (23:44:52) </font> <b>user.fox@gmail.com/95C9F047: </b></font> Hello) <br/>
+Пример ''Тела'' \ttfamily <font color=''\#16569E''> <font size=''2''> (23:44:52) </font> <b>user.fox@gmail.com/95C9F047: </b></font> Hello) <br/>\normalfont
 
 Точно так же из полученного списка найденные файлы поочередно открываются для чтения. Разбор открытого файла решено осуществлять при помощи регулярных выражений, описанных в класс QRegExp.
 
@@ -178,7 +184,15 @@ order by messages.timestamp
 Для каждого файла БД, находящейся в обрабатываемом списке, создается элемент info account содержащий атрибуты skypeName, fullName, emails, ipcountry которым присваивается, соответственно: логин пользователя Skype, его полное имя, email (не шифрованный), геолокация ip-адреса.  
 
 Далее следует элемент contact содержащий атрибуты skypeName, fullName, languages, country, city.
+
+Пример выходного файла в формате XML представлен на рисунке \ref{pic:log_skype}.
   
+\begin{figure}[h]
+\center{\includegraphics[width=0.9\linewidth]{log_skype}}
+\caption{логи Skype в формате XML}
+\label{pic:log_skype}
+\end{figure}
+
 \subsubsection{Структура логов Pidgin, сохранённых в XML}
 
 Все документы XML начинаются с пролога (prolog). Пролог сообщает, что документ написан на XML, а также указывает, какая версия XML при этом использовалась.  
@@ -188,5 +202,13 @@ order by messages.timestamp
 Далее следует элемент INFO содержащий атрибуты chathID, account, data, protocol которым присваивается, соответственно: идентификатор чата, полная дата в формате День.Число Месяц. Год Час:Мин:Сек, аккаунт с которого происходил обмен сообщениями и протокол используемый для передачи сообщений. 
 
 Последний элемент -- MESSAGE, содержащий атрибуты author, dataTime, message.
+
+Пример выходного файла в формате XML представлен на рисунке \ref{pic:log_pidgin}.
+
+\begin{figure}[h]
+\center{\includegraphics[width=0.9\linewidth]{log_pidgin}}
+\caption{логи Pidgin в формате XML}
+\label{pic:log_pidgin}
+\end{figure}
 
 На текущий момент полностью реализован импорт контактной книги из приложения Skype, импорт звонков и переписки находится в режиме разработки.

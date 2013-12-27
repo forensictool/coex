@@ -4,6 +4,8 @@ XML - eXtensible Markup Language или расширяемый язык разм
 
 Простейший XML-документ может выглядеть так:
 
+
+\ttfamily
 \noindent <?xml version="1.0"?> \\
 <list\_of\_items> \\
 <item id="1"\textbackslash><first/>Первый</item\textbackslash> \\
@@ -11,5 +13,7 @@ XML - eXtensible Markup Language или расширяемый язык разм
 <item id="3"\textbackslash>Третий</item\textbackslash> \\
 <item id="4"\textbackslash><last/\textbackslash>Последний</item\textbackslash> \\
 </list\_of\_items\textbackslash>
+\normalfont
+
 
 Первая строка - это объявление начала XML-документа, дальше идут элементы документа <list\_of\_items> - тег описывающий начало элемента \\list\_of\_items, </list\_of\_items> - тег конца элемента. Между этими тегами заключается описание элемента, которое может содержать текстовую информацию или другие элементы (как в нашем примере). Внутри тега начала элемента так же могут указывать атрибуты элемента, как например атрибут id элемента item, атрибуту должно быть присвоено определенное значение.
