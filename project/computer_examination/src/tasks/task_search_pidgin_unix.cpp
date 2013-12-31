@@ -52,6 +52,13 @@ bool taskSearchPidginUnix::execute(const coex::config &config)
 	  std::cout << ">>>>>> same execute...\n\n";
 	  std::cout << config.inputFolder.toStdString() << "\n";
 	  std::cout << config.outputFolder.toStdString() << "\n";
+    /*
+        Поздравляем с Новым годом
+        И желаем от души,
+        Чтоб со счастьем пароходы
+        И вагоны к вам дошли!
+    */
+
 	}
 	
 	return true;
