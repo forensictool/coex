@@ -1,0 +1,2 @@
+qmake testPlugin.pro
+make

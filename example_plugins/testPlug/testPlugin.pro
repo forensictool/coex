@@ -1,8 +1,10 @@
-QT       += core gui
-
-TARGET = testPlugin
+QT += core \
+ xml \
+ script \
+ xmlpatterns
+ 
 TEMPLATE = lib
-CONFIG += plugin
+TARGET = testPlugin
 DESTDIR = ../bin/
 SOURCES += src/testPlugin.cpp
 HEADERS += src/testPlugin.h \
