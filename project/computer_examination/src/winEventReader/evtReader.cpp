@@ -251,9 +251,9 @@ QString EventCategoryToString(quint16 type)
                 }
                 stream.writeAttribute(i.key(), i.value());
             }
-            stream.writeStartElement("Data");
-            stream.writeCharacters(MapData["Data"]);
-            stream.writeEndElement();
+            //stream.writeStartElement("Data");
+            //stream.writeCharacters(MapData["Data"]);
+            //stream.writeEndElement();
             stream.writeEndElement();
         }
 
@@ -296,7 +296,10 @@ QString EventCategoryToString(quint16 type)
 				evnt.MapData["Length"] = QString::number(evnt.Length);
 				
 				if(evnt.Length == 0xfffffffc || int(evnt.Length) < 0)
+                {
+                    xmlout.writeEndDocument();
 					return;
+                }
 				
 				evnt.Bytes = new char[evnt.Length];
 				stream.readRawData(evnt.Bytes, evnt.Length);
