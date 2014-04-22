@@ -2,6 +2,9 @@
 *.pro.user*
 *.*~
 *~
+*.1.0.0
+*.1.0
+*.1
 ~$*.odt
 Makefile
 project/coex
