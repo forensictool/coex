@@ -28,10 +28,12 @@ int main(int argc, char* argv[])
 
 
     typedef coex::typeOS (*Fct) (QString);
-    Fct detectOS = (Fct)(lib.resolve("detectOS"));
-    if(detectOS)
+    Fct detOS = (Fct)(lib.resolve("detectOS"));
+    if(detOS)
     {
-    	cnf.os = detectOS(cnf.inputFolder);
+        std::cout << "-------------------------------------------------------------------------\n";
+    	cnf.os = detOS(cnf.inputFolder);
+        std::cout << "-------------------------------------------------------------------------\n";
     }
     else
     {
@@ -40,5 +42,6 @@ int main(int argc, char* argv[])
     }
 
     coex::printConfig(cnf);
+    lib.unload();
     return 0;
 }

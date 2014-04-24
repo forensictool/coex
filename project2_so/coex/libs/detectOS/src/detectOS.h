@@ -5,5 +5,9 @@
 extern "C"
 {
 	QString getLibName();
-	coex::typeOS detectOS(const QString&);
+	namespace coex
+	{
+		coex::typeOS detectOS(const QString&);
+		coex::typeOS retOS();
+	}
 }
