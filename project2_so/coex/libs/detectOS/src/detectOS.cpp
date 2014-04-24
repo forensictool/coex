@@ -41,14 +41,15 @@ namespace coex {
   		return coex::ceWindowsXP;
   	}
 
-	coex::typeOS detectOS(const QString& inputFolder)
+	coex::typeOS detectOS(QString input)
 	{
-		std::cout << "1\n";
+		std::cout << input.toStdString() << std::endl;
+
+		QString inputFolder(input);
+
 
 		QList<fileos> listfiles;
 		QList<fileos> checkfiles;
-
-		std::cout << "2\n";
 
 		// Windows XP
 		listfiles << fileos( coex::ceWindowsXP, "5.1.2600.5512", "/WINDOWS/system32/kernel32.dll", "d612ee36f95da6d1179f7567b2b77d77");
@@ -97,19 +98,13 @@ namespace coex {
 		listfiles << fileos( coex::ceWindows8 , "6.2.9200.16384", "/Windows/SysWOW64/kernel32.dll", "1C5F50F98291B7545391BB57C406E615");		
 		listfiles << fileos( coex::ceWindows8 , "6.2.9200.16627", "/Windows/System32/kernel32.dll", "e1ff9d65e6b86f7ebb531ae36c5af635");
 
-		std::cout << "3\n" << listfiles.size() << "\n";
-
 		for(int i = 0; i < listfiles.size(); i++)
-		//int i = 0;
 		{
-			std::cout << "4\n";
 			QFileInfo fi(inputFolder + listfiles[i].filePath);
-			std::cout << "5\n";
+			
 			if(fi.exists())
 			{
-				std::cout << "6\n";
 				QFile file(fi.absoluteFilePath());
-				std::cout << "7\n";
 				if (file.open(QIODevice::ReadOnly)) 
 				{
 					QByteArray fileData = file.readAll();
@@ -122,11 +117,11 @@ namespace coex {
 			}
 		}
 
-		std::cout << "4\n";
 		if(checkfiles.size() == 0)
 			return coex::ceUnknown;
 
 		coex::typeOS os_result = coex::ceUnknown;
+		
 		// check on conflicts
 		{
 			int nCounter = 0;
@@ -143,12 +138,11 @@ namespace coex {
 				};
 			if(nCounter == 0) 
 			{
-				std::cout << "\n  OS was detected";
-				std::cout << checkfiles[0].toBigString().toStdString() << "\n";
+				std::cout << "\n  OS was detected\n";
+				//std::cout << checkfiles[0].toBigString().toStdString() << "\n";
 				os_result = checkfiles[0].os;
 			}
 		};
-
     return os_result;
  	};  
 };

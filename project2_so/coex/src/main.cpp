@@ -3,6 +3,11 @@
 #include <iostream>
 #include <QString>
 #include <QLibrary>
+#include <QFile>
+#include <QFileInfo>
+#include <QCryptographicHash>
+#include <QIODevice>
+#include <QList>
 
 int main(int argc, char* argv[])
 {
