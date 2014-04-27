@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-DESTDIR = ../../../bin/libs
+DESTDIR = ../../../apps/coex/bin/libs
 
 QT -= gui
 
