@@ -5,7 +5,7 @@
 *.so*
 ~$*.odt
 Makefile
-project2_so/apps/coex/bin
+project2_so/apps/coex/bin/*
 project/coex
 project/computer_examination/computer_examination
 docs/tex/gpo.pdf
