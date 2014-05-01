@@ -2,4 +2,5 @@
 
 cd ./apps/coex/bin
 
-./coex 123 123
+./coex ../../../../../gpo-testdata.git/WindowsXP_SP3_Pro/ ../../../../../gpo-tests/WinXPSP3Pro/
+
