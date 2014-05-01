@@ -32,7 +32,7 @@ namespace coex
 
 	void printConfig(const coex::config & cnf);
 	QString typeOStoString(const coex::typeOS &os);
-	void initLibs();
+	void initLibs(const coex::config & cnf);
 }
 
 #endif //__COEX_H__

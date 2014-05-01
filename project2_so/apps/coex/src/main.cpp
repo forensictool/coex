@@ -16,8 +16,6 @@ int main(int argc, char* argv[])
     cnf.inputFolder = QString(argv[argc - 2]);
     cnf.outputFolder = QString(argv[argc - 1]);
     coex::printConfig(cnf);
-    
-    //coex::initLibs();
 
     QLibrary lib("../bin/libs/libdetectOS.so.1.0.0");
     typedef QString (*Fct2)();
@@ -48,5 +46,8 @@ int main(int argc, char* argv[])
 
     coex::printConfig(cnf);
     lib.unload();
+
+    coex::initLibs(cnf);
+
     return 0;
 }

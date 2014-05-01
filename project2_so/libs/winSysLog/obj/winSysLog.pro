@@ -1,5 +1,7 @@
 TEMPLATE = lib
 
+TARGET = TaskWinSysLog
+
 DESTDIR = ../../../apps/coex/bin/libs
 
 QT -= gui

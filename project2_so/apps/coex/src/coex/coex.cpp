@@ -37,7 +37,7 @@ namespace coex
 			return QString((int)os);
 	};
 
-	void initLibs()
+	void initLibs(const coex::config& cnf)
 	{
 		QDirIterator libsDir("../bin/libs/", QDir::Files | QDir::NoSymLinks);
 		while(libsDir.hasNext())
@@ -56,6 +56,18 @@ namespace coex
 			else
 			{
 				std::cout << str.toStdString() << " is not library\n";
+				continue;
+			}
+
+			typedef bool (*Exec) (const coex::config & );
+			Exec exec = (Exec)(lib.resolve("execute"));
+			if(exec)
+			{
+				exec(cnf);
+			}
+			else
+			{
+				std::cout << "execute not found =)" << std::endl;
 			}
 		}
 	}
