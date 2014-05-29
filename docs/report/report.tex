@@ -46,6 +46,7 @@
 % - Для больших таблиц
 \usepackage{longtable}
 \usepackage{tabularx}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
 
 % - Используем графику в документе
 \usepackage{graphicx}
@@ -98,16 +99,16 @@ XXXXXXXXXXXXXXXX\kill
 \> Ответственный исполнитель\\
 \> Студент гр. 520-1\\
 \> \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } Никифоров Д. С.\\
-\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2013г.\\
+\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2014г.\\
 \ \\
 \> Научный руководитель\\
 \> Аспирант каф.КИБЭВС\\
 \> \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } Гуляев А. И.\\
-\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2013г.\\
+\> "\underline{\ \ \ \ \ }"\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } 2014г.\\
 \end{tabbing}
 \vfill
 \begin{center}
-Томск -- 2013
+Томск -- 2014
 \end{center}
 
 \newpage
@@ -115,7 +116,7 @@ XXXXXXXXXXXXXXXX\kill
 \paragraph{\hfill РЕФЕРАТ \hfill}
 Курсовая работа содержит \ESKDtotal{page} страниц, \ESKDtotal{figure} рисунков, \ESKDtotal{table} таблицы, \ESKDtotal{bibitem} источников, \ESKDtotal{appendix} приложение.
 
-КОМПЬЮТЕРНАЯ ЭКСПЕРТИЗА, ФОРЕНЗИКА, ЛОГИ, QT, XML, GIT, LATEX, ЖУРНАЛЬНЫЕ ФАЙЛЫ, SKYPE, PIDGIN, WINDOWS, СЕРТИФИКАЦИЯ.
+КОМПЬЮТЕРНАЯ ЭКСПЕРТИЗА, ФОРЕНЗИКА, ЛОГИ, QT, XML, GIT, LATEX, ЖУРНАЛЬНЫЕ ФАЙЛЫ, SKYPE, PIDGIN, WINDOWS, СЕРТИФИКАЦИЯ, РЕПОЗИТОРИЙ, XSLT, LIB, БИБЛИОТЕКИ.
 
 Цель работы --- создание программного комплекса, предназначенного для проведения компьютерной экспертизы.
 
@@ -157,7 +158,7 @@ XXXXXXXXXXXXXXXX\kill
 \section{Постановка задачи}
 \setcounter{figure}{0}
 \input{problem_form}
-\section{Новые инструменты}
+\section{Инструменты}
 \setcounter{figure}{0}
 \subsection{Система контроля версий Git}
 \input{git}
@@ -176,15 +177,23 @@ XXXXXXXXXXXXXXXX\kill
 
 \subsection{Архитектура}
 \input{individual_reports/architech}
-\subsection{Сбор и анализ системных журналов Windows} % - Отчёт Димы
+\subsection{Сбор и анализ системных журналов Windows (III семестр)} % - Отчёт Димы
 \input{individual_reports/Nikiforov}
+\subsection{Сбор и анализ системных журналов Windows (IV семестр)} 
+\input{individual_reports/NewNikiforov}
 \newpage
-\subsection{Cбор и анализ истории переписки мессенджеров} % - Отчёт Игоря
+\subsection{Cбор и анализ истории переписки мессенджеров (III семестр)} % - Отчёт Игоря
 \input{individual_reports/Polyakov}
+\subsection{Cбор и анализ истории переписки мессенджеров (IV семестр)} 
+\input{individual_reports/NewPolyakov}
 
 \section{Некоторые аспекты сертификации программных средств объектов\\ информатизации по требованиям информационной безопасности} % - Отчёт Лёши
 \setcounter{figure}{0}
 \input{individual_reports/Ponomarev}
+
+\section{Создание собственного репозитория для debian и ubuntu}
+\setcounter{figure}{0}
+\input{individual_reports/NewPonomarev}
 
 \newpage
 \section{Цели следующего семестра}
