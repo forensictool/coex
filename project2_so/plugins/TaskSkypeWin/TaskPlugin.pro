@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-TARGET = pluginTaskSkypeWin
+TARGET = TaskSkypeWin
 
 DESTDIR = ../../bin/plugins
 
