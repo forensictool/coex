@@ -1,5 +1,7 @@
 TEMPLATE = app
 
+TARGET = coex
+
 DESTDIR = ../bin
 
 INCLUDEPATH += ../include/
