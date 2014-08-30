@@ -1,4 +1,4 @@
-#include "coex.h"
+#include "helpers.h"
 
 #include <QDirIterator>
 #include <QLibrary>
