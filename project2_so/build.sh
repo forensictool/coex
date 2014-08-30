@@ -5,6 +5,10 @@ LOGFILE="$CURRPWD/log_build.log"
 ERRORLOGFILE="$CURRPWD/errorlog_build.log"
 echo $CURRPWD > $CURRPWD/log_build.log
 
+echo -ne " * delete folder 'bin'"
+rm -rf 'bin'
+echo $OK
+
 echo -ne " * delete all 'Makefile'"
 find . -iname 'Makefile' -delete
 echo $OK
