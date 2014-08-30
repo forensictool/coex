@@ -12,7 +12,9 @@ File 'build.sh' - script for build coex (without clean temporary files)
 
 File 'rebuild.sh' - script for re-build coex (clean + build)
 
-File 'test-run.sh' - script for test run after build
+File 'test.sh' - script for test-run (use tmp/) after build
+
+File 'clone-test-data.sh' - script for clone repository test-data to tmp/
 
 File 'README' - this file
 
