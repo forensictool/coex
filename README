@@ -1,17 +1,16 @@
-Folder 'project' has project for qt.
-	for build:
-	cd project/computer_examination
-	qmake && make
+Folder 'sources' has all sources.
 
-Folder 'docs' has documentation.
+Folder 'docs' has only documentation.
 
-You can find repo with test data:
+Folder 'examples' has some examples.
 
-test
+Folder 'thirdparty' has some "alien" packages.
 
-for example:
-$ git clone git@git.keva.su:gpo-testdata.git gpo-testdata.git
+File 'build.sh' - script for build coex
 
+File 'run.sh' - script for test run after build
+
+File 'README' - this file
 
 
 

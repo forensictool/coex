@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ./apps/coex/bin
+cd bin
 
 ./coex ../../../../../gpo-testdata.git/WindowsXP_SP3_Pro/ ../../../../../gpo-tests/WinXPSP3Pro/
 
