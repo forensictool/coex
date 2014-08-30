@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-DESTDIR = ../../bin/libs
+DESTDIR = ../../bin/plugins
 
 INCLUDEPATH += ../../include/
 
