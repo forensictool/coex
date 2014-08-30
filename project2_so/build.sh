@@ -1,9 +1,9 @@
 #!/bin/bash
 CURRPWD=$(echo "`pwd`")
 OK=" ..... ok"
-LOGFILE="$CURRPWD/log_build.log"
-ERRORLOGFILE="$CURRPWD/errorlog_build.log"
-echo $CURRPWD > $CURRPWD/log_build.log
+LOGFILE="$CURRPWD/logs/log_build.log"
+ERRORLOGFILE="$CURRPWD/logs/errorlog_build.log"
+echo $CURRPWD > $LOGFILE
 
 echo -ne " * delete folder 'bin'"
 rm -rf 'bin'
@@ -35,7 +35,7 @@ do
 	cd $D
 	DIRNAME=$(basename "`pwd`")
 	echo -ne " * * build '$DIRNAME'"
-	
+
 	qmake-qt4 >> $LOGFILE 2>> $ERRORLOGFILE
 	if [ $? -ne 0 ]; then
 		echo ""
