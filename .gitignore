@@ -1,12 +1,12 @@
 *.o
-*.dia
 *.pro.user*
 *.*~
 *~
 *.so*
 ~$*.odt
 Makefile
-project2_so/apps/coex/bin/*
+project2_so/bin/*
+*.log
 project/coex
 project/computer_examination/computer_examination
 docs/tex/gpo.pdf
