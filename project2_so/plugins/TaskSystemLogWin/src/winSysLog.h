@@ -1,4 +1,4 @@
-#include "../../../apps/coex/src/coex/coex.h"
+#include "coex.h"
 
 #include <QString>
 #include <QMap>
