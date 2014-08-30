@@ -1,4 +1,4 @@
-#include "coex/coex.h"
+#include "coex.h"
 
 #include <iostream>
 #include <QString>

@@ -2,12 +2,12 @@ TEMPLATE = app
 
 DESTDIR = ../../bin
 
-SOURCES += src/main.cpp \
-		   src/coex/coex.cpp
-
 INCLUDEPATH += ../../include/
 
-HEADERS += src/coex/coex.h
+SOURCES += src/main.cpp \
+		   src/coex.cpp
+
+HEADERS += src/coex.h
 
 OBJECTS_DIR = tmp/
 
