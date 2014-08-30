@@ -1,7 +1,7 @@
 #ifndef __SKYPE_WIN_TASK_H__
 #define __SKYPE_WIN_TASK_H__
 
-#include "../../../apps/coex/src/coex/coex.h"
+#include "coex.h"
 
 #include <QString>
 #include <QFile>
