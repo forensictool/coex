@@ -2,7 +2,7 @@ TEMPLATE = app
 
 TARGET = coex
 
-DESTDIR = ../bin
+DESTDIR = ../../bin
 
 INCLUDEPATH += ../include/
 

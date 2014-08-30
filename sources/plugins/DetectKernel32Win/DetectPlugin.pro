@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 TARGET = DetectKernel32Win
 
-DESTDIR = ../../bin/plugins
+DESTDIR = ../../../bin/plugins
 
 INCLUDEPATH += ../../include/
 

@@ -6,9 +6,13 @@ Folder 'examples' has some examples.
 
 Folder 'thirdparty' has some "alien" packages.
 
-File 'build.sh' - script for build coex
+File 'clean.sh' - script for clean temporary files
 
-File 'run.sh' - script for test run after build
+File 'build.sh' - script for build coex (without clean temporary files)
+
+File 'rebuild.sh' - script for re-build coex (clean + build)
+
+File 'test-run.sh' - script for test run after build
 
 File 'README' - this file
 

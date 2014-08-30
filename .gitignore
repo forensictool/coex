@@ -7,6 +7,10 @@
 Makefile
 project2_so/bin/*
 *.log
+logs
+test-data/*
 project/coex
 project/computer_examination/computer_examination
 docs/tex/gpo.pdf
+bin
+tmp

@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 TARGET = TaskPidginWin
 
-DESTDIR = ../../bin/plugins
+DESTDIR = ../../../bin/plugins
 
 INCLUDEPATH += ../../include/
 

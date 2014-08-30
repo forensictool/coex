@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 TARGET = TaskWinSysLog
 
-DESTDIR = ../../bin/plugins
+DESTDIR = ../../../bin/plugins
 
 INCLUDEPATH += ../../include/
 

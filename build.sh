@@ -1,37 +1,28 @@
 #!/bin/bash
 CURRPWD=$(echo "`pwd`")
+SOURCES=$(echo "`pwd`/sources")
 OK=" ..... ok"
+
 LOGFILE="$CURRPWD/logs/log_build.log"
 ERRORLOGFILE="$CURRPWD/logs/errorlog_build.log"
-echo $CURRPWD > $LOGFILE
 
-echo -ne " * delete folder 'bin'"
-rm -rf 'bin'
-echo $OK
+if [ ! -d "logs" ]; then
+  mkdir "logs"
+fi
 
-echo -ne " * delete all 'Makefile'"
-find . -iname 'Makefile' -delete
-echo $OK
-
-echo -ne " * delete all '*.o'"
-find . -iname '*.o' -delete
-echo $OK
-
-echo -ne " * delete all 'tmp'"
-find . -iname 'tmp' -delete
-echo $OK
+echo $SOURCES > $LOGFILE
 
 echo -ne " * build 'coex'"
-cd $CURRPWD/app/
+cd $SOURCES/app/
 qmake-qt4
 make >> $LOGFILE 2>> $ERRORLOGFILE
 echo $OK
 
 echo " * build plugins"
-cd $CURRPWD/plugins
+cd $SOURCES/plugins
 for D in `find ./ -mindepth 1 -maxdepth 1 -type d `
 do
-	cd $CURRPWD/plugins
+	cd $SOURCES/plugins
 	cd $D
 	DIRNAME=$(basename "`pwd`")
 	echo -ne " * * build '$DIRNAME'"
