@@ -1,7 +1,7 @@
 #ifndef __PIDGIN_WIN_TASK_H__
 #define __PIDGIN_WIN_TASK_H__
 
-#include "../../../apps/coex/src/coex/coex.h"
+#include "coex.h"
 
 #include <QString>
 #include <QFile>

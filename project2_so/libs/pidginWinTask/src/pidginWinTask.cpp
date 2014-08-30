@@ -296,6 +296,7 @@ writerMessages::~writerMessages()
 }
 bool writerMessages::opened()
 {
+	return m_bOpened;
 }
 
 bool writerMessagesPidgin::opened()
@@ -372,7 +373,7 @@ void writerMessagesPidgin::writeInfoLog(
     QString protocol
 )
 {
-    if (!m_bOpened)return;
+    if (!m_bOpened) return;
     m_pXmlWriter->writeStartElement("info");
     m_pXmlWriter->writeAttribute("chathID", chathID);
     m_pXmlWriter->writeAttribute("account", account);
