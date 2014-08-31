@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	config->setInputFolder(QString(argv[1]));
 	config->setOutputFolder(QString(argv[2]));
     
-	std::cout << "\nLoad plugins.\n";
+	std::cout << "\n * * Loading plugins...\n";
 
 	typedef coex::IDetectOperationSystem* (*funcCreateDetectOperationSystem) ();
 	typedef coex::ITask* (*funcCreateTask) ();
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 		
 		for (int i = 0; i < files.size(); ++i) {
 			QLibrary *plugin = new QLibrary(dirPlugins.absolutePath() + "/" + files.at(i));
-			std::cout << " * loading plugin '" << files.at(i).toStdString() << "'  .... ";
+			std::cout << " * Plugin '" << files.at(i).toStdString() << "'  .... ";
 			
 			bool bIsPlugin = false;
 			
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 			{
 				bIsPlugin = true;
 				coex::IDetectOperationSystem* detect = createDetect();
-				std::cout << "OK \n\t detector '" << detect->name().toStdString() << "' by " << detect->author().toStdString();
+				std::cout << "OK \n\ * Found detector '" << detect->name().toStdString() << "' by '" << detect->author().toStdString() << "' ";
 				detectOS.push_back(detect);
 			}
 			
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 			if(createTask) {
 				bIsPlugin = true;
 				coex::ITask* task = createTask();
-				std::cout << "OK \n\t task '" << task->name().toStdString() << "' by " << task->author().toStdString() << " ";
+				std::cout << "OK \n * Found task '" << task->name().toStdString() << "' by '" << task->author().toStdString() << "' ";
 				tasks.push_back(task);
 			}
 			
@@ -85,8 +85,10 @@ int main(int argc, char* argv[])
 			std::cout << "\n";
 		}
 	}
+	std::cout << " * Plugins loaded\n";
 	
 	// detect operation system
+	std::cout << " * * Detectiong operation system... \n";
 	{
 		coex::ITypeOperationSystem* typeOS = NULL;
 		for (int i = 0; i < detectOS.size(); i++) {
@@ -104,16 +106,16 @@ int main(int argc, char* argv[])
 		std::cout << "ERROR: could not detected Operation System\n";
 		return -3;
 	}
-	
-
 	std::cout << " * Detected OS: '" << config->typeOS()->toString().toStdString() << "'\n";
 
 
 	// found and run tasks
+	std::cout << " * * Executing tasks...\n";
 	{
 		for (int i = 0; i < tasks.size(); i++) {
 			
 			if (tasks[i]->isSupportOS(config->typeOS())) {
+				std::cout << " * Execute task: '" << tasks[i]->name().toStdString() << "' by '" << tasks[i]->author().toStdString() << "' \n";
 				tasks[i]->execute(config);
 			}
 		}

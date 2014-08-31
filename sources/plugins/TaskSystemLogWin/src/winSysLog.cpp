@@ -74,3 +74,7 @@ bool TaskSystemLogWin::execute(const coex::IConfig *config) {
 
 	return true;
 }
+
+coex::ITask* createTask() {
+	return (coex::ITask*)(new TaskSystemLogWin());
+}

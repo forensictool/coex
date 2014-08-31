@@ -206,7 +206,7 @@ QString DetectKernel32Win::author() {
 	/*
 	 * return name of developer
 	 * */
-	return "Evgenii Sopov & Dmitrii Nikiforov";
+	return "Dmitrii Nikiforov";
 };
 
 coex::IDetectOperationSystem* createDetectOperationSystem() {
