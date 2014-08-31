@@ -2,6 +2,7 @@
 #define __COEX_H__
 
 #include <QString>
+#include <QVector>
 #include <iostream>
 
 namespace coex
@@ -60,6 +61,7 @@ namespace coex
 			virtual coex::ITypeOperationSystem* detect(QString path) = 0;
 			virtual QString name() = 0;
 			virtual QString author() = 0;
+			virtual QVector<coex::ITypeOperationSystem *> getSupportsOS() = 0;
 	};
 
 	class ITask

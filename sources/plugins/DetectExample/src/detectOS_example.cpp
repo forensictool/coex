@@ -10,23 +10,31 @@
 coex::ITypeOperationSystem* DetectExample::detect(QString path) {
 	/*
 	 * here you try detect and return coex::ITypeOperationSystem*
-	 * if not you just NULL returned
+	 * if you don't detect then you must return NULL
 	 * */
 	return NULL;
 };
 
 QString DetectExample::name() {
 	/*
-	 * return name of implementation
+	 * returned name of implementation
 	 * */
 	return "detectExample";
 };
 
 QString DetectExample::author() {
 	/*
-	 * return name of developer
+	 * returned name of developer
 	 * */
 	return "sea-kg";
+};
+
+QVector<coex::ITypeOperationSystem *> DetectExample::getSupportsOS() {
+	QVector<coex::ITypeOperationSystem *> supportsOS;
+	/*
+	 * returned list of suppotrs os for detection
+	 * */
+	return supportsOS;
 };
 
 coex::IDetectOperationSystem* createDetectOperationSystem() {

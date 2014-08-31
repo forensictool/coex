@@ -7,6 +7,7 @@ class DetectExample : coex::IDetectOperationSystem {
 		virtual coex::ITypeOperationSystem* detect(QString path);
 		virtual QString name();
 		virtual QString author();
+		virtual QVector<coex::ITypeOperationSystem *> getSupportsOS();
 };
 
 extern "C"
