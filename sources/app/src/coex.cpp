@@ -75,6 +75,7 @@ int main(int argc, char* argv[])
 			if (bIsPlugin) {
 				plugins.push_back(plugin);
 			} else {
+				std::cout << "NOTHING";
 				plugin->unload();
 			}
 			
@@ -100,6 +101,9 @@ int main(int argc, char* argv[])
 		std::cout << "ERROR: could not detected Operation System\n";
 		return -3;
 	}
+	
+	std::cout << " * Detected OS: '" << typeOS->toString().toStdString() << "'\n";
+	
 
 	// found and run tasks
 

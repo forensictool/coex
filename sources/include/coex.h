@@ -8,23 +8,20 @@
 namespace coex
 {
 	class ITypeOperationSystem {
-		virtual QString platform() = 0;
-		/* example returned: "windows" or "linux" */
-		
-		virtual QString version() = 0;
-		/* example returned:
-		 * if platform is "windows" then "95" or "98" or "XP" or "Vista" or "7" or "8"
-		 * */
-		
-		virtual QString toString() = 0;
-		/*
-		 *
-		 * */
+		public:
+			// platform: "Windows" or "Linux"
+			virtual QString platform() = 0;
+			virtual void setPlatform(QString platform) = 0;
+			
+			// for platform "Windows" version can be "95" or "98" or "XP" or "Vista" or "7" or "8"
+			virtual QString version() = 0;
+			virtual void setVersion(QString version) = 0;
 
-		virtual bool isUnknown() = 0;
-		virtual bool isWindows() = 0;
-		virtual bool isLinux() = 0;
-		virtual void copyTo(coex::ITypeOperationSystem *) = 0;
+			virtual QString toString() = 0;
+
+			virtual bool isUnknown() = 0;
+			virtual bool isWindows() = 0;
+			virtual bool isLinux() = 0;
 	};
 	
 	enum typeOS
