@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 			{
 				bIsPlugin = true;
 				coex::IDetectOperationSystem* detect = createDetect();
-				std::cout << "OK (by " << detect->author().toStdString() << ") ";
+				std::cout << "OK \n\t'" << detect->name().toStdString() << "' by " << detect->author().toStdString();
 				detectOS.push_back(detect);
 			}
 			

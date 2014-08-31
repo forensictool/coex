@@ -15,6 +15,13 @@ coex::ITypeOperationSystem* DetectExample::detect(QString path) {
 	return NULL;
 };
 
+QString DetectExample::name() {
+	/*
+	 * return name of implementation
+	 * */
+	return "detectExample";
+};
+
 QString DetectExample::author() {
 	/*
 	 * return name of developer

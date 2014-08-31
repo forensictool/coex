@@ -58,6 +58,7 @@ namespace coex
 	class IDetectOperationSystem {
 		public:
 			virtual coex::ITypeOperationSystem* detect(QString path) = 0;
+			virtual QString name() = 0;
 			virtual QString author() = 0;
 	};
 
