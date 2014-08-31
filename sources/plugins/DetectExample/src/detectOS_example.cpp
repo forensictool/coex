@@ -7,7 +7,7 @@
 #include <QList>
 #include <iostream>
 
-coex::ITypeOperationSystem* DetectExample::detect() {
+coex::ITypeOperationSystem* DetectExample::detect(QString path) {
 	/*
 	 * here you try detect and return coex::ITypeOperationSystem*
 	 * if not you just NULL returned

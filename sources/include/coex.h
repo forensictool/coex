@@ -57,7 +57,7 @@ namespace coex
 	 * must be TODO */
 	class IDetectOperationSystem {
 		public:
-			virtual coex::ITypeOperationSystem* detect() = 0;
+			virtual coex::ITypeOperationSystem* detect(QString path) = 0;
 			virtual QString author() = 0;
 	};
 
