@@ -13,6 +13,8 @@ QT += sql
 
 CONFIG += dll
 
-SOURCES += src/skypeWinTask.cpp
+SOURCES += 	src/skypeWinTask.cpp \
+			src/writerMessages.cpp
 
-HEADERS += src/skypeWinTask.h
+HEADERS += 	src/skypeWinTask.h \
+			src/writerMessages.h

@@ -18,8 +18,7 @@ File 'clone-test-data.sh' - script for clone repository test-data to tmp/
 
 File 'README' - this file
 
-
-
-
-
+steps for test runs:
+1. call script ./clone-test-data.sh
+2. call script ./test.sh
 
