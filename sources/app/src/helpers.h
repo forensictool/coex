@@ -5,6 +5,9 @@
 #include <QString>
 #include <iostream>
 
+void printHelp(int argc, char* argv[]);
+bool checkArgs(int argc, char* argv[]);
+
 namespace coex
 {
 	void printConfig(const coex::config & cnf);

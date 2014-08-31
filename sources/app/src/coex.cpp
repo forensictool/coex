@@ -20,10 +20,9 @@
 int main(int argc, char* argv[])
 {
 	QCoreApplication app(argc, argv);
-    QString nameProgram(argv[0]);
-    
-    if (argc < 3) {
-		std::cout << " Usage " << nameProgram.toStdString() << " <inputFolder> <outputFolder> \n";
+
+    if (!checkArgs(argc, argv)) {
+		printHelp(argc, argv);
 		return -1;
 	};
 	
