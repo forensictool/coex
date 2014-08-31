@@ -12,6 +12,8 @@ QT -= gui
 
 CONFIG += dll
 
-SOURCES += src/pidginWinTask.cpp
+SOURCES += 	src/pidginWinTask.cpp \
+			src/writerMessages.cpp
 
-HEADERS += src/pidginWinTask.h
+HEADERS += 	src/pidginWinTask.h \
+			src/writerMessages.h

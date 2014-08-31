@@ -1,4 +1,5 @@
 #include "pidginWinTask.h"
+#include "writerMessages.h"
 
 #include <iostream>
 #include <QDirIterator>
@@ -9,24 +10,53 @@
 #include <QXmlStreamWriter>
 #include <QTextStream>
 
-QString getLibName()
-{
-	return(QString("pidginWinTask"));
-}
+TaskPidginWin::TaskPidginWin() {
+	m_bDebug = false;
+};
 
-bool m_bDebug = true;
+QString TaskPidginWin::help() {
+	return "\t--debug - viewing debug messages";
+};
 
-bool execute(const coex::config& config)
-{
-	if(m_bDebug)
+QString TaskPidginWin::name() {
+	return "pidgin-win";
+};
+
+QString TaskPidginWin::author() {
+	return "Igor Polyakov";
+};
+
+QString TaskPidginWin::description() {
+	return "Task is search logs of Pidgin for WINDOWS";
+};
+
+bool TaskPidginWin::isSupportOS(const coex::ITypeOperationSystem *os) {
+	return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
+};
+
+void TaskPidginWin::setOption(QStringList options) {
+	/*
+	 * 
+	 * */
+	if(options.contains("--debug"))
+		m_bDebug = true;
+};
+
+bool TaskPidginWin::execute(const coex::IConfig *config) {
+	if(m_bDebug) {
+		std::cout << "  !!! debug mode on.\n";
+		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+	};
+
+		if(m_bDebug)
 	std::cout << "  !!! debug mode on.\n";
 	{
-		QDir dir(config.outputFolder);
+		QDir dir(config->outputFolder());
 		dir.mkdir("pidgin");
 	}
 	if(m_bDebug)
 	std::cout << "===========================================\n\n";
-	QString path = config.inputFolder + "/Users/";
+	QString path = config->inputFolder() + "/Users/";
 	QDir dir(path);
 	dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
 	QFileInfoList users = dir.entryInfoList();
@@ -45,9 +75,9 @@ bool execute(const coex::config& config)
 			}
 		}
 	}
-    writerMessagesPidgin pidginMessages(config.outputFolder + "//pidgin/messages.xml", "pidgin");
-    writerMessagesPidgin pidginAccount(config.outputFolder + "//pidgin/accounts.xml", "pidgin");
-    writerMessagesPidgin pidginContacts(config.outputFolder + "//pidgin/contacts.xml", "pidgin");
+    writerMessagesPidgin pidginMessages(config->outputFolder() + "//pidgin/messages.xml", "pidgin");
+    writerMessagesPidgin pidginAccount(config->outputFolder() + "//pidgin/accounts.xml", "pidgin");
+    writerMessagesPidgin pidginContacts(config->outputFolder() + "//pidgin/contacts.xml", "pidgin");
     if(!pidginMessages.opened()||!pidginAccount.opened()||!pidginContacts.opened())
 	{
 		std::cout << " failed task\n";
@@ -59,7 +89,7 @@ bool execute(const coex::config& config)
     QString protocol;
     QString password;
 
-    QFile fileXmlAccount(config.inputFolder + "/Users/Default/AppData/Roaming/.purple/accounts.xml");
+    QFile fileXmlAccount(config->inputFolder() + "/Users/Default/AppData/Roaming/.purple/accounts.xml");
     QXmlStreamReader xmlReader;
     xmlReader.setDevice(&fileXmlAccount);
 
@@ -118,7 +148,6 @@ bool execute(const coex::config& config)
 							<< "\npidginAccount::2:: "<< email.toStdString()
 							<<"\npidginAccount::3:: "<< protocol.toStdString()
 							<<"\npidginAccount::4:: " << password.toStdString() <<"\n";
-					
 				}
             }
         }
@@ -133,7 +162,7 @@ bool execute(const coex::config& config)
     QString namePidgin;
     QString emailPidgin;
 
-    QFile fileXmlContacts(config.inputFolder + "/Users/Default/AppData/Roaming/.purple/blist.xml");
+    QFile fileXmlContacts(config->inputFolder() + "/Users/Default/AppData/Roaming/.purple/blist.xml");
     //QXmlStreamReader xmlReader;
     xmlReader.setDevice(&fileXmlContacts);
 
@@ -286,114 +315,10 @@ bool execute(const coex::config& config)
 	if(m_bDebug)
 	std::cout << "===========================================\n\n";
 	return true;
-}
 
-writerMessages::writerMessages()
-{
-}
-writerMessages::~writerMessages()
-{
-}
-bool writerMessages::opened()
-{
-	return m_bOpened;
-}
+	return true;
+};
 
-bool writerMessagesPidgin::opened()
-{
-    return m_bOpened;
+coex::ITask* createTask() {
+	return (coex::ITask*)(new TaskPidginWin());
 }
-
-writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerName)
-{
-    m_bOpened = true;
-    m_pFile = new QFile(fileName);
-    if (!m_pFile->open(QIODevice::Append))
-    {
-        //std::cout << " failed task\n";
-        m_bOpened = false;
-        return;
-    }
-    m_pXmlWriter = new QXmlStreamWriter();
-    m_pXmlWriter->setDevice(m_pFile);
-
-    m_pXmlWriter->setAutoFormatting(true);
-    m_pXmlWriter->writeStartDocument();
-    m_pXmlWriter->writeStartElement("Messages ");
-    m_pXmlWriter->writeAttribute("Messenger" ,messangerName);
-}
-
-writerMessagesPidgin::~writerMessagesPidgin()
-{
-    m_pXmlWriter->writeEndElement();
-    m_pXmlWriter->writeEndDocument();
-    delete m_pXmlWriter;
-    delete m_pFile;
-}
-
-//about account.xml file
-void writerMessagesPidgin::writeAccountInfo(
-    QString name,
-    QString email,
-    QString protocol,
-    QString password
-)
-{
-    if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("info_account");
-    m_pXmlWriter->writeAttribute("name", name);
-    m_pXmlWriter->writeAttribute("email", email);
-    m_pXmlWriter->writeAttribute("password", password);
-    m_pXmlWriter->writeAttribute("protocol", protocol);
-    m_pXmlWriter->writeEndElement();
-}
-
-//about contacts.xml file
-void writerMessagesPidgin::writeContactList(
-    QString account,
-    QString protocol,
-    QString alias,
-    QString name
-)
-{
-    if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("Contact_list");
-    m_pXmlWriter->writeAttribute("account", account);
-    m_pXmlWriter->writeAttribute("protocol", protocol);
-    m_pXmlWriter->writeAttribute("name", alias);
-    m_pXmlWriter->writeAttribute("emails", name);
-    m_pXmlWriter->writeEndElement();
-}
-
-//about log file
-void writerMessagesPidgin::writeInfoLog(
-    QString chathID,
-    QString account,
-    QString data,
-    QString protocol
-)
-{
-    if (!m_bOpened) return;
-    m_pXmlWriter->writeStartElement("info");
-    m_pXmlWriter->writeAttribute("chathID", chathID);
-    m_pXmlWriter->writeAttribute("account", account);
-    m_pXmlWriter->writeAttribute("data", data);
-    m_pXmlWriter->writeAttribute("protocol", protocol);
-    m_pXmlWriter->writeEndElement();
-}
-
-//like pidgin
-void writerMessagesPidgin::writeMessage(
-    QString author,
-    QString dataTime,
-    QString message
-)
-{
-    if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("message");
-    m_pXmlWriter->writeAttribute("author", author);
-    m_pXmlWriter->writeAttribute("dataTime", dataTime);
-    m_pXmlWriter->writeAttribute("message", message);
-    m_pXmlWriter->writeEndElement();
-}
-

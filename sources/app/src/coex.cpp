@@ -87,9 +87,8 @@ int main(int argc, char* argv[])
 	}
 	
 	// detect operation system
-	coex::ITypeOperationSystem* typeOS = NULL;
 	{
-		// detect
+		coex::ITypeOperationSystem* typeOS = NULL;
 		for (int i = 0; i < detectOS.size(); i++) {
 			coex::ITypeOperationSystem* tmpTypeOS = detectOS[i]->detect(config->inputFolder());
 			if (tmpTypeOS != NULL && typeOS != NULL) {
@@ -98,18 +97,27 @@ int main(int argc, char* argv[])
 			}
 			typeOS = tmpTypeOS;
 		}
+		config->setTypeOS(typeOS);
 	}
 
-	if (typeOS == NULL) {
+	if (config->typeOS() == NULL) {
 		std::cout << "ERROR: could not detected Operation System\n";
 		return -3;
 	}
-	config->setTypeOS(typeOS);
+	
 
-	std::cout << " * Detected OS: '" << typeOS->toString().toStdString() << "'\n";
+	std::cout << " * Detected OS: '" << config->typeOS()->toString().toStdString() << "'\n";
 
 
 	// found and run tasks
+	{
+		for (int i = 0; i < tasks.size(); i++) {
+			
+			if (tasks[i]->isSupportOS(config->typeOS())) {
+				tasks[i]->execute(config);
+			}
+		}
+	}
 	
    /* Fct detOS = (Fct)(lib.resolve("detectOS"));
     if(detOS)

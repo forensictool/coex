@@ -62,7 +62,7 @@ class WindowsOS : coex::ITypeOperationSystem {
 			m_sVersion = version;
 		};
 
-		virtual QString toString() {
+		virtual QString toString() const {
 			return m_sPlatform + " " + m_sVersion;
 		};
 		

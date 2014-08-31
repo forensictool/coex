@@ -9,69 +9,25 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
+class TaskPidginWin : coex::ITask
+{
+	public:
+		TaskPidginWin();
+		virtual QString help();
+		virtual QString name();
+		virtual QString author();
+		virtual QString description();
+
+		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
+		virtual void setOption(QStringList options);
+		virtual bool execute(const coex::IConfig *config);
+	private:
+		bool m_bDebug;
+};
+
 extern "C"
 {
-	QString getLibName();
-	bool execute(const coex::config &);
+	coex::ITask* createTask();
 }
-
-
-
-class writerMessages
-{
-public:
-    writerMessages();
-
-    bool opened();
-
-      //about pidgin log file
-     void writeInfo();
-
-    //like pidgin
-    void writeMessage();
-    ~writerMessages();
-private:
-    bool m_bOpened;
-};
-
-class writerMessagesPidgin : writerMessages
-{
-public:
-    writerMessagesPidgin(QString fileName, QString messangerName);
-
-    bool opened(
-    );
-
-    void writeAccountInfo(
-        QString name,
-        QString email,
-        QString protocol,
-        QString password);
-
-    void writeContactList(
-        QString account,
-        QString protocol,
-        QString alias,
-        QString name);
-
-    void writeInfoLog(
-        QString chathID,
-        QString account,
-        QString data,
-        QString protocol
-    );
-
-    void writeMessage(
-        QString author,
-        QString dataTime,
-        QString message
-    );
-
-    ~writerMessagesPidgin();
-private:
-    QFile *m_pFile;
-    QXmlStreamWriter* m_pXmlWriter;
-    bool m_bOpened;
-};
 
 #endif // __PIDGIN_WIN_TASK_H__

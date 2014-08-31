@@ -17,7 +17,7 @@ namespace coex
 			virtual QString version() const = 0;
 			virtual void setVersion(QString version) = 0;
 
-			virtual QString toString() = 0;
+			virtual QString toString() const = 0;
 	};
 
 

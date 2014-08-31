@@ -9,7 +9,6 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
-
 class TaskExample : coex::ITask
 {
 	public:
