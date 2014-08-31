@@ -1,6 +1,7 @@
 
 #include "coex.h"
 #include "helpers.h"
+#include "config.h"
 
 #include <QCoreApplication>
 #include <QApplication>
@@ -26,8 +27,10 @@ int main(int argc, char* argv[])
 		return -1;
 	};
 	
-    QString inputFolder = QString(argv[1]);
-    QString outputFolder = QString(argv[2]);
+	coex::IConfig *config = createConfig();
+	
+	config->setInputFolder(QString(argv[1]));
+	config->setOutputFolder(QString(argv[2]));
     
 	std::cout << "\nLoad plugins.\n";
 
@@ -88,7 +91,7 @@ int main(int argc, char* argv[])
 	{
 		// detect
 		for (int i = 0; i < detectOS.size(); i++) {
-			coex::ITypeOperationSystem* tmpTypeOS = detectOS[i]->detect(inputFolder);
+			coex::ITypeOperationSystem* tmpTypeOS = detectOS[i]->detect(config->inputFolder());
 			if (tmpTypeOS != NULL && typeOS != NULL) {
 				std::cout << "ERROR: found ambiguity\n";
 				return -2;
@@ -101,9 +104,10 @@ int main(int argc, char* argv[])
 		std::cout << "ERROR: could not detected Operation System\n";
 		return -3;
 	}
-	
+	config->setTypeOS(typeOS);
+
 	std::cout << " * Detected OS: '" << typeOS->toString().toStdString() << "'\n";
-	
+
 
 	// found and run tasks
 

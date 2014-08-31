@@ -65,18 +65,6 @@ class WindowsOS : coex::ITypeOperationSystem {
 		virtual QString toString() {
 			return m_sPlatform + " " + m_sVersion;
 		};
-
-		virtual bool isUnknown() {
-			return false;
-		};
-		
-		virtual bool isWindows() {
-			return true;
-		};
-		
-		virtual bool isLinux() {
-			return false;
-		};
 		
 	private:
 		QString m_sVersion;

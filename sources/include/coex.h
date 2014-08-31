@@ -18,10 +18,6 @@ namespace coex
 			virtual void setVersion(QString version) = 0;
 
 			virtual QString toString() = 0;
-
-			virtual bool isUnknown() = 0;
-			virtual bool isWindows() = 0;
-			virtual bool isLinux() = 0;
 	};
 	
 	enum typeOS
@@ -48,6 +44,10 @@ namespace coex
 			virtual void setInputFolder(QString path) = 0;
 			virtual void setOutputFolder(QString path) = 0;
 			virtual void setTypeOS(coex::ITypeOperationSystem*) = 0;
+			
+			virtual bool isUnknownOS() = 0;
+			virtual bool isWindows() = 0;
+			virtual bool isLinux() = 0;
 	};
 	
 	/* interface for
