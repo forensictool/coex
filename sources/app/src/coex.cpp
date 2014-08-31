@@ -118,53 +118,6 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
-	
-   /* Fct detOS = (Fct)(lib.resolve("detectOS"));
-    if(detOS)
-    {
-        std::cout << "-------------------------------------------------------------------------\n";
-    	cnf.os = detOS(cnf.inputFolder);
-        std::cout << "-------------------------------------------------------------------------\n";
-    }
-    else
-    {
-    	std::cout << "library is not loaded\n";
-    	return (-1);
-    }*/
     
-    return 0;
-    /*
-    QLibrary lib("../bin/libs/libdetectOS.so.1.0.0");
-    typedef QString (*Fct2)();
-    Fct2 fct = (Fct2)(lib.resolve("getLibName"));
-    if(fct)
-    {
-    	std::cout << fct().toStdString() << "\n";
-	}
-	else
-	{
-		std::cout << " is not library\n";
-	}
-
-
-    typedef coex::typeOS (*Fct) (QString);
-    Fct detOS = (Fct)(lib.resolve("detectOS"));
-    if(detOS)
-    {
-        std::cout << "-------------------------------------------------------------------------\n";
-    	cnf.os = detOS(cnf.inputFolder);
-        std::cout << "-------------------------------------------------------------------------\n";
-    }
-    else
-    {
-    	std::cout << "library is not loaded\n";
-    	return (-1);
-    }
-
-    coex::printConfig(cnf);
-    lib.unload();
-
-    coex::initLibs(cnf);
-*/
     return 0;
 }

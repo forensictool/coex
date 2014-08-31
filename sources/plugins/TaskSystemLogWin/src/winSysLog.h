@@ -1,3 +1,6 @@
+#ifndef __TASK_SYSTEM_LOG_WIN_H__
+#define __TASK_SYSTEM_LOG_WIN_H__
+
 #include "coex.h"
 
 #include <QString>
@@ -8,62 +11,25 @@
 #include <iostream>
 #include <QXmlStreamWriter>
 
+class TaskSystemLogWin : coex::ITask
+{
+	public:
+		TaskSystemLogWin();
+		virtual QString help();
+		virtual QString name();
+		virtual QString author();
+		virtual QString description();
+
+		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
+		virtual void setOption(QStringList options);
+		virtual bool execute(const coex::IConfig *config);
+	private:
+		bool m_bDebug;
+};
 
 extern "C"
 {
-	QString getLibName();
-	bool execute(const coex::config &);
+	coex::ITask* createTask();
 }
 
-void test(const coex::config &);
-void readEvtFiles(const QStringList & evtFiles, const coex::config& config);
-
-class _EVENTLOGRECORD 
-{
-	public:
-        _EVENTLOGRECORD();
-        ~_EVENTLOGRECORD();
-		
-		char *Bytes;
-
-		quint32 Length;
-		quint32 Reserved;
-		quint32 RecordNumber;
-		quint32 TimeGenerated;
-		quint32 TimeWritten;
-		quint32 EventID;
-		quint16 EventType;
-		quint16 NumStrings;
-		quint16 EventCategory;
-		quint16 ReservedFlags;
-		quint32 ClosingRecordNumber;
-		quint32 StringOffset;
-		quint32 UserSidLength;
-		quint32 UserSidOffset;
-		quint32 DataLength;
-		quint32 DataOffset;
-
-		QMap<QString, QString> MapData;
-			
-        virtual void setEventID(quint32 id);
-        virtual void read(QDataStream &stream);
-        virtual void print(QTextStream &stream);
-        virtual void xmlPrint(QXmlStreamWriter &stream);
-};
-
-//читалка файла
-class winEventLog
-{
-	public:
-        winEventLog(QString filename, QString outFilename);
-        ~winEventLog();
-
-        virtual void read();
-
-	private:
-		QVector<_EVENTLOGRECORD> m_evtlogs;
-		QFile *m_file;
-        QFile *m_outFile;
-		bool m_bOpen;
-        bool m_bOutOpen;
-};
+#endif // __TASK_SYSTEM_LOG_WIN_H__

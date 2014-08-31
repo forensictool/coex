@@ -12,6 +12,8 @@ QT -= gui
 
 CONFIG += dll
 
-SOURCES += src/winSysLog.cpp
+SOURCES += 	src/winSysLog.cpp \
+			src/reader.cpp
 
-HEADERS += src/winSysLog.h
+HEADERS += 	src/winSysLog.h \
+			src/reader.h
