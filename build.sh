@@ -14,8 +14,20 @@ echo $SOURCES > $LOGFILE
 
 echo -ne " * build 'coex'"
 cd $SOURCES/app/
+
 qmake-qt4
+if [ $? -ne 0 ]; then
+	echo ""
+	echo "ERRORS, log look in file: $ERRORLOGFILE"
+	exit;
+fi
+
 make >> $LOGFILE 2>> $ERRORLOGFILE
+if [ $? -ne 0 ]; then
+	echo ""
+	echo "ERRORS, log look in file: $ERRORLOGFILE"
+	exit;
+fi
 echo $OK
 
 echo " * * build plugins"
