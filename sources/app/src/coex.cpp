@@ -30,57 +30,81 @@ int main(int argc, char* argv[])
     QString inputFolder = QString(argv[1]);
     QString outputFolder = QString(argv[2]);
     
-    // coex::printConfig(cnf);
+	std::cout << "\nLoad plugins.\n";
 
-	QVector<coex::IDetectOperationSystem*> detectOS;
-	std::cout << "\nSearch plugins\n";
-
-	typedef coex::IDetectOperationSystem* (*createDetectOperationSystem) ();
+	typedef coex::IDetectOperationSystem* (*funcCreateDetectOperationSystem) ();
+	typedef coex::ITask* (*funcCreateTask) ();
 	
 	QDir dirPlugins(app.applicationDirPath() + "/plugins");
-
+	
+	QVector<coex::IDetectOperationSystem*> detectOS;
+	QVector<coex::ITask*> tasks;
+	QVector<QLibrary*> plugins;
+	
+	
 	// std::cout << dirPlugins.absolutePath().toStdString() << "\n";
 	// std::cout << QApplication::applicationFilePath().toStdString() << "\n";
-
-    QStringList files;
-    files = dirPlugins.entryList(QStringList("libDetect*.so"), QDir::Files);
 	
-	for (int i = 0; i < files.size(); ++i) {
-		QLibrary plugin(dirPlugins.absolutePath() + "/" + files.at(i));
-		std::cout << "loading plugin '" << files.at(i).toStdString() << "'  .... ";
+	// load plugins
+	{
+		QStringList files;
+		files = dirPlugins.entryList(QStringList("lib*.so"), QDir::Files);
 		
-		createDetectOperationSystem createDetect = (createDetectOperationSystem)(plugin.resolve("createDetectOperationSystem"));
-		if(createDetect)
-		{
-			coex::IDetectOperationSystem* detect = createDetect();
+		for (int i = 0; i < files.size(); ++i) {
+			QLibrary *plugin = new QLibrary(dirPlugins.absolutePath() + "/" + files.at(i));
+			std::cout << " * loading plugin '" << files.at(i).toStdString() << "'  .... ";
 			
-			std::cout << "OK (by " << detect->author().toStdString() << ") ";
+			bool bIsPlugin = false;
 			
-			detectOS.push_back(detect);
+			funcCreateDetectOperationSystem createDetect = (funcCreateDetectOperationSystem)(plugin->resolve("createDetectOperationSystem"));
+			if(createDetect)
+			{
+				bIsPlugin = true;
+				coex::IDetectOperationSystem* detect = createDetect();
+				std::cout << "OK (by " << detect->author().toStdString() << ") ";
+				detectOS.push_back(detect);
+			}
+			
+			funcCreateTask createTask = (funcCreateTask)(plugin->resolve("createTask"));
+			if(createTask) {
+				bIsPlugin = true;
+				coex::ITask* task = createTask();
+				std::cout << "OK (by " << task->author().toStdString() << ") ";
+				tasks.push_back(task);
+			}
+			
+			if (bIsPlugin) {
+				plugins.push_back(plugin);
+			} else {
+				plugin->unload();
+			}
+			
+			std::cout << "\n";
 		}
-		else
-		{
-			plugin.unload();
-			std::cout << "FAIL (it's not plugin)\n";
-		}
-		std::cout << "\n";
 	}
-    
-	coex::ITypeOperationSystem* typeOS = NULL;
 	
-    for (int i = 0; i < detectOS.size(); i++) {
-		coex::ITypeOperationSystem* tmpTypeOS = detectOS[i]->detect(inputFolder);
-		if (tmpTypeOS != NULL && typeOS != NULL) {
-			std::cout << "ERROR: found ambiguity\n";
-			return -2;
+	// detect operation system
+	coex::ITypeOperationSystem* typeOS = NULL;
+	{
+		// detect
+		for (int i = 0; i < detectOS.size(); i++) {
+			coex::ITypeOperationSystem* tmpTypeOS = detectOS[i]->detect(inputFolder);
+			if (tmpTypeOS != NULL && typeOS != NULL) {
+				std::cout << "ERROR: found ambiguity\n";
+				return -2;
+			}
+			typeOS = tmpTypeOS;
 		}
-		typeOS = tmpTypeOS;
 	}
 
 	if (typeOS == NULL) {
 		std::cout << "ERROR: could not detected Operation System\n";
 		return -3;
 	}
+
+	// found and run tasks
+
+	// 
 	
    /* Fct detOS = (Fct)(lib.resolve("detectOS"));
     if(detOS)

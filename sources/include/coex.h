@@ -69,6 +69,7 @@ namespace coex
 			virtual QString command() = 0;
 			virtual bool isSupportOS(const coex::ITypeOperationSystem *os) = 0;
 			virtual QString name() = 0;
+			virtual QString author() = 0;
 			virtual QString description() = 0;
 			virtual bool test() = 0;
 			virtual bool execute(const coex::IConfig *config) = 0;
