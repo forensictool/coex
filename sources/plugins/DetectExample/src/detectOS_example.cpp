@@ -26,7 +26,7 @@ QString DetectExample::author() {
 	/*
 	 * returned name of developer
 	 * */
-	return "sea-kg";
+	return "Evgenii Sopov";
 };
 
 QVector<coex::ITypeOperationSystem *> DetectExample::getSupportsOS() {

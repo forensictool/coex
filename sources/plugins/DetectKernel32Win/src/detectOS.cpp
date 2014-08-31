@@ -46,7 +46,7 @@ class WindowsOS : coex::ITypeOperationSystem {
 			m_sPlatform = "Windows";
 		};
 
-		virtual QString platform() {
+		virtual QString platform() const {
 			return m_sPlatform;
 		};
 		
@@ -54,7 +54,7 @@ class WindowsOS : coex::ITypeOperationSystem {
 			m_sPlatform = platform;
 		};
 
-		virtual QString version() {
+		virtual QString version() const {
 			return m_sVersion;
 		};
 		
@@ -206,7 +206,7 @@ QString DetectKernel32Win::author() {
 	/*
 	 * return name of developer
 	 * */
-	return "sea-kg";
+	return "Evgenii Sopov & Dmitrii Nikiforov";
 };
 
 coex::IDetectOperationSystem* createDetectOperationSystem() {

@@ -10,36 +10,25 @@ namespace coex
 	class ITypeOperationSystem {
 		public:
 			// platform: "Windows" or "Linux"
-			virtual QString platform() = 0;
+			virtual QString platform() const = 0;
 			virtual void setPlatform(QString platform) = 0;
 			
 			// for platform "Windows" version can be "95" or "98" or "XP" or "Vista" or "7" or "8"
-			virtual QString version() = 0;
+			virtual QString version() const = 0;
 			virtual void setVersion(QString version) = 0;
 
 			virtual QString toString() = 0;
 	};
-	
-	enum typeOS
-	{
-		ceUnknown,
-		ceLinux,
-		ceWindows95,
-		ceWindows98,
-		ceWindowsXP,
-		ceWindowsVista,
-		ceWindows7,
-		ceWindows8
-	};
+
 
 	/* interface for
 	 * config object 
 	 * */
 	class IConfig {
 		public:
-			virtual QString inputFolder() = 0;
-			virtual QString outputFolder() = 0;
-			virtual coex::ITypeOperationSystem* typeOS() = 0;
+			virtual QString inputFolder() const = 0;
+			virtual QString outputFolder() const = 0;
+			virtual const coex::ITypeOperationSystem* typeOS() const = 0;
 			
 			virtual void setInputFolder(QString path) = 0;
 			virtual void setOutputFolder(QString path) = 0;
@@ -64,17 +53,29 @@ namespace coex
 	class ITask
 	{
 		public:
-			virtual QString manual() = 0;
-			virtual void setOption(QStringList) = 0;
-			virtual QString command() = 0;
-			virtual bool isSupportOS(const coex::ITypeOperationSystem *os) = 0;
+			virtual QString help() = 0;
 			virtual QString name() = 0;
 			virtual QString author() = 0;
 			virtual QString description() = 0;
-			virtual bool test() = 0;
+
+			virtual bool isSupportOS(const coex::ITypeOperationSystem *os) = 0;
+			virtual void setOption(QStringList) = 0;
 			virtual bool execute(const coex::IConfig *config) = 0;
 	};
 	
+	
+	// next code will be deprecated
+	enum typeOS
+	{
+		ceUnknown,
+		ceLinux,
+		ceWindows95,
+		ceWindows98,
+		ceWindowsXP,
+		ceWindowsVista,
+		ceWindows7,
+		ceWindows8
+	};	
 
 	struct config
 	{

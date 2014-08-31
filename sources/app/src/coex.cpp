@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 			{
 				bIsPlugin = true;
 				coex::IDetectOperationSystem* detect = createDetect();
-				std::cout << "OK \n\t'" << detect->name().toStdString() << "' by " << detect->author().toStdString();
+				std::cout << "OK \n\t detector '" << detect->name().toStdString() << "' by " << detect->author().toStdString();
 				detectOS.push_back(detect);
 			}
 			
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 			if(createTask) {
 				bIsPlugin = true;
 				coex::ITask* task = createTask();
-				std::cout << "OK (by " << task->author().toStdString() << ") ";
+				std::cout << "OK \n\t task '" << task->name().toStdString() << "' by " << task->author().toStdString() << " ";
 				tasks.push_back(task);
 			}
 			
@@ -110,8 +110,6 @@ int main(int argc, char* argv[])
 
 
 	// found and run tasks
-
-	// 
 	
    /* Fct detOS = (Fct)(lib.resolve("detectOS"));
     if(detOS)
