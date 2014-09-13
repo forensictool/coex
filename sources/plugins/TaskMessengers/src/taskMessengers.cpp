@@ -47,6 +47,7 @@ bool TaskMessengers::execute(const coex::IConfig *config) {
 		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
 	};
 
+	std:: cout << "hello"; 
 	// some processing
 
 	return true;
