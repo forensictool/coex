@@ -48,6 +48,7 @@ bool TaskMessengers::execute(const coex::IConfig *config) {
 	};
 
 	std:: cout << "hello"; 
+	std:: cout << "checking git skills";
 	// some processing
 
 	return true;
