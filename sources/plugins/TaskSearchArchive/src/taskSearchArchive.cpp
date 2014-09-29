@@ -13,7 +13,7 @@
 #include <qtextcodec.h>
 
 TaskSearchArchive::TaskSearchArchive() {
-    m_bDebug = true;
+    m_bDebug = false;
 };
 
 QString TaskSearchArchive::help() {
