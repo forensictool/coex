@@ -62,6 +62,7 @@ bool TaskGetDictionary::execute(const coex::IConfig *config) {
 	if(!outFile.open(QIODevice::WriteOnly | QIODevice::Text)&&(m_bDebug))
 	{
 		std::cout << "ERROR: can't open output file" << std::endl;
+        return false;
 	}
 	QTextStream out(&outFile);
 	QDirIterator fileListDirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
