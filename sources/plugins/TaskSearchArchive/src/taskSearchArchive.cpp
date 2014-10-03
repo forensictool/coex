@@ -57,9 +57,9 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
     };
 	QString dirStr(config->inputFolder());
 	QString outDirStr(config->outputFolder());
-    outDirStr.append("/Result");
+    outDirStr.append("/Archives");
 	QDir().mkdir(outDirStr);
-    outDirStr.append("/Result.txt");
+    outDirStr.append("/list of found archive.txt");
 	QFile outFile(outDirStr);
 	if(!outFile.open(QIODevice::WriteOnly | QIODevice::Text)&&(m_bDebug))
 	{
@@ -68,43 +68,34 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
 	}
 	QTextStream out(&outFile);
 	QDirIterator fileListDirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-	QStringList buf;
 	while(fileListDirit.hasNext())
 	{
 		QString str = QString("%1").arg(fileListDirit.next());
         QFileInfo fInfo(str);
-        if(m_bDebug) std::cout << fInfo.absoluteFilePath().toStdString() << std::endl;
+        //if(m_bDebug) std::cout << fInfo.absoluteFilePath().toStdString() << std::endl;
         QFile file(fInfo.absoluteFilePath());
-        /*if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QString plainText = file.readLine().trimmed();
-            QString hexText = QByteArray::fromHex(file.readLine().trimmed());
-            QString reading = file.read(8);
 
-            while(!file.)
+            if(plainText.contains(QRegExp("PK.*")))
             {
-                str = file.readLine();
-                QStringList list = str.split(QRegExp("\\W+"), QString::SkipEmptyParts);
-                for(int i = 0; i < list.count(); i++)
-                {
-                    str = list.at(i);
-                    if(buf.indexOf(str) == -1)
-                    {
-                        buf.append(str);
-                    }
-                }
+                if(m_bDebug) std::cout << "Find ZIP archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
+                out << "ZIP :: " << fInfo.absoluteFilePath() << "\n";
             }
-            if(m_bDebug) std::cout << ":::::: "<< reading.toStdString() <<":::::"<< std::endl;
-            if(m_bDebug) std::cout << ":::::: "<< plainText.toStdString() <<":::::"<< std::endl;
-            if(m_bDebug) std::cout << ":::::: "<< hexText.toStdString()   <<":::::"<< std::endl;
+            else if(plainText.contains(QRegExp("Rar!.*")))
+            {
+                if(m_bDebug) std::cout << "Find RAR archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
+                out << "RAR :: " << fInfo.absoluteFilePath() << "\n";
+            }
+            else if(plainText.contains(QRegExp("7z.*")))
+            {
+                if(m_bDebug) std::cout << "Find 7Z archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
+                out << "7ZIP :: " << fInfo.absoluteFilePath() << "\n";
+            }
             file.close();
-        }*/
+        }
     }
-	buf.sort();
-	for(int i = 0; i < buf.count(); i++)
-	{
-		out << buf.at(i) << "\n";
-	}
 	outFile.close();
 	std::cout << "---------------------------------------------------------" << std::endl;
 
