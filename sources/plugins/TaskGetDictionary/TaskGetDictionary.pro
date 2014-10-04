@@ -8,10 +8,14 @@ INCLUDEPATH += ../../include/
 
 OBJECTS_DIR = tmp/
 
+QT += core sql
+
 QT -= gui
 
 CONFIG += dll
 
-SOURCES += src/taskGetDictionary.cpp
+SOURCES += src/taskGetDictionary.cpp \
+           src/coexDb.cpp
 
-HEADERS += src/taskGetDictionary.h
+HEADERS += src/taskGetDictionary.h \
+           src/coexDb.h
