@@ -37,32 +37,29 @@ QString TaskSkypeWin::description() {
 };
 
 bool TaskSkypeWin::isSupportOS(const coex::ITypeOperationSystem *os) {
-	return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
+    return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7" || os->version() == "8"));
 };
 
 void TaskSkypeWin::setOption(QStringList options) {
 	/*
-	 * 
-	 * */
+	* 
+	* */
 	if(options.contains("--debug"))
-		m_bDebug = true;
+	m_bDebug = true;
 };
 
 bool TaskSkypeWin::execute(const coex::IConfig *config) {
 	// example usage options
-	if(m_bDebug)
-	std::cout << "  !!! debug mode on.\n";
+    if(m_bDebug)
+    {
+        std::cout << "Debug mode ON\n";
+        std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+    };
 	{
 		QDir dir(config->outputFolder());
 		dir.mkdir("skype");
 	}
 	
-	// TODO: 
-	
-	if(m_bDebug)
-		std::cout << "===========================================\n\n";
-	// std::cout << config.inputFolder.toStdString() << "\n";
-	// std::cout << config.outputFolder.toStdString() << "\n";
 	QString path = config->inputFolder() + "/Users/";
 	QStringList  listOfSkypeUser;
 	QRegExp skypePathLog(".*Skype.*main.db");
@@ -82,7 +79,7 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
 	writerMessagesSkype skypeCalls (config->outputFolder() + "//skype/calls.xml", "Calls", "skype");
 	if(!skypeMessages.opened()||!skypeContacts.opened()||!skypeAccouts.opened()||!skypeCalls.opened())
 	{
-		std::cout << " failed task\n";
+        std::cout << "Failed task :: Can't create output folder & files\n";
 		return false;
 	}
 	for(int i = 0; i < listOfSkypeUser.size(); i++)
@@ -107,7 +104,6 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
 			<< "Participants" << "VideoMessages";*/
 		QString sql;
 		QSqlQuery query(db);
-		//QString sql = "select skypename, fullname, languages, country, city  from " + strTableName + ";";
 		QSqlRecord rec = query.record();
 		sql = "select *  from  Accounts;";
 		query.exec(sql);
@@ -124,19 +120,19 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
 		}
 		sql = "select *  from Contacts";
 		query.exec(sql);
-        rec = query.record();
+		rec = query.record();
 		while (query.next())
 		{
 			{
-                QString skypename = query.value(rec.indexOf("skypename")).toString();
-                QString fullName = query.value(rec.indexOf("fullName")).toString();
-                QString birthday = query.value(rec.indexOf("birthday")).toString();
-                QString gender = query.value(rec.indexOf("gender")).toString();
-                QString phone_mobile = query.value(rec.indexOf("phone_mobile")).toString();
-                QString languages = query.value(rec.indexOf("languages")).toString();
-                QString country = query.value(rec.indexOf("country")).toString();
-                QString city = query.value(rec.indexOf("city")).toString();
-                skypeContacts.writeContacts(skypename,fullName,birthday,gender,phone_mobile,languages,country,city);
+				QString skypename = query.value(rec.indexOf("skypename")).toString();
+				QString fullName = query.value(rec.indexOf("fullName")).toString();
+				QString birthday = query.value(rec.indexOf("birthday")).toString();
+				QString gender = query.value(rec.indexOf("gender")).toString();
+				QString phone_mobile = query.value(rec.indexOf("phone_mobile")).toString();
+				QString languages = query.value(rec.indexOf("languages")).toString();
+				QString country = query.value(rec.indexOf("country")).toString();
+				QString city = query.value(rec.indexOf("city")).toString();
+				skypeContacts.writeContacts(skypename,fullName,birthday,gender,phone_mobile,languages,country,city);
 			}
 		}
 		sql = "select *  from  Messages;";
@@ -147,7 +143,7 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
 			{
 				QString strValue1 = query.value(rec.indexOf("author")).toString();
 				QString strValue2 = query.value(rec.indexOf("timestamp")).toString();
-                //QDateTime::fromTime_t(x);
+				//QDateTime::fromTime_t(x);
 				QString strValue3 = query.value(rec.indexOf("body_xml")).toString();
 				skypeMessages.writeMessage(strValue1,strValue2,strValue3);
 			}
@@ -158,17 +154,15 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
 		while (query.next())
 		{
 			{
-                QString begin_timestamp = query.value(rec.indexOf("begin_timestamp")).toString();
-                QString duration = query.value(rec.indexOf("duration")).toString();
-                QString host_identity = query.value(rec.indexOf("host_identity")).toString();
-                QString current_video_audience = query.value(rec.indexOf("current_video_audience")).toString();
-                skypeCalls.writeCalls(begin_timestamp,duration,host_identity,current_video_audience);
+				QString begin_timestamp = query.value(rec.indexOf("begin_timestamp")).toString();
+				QString duration = query.value(rec.indexOf("duration")).toString();
+				QString host_identity = query.value(rec.indexOf("host_identity")).toString();
+				QString current_video_audience = query.value(rec.indexOf("current_video_audience")).toString();
+				skypeCalls.writeCalls(begin_timestamp,duration,host_identity,current_video_audience);
 			}
 		}
 	}
-	if(m_bDebug)
-	std::cout << "===========================================\n\n";	
-	return true;
+    return true;
 }
 
 coex::ITask* createTask() {
