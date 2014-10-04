@@ -11,3 +11,7 @@ for correct compilation
 $ pdflatex example.tex
 $ bibtexu example.tex
 $ pdflatex example.tex
+
+Для корректной сборки с пакетом eskdx необходимо заменить в файле /usr/share/texmf/tex/latex/eskdx/eskdrussian.def все вхождения \No на \textnumero.
+В дальнейшем для вставки номера использовать не \No, а \textnumero! Новшество 2013 года.
+Мантейнеры - уроды. Простите, не сдержалась.

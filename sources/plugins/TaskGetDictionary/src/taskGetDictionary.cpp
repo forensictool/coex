@@ -63,8 +63,7 @@ bool TaskGetDictionary::execute(const coex::IConfig *config)
   QDir().mkdir(outDirStr);
   
   CoexDB db(outDirStr + "/db.db");
-
-  /*outDirStr.append("/dictionary.txt");
+ /*outDirStr.append("/dictionary.txt");
   QFile outFile(outDirStr);
   if(!outFile.open(QIODevice::WriteOnly | QIODevice::Text)&&(m_bDebug))
   {
