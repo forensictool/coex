@@ -51,7 +51,6 @@ bool TaskExample::execute(const coex::IConfig *config) {
 		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
     };
 
-    QCoreApplication a(argc, argv);
     QString path = config->inputFolder() + "/Users/";
     QDir dir(path);
     dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
@@ -66,9 +65,7 @@ bool TaskExample::execute(const coex::IConfig *config) {
         {
             QFileInfo fileInfo = dirPath.next();
             if (fileInfo.fileName() == "places.sqlite")
-            {
                 foundFile << fileInfo.absoluteFilePath();
-            }
         }
     }
 
@@ -76,17 +73,28 @@ bool TaskExample::execute(const coex::IConfig *config) {
     {
         if( !QFile::exists(foundFile.at(i)) )
             return false;
+
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(foundFile.at(i));
+        db.setDatabaseName( foundFile.at(i) );
+
         if( !db.open() )
             if(true)
                 std::cout << "Not connected with this db" << foundFile.at(i) <<  "\n\n";
+
         QString sql;
         QSqlQuery query(db);
         QSqlRecord rec = query.record();
-        sql = "select *  from sqlite_master;";
+        sql = "select *  from sqlite_master;";// for each table from sqlite_master output *
         query.exec(sql);
         rec = query.record();
+        std::cout << "\nFOR " << foundFile.at(i) << "\n\n";
+        while( query.next() )
+        {
+            int id = query.value(0).toInt();
+            QString content = query.value(4).toString();
+            std::cout << id << ": " << content.toStdString() << "\n\n";
+        }
+        db.close();
     }
 
 	return true;
