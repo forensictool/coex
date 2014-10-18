@@ -79,7 +79,7 @@ bool TaskExample::execute(const coex::IConfig *config) {
 
         if( !db.open() )
             if(true)
-                std::cout << "Not connected with this db" << foundFile.at(i) <<  "\n\n";
+                std::cout << "Not connected with this db" << foundFile.at(i).toStdString() <<  "\n\n";
 
         QString sql;
         QSqlQuery query(db);
@@ -87,7 +87,7 @@ bool TaskExample::execute(const coex::IConfig *config) {
         sql = "select *  from sqlite_master;";// for each table from sqlite_master output *
         query.exec(sql);
         rec = query.record();
-        std::cout << "\nFOR " << foundFile.at(i) << "\n\n";
+        std::cout << "\nFOR " << foundFile.at(i).toStdString() << "\n\n";
         while( query.next() )
         {
             int id = query.value(0).toInt();
