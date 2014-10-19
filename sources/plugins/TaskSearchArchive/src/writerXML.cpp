@@ -67,10 +67,10 @@ void writerFoudnArchive::writeFound(
     if (!m_bOpened)return;
     qDebug() << "in progress";
     m_pXmlWriter->writeStartElement("info_archive");
-    m_pXmlWriter->writeAttribute("pathWay", pathWay);
     m_pXmlWriter->writeAttribute("archiveType", archiveType);
     m_pXmlWriter->writeAttribute("suffix", suffix);
     m_pXmlWriter->writeAttribute("size", size);
     m_pXmlWriter->writeAttribute("password", password);
+    m_pXmlWriter->writeAttribute("pathWay", pathWay);
     m_pXmlWriter->writeEndElement();
 }

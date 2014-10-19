@@ -14,7 +14,7 @@
 #include <qtextcodec.h>
 
 TaskSearchArchive::TaskSearchArchive() {
-    m_bDebug = true;
+    m_bDebug = false;
 };
 
 QString TaskSearchArchive::help() {
@@ -56,7 +56,6 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
         dir.mkdir("Archive");
     }
 
-    //QString dirStr();
     writerFoudnArchive searchArchive(config->outputFolder() + "//Archive/found.xml", "archive");;
     if(!searchArchive.opened())
     {
@@ -76,21 +75,17 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
             QString size;
             //QByteArray plainText = QByteArray::fromHex(file.read(5));
             //QByteArray zipMagicWord = "504B030414";
+            //if(plainText.toHex()==zipMagicWord.toHex())
 
-            /*if(plainText.toHex()==zipMagicWord.toHex())
-            qDebug() << "Year";*/
             if(plainText.contains(QRegExp("PK.*")))
             {
                 if(plainText.contains(QRegExp("PK.14*")))
                 {
-                    //std::cout << "Find ZIP with pass archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
                     suffix = fInfo.suffix();
                     archiveType = "ZIP";
                     password = "Yes";
-                    size = QString::number(fInfo.size(),10);
+                    size = QString::number(fInfo.size(),10) + " b";
                     pathWay = fInfo.absoluteFilePath();
-                    //size = "1";
-                    //pathWay = "2";
                     searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
 
                 }
@@ -98,8 +93,8 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
                     suffix = fInfo.suffix();
                     archiveType = "ZIP";
                     password = "No";
-                    size = QString::number(fInfo.size(),10);
-                    pathWay = "2";
+                    size = QString::number(fInfo.size(),10) + " b";
+                    pathWay = fInfo.absoluteFilePath();
                     searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
                 }
             }
@@ -108,8 +103,8 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
                     suffix = fInfo.suffix();
                     archiveType = "RAR";
                     password = "No";
-                    size = QString::number(fInfo.size(),10);
-                    pathWay = "2";
+                    size = QString::number(fInfo.size(),10) + " b";
+                    pathWay = fInfo.absoluteFilePath();
                     searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
             }
             else if(plainText.contains(QRegExp("7z.*")))
@@ -117,8 +112,8 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
                     suffix = fInfo.suffix();
                     archiveType = "7 ZIP";
                     password = "No";
-                    size = QString::number(fInfo.size(),10);
-                    pathWay = "2";
+                    size = QString::number(fInfo.size(),10) + " b";
+                    pathWay = fInfo.absoluteFilePath();
                     searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
             }
     };
