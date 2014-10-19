@@ -1,5 +1,5 @@
 #include "taskSearchArchive.h"
-
+#include "writerXML.h"
 #include <iostream>
 #include <QDirIterator>
 #include <QString>
@@ -10,98 +10,122 @@
 #include <QXmlStreamWriter>
 #include <QTextStream>
 #include <QDir>
+#include <QDebug>
 #include <qtextcodec.h>
 
 TaskSearchArchive::TaskSearchArchive() {
-    m_bDebug = false;
+    m_bDebug = true;
 };
 
 QString TaskSearchArchive::help() {
-	return "\t--debug - viewing debug messages";
+    return "\t--debug - viewing debug messages";
 };
 
 QString TaskSearchArchive::name() {
-	return "search Archive";
+    return "search Archive";
 };
 
 QString TaskSearchArchive::author() {
-	return "Igor Polyakov";
+    return "Igor Polyakov";
 };
 
 QString TaskSearchArchive::description() {
-	return "task Search Archive";
+    return "task Search Archive";
 };
 
 bool TaskSearchArchive::isSupportOS(const coex::ITypeOperationSystem *os) {
-	return (os->platform() == "Windows");
+    return (os->platform() == "Windows");
 };
 
 void TaskSearchArchive::setOption(QStringList options) {
-	/*
-	 * 
-	 * */
-	if(options.contains("--debug"))
-		m_bDebug = true;
+/*
+*
+* */
+if(options.contains("--debug"))
+    m_bDebug = true;
 };
 
 bool TaskSearchArchive::execute(const coex::IConfig *config) {
-	if(m_bDebug) {
-		std::cout << "  !!! debug mode on.\n";
-		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
-	};
-
-    //QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
-    //QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     if(m_bDebug) {
+        std::cout << "Debug mode on.\n";
+        std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
         std::cout << "---------------------------------------------------------" << std::endl;
     };
-	QString dirStr(config->inputFolder());
-	QString outDirStr(config->outputFolder());
-    outDirStr.append("/Archives");
-	QDir().mkdir(outDirStr);
-    outDirStr.append("/list of found archive.txt");
-	QFile outFile(outDirStr);
-	if(!outFile.open(QIODevice::WriteOnly | QIODevice::Text)&&(m_bDebug))
-	{
-		std::cout << "ERROR: can't open output file" << std::endl;
+    {
+        QDir dir(config->outputFolder());
+        dir.mkdir("Archive");
+    }
+
+    //QString dirStr();
+    writerFoudnArchive searchArchive(config->outputFolder() + "//Archive/found.xml", "archive");;
+    if(!searchArchive.opened())
+    {
+        std::cout << "Failed task :: Can't create output folder & files\n";
         return false;
-	}
-	QTextStream out(&outFile);
-	QDirIterator fileListDirit(dirStr, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-	while(fileListDirit.hasNext())
-	{
-		QString str = QString("%1").arg(fileListDirit.next());
+    }
+    QDirIterator fileListDirit(config->inputFolder(), QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    while(fileListDirit.hasNext())
+    {
+        QString str = QString("%1").arg(fileListDirit.next());
         QFileInfo fInfo(str);
-        //if(m_bDebug) std::cout << fInfo.absoluteFilePath().toStdString() << std::endl;
         QFile file(fInfo.absoluteFilePath());
         if(file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QString plainText = file.readLine().trimmed();
+            QString pathWay,archiveType,suffix,password;
+            QString size;
+            //QByteArray plainText = QByteArray::fromHex(file.read(5));
+            //QByteArray zipMagicWord = "504B030414";
 
+            /*if(plainText.toHex()==zipMagicWord.toHex())
+            qDebug() << "Year";*/
             if(plainText.contains(QRegExp("PK.*")))
             {
-                if(m_bDebug) std::cout << "Find ZIP archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
-                out << "ZIP :: " << fInfo.absoluteFilePath() << "\n";
+                if(plainText.contains(QRegExp("PK.14*")))
+                {
+                    //std::cout << "Find ZIP with pass archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
+                    suffix = fInfo.suffix();
+                    archiveType = "ZIP";
+                    password = "Yes";
+                    size = QString::number(fInfo.size(),10);
+                    pathWay = fInfo.absoluteFilePath();
+                    //size = "1";
+                    //pathWay = "2";
+                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
+
+                }
+                else if(plainText.contains(QRegExp("PK.*"))){
+                    suffix = fInfo.suffix();
+                    archiveType = "ZIP";
+                    password = "No";
+                    size = QString::number(fInfo.size(),10);
+                    pathWay = "2";
+                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
+                }
             }
             else if(plainText.contains(QRegExp("Rar!.*")))
             {
-                if(m_bDebug) std::cout << "Find RAR archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
-                out << "RAR :: " << fInfo.absoluteFilePath() << "\n";
+                    suffix = fInfo.suffix();
+                    archiveType = "RAR";
+                    password = "No";
+                    size = QString::number(fInfo.size(),10);
+                    pathWay = "2";
+                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
             }
             else if(plainText.contains(QRegExp("7z.*")))
             {
-                if(m_bDebug) std::cout << "Find 7Z archive! on this way :: "<< fInfo.absoluteFilePath().toStdString() << std::endl;
-                out << "7ZIP :: " << fInfo.absoluteFilePath() << "\n";
+                    suffix = fInfo.suffix();
+                    archiveType = "7 ZIP";
+                    password = "No";
+                    size = QString::number(fInfo.size(),10);
+                    pathWay = "2";
+                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
             }
-            file.close();
-        }
-    }
-	outFile.close();
-	std::cout << "---------------------------------------------------------" << std::endl;
-
-	return true;
+    };
+};
+return true;
 };
 
 coex::ITask* createTask() {
-	return (coex::ITask*)(new TaskSearchArchive());
+    return (coex::ITask*)(new TaskSearchArchive());
 }

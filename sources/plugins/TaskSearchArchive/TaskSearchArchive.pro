@@ -12,6 +12,8 @@ QT -= gui
 
 CONFIG += dll
 
-SOURCES += src/taskSearchArchive.cpp
+SOURCES += src/taskSearchArchive.cpp \
+           src/writerXML.cpp
 
-HEADERS += src/taskSearchArchive.h
+HEADERS += src/taskSearchArchive.h \
+    src/writerXML.h
