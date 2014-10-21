@@ -109,8 +109,7 @@ void processingAccountPidgin(QString inputFile, QString outPath){
     writerMessagesPidgin pidginAccount(outPath + "//pidgin/accounts.xml", "pidgin");
     QXmlStreamReader xmlReader;
     xmlReader.setDevice(&foundFile);
-    QString name, email, protocol, password;
-    QString nameElem = "";
+    QString name, email, protocol, password, nameElem = "";
     if(foundFile.open(QIODevice::ReadOnly))
     {
         xmlReader.readNext();
@@ -170,72 +169,52 @@ void processingAccountPidgin(QString inputFile, QString outPath){
 };
 
 void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
-    writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + fileInfo.completeBaseName() +".xml", "pidgin");
+    writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + fileInfo.fileName() +".xml", "pidgin");
     QString time, author,message, chatID, account, data, namePidgin;
-    if (fileInfo.suffix() == "html")
+
+    QFile fileLogs(fileInfo.absoluteFilePath());
+    QRegExp rxHead, rxBody;
+
+    if (fileLogs.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QFile fileHtmlLogs(fileInfo.absoluteFilePath());
-        if (fileHtmlLogs.open(QIODevice::ReadOnly | QIODevice::Text))
+        if (fileInfo.suffix() == "html")
         {
-            QRegExp rxHead(".*h3.*with (.*) at (.*) \\d{2}:\\d{2}:\\d{2} on (.*) .*\\((.*)\\)");
-            /*Parse string like this (one string):
-            *  <html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>
-            *  Conversation with dog.user@mail.ru at Сб. 04 мая 2013 15:49:00 on cat.user@mail.ru (icq)
-            *  </title></head><body><h3>Conversation with dog.user@mail.ru at Сб. 04 мая 2013 15:49:00 on cat.user@mail.ru (icq)</h3>
-            */
-            QTextStream in(&fileHtmlLogs);
-            QString line = fileHtmlLogs.readLine();//read first line, get interesting info)
-            rxHead.indexIn(line);
-            chatID = rxHead.cap(1);
-            account = rxHead.cap(3);
-            data = rxHead.cap(2);
-            namePidgin = rxHead.cap(4);
-            pidginMessages.writeInfoLog(chatID, data, account, namePidgin);
-            QRegExp rxBody(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
-            while(!in.atEnd())
-            {
-                line = in.readLine(); // read all file
-                rxBody.indexIn(line);
-                time = rxBody.cap(1);
-                author = rxBody.cap(2);
-                message = rxBody.cap(3);
-                pidginMessages.writeMessage(author,data + " " + time,message);
-            }
+            rxHead.setPattern(".*h3.*with (.*) at (.*) \\d{2}:\\d{2}:\\d{2} on (.*) .*\\((.*)\\)");
         }
-        else
+        else if (fileInfo.suffix() == "txt")
         {
-            std::cout << "could not opening html log file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+            rxHead.setPattern(".* with (.*) at (.*) on (.*) \\((.*)\\)");
+        }
+        QString line = fileLogs.readLine();//read first line, get interesting info)
+        qDebug() << line;
+        rxHead.indexIn(line);
+        chatID = rxHead.cap(1);
+        account = rxHead.cap(3);
+        data = rxHead.cap(2);
+        namePidgin = rxHead.cap(4);
+        pidginMessages.writeInfoLog(chatID, data, account, namePidgin);
+        if (fileInfo.suffix() == "html")
+        {
+            rxBody.setPattern(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
+        }
+        else if (fileInfo.suffix() == "txt")
+        {
+            rxBody.setPattern("\\((.*\\d{2}:\\d{2}:\\d{2})\\) (.*): (.*)");
+        }
+
+        while(!fileLogs.atEnd())
+        {
+            line = fileLogs.readLine(); // read all file
+            rxBody.indexIn(line);
+            time = rxBody.cap(1);
+            author = rxBody.cap(2);
+            message = rxBody.cap(3);
+            pidginMessages.writeMessage(author,data + " " + time,message);
         }
     }
-    else if (fileInfo.suffix() == "txt")
+    else
     {
-        QFile fileTxtLog(fileInfo.absoluteFilePath());
-        // open a file
-        if (fileTxtLog.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            QRegExp rxHead(".*with (.*) at (.*) on (.*)\\/ \\((.*)\\)");
-            QString line = fileTxtLog.readLine();//read first line, get interesting info)
-            rxHead.indexIn(line);
-            chatID = rxHead.cap(1);
-            account = rxHead.cap(2);
-            data = rxHead.cap(3);
-            namePidgin = rxHead.cap(4);
-            pidginMessages.writeInfoLog(chatID, data, account, namePidgin);
-            QRegExp rxBody("\\((\\d{2}:\\d{2}:\\d{2})\\)[ ]*(.*):(.*)$");
-            while(!fileTxtLog.atEnd())
-            {
-                line = fileTxtLog.readLine();
-                rxBody.indexIn(line);
-                time = rxBody.cap(1);
-                author = rxBody.cap(2);
-                message = rxBody.cap(3);
-                pidginMessages.writeMessage(author,time,message);
-            }
-        }
-        else
-        {
-            std::cout << "could not opening txt log file: " << fileInfo.absolutePath().toStdString() << "\r\n";
-        }
+        std::cout << "could not opening log file: " << fileInfo.absolutePath().toStdString() << "\r\n";
     }
 };
 
@@ -271,12 +250,12 @@ bool TaskPidginWin::execute(const coex::IConfig *config) {
             processingContactListPidgin(dirPath.filePath(), config->outputFolder());
             dirPath.next();
         }
-        else if (dirPath.filePath().contains(pidginPathLogHtml)||(dirPath.next().contains(pidginPathLogTxt)))
+        else if ( dirPath.filePath().contains(pidginPathLogTxt) || dirPath.next().contains(pidginPathLogHtml) )
         {
+            qDebug() << dirPath.filePath();
             processingLogPidgin(dirPath.fileInfo(), config->outputFolder());
             dirPath.next();
         }
-
     };
 	return true;
 };
