@@ -53,10 +53,10 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
     };
     {
         QDir dir(config->outputFolder());
-        dir.mkdir("Archive");
+        dir.mkdir("archive");
     }
 
-    writerFoudnArchive searchArchive(config->outputFolder() + "//Archive/found.xml", "archive");;
+    writerFoudnArchive searchArchive(config->outputFolder() + "//archive/found.xml", "archive");;
     if(!searchArchive.opened())
     {
         std::cout << "Failed task :: Can't create output folder & files\n";
@@ -102,6 +102,15 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
             {
                     suffix = fInfo.suffix();
                     archiveType = "RAR";
+                    password = "No";
+                    size = QString::number(fInfo.size(),10) + " b";
+                    pathWay = fInfo.absoluteFilePath();
+                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password);
+            }
+            else if(plainText.contains(QRegExp("*7zXZ.*")))
+            {
+                    suffix = fInfo.suffix();
+                    archiveType = "XZ"; //да есть такой формат.
                     password = "No";
                     size = QString::number(fInfo.size(),10) + " b";
                     pathWay = fInfo.absoluteFilePath();

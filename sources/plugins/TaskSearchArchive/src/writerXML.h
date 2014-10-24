@@ -15,12 +15,9 @@ public:
     writerXML();
 
     bool opened();
-
-      //about pidgin log file
-     void writeInfo();
-
-    //like pidgin
+    void writeInfo();
     void writeMessage();
+
     ~writerXML();
 private:
     bool m_bOpened;

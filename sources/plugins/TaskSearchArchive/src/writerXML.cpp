@@ -39,7 +39,6 @@ writerFoudnArchive::writerFoudnArchive(QString fileName, QString messangerName)
     }
     m_pXmlWriter = new QXmlStreamWriter();
     m_pXmlWriter->setDevice(m_pFile);
-    qDebug() << "constructor start";
     m_pXmlWriter->setAutoFormatting(true);
     m_pXmlWriter->writeStartDocument();
     m_pXmlWriter->writeStartElement("Archive ");
@@ -48,7 +47,6 @@ writerFoudnArchive::writerFoudnArchive(QString fileName, QString messangerName)
 
 writerFoudnArchive::~writerFoudnArchive()
 {
-    qDebug() << "constructor finish";
     m_pXmlWriter->writeEndElement();
     m_pXmlWriter->writeEndDocument();
     delete m_pXmlWriter;
@@ -66,8 +64,8 @@ void writerFoudnArchive::writeFound(
 {
     if (!m_bOpened)return;
     qDebug() << "in progress";
-    m_pXmlWriter->writeStartElement("info_archive");
-    m_pXmlWriter->writeAttribute("archiveType", archiveType);
+    m_pXmlWriter->writeStartElement("archive");
+    m_pXmlWriter->writeAttribute("type", archiveType);
     m_pXmlWriter->writeAttribute("suffix", suffix);
     m_pXmlWriter->writeAttribute("size", size);
     m_pXmlWriter->writeAttribute("password", password);
