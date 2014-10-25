@@ -71,9 +71,15 @@ bool Config::getArgumentsValues(int argc, char **argv, QString shortopts)
         case 'o':
           this->m_qmArguments.insert("outputFolder", optarg);
           break;
+        case 'd':
+          this->m_qmArguments.insert("debug", optarg);
+          std::cout << "debug: " << m_qmArguments.value("debug").toStdString() << std::endl;
         default:
           break;
         }
     }
-  return false;
+  if (!((m_qmArguments.contains("inputFolder"))||(m_qmArguments.contains("outFolder"))))
+    return false;
+
+  return(true);
 }
