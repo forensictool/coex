@@ -37,6 +37,8 @@ namespace coex
 			virtual bool isUnknownOS() = 0;
 			virtual bool isWindows() = 0;
 			virtual bool isLinux() = 0;
+
+			virtual bool getArgumentsValues(int, char**, QString) = 0;
 	};
 	
 	/* interface for

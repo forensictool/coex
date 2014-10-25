@@ -39,7 +39,7 @@ do
 		echo " test folder '$DIRNAME'"
 		mkdir ../$TESTS/$DIRNAME
 		# ./coex :all "$TESTDATA/WindowsXP_SP3_Pro" "WinXPSP3Pro"
-		./coex ../$TESTDATA/$DIRNAME ../$TESTS/$DIRNAME
+		./coex -i ../$TESTDATA/$DIRNAME -o ../$TESTS/$DIRNAME
 		if [ $? -ne 0 ]; then
 			echo "ERROR"
 			exit;

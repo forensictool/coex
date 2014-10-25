@@ -3,6 +3,7 @@
 
 #include "coex.h"
 #include <QString>
+#include <QMap>
 #include <iostream>
 
 class Config : coex::IConfig {
@@ -20,10 +21,14 @@ class Config : coex::IConfig {
 		virtual bool isWindows();
 		virtual bool isLinux();
 
+		//parse Arguments
+		virtual bool getArgumentsValues(int, char **, QString);
+
 	private:
 		coex::ITypeOperationSystem* m_pTypeOS;
 		QString m_sInputFolder;
 		QString m_sOutputFolder;
+		QMap<QString, QString> m_qmArguments;
 };
 
 coex::IConfig* createConfig();
