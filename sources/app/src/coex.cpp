@@ -3,6 +3,7 @@
 #include "helpers.h"
 #include "config.h"
 
+#include <unistd.h>
 #include <QCoreApplication>
 #include <QApplication>
 #include <iostream>
@@ -20,19 +21,27 @@
 
 int main(int argc, char* argv[])
 {
-	QCoreApplication app(argc, argv);
+  QCoreApplication app(argc, argv);
+  coex::IConfig *config = createConfig();
+  if(!config->getArgumentsValues(argc, argv, "i:o:d::"))
+    {
+      printHelp(argc,argv);
+      return(-1);
+    }
 
-    if (!checkArgs(argc, argv)) {
+   /*if (!checkArgs(argc, argv))
+      {
 		printHelp(argc, argv);
 		return -1;
 	};
+
+
 	
-	coex::IConfig *config = createConfig();
 	
 	config->setInputFolder(QString(argv[1]));
-	config->setOutputFolder(QString(argv[2]));
+	config->setOutputFolder(QString(argv[2]));*/
     
-	std::cout << "\n * * Loading plugins...\n";
+        std::cout << "\n * * Loading plugins...\n";
 
 	typedef coex::IDetectOperationSystem* (*funcCreateDetectOperationSystem) ();
 	typedef coex::ITask* (*funcCreateTask) ();
@@ -63,7 +72,7 @@ int main(int argc, char* argv[])
 			{
 				bIsPlugin = true;
 				coex::IDetectOperationSystem* detect = createDetect();
-				std::cout << "OK \n\ * Found detector '" << detect->name().toStdString() << "' by '" << detect->author().toStdString() << "' ";
+				std::cout << "OK \n * Found detector '" << detect->name().toStdString() << "' by '" << detect->author().toStdString() << "' ";
 				detectOS.push_back(detect);
 			}
 			
@@ -120,6 +129,5 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
-    
     return 0;
 }
