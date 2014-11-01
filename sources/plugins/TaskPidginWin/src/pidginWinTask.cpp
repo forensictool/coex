@@ -63,22 +63,25 @@ void processingContactListPidgin(QString inputFile, QString outPath){
             if(token == QXmlStreamReader::StartElement)
             {
                 nameElem = xmlReader.name().toString();
+
                 if (xmlReader.name() == "buddy") {
-                    accountPidgin = "";
-                    protoPidgin = "";
+                    foreach(const QXmlStreamAttribute &attr, xmlReader.attributes()) {
+                        if (attr.name().toString() == QLatin1String("account")) {
+                            accountPidgin = attr.value().toString();
+                        }
+                        else if (attr.name().toString() == QLatin1String("proto")) {
+                            protoPidgin = attr.value().toString();
+                        }
+                    }
                     namePidgin = "";
                     emailPidgin = "";
                 }
             }
             if(token == QXmlStreamReader::Characters) {
-                if(nameElem == "account")
-                accountPidgin += xmlReader.text().toString();
-                else if (nameElem == "name")
+                if (nameElem == "name")
                 emailPidgin += xmlReader.text().toString();
                 else if (nameElem == "alias")
                 namePidgin += xmlReader.text().toString();
-                else if (nameElem == "proto")
-                protoPidgin += xmlReader.text().toString();
             }
             if(token == QXmlStreamReader::EndElement)
             {
@@ -88,11 +91,6 @@ void processingContactListPidgin(QString inputFile, QString outPath){
                     namePidgin = namePidgin.trimmed();
                     emailPidgin = emailPidgin.trimmed();
                     pidginContacts.writeContactList(accountPidgin,protoPidgin,namePidgin,emailPidgin);
-                    /*std::cout <<"\npidginContact::1:: " << accountPidgin.toStdString()
-                    << "\npidginContact::2:: "<< protoPidgin.toStdString()
-                    <<"\npidginContact::3:: "<< namePidgin.toStdString()
-                    <<"\npidginContact::4:: " << emailPidgin.toStdString() <<"\n";*/
-
                 }
             }
         }
@@ -139,13 +137,13 @@ void processingAccountPidgin(QString inputFile, QString outPath){
 
             // запоминаем текст исходя из имени элемента
             if(token == QXmlStreamReader::Characters) {
-                if(nameElem == "name")
+                if(nameElem == "alias")
                 name += xmlReader.text().toString();
                 else if (nameElem == "password")
                 password += xmlReader.text().toString();
                 else if (nameElem == "protocol")
                 protocol += xmlReader.text().toString();
-                else if (nameElem == "email")
+                else if (nameElem == "name")
                 email += xmlReader.text().toString();
             }
 
