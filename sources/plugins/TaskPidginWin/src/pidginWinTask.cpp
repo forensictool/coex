@@ -10,6 +10,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QTextStream>
+#include <QCryptographicHash>
 
 TaskPidginWin::TaskPidginWin() {
     m_bDebug = false;
@@ -167,7 +168,10 @@ void processingAccountPidgin(QString inputFile, QString outPath){
 };
 
 void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
-    writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + fileInfo.fileName() +".xml", "pidgin");
+
+    QString md5Id = QCryptographicHash::hash( fileInfo.filePath().toAscii(), QCryptographicHash::Sha1 ).toHex();
+
+    writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + md5Id + ".xml", "pidgin");
     QString time, author,message, chatID, account, data, namePidgin;
 
     QFile fileLogs(fileInfo.absoluteFilePath());
