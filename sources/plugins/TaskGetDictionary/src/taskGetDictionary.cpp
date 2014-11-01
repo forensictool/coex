@@ -48,6 +48,8 @@ void TaskGetDictionary::setOption(QStringList options) {
 
 bool TaskGetDictionary::execute(const coex::IConfig *config) 
 {
+  m_bDebug = config->isDebugEnable();
+
   if(m_bDebug) 
   {
     std::cout << "  !!! debug mode on.\n";
@@ -56,7 +58,8 @@ bool TaskGetDictionary::execute(const coex::IConfig *config)
 
   QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale()); 
   QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-  std::cout << "---------------------------------------------------------" << std::endl;
+  if(m_bDebug)
+    std::cout << "---------------------------------------------------------" << std::endl;
   QString dirStr(config->inputFolder());
   QString outDirStr(config->outputFolder());
   outDirStr.append("/dictionary");
@@ -80,7 +83,8 @@ bool TaskGetDictionary::execute(const coex::IConfig *config)
     //int pos = 0;
     if(fInfo.suffix() == "txt")
     {
-      //std::cout << fInfo.absoluteFilePath().toStdString() << std::endl;
+      if(m_bDebug)
+        std::cout << fInfo.absoluteFilePath().toStdString() << std::endl;
       QFile file(fInfo.absoluteFilePath());
       if(file.open(QIODevice::ReadOnly | QIODevice::Text))
       {
@@ -108,11 +112,12 @@ bool TaskGetDictionary::execute(const coex::IConfig *config)
     out << buf.at(i) << "\n";
   }
   outFile.close();*/
-  std::cout << "---------------------------------------------------------" << std::endl;
+  if(m_bDebug)
+    std::cout << "---------------------------------------------------------" << std::endl;
   return true;
 };
 
 coex::ITask* createTask() 
 {
-  return (coex::ITask*)(new TaskGetDictionary());
+  return (new TaskGetDictionary());
 }

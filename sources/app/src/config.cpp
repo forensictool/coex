@@ -103,7 +103,7 @@ bool Config::getArgumentsValues(int argc, char **argv, QString shortopts)
 }
 //--------------------------------------------------------------------------------------------------------
 
-bool Config::isDebugEnable()
+bool Config::isDebugEnable() const
 {
   if(this->m_qmArguments.contains("debug"))
     return true;

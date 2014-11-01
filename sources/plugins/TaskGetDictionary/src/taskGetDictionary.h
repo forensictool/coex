@@ -9,7 +9,7 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
-class TaskGetDictionary : coex::ITask
+class TaskGetDictionary : public coex::ITask
 {
 	public:
 		TaskGetDictionary();
