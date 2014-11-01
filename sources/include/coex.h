@@ -39,6 +39,7 @@ namespace coex
 			virtual bool isLinux() = 0;
 
 			virtual bool getArgumentsValues(int, char**, QString) = 0;
+			virtual bool isDebugEnable() const = 0;
 	};
 	
 	/* interface for

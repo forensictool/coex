@@ -54,12 +54,15 @@ bool Config::isLinux() {
 coex::IConfig* createConfig() {
 	return (coex::IConfig *) new Config();
 }
-//------------------------------------------------------------------------------------
 
 bool Config::getArgumentsValues(int argc, char **argv, QString shortopts)
 {
   if(argc < 3)
-    return false;
+    {
+      //std::cout << "incorrect call. you must select input and output folders" << std::endl;
+      //std::cout << argv[0] << " -i <inputFolder> -o <outputFolder>" << std::endl;
+      return false;
+    }
   int pr = 0;
   while((pr = getopt(argc, argv, shortopts.toAscii().data())) != -1)
     {
@@ -72,14 +75,37 @@ bool Config::getArgumentsValues(int argc, char **argv, QString shortopts)
           this->m_qmArguments.insert("outputFolder", optarg);
           break;
         case 'd':
-          this->m_qmArguments.insert("debug", optarg);
-          std::cout << "debug: " << m_qmArguments.value("debug").toStdString() << std::endl;
+          this->m_qmArguments.insert("debug", "debug mode on");
+          std::cerr << "INFO: " << m_qmArguments.value("debug").toStdString() << std::endl;
         default:
           break;
         }
     }
-  if (!((m_qmArguments.contains("inputFolder"))||(m_qmArguments.contains("outFolder"))))
-    return false;
+  if ((m_qmArguments.contains("inputFolder"))||(m_qmArguments.contains("outFolder")))
+    {
+      QDir buf(m_qmArguments.value("inputFolder"));
+      if(buf.exists())
+        {
+          return true;
+        }
+      else
+        {
+          std::cerr << "ERROR: input folder is not exist" << std::endl;
+          return false;
+        }
+    }
+  else
+    {
+      return false;
+    }
 
   return(true);
+}
+//--------------------------------------------------------------------------------------------------------
+
+bool Config::isDebugEnable() const
+{
+  if(this->m_qmArguments.contains("debug"))
+    return true;
+  return false;
 }

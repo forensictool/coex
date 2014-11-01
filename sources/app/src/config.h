@@ -23,6 +23,7 @@ class Config : coex::IConfig {
 
 		//parse Arguments
 		virtual bool getArgumentsValues(int, char **, QString);
+		virtual bool isDebugEnable() const ;
 
 	private:
 		coex::ITypeOperationSystem* m_pTypeOS;

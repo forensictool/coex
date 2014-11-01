@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 {
   QCoreApplication app(argc, argv);
   coex::IConfig *config = createConfig();
-  if(!config->getArgumentsValues(argc, argv, "i:o:d::"))
+  if(!config->getArgumentsValues(argc, argv, "i:o:d"))
     {
       printHelp(argc,argv);
       return(-1);
