@@ -30,7 +30,7 @@ private:
 class writerMessagesSkype : writerMessages
 {
 public:
-    writerMessagesSkype(QString fileResult, QString type, QString messangerName);
+    writerMessagesSkype(QString fileResult);
 
     bool opened(
     );
