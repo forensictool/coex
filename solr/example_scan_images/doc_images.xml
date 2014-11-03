@@ -1,0 +1,26 @@
+<add>
+	<doc>
+		<!-- Comment: id must be generated as <format_image>_MD5(full path to image) -->
+		<field name="id">png_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">images</field>
+		<field name="doc_type">image</field>
+		<field name="image_result">correct / incorrect</field>
+		<field name="image_path">full path to image</field>
+		<field name="image_datecreate">date create</field>
+		<field name="image_datemodify">date modify</field>		
+		<field name="image_tags">tags to image</field>
+		<field name="image_other">other information</field>		
+	</doc>
+	<doc>
+		<!-- Comment: id must be generated as <format_image>_MD5(full path to image) -->
+		<field name="id">png_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">images</field>
+		<field name="doc_type">image</field>
+		<field name="image_result">correct / incorrect</field>
+		<field name="image_path">full path to image</field>
+		<field name="image_datecreate">date create</field>
+		<field name="image_datemodify">date modify</field>		
+		<field name="image_tags">tags to image</field>
+		<field name="image_other">other information</field>		
+	</doc>	
+</add>
