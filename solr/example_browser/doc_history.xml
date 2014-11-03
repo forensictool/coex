@@ -1,0 +1,18 @@
+<add>
+	<doc>
+		<!-- Comment: id must be generated as bookmark_MD5(url+date+name_browser) -->
+		<field name="id">history_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">Chrome</field>
+		<field name="doc_type">history</field>
+		<field name="history_url">http://fff</field>
+		<field name="history_date">date</field>
+	</doc>
+	<doc>
+		<!-- Comment: id must be generated as bookmark_MD5(url+date+name_browser) -->
+		<field name="id">history_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">Chrome</field>
+		<field name="doc_type">history</field>
+		<field name="history_url">http://fff</field>
+		<field name="history_date">date</field>
+	</doc>
+</add>

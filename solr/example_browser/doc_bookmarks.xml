@@ -1,0 +1,20 @@
+<add>
+	<doc>
+		<!-- Comment: id must be generated as bookmark_MD5(url+name+name_browser) -->
+		<field name="id">bookmark_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">Chrome</field>
+		<field name="doc_type">bookmark</field>
+		<field name="bookmark_url">http://fff</field>
+		<field name="bookmark_name">name</field>
+		<field name="bookmark_other">other information</field>
+	</doc>
+	<doc>
+		<!-- Comment: id must be generated as bookmark_MD5(url+name+name_browser) -->
+		<field name="id">bookmark_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">Chrome</field>
+		<field name="doc_type">bookmark</field>
+		<field name="bookmark_url">http://fff</field>
+		<field name="bookmark_name">name</field>
+		<field name="bookmark_other">other information</field>
+	</doc>
+</add>
