@@ -78,6 +78,11 @@ void writerMessagesPidgin::writeAccountInfo(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("pidgin");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "account_id");
     m_pXmlWriter->writeCharacters(name);
     m_pXmlWriter->writeEndElement();
@@ -175,6 +180,11 @@ void writerMessagesPidgin::writeInfoLog(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("pidgin");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "log_chat_id");
     m_pXmlWriter->writeCharacters(chathID);
     m_pXmlWriter->writeEndElement();
@@ -217,6 +227,11 @@ void writerMessagesPidgin::writeMessage(
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc-type");
     m_pXmlWriter->writeCharacters("log");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("pidgin");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");

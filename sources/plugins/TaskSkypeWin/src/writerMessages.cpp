@@ -69,6 +69,11 @@ void writerMessagesSkype::writeMessage(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("skype");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "log_author");
     m_pXmlWriter->writeCharacters(author);
     m_pXmlWriter->writeEndElement();
@@ -110,6 +115,11 @@ void writerMessagesSkype::writeCalls(
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc-type");
     m_pXmlWriter->writeCharacters("call");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("skype");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -164,6 +174,11 @@ void writerMessagesSkype::writeContacts(
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc-type");
     m_pXmlWriter->writeCharacters("contact");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("skype");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -235,6 +250,11 @@ void writerMessagesSkype::writeInfo(
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc-type");
     m_pXmlWriter->writeCharacters("account");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters("skype");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
