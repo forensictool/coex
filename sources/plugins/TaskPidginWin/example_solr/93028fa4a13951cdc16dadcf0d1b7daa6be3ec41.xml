@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">pidgin_e17b078324a02fef57bc0b48e1ffd4e8</field>
+        <field name="doc-type">log</field>
+        <field name="log_chat_id">id11190388</field>
+        <field name="log_account">Чт. 01 мая 2014</field>
+        <field name="log_protocol">vkontakte</field>
+        <field name="log_message">fox.user.3@gmail.com</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_a5afdc52fe9bc68e8c9d18dff16fb856</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Игорь Поляков</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 16:06:32</field>
+        <field name="log_message">Привет) Я по поводу предстоящего CTF. Нужно завтра вечером собраться в 005-3. Сможешь?</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_53079b9752ce4a2f682d28f2dbbb4609</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Дмитрий Муковкин</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 18:21:28</field>
+        <field name="log_message">Привет. Конечно!</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_35dacb7ded2b633f6db73020cd8e83fa</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Дмитрий Муковкин</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 18:21:32</field>
+        <field name="log_message">Примерно в 2-3</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_45b1ae1b5f6a0a684b5289bf604d7eee</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Игорь Поляков</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 15:57:56</field>
+        <field name="log_message">сегодня в 6, сможешь?</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_5d0702541cdacd7c1ffe16eaa21e83e2</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Дмитрий Муковкин</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 17:44:00</field>
+        <field name="log_message">Ой, я поздно прочитал</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_4b57db22ee244044ee0610af52cee2b7</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Игорь Поляков</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 19:25:56</field>
+        <field name="log_message">завтра придешь? volgaCTF намечается, хотим поиграть новым составом :-)</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_7be6783a95e4643e75991971fe9f51d3</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Дмитрий Муковкин</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 19:30:12</field>
+        <field name="log_message">да, приду ко 2</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_7c74e411b24ad21b5b7318f2f17f4dd9</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Дмитрий Муковкин</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 19:30:24</field>
+        <field name="log_message">volga ctf ?? круто :)</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_837ef41710b505f97f0ef213cf6bfa58</field>
+        <field name="doc-type">log</field>
+        <field name="log_author">Игорь Поляков</field>
+        <field name="log_dataTime">Чт. 01 мая 2014 05:43:40</field>
+        <field name="log_message">отлично)</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_88d75eeb48df89fdbb6a671eb7b0da52</field>
+        <field name="doc-type">log</field>
+        <field name="log_author"></field>
+        <field name="log_dataTime">Чт. 01 мая 2014 </field>
+        <field name="log_message"></field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_88d75eeb48df89fdbb6a671eb7b0da52</field>
+        <field name="doc-type">log</field>
+        <field name="log_author"></field>
+        <field name="log_dataTime">Чт. 01 мая 2014 </field>
+        <field name="log_message"></field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_88d75eeb48df89fdbb6a671eb7b0da52</field>
+        <field name="doc-type">log</field>
+        <field name="log_author"></field>
+        <field name="log_dataTime">Чт. 01 мая 2014 </field>
+        <field name="log_message"></field>
+    </doc>
+</add>

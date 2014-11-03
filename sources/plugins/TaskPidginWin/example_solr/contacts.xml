@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">skype_148506fa95156090656b23c9bee1e6b7</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">echo123</field>
+        <field name="contact_fullName">Echo / Sound Test Service</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">en</field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_7805e628b2c4f8dbbc91a3787ad73365</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">xartix57</field>
+        <field name="contact_fullName">ArtemDr-_-</field>
+        <field name="contact_birthday">19911128</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_e70013f8e4b006e20819ccb89b980e3b</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">erkin_201</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday">19911220</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_fd9d5f3358e89f3c8f4710dcc631fe73</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">kama13134</field>
+        <field name="contact_fullName">Камиль Сатаев</field>
+        <field name="contact_birthday">19891124</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Нижневартовск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_82b5a89e577836cb1ed840271e4207b1</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">kretovigor1</field>
+        <field name="contact_fullName">Игорь Кретов</field>
+        <field name="contact_birthday">19920616</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_ea7f0fba4be138ab914defac07a03046</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">kretov1</field>
+        <field name="contact_fullName">Кретов Игорь</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_ca5d9bd2fd9b5bccd5cbeba38e58fad4</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">jenny_sunny3</field>
+        <field name="contact_fullName">Женечка)</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Felmale</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_c70b4e72da3096e2e18593d6b929a664</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">denas570</field>
+        <field name="contact_fullName">Баженов Александр</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_80b024f338384adb6de665b8cee18807</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">pahendra1</field>
+        <field name="contact_fullName">Павел Нестеренко</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_6489bd5fe0def1ad072237468de7a590</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">vlad-venom</field>
+        <field name="contact_fullName">Владислав</field>
+        <field name="contact_birthday">19920907</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Тайга</field>
+    </doc>
+    <doc>
+        <field name="id">skype_d88859206dbf15281c7163dd5d895e66</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">sofia_78_08</field>
+        <field name="contact_fullName">София</field>
+        <field name="contact_birthday">19781124</field>
+        <field name="contact_phone">+79048820901</field>
+        <field name="contact_gender">Felmale</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Нижневартовск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_6e69303b03b1c22cdda800e5a05c7d57</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">turb0_1992</field>
+        <field name="contact_fullName">Артур</field>
+        <field name="contact_birthday">19920923</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_291c2c31c223329c53b25db8fe0fd52a</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">willer12312</field>
+        <field name="contact_fullName">Илья Довженко</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone">+79539182452</field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_abf79f5751186d42101db39787aed7e3</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">sveta_749</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_63bb32e10f57626a2619ce57f17e7c69</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">fumafu2</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_a33b91b1e8cf06065b21d5466ea09bb0</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">senya_2007</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_23e58ec93772c564ffa2f12d7123b4df</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">james_mariarti</field>
+        <field name="contact_fullName">Дмитрий Никифоров</field>
+        <field name="contact_birthday">19911221</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_ca44dd3899e660598bfd34a150d25475</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">sain_070</field>
+        <field name="contact_fullName">Sain_070</field>
+        <field name="contact_birthday">19930301</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Асино - Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_b93164a60a1dcb356f058d84c9c2489a</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">maxsim_404</field>
+        <field name="contact_fullName">Max Antonov</field>
+        <field name="contact_birthday">19930413</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_a1578a5fb695db950ae6a3111d2f4b0e</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">aleksey.gulyaev</field>
+        <field name="contact_fullName">aleksey.gulyaev</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone">+79234077930</field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_ea26c81acec6a9c95259a1f4c67e4ab3</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">reduxer</field>
+        <field name="contact_fullName">Redux</field>
+        <field name="contact_birthday">19931208</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_91cf3d161857419ce849c7ff0a8f40da</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">stas56491</field>
+        <field name="contact_fullName">Станислав</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city">Томск</field>
+    </doc>
+    <doc>
+        <field name="id">skype_b6aebc4c76d473d953a51323d3e9e5ab</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">victor.grenke</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_500a70ffd77fcfc3b2e65f2aed5d79da</field>
+        <field name="doc-type">contact</field>
+        <field name="contact_name">polyakova.svetlana1</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+</add>

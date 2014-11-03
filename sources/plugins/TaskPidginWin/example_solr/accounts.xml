@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">skype_be61d21d6737158aa03d1a2b180b8422</field>
+        <field name="doc-type">account</field>
+        <field name="account_name">fox.user.3</field>
+        <field name="account_fullName">Игорь</field>
+        <field name="account_emails">fox.user.3@gmail.ru</field>
+        <field name="account_ipcountry">ru</field>
+    </doc>
+</add>
