@@ -56,7 +56,7 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
         dir.mkdir("archive");
     }
 
-    writerFoudnArchive searchArchive(config->outputFolder() + "//archive/found.xml", "archive");;
+    writerFoudnArchive searchArchive(config->outputFolder() + "//archive/found.xml");;
     if(!searchArchive.opened())
     {
         std::cout << "Failed task :: Can't create output folder & files\n";

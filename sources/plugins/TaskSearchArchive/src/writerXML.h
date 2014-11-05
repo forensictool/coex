@@ -26,7 +26,7 @@ private:
 class writerFoudnArchive : writerXML
 {
 public:
-    writerFoudnArchive(QString fileName, QString messangerName);
+    writerFoudnArchive(QString fileType);
 
     bool opened(
     );

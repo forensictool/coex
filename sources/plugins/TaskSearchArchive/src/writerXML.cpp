@@ -9,7 +9,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QTextStream>
-#include <QDebug>
+#include <QCryptographicHash>
 
 writerXML::writerXML()
 {
@@ -27,22 +27,22 @@ bool writerFoudnArchive::opened()
     return m_bOpened;
 }
 
-writerFoudnArchive::writerFoudnArchive(QString fileName, QString messangerName)
+writerFoudnArchive::writerFoudnArchive(QString fileType)
 {
     m_bOpened = true;
-    m_pFile = new QFile(fileName);
+    m_pFile= new QFile(fileType);
     if (!m_pFile->open(QIODevice::Append))
     {
-        std::cout << "Cant open file  failed task\n";
         m_bOpened = false;
         return;
     }
+
     m_pXmlWriter = new QXmlStreamWriter();
     m_pXmlWriter->setDevice(m_pFile);
+
     m_pXmlWriter->setAutoFormatting(true);
     m_pXmlWriter->writeStartDocument();
-    m_pXmlWriter->writeStartElement("Archive ");
-    m_pXmlWriter->writeAttribute("Found" ,messangerName);
+    m_pXmlWriter->writeStartElement("add");
 }
 
 writerFoudnArchive::~writerFoudnArchive()
@@ -63,12 +63,43 @@ void writerFoudnArchive::writeFound(
 )
 {
     if (!m_bOpened)return;
-    qDebug() << "in progress";
-    m_pXmlWriter->writeStartElement("archive");
-    m_pXmlWriter->writeAttribute("type", archiveType);
-    m_pXmlWriter->writeAttribute("suffix", suffix);
-    m_pXmlWriter->writeAttribute("size", size);
-    m_pXmlWriter->writeAttribute("password", password);
-    m_pXmlWriter->writeAttribute("pathWay", pathWay);
+    m_pXmlWriter->writeStartElement("doc");
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "id");
+    QString md5Id = QCryptographicHash::hash( (pathWay+archiveType+suffix+size+password).toAscii(), QCryptographicHash::Md5 ).toHex();
+    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "doc-type");
+    m_pXmlWriter->writeCharacters("file");
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "application");
+    m_pXmlWriter->writeCharacters(archiveType);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "file_suffix");
+    m_pXmlWriter->writeCharacters(suffix);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "file_size");
+    m_pXmlWriter->writeCharacters(size);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "file_password");
+    m_pXmlWriter->writeCharacters(password);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "file_path");
+    m_pXmlWriter->writeCharacters(pathWay);
+    m_pXmlWriter->writeEndElement();
+
     m_pXmlWriter->writeEndElement();
 }
