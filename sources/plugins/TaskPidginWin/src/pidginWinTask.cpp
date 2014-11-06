@@ -1,7 +1,6 @@
 #include "pidginWinTask.h"
 #include "writerMessages.h"
 
-#include <iostream>
 #include <QDirIterator>
 #include <QString>
 #include <QRegExp>
@@ -98,7 +97,7 @@ void processingContactListPidgin(QString inputFile, QString outPath){
     }
     else
     {
-        std::cout << "could not opening contacts file \r\n";
+        qDebug() << "could not opening contacts file \r\n";
     };
 
 };
@@ -114,7 +113,7 @@ void processingAccountPidgin(QString inputFile, QString outPath){
         xmlReader.readNext();
         while(!xmlReader.atEnd() && !xmlReader.hasError())
         {
-            //std::cout << "cyrcle";
+            //qDebug() << "cyrcle";
             QXmlStreamReader::TokenType token = xmlReader.readNext();
 
             // пропускаем рутовый элемент документа
@@ -163,7 +162,7 @@ void processingAccountPidgin(QString inputFile, QString outPath){
     }
     else
     {
-        std::cout << "Could not opening accounts.xml file \r\n";
+        qDebug() << "Could not opening accounts.xml file \r\n";
     };
 };
 
@@ -188,7 +187,6 @@ void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
             rxHead.setPattern(".* with (.*) at (.*) on (.*) \\((.*)\\)");
         }
         QString line = fileLogs.readLine();//read first line, get interesting info)
-        qDebug() << line;
         rxHead.indexIn(line);
         chatID = rxHead.cap(1);
         account = rxHead.cap(3);
@@ -216,15 +214,15 @@ void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
     }
     else
     {
-        std::cout << "could not opening log file: " << fileInfo.absolutePath().toStdString() << "\r\n";
+        qDebug() << "could not opening log file: " << fileInfo.absolutePath() << "\r\n";
     }
 };
 
 bool TaskPidginWin::execute(const coex::IConfig *config) {
 	if(m_bDebug) {
-        std::cout << "===========================================\n\n";
-        std::cout << "Debug mode ON\n";
-		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+        qDebug() << "===========================================\n\n";
+        qDebug() << "Debug mode ON\n";
+        qDebug() << "InputFolder: " << config->inputFolder() << "\n";
 	};
     {
         QDir dir(config->outputFolder());
@@ -254,7 +252,6 @@ bool TaskPidginWin::execute(const coex::IConfig *config) {
         }
         else if ( dirPath.filePath().contains(pidginPathLogTxt) || dirPath.next().contains(pidginPathLogHtml) )
         {
-            qDebug() << dirPath.filePath();
             processingLogPidgin(dirPath.fileInfo(), config->outputFolder());
             dirPath.next();
         }
