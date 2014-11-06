@@ -32,12 +32,12 @@ public:
     );
 
     void writeFound(
-        QString pathWay,
-        QString archiveType,
-        QString suffix,
-        QString size,
-        QString password
-    );
+            QString pathWay,
+            QString archiveType,
+            QString suffix,
+            QString size,
+            QString password,
+            QString archiveFileList);
 
     ~writerFoudnArchive();
 private:

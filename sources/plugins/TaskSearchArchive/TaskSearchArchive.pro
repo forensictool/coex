@@ -13,7 +13,10 @@ QT -= gui
 CONFIG += dll
 
 SOURCES += src/taskSearchArchive.cpp \
-           src/writerXML.cpp
+           src/writerXML.cpp \
+           src/qzip.cpp
 
 HEADERS += src/taskSearchArchive.h \
-    src/writerXML.h
+           src/qzipreader_p.h \
+           src/writerXML.h \
+           src/qzipwriter_p.h

@@ -1,7 +1,4 @@
-
 #include "writerXML.h"
-
-#include <iostream>
 #include <QDirIterator>
 #include <QString>
 #include <QRegExp>
@@ -59,7 +56,8 @@ void writerFoudnArchive::writeFound(
     QString archiveType,
     QString suffix,
     QString size,
-    QString password
+    QString password,
+    QString archiveFileList
 )
 {
     if (!m_bOpened)return;
@@ -67,8 +65,8 @@ void writerFoudnArchive::writeFound(
 
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (pathWay+archiveType+suffix+size+password).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
+    QString md5Id = QCryptographicHash::hash( (pathWay+archiveType+suffix+size+password+archiveFileList).toAscii(), QCryptographicHash::Md5 ).toHex();
+    m_pXmlWriter->writeCharacters("archive_"+ md5Id);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -99,6 +97,11 @@ void writerFoudnArchive::writeFound(
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "file_path");
     m_pXmlWriter->writeCharacters(pathWay);
+    m_pXmlWriter->writeEndElement();
+
+    m_pXmlWriter->writeStartElement("field");
+    m_pXmlWriter->writeAttribute("name", "file_list");
+    m_pXmlWriter->writeCharacters(archiveFileList);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeEndElement();
