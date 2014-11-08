@@ -110,7 +110,6 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
             {
                 if(plainText.contains(QRegExp("PK.14*")))
                 {
-                    qDebug() << "ZIP FOUND";
                     archiveFileList = listZip(fInfo.absoluteFilePath());
                     suffix = fInfo.suffix();
                     archiveType = "ZIP";
