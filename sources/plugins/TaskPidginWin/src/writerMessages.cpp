@@ -19,7 +19,7 @@ writerMessages::~writerMessages()
 }
 bool writerMessages::opened()
 {
-	return m_bOpened;
+    return m_bOpened;
 }
 
 bool writerMessagesPidgin::opened()
@@ -176,7 +176,7 @@ void writerMessagesPidgin::writeInfoLog(
 
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("messages");
+    m_pXmlWriter->writeCharacters("message");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -185,22 +185,22 @@ void writerMessagesPidgin::writeInfoLog(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_chat_id");
+    m_pXmlWriter->writeAttribute("name", "message_chat_id");
     m_pXmlWriter->writeCharacters(chathID);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_account");
+    m_pXmlWriter->writeAttribute("name", "message_account");
     m_pXmlWriter->writeCharacters(account);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_protocol");
+    m_pXmlWriter->writeAttribute("name", "message_protocol");
     m_pXmlWriter->writeCharacters(protocol);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_text");
+    m_pXmlWriter->writeAttribute("name", "message_text");
     m_pXmlWriter->writeCharacters(data);
     m_pXmlWriter->writeEndElement();
 
@@ -226,7 +226,7 @@ void writerMessagesPidgin::writeMessage(
 
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("messages");
+    m_pXmlWriter->writeCharacters("message");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -235,20 +235,19 @@ void writerMessagesPidgin::writeMessage(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_author");
+    m_pXmlWriter->writeAttribute("name", "message_author");
     m_pXmlWriter->writeCharacters(author);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_dataTime");
+    m_pXmlWriter->writeAttribute("name", "message_dataTime");
     m_pXmlWriter->writeCharacters(dataTime);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_message");
+    m_pXmlWriter->writeAttribute("name", "message_message");
     m_pXmlWriter->writeCharacters(message.trimmed());
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeEndElement();
-
 }

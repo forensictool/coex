@@ -65,7 +65,7 @@ void writerMessagesSkype::writeMessage(
 
     m_pXmlWriter->writeStartElement("field");
     m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("messages");
+    m_pXmlWriter->writeCharacters("message");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -74,7 +74,7 @@ void writerMessagesSkype::writeMessage(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_author");
+    m_pXmlWriter->writeAttribute("name", "message_author");
     m_pXmlWriter->writeCharacters(author);
     m_pXmlWriter->writeEndElement();
 
@@ -82,12 +82,12 @@ void writerMessagesSkype::writeMessage(
     bool isconverted;
     uint iunixtime_integer = timestamp.toUInt(&isconverted);
     QString idatetime = QDateTime::fromTime_t(iunixtime_integer).toString();
-    m_pXmlWriter->writeAttribute("name", "messages_timestamp");
+    m_pXmlWriter->writeAttribute("name", "message_timestamp");
     m_pXmlWriter->writeCharacters(idatetime);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "messages_text");
+    m_pXmlWriter->writeAttribute("name", "message_text");
     m_pXmlWriter->writeCharacters(body_xml);
     m_pXmlWriter->writeEndElement();
 

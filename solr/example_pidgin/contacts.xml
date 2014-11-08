@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">pidgin_1031cc1916a632e410274f2e2741e119</field>
+        <field name="doc_type">contact</field>
+        <field name="application">pidgin</field>
+        <field name="contact_name">Константин Крючков</field>
+        <field name="contact_account">fox.user.3@gmail.com</field>
+        <field name="contact_protocol">prpl-vkcom</field>
+        <field name="contact_id">id5831956</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_95265f0b41e8970758f1164b908360e7</field>
+        <field name="doc_type">contact</field>
+        <field name="application">pidgin</field>
+        <field name="contact_name">Алексей Калентьев</field>
+        <field name="contact_account">fox.user.3@gmail.com</field>
+        <field name="contact_protocol">prpl-vkcom</field>
+        <field name="contact_id">id5954849</field>
+    </doc>
+    <doc>
+        <field name="id">pidgin_65fcd82eb8a215e68b7cb23736b0a62e</field>
+        <field name="doc_type">contact</field>
+        <field name="application">pidgin</field>
+        <field name="contact_name">Сергей Белов</field>
+        <field name="contact_account">fox.user.3@gmail.com</field>
+        <field name="contact_protocol">prpl-vkcom</field>
+        <field name="contact_id">id6254003</field>
+    </doc>
+</add>
