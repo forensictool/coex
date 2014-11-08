@@ -129,7 +129,7 @@ void writerMessagesPidgin::writeMessage(
 )
 {
     if (!m_bOpened)return;
-    QString md5Id = QCryptographicHash::hash((chatID+account+protocol+author,dataTime,message).toAscii(), QCryptographicHash::Md5 ).toHex();
+    QString md5Id = QCryptographicHash::hash((chathID+account+protocol+author+dataTime+message).toAscii(), QCryptographicHash::Md5 ).toHex();
     m_pXmlWriter->writeStartElement("doc");
 
     writeAccountInfo_field("doc_type", "message");
@@ -140,7 +140,7 @@ void writerMessagesPidgin::writeMessage(
     writeAccountInfo_field("message_protocol", protocol);
     writeAccountInfo_field("message_author", author);
     writeAccountInfo_field("message_dataTime", dataTime);
-    writeAccountInfo_field("message_message", message);
+    writeAccountInfo_field("message_text", message);
 
     m_pXmlWriter->writeEndElement();
 }

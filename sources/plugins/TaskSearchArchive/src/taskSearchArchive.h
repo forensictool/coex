@@ -20,7 +20,7 @@ class TaskSearchArchive : coex::ITask
 
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList);
-        virtual QString listZip(QString);
+        QString listZip(QString);
 		virtual bool execute(const coex::IConfig *config);
 	private:
 		bool m_bDebug;
