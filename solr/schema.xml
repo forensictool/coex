@@ -22,7 +22,7 @@
    <field name="preferences_param_name" type="text" indexed="true" stored="true"/>
    <field name="preferences_param_value" type="text" indexed="true" stored="true"/>
    
-<!--  Skype message's fields   -->
+<!--  Message's fields   -->
    <field name="log_chat_id" type="text" indexed="true" stored="true"/>
    <field name="account_name" type="text" indexed="true" stored="true"/>
    <field name="account_fullName" type="text" indexed="true" stored="true"/>
@@ -40,21 +40,20 @@
    <field name="contact_languages" type="text" indexed="true" stored="true"/>
    <field name="contact_country" type="text" indexed="true" stored="true"/>
    <field name="contact_city" type="text" indexed="true" stored="true"/>
-   <field name="log_author" type="text" indexed="true" stored="true"/>
-   <field name="log_timestamp" type="text" indexed="true" stored="true"/>
-   <field name="log_message" type="text" indexed="true" stored="true" multiValued="true"/>
-   
-<!--  Pidgin message's fields   -->
+   <field name="message_chat_id" type="text" indexed="true" stored="true"/>
+   <field name="message_account" type="text" indexed="true" stored="true"/>
+   <field name="message_protocol" type="text" indexed="true" stored="true"/>
+   <field name="message_dataTime" type="text" indexed="true" stored="true"/>
+   <field name="message_message" type="text" indexed="true" stored="true"/>
+   <field name="message_author" type="text" indexed="true" stored="true"/>
+   <field name="message_text" type="text" indexed="true" stored="true"/>
+   <field name="contact_account" type="text" indexed="true" stored="true"/>
+   <field name="contact_protocol" type="text" indexed="true" stored="true"/>
+   <field name="contact_id" type="text" indexed="true" stored="true"/>
    <field name="account_id" type="text" indexed="true" stored="true"/>
    <field name="account_mail" type="text" indexed="true" stored="true"/>
    <field name="account_protocol" type="text" indexed="true" stored="true"/>
    <field name="account_password" type="text" indexed="true" stored="true"/>
-   <field name="contact_account" type="text" indexed="true" stored="true"/>
-   <field name="contact_protocol" type="text" indexed="true" stored="true"/>
-   <field name="contact_id" type="text" indexed="true" stored="true"/>
-   <field name="log_account" type="text" indexed="true" stored="true"/>
-   <field name="log_protocol" type="text" indexed="true" stored="true"/>
-   <field name="log_dataTime" type="text" indexed="true" stored="true"/>
    
    <dynamicField name="*_i"  type="int"    indexed="true"  stored="true"/>
    <dynamicField name="*_is" type="int"    indexed="true"  stored="true"  multiValued="true"/>
