@@ -34,6 +34,10 @@ public:
     bool opened(
     );
 
+    void writeAccountInfo_field(
+        QString field_name,
+        QString field_value
+    );
     void writeAccountInfo(
         QString name,
         QString email,
@@ -46,14 +50,10 @@ public:
         QString alias,
         QString name);
 
-    void writeInfoLog(
+    void writeMessage(
         QString chathID,
         QString account,
-        QString data,
-        QString protocol
-    );
-
-    void writeMessage(
+        QString protocol,
         QString author,
         QString dataTime,
         QString message

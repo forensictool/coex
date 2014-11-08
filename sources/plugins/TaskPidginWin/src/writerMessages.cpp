@@ -55,6 +55,19 @@ writerMessagesPidgin::~writerMessagesPidgin()
     delete m_pFile;
 }
 
+void writerMessagesPidgin::writeAccountInfo_field(
+    QString field_name,
+    QString field_value
+)
+{
+    if(!field_value.isEmpty())
+    {
+        m_pXmlWriter->writeStartElement("field");
+        m_pXmlWriter->writeAttribute("name", field_name);
+        m_pXmlWriter->writeCharacters(field_value);
+        m_pXmlWriter->writeEndElement();
+    }
+}
 //about account.xml file
 void writerMessagesPidgin::writeAccountInfo(
     QString name,
@@ -64,43 +77,18 @@ void writerMessagesPidgin::writeAccountInfo(
 )
 {
     if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash( (email+protocol+name+password).toAscii(), QCryptographicHash::Md5 ).toHex();
+
     m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (protocol+name+password).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("pidgin_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("account");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("pidgin");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_id");
-    m_pXmlWriter->writeCharacters(name);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_mail");
-    m_pXmlWriter->writeCharacters(email);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_protocol");
-    m_pXmlWriter->writeCharacters(protocol);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_password");
-    m_pXmlWriter->writeCharacters(password);
-    m_pXmlWriter->writeEndElement();
+    writeAccountInfo_field("doc_type", "account");
+    writeAccountInfo_field("id", "pidgin_"+ md5Id);
+    writeAccountInfo_field("application", "pidgin");
+    writeAccountInfo_field("account_id", name);
+    writeAccountInfo_field("account_mail", email);
+    writeAccountInfo_field("account_protocol", protocol);
+    writeAccountInfo_field("account_password", password);
 
     m_pXmlWriter->writeEndElement();
 }
@@ -115,139 +103,44 @@ void writerMessagesPidgin::writeContactList(
 {
     if (!m_bOpened)return;
 
+    QString md5Id = QCryptographicHash::hash( (protocol+account+name+alias).toAscii(), QCryptographicHash::Md5 ).toHex();
     m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (protocol+account+name).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("pidgin_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("contact");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("pidgin");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_name");
-    m_pXmlWriter->writeCharacters(alias);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_account");
-    m_pXmlWriter->writeCharacters(account);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_protocol");
-    m_pXmlWriter->writeCharacters(protocol);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_id");
-    m_pXmlWriter->writeCharacters(name);
-    m_pXmlWriter->writeEndElement();
+    writeAccountInfo_field("doc_type", "contact");
+    writeAccountInfo_field("id", "pidgin_"+ md5Id);
+    writeAccountInfo_field("application", "pidgin");
+    writeAccountInfo_field("contact_name", alias);
+    writeAccountInfo_field("contact_account", account);
+    writeAccountInfo_field("contact_protocol", protocol);
+    writeAccountInfo_field("contact_id", name);
 
     m_pXmlWriter->writeEndElement();
 }
 
-//about log file
-void writerMessagesPidgin::writeInfoLog(
+
+
+void writerMessagesPidgin::writeMessage(
     QString chathID,
     QString account,
-    QString data,
-    QString protocol
-)
-{
-    if (!m_bOpened) return;
-
-    m_pXmlWriter->writeStartElement("doc");
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (protocol+account+data).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("pidgin_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("message");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("pidgin");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_chat_id");
-    m_pXmlWriter->writeCharacters(chathID);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_account");
-    m_pXmlWriter->writeCharacters(account);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_protocol");
-    m_pXmlWriter->writeCharacters(protocol);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_text");
-    m_pXmlWriter->writeCharacters(data);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeEndElement();
-
-}
-
-//like pidgin
-void writerMessagesPidgin::writeMessage(
+    QString protocol,
     QString author,
     QString dataTime,
     QString message
 )
 {
     if (!m_bOpened)return;
+    QString md5Id = QCryptographicHash::hash((chatID+account+protocol+author,dataTime,message).toAscii(), QCryptographicHash::Md5 ).toHex();
     m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (author+dataTime+message).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("pidgin_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("message");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("pidgin");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_author");
-    m_pXmlWriter->writeCharacters(author);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_dataTime");
-    m_pXmlWriter->writeCharacters(dataTime);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_message");
-    m_pXmlWriter->writeCharacters(message.trimmed());
-    m_pXmlWriter->writeEndElement();
+    writeAccountInfo_field("doc_type", "message");
+    writeAccountInfo_field("id", "pidgin_"+ md5Id);
+    writeAccountInfo_field("application", "pidgin");
+    writeAccountInfo_field("message_chat_id", chathID);
+    writeAccountInfo_field("message_account", account);
+    writeAccountInfo_field("message_protocol", protocol);
+    writeAccountInfo_field("message_author", author);
+    writeAccountInfo_field("message_dataTime", dataTime);
+    writeAccountInfo_field("message_message", message);
 
     m_pXmlWriter->writeEndElement();
 }

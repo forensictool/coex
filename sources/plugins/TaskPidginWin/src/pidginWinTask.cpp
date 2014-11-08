@@ -192,7 +192,6 @@ void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
         account = rxHead.cap(3);
         data = rxHead.cap(2);
         namePidgin = rxHead.cap(4);
-        pidginMessages.writeInfoLog(chatID, data, account, namePidgin);
         if (fileInfo.suffix() == "html")
         {
             rxBody.setPattern(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
@@ -209,7 +208,7 @@ void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
             time = rxBody.cap(1);
             author = rxBody.cap(2);
             message = rxBody.cap(3);
-            pidginMessages.writeMessage(author,data + " " + time,message);
+            pidginMessages.writeMessage(chatID, account, namePidgin, author,data + " " + time,message);
         }
     }
     else
