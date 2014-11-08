@@ -73,7 +73,7 @@ void writerMessagesPidgin::writeAccountInfo(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc-type");
+    m_pXmlWriter->writeAttribute("name", "doc_type");
     m_pXmlWriter->writeCharacters("account");
     m_pXmlWriter->writeEndElement();
 
@@ -124,7 +124,7 @@ void writerMessagesPidgin::writeContactList(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc-type");
+    m_pXmlWriter->writeAttribute("name", "doc_type");
     m_pXmlWriter->writeCharacters("contact");
     m_pXmlWriter->writeEndElement();
 
@@ -175,8 +175,8 @@ void writerMessagesPidgin::writeInfoLog(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc-type");
-    m_pXmlWriter->writeCharacters("log");
+    m_pXmlWriter->writeAttribute("name", "doc_type");
+    m_pXmlWriter->writeCharacters("messages");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -185,22 +185,22 @@ void writerMessagesPidgin::writeInfoLog(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_chat_id");
+    m_pXmlWriter->writeAttribute("name", "messages_chat_id");
     m_pXmlWriter->writeCharacters(chathID);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_account");
+    m_pXmlWriter->writeAttribute("name", "messages_account");
     m_pXmlWriter->writeCharacters(account);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_protocol");
+    m_pXmlWriter->writeAttribute("name", "messages_protocol");
     m_pXmlWriter->writeCharacters(protocol);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_message");
+    m_pXmlWriter->writeAttribute("name", "messages_text");
     m_pXmlWriter->writeCharacters(data);
     m_pXmlWriter->writeEndElement();
 
@@ -225,8 +225,8 @@ void writerMessagesPidgin::writeMessage(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc-type");
-    m_pXmlWriter->writeCharacters("log");
+    m_pXmlWriter->writeAttribute("name", "doc_type");
+    m_pXmlWriter->writeCharacters("messages");
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
@@ -235,17 +235,17 @@ void writerMessagesPidgin::writeMessage(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_author");
+    m_pXmlWriter->writeAttribute("name", "messages_author");
     m_pXmlWriter->writeCharacters(author);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_dataTime");
+    m_pXmlWriter->writeAttribute("name", "messages_dataTime");
     m_pXmlWriter->writeCharacters(dataTime);
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "log_message");
+    m_pXmlWriter->writeAttribute("name", "messages_message");
     m_pXmlWriter->writeCharacters(message.trimmed());
     m_pXmlWriter->writeEndElement();
 

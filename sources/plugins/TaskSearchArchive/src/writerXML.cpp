@@ -70,7 +70,7 @@ void writerFoudnArchive::writeFound(
     m_pXmlWriter->writeEndElement();
 
     m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc-type");
+    m_pXmlWriter->writeAttribute("name", "doc_type");
     m_pXmlWriter->writeCharacters("file");
     m_pXmlWriter->writeEndElement();
 
