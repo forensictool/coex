@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">skype_148506fa95156090656b23c9bee1e6b7</field>
+        <field name="doc_type">contact</field>
+        <field name="application">skype</field>
+        <field name="contact_name">echo123</field>
+        <field name="contact_fullName">Echo / Sound Test Service</field>
+        <field name="contact_birthday"></field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages">en</field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_7805e628b2c4f8dbbc91a3787ad73365</field>
+        <field name="doc_type">contact</field>
+        <field name="application">skype</field>
+        <field name="contact_name">xartix57</field>
+        <field name="contact_fullName">ArtemDr-_-</field>
+        <field name="contact_birthday">19911128</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Male</field>
+        <field name="contact_languages">ru</field>
+        <field name="contact_country">ru</field>
+        <field name="contact_city"></field>
+    </doc>
+    <doc>
+        <field name="id">skype_e70013f8e4b006e20819ccb89b980e3b</field>
+        <field name="doc_type">contact</field>
+        <field name="application">skype</field>
+        <field name="contact_name">erkin_201</field>
+        <field name="contact_fullName"></field>
+        <field name="contact_birthday">19911220</field>
+        <field name="contact_phone"></field>
+        <field name="contact_gender">Unknow</field>
+        <field name="contact_languages"></field>
+        <field name="contact_country"></field>
+        <field name="contact_city"></field>
+    </doc>
+</add>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+    <doc>
+        <field name="id">skype_baec8b4c276a70be007b9da4655d38ed</field>
+        <field name="doc_type">message</field>
+        <field name="application">skype</field>
+        <field name="message_author">nocnuhejionatou</field>
+        <field name="message_timestamp">вс дек 30 15:05:22 2012</field>
+        <field name="message_text">это должно было быть в MEGAIMAGE картинке в exif</field>
+    </doc>
+    <doc>
+        <field name="id">skype_a71434bc567e7f57e88ae0e7e3a4614c</field>
+        <field name="doc_type">message</field>
+        <field name="application">skype</field>
+        <field name="message_author">sea-kg</field>
+        <field name="message_timestamp">пн дек 31 20:14:02 2012</field>
+        <field name="message_text">всех с новым годом!</field>
+    </doc>
+    <doc>
+        <field name="id">skype_d024167f57113e1e99d0514f767e9aca</field>
+        <field name="doc_type">message</field>
+        <field name="application">skype</field>
+        <field name="message_author">nocnuhejionatou</field>
+        <field name="message_timestamp">пн дек 31 20:15:29 2012</field>
+        <field name="message_text">действительно )</field>
+    </doc>
+</add>
