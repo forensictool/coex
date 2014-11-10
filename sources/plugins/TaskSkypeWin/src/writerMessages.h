@@ -36,6 +36,11 @@ public:
     );
 
     // like skype
+    void writeSkype_field(
+        QString field_name,
+        QString field_value
+    );
+
     void writeMessage(
         QString author,
         QString timestamp,

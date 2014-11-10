@@ -1,4 +1,5 @@
 #include <QCryptographicHash>
+#include <QRegExp>
 #include "writerMessages.h"
 
 writerMessages::writerMessages()
@@ -16,6 +17,19 @@ bool writerMessagesSkype::opened()
     return m_bOpened;
 }
 
+void writerMessagesSkype::writeSkype_field(
+    QString field_name,
+    QString field_value
+)
+{
+    if(!field_value.isEmpty())
+    {
+        m_pXmlWriter->writeStartElement("field");
+        m_pXmlWriter->writeAttribute("name", field_name);
+        m_pXmlWriter->writeCharacters(field_value);
+        m_pXmlWriter->writeEndElement();
+    }
+}
 
 //constructor
 writerMessagesSkype::writerMessagesSkype(
@@ -41,6 +55,7 @@ writerMessagesSkype::writerMessagesSkype(
 writerMessagesSkype::~writerMessagesSkype()
 {
     m_pXmlWriter->writeEndElement();
+    m_pXmlWriter->writeEndElement();
     m_pXmlWriter->writeEndDocument();
     delete m_pXmlWriter;
     delete m_pFile;
@@ -52,48 +67,25 @@ void writerMessagesSkype::writeMessage(
         QString timestamp,
         QString body_xml
 )
-
 {
     if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
     QString md5Id = QCryptographicHash::hash( (author+timestamp+body_xml).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("message");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("skype");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_author");
-    m_pXmlWriter->writeCharacters(author);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
     bool isconverted;
     uint iunixtime_integer = timestamp.toUInt(&isconverted);
     QString idatetime = QDateTime::fromTime_t(iunixtime_integer).toString();
-    m_pXmlWriter->writeAttribute("name", "message_timestamp");
-    m_pXmlWriter->writeCharacters(idatetime);
-    m_pXmlWriter->writeEndElement();
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "message_text");
-    m_pXmlWriter->writeCharacters(body_xml);
-    m_pXmlWriter->writeEndElement();
+    m_pXmlWriter->writeStartElement("doc");
 
+    writeSkype_field("doc_type", "message");
+    writeSkype_field("id", "skype_"+ md5Id);
+    writeSkype_field("application", "skype");
+    writeSkype_field("message_author", author);
+    writeSkype_field("message_dataTime", idatetime);
+    writeSkype_field("message_text", body_xml.remove(QRegExp("[^а-яА-Яa-zA-Z\\d\\s]")));/*
+    //hack allows you to remove the special characters in the future, you need to fix it*/
     m_pXmlWriter->writeEndElement();
-};
-
+}
 
 void writerMessagesSkype::writeCalls(
     QString begin_timestamp,
@@ -104,46 +96,20 @@ void writerMessagesSkype::writeCalls(
 
 {
     if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("doc");
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (begin_timestamp+duration+host_identity+current_video_audience).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("call");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("skype");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
     bool isconverted;
     uint iunixtime_integer = begin_timestamp.toUInt(&isconverted);
     QString idatetime = QDateTime::fromTime_t(iunixtime_integer).toString();
-    m_pXmlWriter->writeAttribute("name", "call_timestamp");
-    m_pXmlWriter->writeCharacters(idatetime);
-    m_pXmlWriter->writeEndElement();
+    QString md5Id = QCryptographicHash::hash( (begin_timestamp+duration+host_identity+current_video_audience).toAscii(), QCryptographicHash::Md5 ).toHex();
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "call_duration");
-    m_pXmlWriter->writeCharacters(duration);
-    m_pXmlWriter->writeEndElement();
+    m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "call_server");
-    m_pXmlWriter->writeCharacters(host_identity);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "call_client");
-    m_pXmlWriter->writeCharacters(current_video_audience);
-    m_pXmlWriter->writeEndElement();
+    writeSkype_field("doc_type", "contact");
+    writeSkype_field("id", "pidgin_"+ md5Id);
+    writeSkype_field("application", "pidgin");
+    writeSkype_field("call_server", host_identity);
+    writeSkype_field("call_client", current_video_audience);
+    writeSkype_field("call_timestamp", idatetime);
+    writeSkype_field("call_duration", duration);
 
     m_pXmlWriter->writeEndElement();
 };
@@ -163,69 +129,27 @@ void writerMessagesSkype::writeContacts(
 
 {
     if (!m_bOpened)return;
-    m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
     QString md5Id = QCryptographicHash::hash( (skypename+fullName+birthday+gender+phone_mobile+languages+country+city).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("contact");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("skype");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_name");
-    m_pXmlWriter->writeCharacters(skypename);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_fullName");
-    m_pXmlWriter->writeCharacters(fullName);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_birthday");
-    m_pXmlWriter->writeCharacters(birthday);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_phone");
-    m_pXmlWriter->writeCharacters(phone_mobile);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
     if (gender == "1")
         gender = "Male";
     else if (gender == "2")
         gender = "Felmale";
     else
         gender = "Unknow";
-    m_pXmlWriter->writeAttribute("name", "contact_gender");
-    m_pXmlWriter->writeCharacters(gender);
-    m_pXmlWriter->writeEndElement();
+    m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_languages");
-    m_pXmlWriter->writeCharacters(languages);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_country");
-    m_pXmlWriter->writeCharacters(country);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "contact_city");
-    m_pXmlWriter->writeCharacters(city);
-    m_pXmlWriter->writeEndElement();
+    writeSkype_field("doc_type", "contact");
+    writeSkype_field("id", "skype_"+ md5Id);
+    writeSkype_field("application", "skype");
+    writeSkype_field("contact_name", skypename);
+    writeSkype_field("contact_fullName", fullName);
+    writeSkype_field("contact_birthday", birthday);
+    writeSkype_field("contact_phone", phone_mobile);
+    writeSkype_field("contact_gender", gender);
+    writeSkype_field("contact_languages", languages);
+    writeSkype_field("contact_country", country);
+    writeSkype_field("contact_city", city);
 
     m_pXmlWriter->writeEndElement();
 };
@@ -239,43 +163,16 @@ void writerMessagesSkype::writeInfo(
 
 {
     if (!m_bOpened)return;
+    QString md5Id = QCryptographicHash::hash( (fullName+ipcountry+emails+fullName+skypeName).toAscii(), QCryptographicHash::Md5 ).toHex();
     m_pXmlWriter->writeStartElement("doc");
 
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "id");
-    QString md5Id = QCryptographicHash::hash( (fullName+ipcountry+emails+fullName+skypeName).toAscii(), QCryptographicHash::Md5 ).toHex();
-    m_pXmlWriter->writeCharacters("skype_"+ md5Id);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "doc_type");
-    m_pXmlWriter->writeCharacters("account");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "application");
-    m_pXmlWriter->writeCharacters("skype");
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_name");
-    m_pXmlWriter->writeCharacters(skypeName);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_fullName");
-    m_pXmlWriter->writeCharacters(fullName);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_emails");
-    m_pXmlWriter->writeCharacters(emails);
-    m_pXmlWriter->writeEndElement();
-
-    m_pXmlWriter->writeStartElement("field");
-    m_pXmlWriter->writeAttribute("name", "account_ipcountry");
-    m_pXmlWriter->writeCharacters(ipcountry);
-    m_pXmlWriter->writeEndElement();
+    writeSkype_field("doc_type", "account");
+    writeSkype_field("id", "skype_"+ md5Id);
+    writeSkype_field("application", "skype");
+    writeSkype_field("account_name", skypeName);
+    writeSkype_field("account_fullName", fullName);
+    writeSkype_field("account_emails", emails);
+    writeSkype_field("account_ipcountry", ipcountry);
 
     m_pXmlWriter->writeEndElement();
 };
