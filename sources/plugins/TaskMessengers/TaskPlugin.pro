@@ -12,6 +12,10 @@ QT -= gui
 
 CONFIG += dll
 
-SOURCES += src/taskMessengers.cpp
+SOURCES +=  src/taskMessengers.cpp\
+            src/writerMessages.cpp\
+            src/XMLReader_ICQContacts.cpp \
 
-HEADERS += src/taskMessengers.h
+HEADERS +=  src/taskMessengers.h\
+            src/writerMessages.h\
+            src/XMLReader_ICQContacts.h \

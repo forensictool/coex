@@ -1,5 +1,5 @@
 #include "taskMessengers.h"
-
+#include "XMLReader_ICQContacts.h"
 #include <iostream>
 #include <QDirIterator>
 #include <QString>
@@ -47,9 +47,8 @@ bool TaskMessengers::execute(const coex::IConfig *config) {
 		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
 	};
 
-	std:: cout << "hello"; 
-	std:: cout << "checking git skills";
-	// some processing
+    XMLReader_ICQContacts reader; // создаем экземпляр класса
+    reader.read("/home/marina/gpo/coex/tmp/test-data/Windows7_Ult/Users/Default/AppData/Roaming/test.xml", config->outputFolder());
 
 	return true;
 };
