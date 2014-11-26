@@ -152,11 +152,26 @@
 	year = "2010"
 }
 
-@article{New1,
+@article{wikirar,
 	journal = "{forensicswiki.org:[сайт]}",
 	language = "russian",
 	title = "{RAR [Электронный ресурс]}",
 	url = "http://www.forensicswiki.org/wiki/RAR",
+	year = "2014"
+}
+
+@article{zipparolil,
+	journal = "{habrahabr.ru:[сайт]}",
+	language = "russian",
+	title = "{История одного бага или как я ZIP паролил [Электронный ресурс]}",
+	url = "http://habrahabr.ru/post/100200"
+}
+
+@article{updatesolr,
+	journal = "{wiki.apache.org:[сайт]}",
+	language = "russian",
+	title = "{XML Messages for Updating a Solr Index [Электронный ресурс]}",
+	url = "https://wiki.apache.org/solr/UpdateXmlMessages",
 	year = "2014"
 }
 

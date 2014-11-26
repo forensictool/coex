@@ -140,7 +140,23 @@
 	owner = "alina",
 	timestamp = "2013.12.11",
 	title = "{Windows Event Log Format [Электронный ресурс]}",
-	url = "http://www.whitehats.ca/main/members/Malik/malik\_eventlogs/malik\_eventlogs.html",
+	url = "http://www.whitehats.ca/main/members/Malik/malik\_eventlogs/malik\_event\-logs.html",
 	year = "2005"
+}
+
+@article{rar,
+	journal = "{Информация о форматах:[сайт]}",
+	language = "russian",
+	title = "{Информация о формате .rar [Электронный ресурс]}",
+	url = "http://formatsfiles.narod.ru/rar.html",
+	year = "2010"
+}
+
+@article{New1,
+	journal = "{forensicswiki.org:[сайт]}",
+	language = "russian",
+	title = "{RAR [Электронный ресурс]}",
+	url = "http://www.forensicswiki.org/wiki/RAR",
+	year = "2014"
 }
 

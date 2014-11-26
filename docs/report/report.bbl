@@ -56,7 +56,7 @@
 \selectlanguageifdefined{russian}
 {Windows Event Log Format [Электронный ресурс]}~//
   {whitehats.ca:[сайт]}.
-\newblock 2005. URL:
+\newblock {[2005]}. URL:
   http://www.whitehats.ca/main/members/Malik/malik\_eventlogs/malik\_event\-logs.html.{}
 
 \bibitem{skypechat}
@@ -103,5 +103,22 @@
   России, ФСБ России, <<АйТи-Сертифика>>
   [Электронный ресурс]}~// {Эшелон:[сайт]}. URL:
   http://www.npo-echelon.ru/services/certification.{}
+
+\bibitem{rar}
+\selectlanguageifdefined{russian}
+{Информация о формате .rar [Электронный
+  ресурс]}~// {Информация о форматах:[сайт]}.
+\newblock {[2010]}. URL: http://formatsfiles.narod.ru/rar.html.{}
+
+\bibitem{wikirar}
+\selectlanguageifdefined{russian}
+{RAR [Электронный ресурс]}~// {forensicswiki.org:[сайт]}.
+\newblock {[2014]}. URL: http://www.forensicswiki.org/wiki/RAR.{}
+
+\bibitem{updatesolr}
+\selectlanguageifdefined{russian}
+{XML Messages for Updating a Solr Index [Электронный
+  ресурс]}~// {wiki.apache.org:[сайт]}.
+\newblock {[2014]}. URL: https://wiki.apache.org/solr/UpdateXmlMessages.{}
 
 \end{thebibliography}
