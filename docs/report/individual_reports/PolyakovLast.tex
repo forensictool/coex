@@ -1,0 +1,272 @@
+\section{TaskSearchArchive}
+
+\subsection{Структура RAR архива}
+RAR — проприетарный формат сжатия данных и условно-бесплатная программа-архиватор. Имеет расширение .rar, .rev, .r00 или .r01
+
+Определение архивного файла RAR
+
+RAR-архив состоит из блоков переменной длины с заголовками по 7 байт каждый. Любой архив содержит как минимум два блока MARK\_HEAD и MAIN\_HEAD. Первый содержит информацию о том, что перед нами RAR, и выглядит как ``0x 52 61 72 21 1A 07 00'' в HEX'ах, или 0x 52 45 7E 5E” в старых версиях . Третий байт 0х72 как раз таки указывает на то, что это Marker Header. Слово 00 07 в little-endian содержит длину блока. Как раз таки 7 байт.\cite{rar}
+
+Второй блок Main Header начинается сразу же после первого и должен содержать 13 байт и иметь маркировочный байт равным 0x73. После него в файле уже начинаются данные — будь-то сжатый файл (маркет 0х74 в третьем байте заголовка блока), комментарий к архиву, дополнительная информация или, к примеру, recovery-запись.\cite{rarwiki}
+
+\subsubsection{Формат архивного файла RAR}
+                
+Файл архива состоит из блоков разной длины.
+
+В самом начале архива стоит блок-маркер, после которого идёт блок заголовка архива, за которым в произвольном порядке следуют блоки остальных типов.
+                
+Каждый блок начинается со следующих полей (таблица \ref{tab:blok}):         
+
+\begin{table}[h]
+ \caption{Поля блоков архива}
+ \label{tab:blok}
+ \begin{tabularx}{\textwidth}{|c|c|X|}
+\hline
+HEAD\_CRC & 2 байта & CRC всего блока или его части\\
+\hline
+HEAD\_TYPE & 1 байт & Тип блока \\
+\hline
+HEAD\_FLAGS & 16 бит ( =2 байта)& Флаги(*) блока\\
+\hline
+HEAD\_SIZE & 2 байта & Размер блока \\
+\hline
+ADD\_SIZE & 4 байта & Добавление к размеру блока\\
+\hline
+\end{tabularx}
+\end{table}
+            
+Во всех блоках следующие биты в HEAD\_FLAGS (*) имеют одинаковое значение:
+
+\begin{itemize}
+ \item предпоследний 14-й (смещение 0х4000) — если = true (*), то старые версии RAR будут игнорировать этот блок и удалять его при изменении архива; иначе блок копируется в новый архивный файл при изменении архива;
+ \item последний 15-й (смещение 0х8000) — если = true, то поле ADD\_SIZE присутствует в блоке, иначе — отсутствует.
+\end{itemize}
+                
+Заявленные типы блоков (возможные значения HEAD\_TYPE):
+
+\begin{itemize}
+\item 0x72 (*) — блок-маркер;
+\item 0x73 — заголовок архива;
+\item 0x74 — заголовок файла;
+\item 0x75 — заголовок комментария старого типа;
+\item 0x76 — электронная подпись старого типа;
+\item 0x77 — субблок старого типа;
+\item 0x78 — информация для восстановления старого типа;
+\item 0x79 — электронная подпись старого типа;
+\item 0x7A — субблок.
+\end{itemize}
+
+Форматы блоков
+
+Блок-маркер (MARK\_HEAD)
+
+\begin{itemize}
+\item HEAD\_CRC = 0x6152;
+\item HEAD\_TYPE = 0x72;
+\item HEAD\_FLAGS = 0x1a21;
+\item HEAD\_SIZE = 0x0007;
+\end{itemize}
+
+Заголовок архива (MAIN\_HEAD)
+\begin{itemize}
+\item HEAD\_CRC = CRC полей от HEAD\_TYPE до RESERVED2;
+\item HEAD\_TYPE = 0x73;
+\item HEAD\_FLAGS ( =16 бит):                     
+\end{itemize}
+
+0-й бит (*) (смещение 0x0001 (*)) — Атрибут тома (том многотомного архива) (*)
+
+1-й бит (смещение 0x0002) — Присутствует архивный комментарий (RAR 3.x использует отдельный блок комментария и не устанавливает этот флаг)
+
+2-й бит (смещение 0x0004) — если = true, то архив заблокирован для изменений
+
+3-й бит (смещение 0x0008) — если = true, то это — непрерывный (solid) архив
+
+4-й бит (смещение 0x0010) — если = true, то используется новая схема именования томов ('volname.partN.rar'), иначе — старая ('volname.rN')
+
+5-й бит (смещение 0x0020) — Присутствует информация об авторе или электронная подпись (AV) (RAR 3.x не устанавливает этот флаг)
+
+6-й бит (смещение 0x0040) — Присутствует информация для восстановления
+
+7-й бит (смещение 0x0080) — Заголовки блоков зашифрованы
+
+8-й бит (смещение 0x0100) — Первый том (устанавливает только RAR 3.0 и выше)
+
+Остальные биты (с 9 по 15-й) зарезервированы для внутреннего использования
+
+\begin{itemize}
+\item HEAD\_SIZE (*) = Общий размер архивного заголовка, включая архивные комментарии;
+\item RESERVED1 (2 байта) - Зарезервировано;
+\item RESERVED2 (4 байта) - Тоже зарезервировано;
+\end{itemize}
+
+\subsection{Структура ZIP архива}                
+
+ZIP файл состоит из трех областей:
+
+\begin{itemize}
+ \item сжатые/несжатые данные, (последовательность структур Local File Header, сами данные и необязательных Data descriptor);
+ \item центральный каталог (последовательность структур Central directory file header);
+ \item описание центрального каталога (End of central directory record).
+\end{itemize}
+
+С начала файла идет набор из Local File Header, непосредственно данные и (необязательно) структура Data descriptor. Затем структуры типа Central directory file header для каждого файла и папки в ZIP архиве и завершает все это структура End of central directory record.
+
+Local File Header -- используется для описания метаданных файла (имя файла, контрольная сумма, время и дата модификации, сжатый/несжатый размер). Как правило сразу после этой структуры следует содержимое файла.
+
+struct LocalFileHeader
+
+\begin{itemize}
+    \item uint32\_t signature;	// Обязательная сигнатура, равна 0x04034b50
+    \item uint16\_t versionToExtract;	// Минимальная версия для распаковки
+    \item uint16\_t generalPurposeBitFlag;	// Битовый флаг
+    \item uint16\_t compressionMethod;	// Метод сжатия (0 - без сжатия, 8 - deflate)
+    \item uint16\_t modificationTime;	// Время модификации файла
+    \item uint16\_t modificationDate;	// Дата модификации файла
+    \item uint32\_t crc32;				// Контрольная сумма
+    \item uint32\_t compressedSize;	// Сжатый размер
+    \item uint32\_t uncompressedSize;	// Несжатый размер
+    \item uint16\_t filenameLength;	// Длина название файла
+    \item uint16\_t extraFieldLength;	// Длина поля с дополнительными данными
+    \item uint8\_t *filename;			// Название файла (размером filenameLength)
+    \item uint8\_t *extraField;		// Дополнительные данные (размером extraFieldLength)
+\end{itemize}
+
+Сразу после этой структуры идут данные размером compressedSize при использовании сжатия или размером uncompressedSize в противном случае.
+Иногда бывает невозможно вычислить данные на момент записи LocalFileHeader, тогда в crc32, compressedSize и uncompressedSize записываются нули третий бит в generalPurposeBitFlag ставится в единицу и после LocalFileHeader добавляется структура типа Data descriptor.
+
+Data descriptor
+
+Если по какой-то причине содержимое файла невозможно создать одновременно с заголовком типа Local File Header, то сразу после него следует структура Data descriptor, где идет находится дополнение метаданных для Local File Header (контрольная сумма, сжатый/несжатый размер). Откровенно говоря, мне такие файлы не попадались, поэтому больше того, чем написано в википедии сказать не могу.
+
+struct DataDescriptor
+
+\begin{itemize}
+\item    uint32\_t signature;		// Необязательная сигнатура, равна 0x08074b50
+\item    uint32\_t crc32;			// Контрольная сумма
+\item    uint32\_t compressedSize;	// Сжатый размер
+\item    uint32\_t uncompressedSize;	 // Несжатый размер
+\end{itemize}
+
+Central directory file header
+
+Расширенное описание метаданных файла. Содержит дополненную версию LocalFileHeader (добавляются поля номер диска, файловые атрибуты, смещение до Local File Header от начала ZIP файла).
+
+struct CentralDirectoryFileHeader
+
+
+    // Обязательная сигнатура, равна 0x02014b50 
+\begin{itemize}
+\item    uint32\_t signature;    // Версия для создания
+\item    uint16\_t versionMadeBy;    // Минимальная версия для распаковки
+\item    uint16\_t versionToExtract;    // Битовый флаг
+\item    uint16\_t generalPurposeBitFlag;    // Метод сжатия (0 - без сжатия, 8 - deflate)
+\item    uint16\_t compressionMethod;    // Время модификации файла
+\item    uint16\_t modificationTime;    // Дата модификации файла
+\item    uint16\_t modificationDate;    // Контрольная сумма
+\item    uint32\_t crc32;    // Сжатый размер
+\item    uint32\_t compressedSize;    // Несжатый размер
+\item    uint32\_t uncompressedSize;    // Длина название файла
+\item    uint16\_t filenameLength;    // Длина поля с дополнительными данными
+\item    uint16\_t extraFieldLength;    // Длина комментариев к файлу
+\item    uint16\_t fileCommentLength;    // Номер диска
+\item    uint16\_t diskNumber;    // Внутренние аттрибуты файла
+\item    uint16\_t internalFileAttributes;    // Внешние аттрибуты файла
+\item    uint32\_t externalFileAttributes;    // Смещение до структуры LocalFileHeader
+\item    uint32\_t localFileHeaderOffset;    // Имя файла (длиной filenameLength)
+\item    uint8\_t *filename;    // Дополнительные данные (длиной extraFieldLength)
+\item    uint8\_t *extraField;    // Комментарий к файла (длиной fileCommentLength)
+\item   uint8\_t *fileComment;
+\end{itemize}
+
+End of central directory record (EOCD)
+
+Эта структура записывается в конце файла. Содержит следующие поля: номер текущего диска, количество записей Central directory file header в текущем диске, общее количество записей Central directory file header.
+
+// Обязательная сигнатура, равна 0x06054b50
+\begin{itemize}
+\item uint32\_t signature; // Номер диска
+\item uint16\_t diskNumber;   // Номер диска, где находится начало Central Directory
+\item uint16\_t startDiskNumber;    // Количество записей в Central Directory в текущем диске
+\item uint16\_t numberCentralDirectoryRecord;    // Всего записей в Central Directory
+\item uint16\_t totalCentralDirectoryRecord;    // Размер Central Directory
+\item uint32\_t sizeOfCentralDirectory;    // Смещение Central Directory
+\item uint32\_t centralDirectoryOffset;    // Длина комментария
+\item uint16\_t commentLength;    // Комментарий (длиной commentLength)
+\item uint8\_t *comment;
+\end{itemize}
+
+Папки в ZIP файле представлены двумя структурами Local File Header и Central directory file header с нулевым размером и контрольной суммой. Название папки заканчивается слешем «/».
+
+\subsection{Рефакторинг старого кода :: COEX}
+
+Рефакторинг — это процесс улучшения написанного ранее кода путем такого изменения его внутренней структуры, которое не влияет на внешнее поведение.
+
+Во многом при рефакторинге лучше полагаться на интуицию, основанную на опыте. Тем не менее имеются некоторые видимые проблемы в коде, требующие рефакторинга:
+
+\begin{itemize}
+\item дублирование кода;
+\item длинный метод;
+\item длинный список параметров;
+\item «завистливые» функции — это метод, который чрезмерно обращается к данным другого объекта;
+\item избыточные временные переменные;
+\item классы данных;
+\item несгруппированные данные.
+\end{itemize}
+
+\subsubsection{Рефакторинг плагина Pidgin}
+
+\begin{itemize}
+\item Удаление дублирующегося кода
+\item Вынесение блоков кода отвечающих за разбор xml, html логов из TaskPidginWin::execute в отдельные функции (processingLogPidgin, processingContactPidgin, processingAccountPidgin).
+\item Замена алгоритма поиска файлов, на более понятный
+\item Использование qDebug вместо std::cout
+\end{itemize}
+
+\subsubsection{Рефакторинг плагина Skype}
+
+\begin{itemize}
+\item Удаление цикличного подключения к БД.
+\item Замена алгоритма поиска файлов, на более понятный.
+\item Использование qDebug вместо std::cout.
+\end{itemize}
+
+\subsection{Совместимость плагинов под формат NoSql БД Solr}
+
+Для совместимости добавления в БД solr необходимо выполнить требования, указанные в источнике \cite{updatesolr}.
+
+Документ добавляющий запись в БД имеет следющий формат: 
+
+Корневой тег add,  затем каждая запись/событие помещается в тег doc, где далее/глубже лежат field с нашими  данными. Атрибуты field name определяются разработчиком, в зависимости от необходимости, однако каждая запись должна иметь уникальный id. Так же добавляется в sceme.xml  на сервере solr, для того чтобы БД знала какие данные в нее импортируются, и как с ними работать.
+
+\textbf{Старый формат}
+
+\begin{lstlisting}
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<Messages  Messenger=\"pidgin\">
+    <info_account name=\"\" email=\"fox.user.3@gmail.com/\" password
+        =\"kpdroscfozyyvsyk\" protocol=\"prpl-jabber\"/>
+    <info_account name=\"Igor Polyakov\" email=\"fox.user.3@gmail.com\"
+        password=\"this\_is\_real\_passowrd\" protocol=\"prpl-vkcom\"/>
+    <info_account name=\"Igor Polyakov\" email=\"fox.user.3@gmail.com\"
+        password=\"this\_is\_real\_passowrd\" protocol=\"prpl-vkcom\"/>
+</Messages >
+\end{lstlisting}
+
+\textbf{Новый формат}
+
+\begin{lstlisting}
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<add>
+    <doc>
+        <field name=\"id\">pidgin\_24d7a3ebd9f601666a7ba27225e71854
+            </field>
+        <field name=\"doc_type\">account</field>
+        <field name=\"application\">pidgin</field>
+        <field name=\"account_id\"></field>
+        <field name=\"account_mail\">fox.user.3@gmail.com/</field>
+        <field name=\"account_protocol\">prpl-jabber</field>
+        <field name=\"account_password\">kpdroscfozyyvsyk</field>
+    </doc>
+</add>
+\end{lstlisting}

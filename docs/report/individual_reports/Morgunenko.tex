@@ -1,0 +1,58 @@
+\subsection{Написание конфигурационного файла schema.xml}
+
+Для того, чтобы Solr искал по тем полям, которые нам нужны, необходимо его правильно сконфигурировать. Поля, используемые при индексировании и поиске информации по индексу, описываются в файле <<schema.xml>>.
+
+Большую часть содержимого файла мы оставили такой, какой она была по умолчанию, заменив только строки, описывающие поля для индексирования.
+
+Были добавлены следующие строки:
+
+\begin{lstlisting}
+<!--  browser's fields   -->
+   <field name="history_url" type="text" indexed="true" stored="true"/>
+   <field name="history_date" type="text" indexed="true" stored="true"/>
+   <field name="bookmark_url" type="text" indexed="true" stored="true"/>
+   <field name="bookmark_name" type="text" indexed="true" stored="true"/>
+   <field name="bookmark_other" type="text" indexed="true" stored="true"/>
+   <field name="login_data_url" type="text" indexed="true" stored="true"/>
+   <field name="login_data_name" type="text" indexed="true" stored="true"/>
+   <field name="login_data_password" type="text" indexed="true" stored="true"/>
+   <field name="preferences_param_name" type="text" indexed="true" 
+        stored="true"/>
+   <field name="preferences_param_value" type="text" indexed="true" 
+        stored="true"/>
+   
+<!--  Message's fields   -->
+   <field name="log_chat_id" type="text" indexed="true" stored="true"/>
+   <field name="account_name" type="text" indexed="true" stored="true"/>
+   <field name="account_fullName" type="text" indexed="true" stored="true"/>
+   <field name="account_emails" type="text" indexed="true" stored="true"/>
+   <field name="account_ipcountry" type="text" indexed="true" stored="true"/>
+   <field name="call_timestamp" type="text" indexed="true" stored="true"/>
+   <field name="call_duration" type="text" indexed="true" stored="true"/>
+   <field name="call_server" type="text" indexed="true" stored="true"/>
+   <field name="call_client" type="text" indexed="true" stored="true"/>
+   <field name="contact_name" type="text" indexed="true" stored="true"/>
+   <field name="contact_fullName" type="text" indexed="true" stored="true"/>
+   <field name="contact_birthday" type="text" indexed="true" stored="true"/>
+   <field name="contact_phone" type="text" indexed="true" stored="true"/>
+   <field name="contact_gender" type="text" indexed="true" stored="true"/>
+   <field name="contact_languages" type="text" indexed="true" stored="true"/>
+   <field name="contact_country" type="text" indexed="true" stored="true"/>
+   <field name="contact_city" type="text" indexed="true" stored="true"/>
+   <field name="message_chat_id" type="text" indexed="true" stored="true"/>
+   <field name="message_account" type="text" indexed="true" stored="true"/>
+   <field name="message_protocol" type="text" indexed="true" stored="true"/>
+   <field name="message_dataTime" type="text" indexed="true" stored="true"/>
+   <field name="message_message" type="text" indexed="true" stored="true"/>
+   <field name="message_author" type="text" indexed="true" stored="true"/>
+   <field name="message_text" type="text" indexed="true" stored="true"/>
+   <field name="contact_account" type="text" indexed="true" stored="true"/>
+   <field name="contact_protocol" type="text" indexed="true" stored="true"/>
+   <field name="contact_id" type="text" indexed="true" stored="true"/>
+   <field name="account_id" type="text" indexed="true" stored="true"/>
+   <field name="account_mail" type="text" indexed="true" stored="true"/>
+   <field name="account_protocol" type="text" indexed="true" stored="true"/>
+   <field name="account_password" type="text" indexed="true" stored="true"/>
+\end{lstlisting}
+
+

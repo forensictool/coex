@@ -1,0 +1,100 @@
+\input{config}
+
+\begin{document}
+
+\input{title}
+\input{referat}
+
+\newpage
+\ESKDthisStyle{empty}
+\section*{Список исполнителей}
+
+Моргуненко А.В. -- документатор.
+
+Никифоров Д.С. -- программист, ответственный исполнитель, ответственный за написание части системы, работающей с логами системы.
+
+Поляков И.Ю. -- программист, ответственный за написание части системы, работающей с логами мессенджеров.
+
+Пономарёв А.К. -- аналитик.
+
+\newpage
+\ESKDstyle{plain}
+\tableofcontents
+
+\newpage
+\ESKDstyle{plain}
+\section*{Введение}
+\addcontentsline{toc}{section}{Введение}
+\input{intro}
+
+\section{Назначение и область применения}
+Разрабатываемый комплекс предназначен для автоматизации процесса сбора информации с исследуемого образа жёсткого диска.
+\section{Постановка задачи}
+\setcounter{figure}{0}
+\input{problem_form}
+\section{Инструменты}
+\setcounter{figure}{0}
+\subsection{Система контроля версий Git}
+\input{git}
+\subsection{Система компьютерной вёрстки \TeX}
+\input{tex}
+\subsection{Qt - кроссплатформенный инструментарий разработки ПО}
+\input{individual_reports/qt_doc}
+
+\section{Технические характеристики}
+\input{individual_reports/technical_attributes}
+\subsection{Выбор единого формата выходных файлов}
+\input{xml}
+
+\section{Разработка программного обеспечения}
+\setcounter{figure}{0}
+
+\subsection{Архитектура}
+\input{individual_reports/architech}
+\subsection{Сбор и анализ системных журналов Windows (III семестр)} % - Отчёт Димы
+\input{individual_reports/Nikiforov}
+\subsection{Сбор и анализ системных журналов Windows (IV семестр)} 
+\input{individual_reports/NewNikiforov}
+\newpage
+\subsection{Cбор и анализ истории переписки мессенджеров (III семестр)} % - Отчёт Игоря
+\input{individual_reports/Polyakov}
+\subsection{Cбор и анализ истории переписки мессенджеров (IV семестр)} 
+\input{individual_reports/NewPolyakov}
+
+\section{Некоторые аспекты сертификации программных средств объектов\\ информатизации по требованиям информационной безопасности} % - Отчёт Лёши
+\setcounter{figure}{0}
+\input{individual_reports/Ponomarev}
+
+\section{Создание собственного репозитория для debian и ubuntu}
+\setcounter{figure}{0}
+\input{individual_reports/NewPonomarev}
+
+\section{Поисковая система Apache Solr}
+\setcounter{figure}{0}
+\input{individual_reports/PonomarevLast}
+\input{individual_reports/Morgunenko}
+
+\setcounter{figure}{0}
+\input{individual_reports/PolyakovLast}
+
+\setcounter{figure}{0}
+\input{individual_reports/NikiforovLast}
+
+\newpage
+\section*{Заключение}
+\addcontentsline{toc}{section}{Заключение}
+В данном семестре нашей группой была выполнена часть работы по созданию автоматизированного программного комплекса для проведения компьютерной экспертизы, проанализированы дальнейшие перспективы и поставлены цели для будущих поколений.
+
+\newpage
+\renewcommand{\refname}{Список использованных источников}
+\bibliography{lit}
+
+\ESKDappendix{Обязательное}{\normalfont Компакт-диск}
+Компакт-диск содержит: 
+\begin{itemize}
+\item электронную версию пояснительной записки в форматах *.tex и *.pdf;
+\item актуальную версию программного комплекса для проведения компьютерной экспертизы;
+\item тестовые данные для работы с программным комплексом.
+\end{itemize}
+
+\end{document}
