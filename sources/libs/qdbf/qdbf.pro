@@ -1,17 +1,15 @@
-
 TARGET = QDbf
 
-# include(library.pri)
 TEMPLATE = lib
 DEFINES += QDBF_LIBRARY
 
-DESTDIR = obj
+DESTDIR = tmp/
 TARGET = ../../../../bin/libs/qdbf
 CONFIG += dll
 
-OBJECTS_DIR = obj
-    MOC_DIR = obj
-BUILD_PATH = obj
+OBJECTS_DIR = tmp/
+    MOC_DIR = tmp/
+BUILD_PATH = tmp/
 
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$INCLUDEPATH
