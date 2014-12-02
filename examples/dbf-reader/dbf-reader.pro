@@ -1,7 +1,7 @@
 QT       += core
 QT       -= gui
 
-TARGET = icqdbreader
+TARGET = dbf-reader
 CONFIG   += console
 CONFIG   -= app_bundle
 
@@ -15,3 +15,6 @@ unix:!macx:!symbian: LIBS += -L$$PWD/../../bin/libs/ -lqdbf
 
 INCLUDEPATH += $$PWD/../../sources/libs/qdbf/src
 DEPENDPATH += $$PWD/../../sources/libs/qdbf/src
+
+target.path = /$$LIBRARY_BASENAME/$$PROJECT_NAME
+INSTALLS += target
