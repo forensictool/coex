@@ -55,6 +55,31 @@ do
 	echo $OK
 done
 
+echo " * * build libs"
+cd $SOURCES/libs
+for D in `find ./ -mindepth 1 -maxdepth 1 -type d `
+do
+	cd $SOURCES/libs
+	cd $D
+	DIRNAME=$(basename "`pwd`")
+	echo -ne " * build '$DIRNAME'"
+
+	qmake-qt4 >> $LOGFILE 2>> $ERRORLOGFILE
+	if [ $? -ne 0 ]; then
+		echo ""
+		echo "ERRORS, log look in file: $ERRORLOGFILE"
+		exit;
+	fi
+
+	make >> $LOGFILE 2>> $ERRORLOGFILE
+	if [ $? -ne 0 ]; then
+		echo ""
+		echo "ERRORS, log look in file: $ERRORLOGFILE"
+		exit;
+	fi
+	echo $OK
+done
+
 # create version file
 
 cd $CURRPWD/bin
@@ -62,7 +87,7 @@ cd $CURRPWD/bin
 
 echo "The MIT License (MIT)
  
-Copyright (c) 2013-2014 GPO-Forensics
+Copyright (c) 2013-2014 GPO-1011-Forensics
  
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the \"Software\"), to deal in
@@ -88,14 +113,21 @@ Version: 0.2.`git rev-list HEAD --count`
 Date: `date`
 Address: Russia, Tomsk, st. Lenina, 40
 Organization: TUSUR
-Author: GPO-Forensics
+Author: GPO-1011-Forensics
 
 Developers:
 Alexey Gulyaev (kondorbrn@gmail.com),
 Evgenii Sopov (sea-kg@ya.ru),
-Dmitrii Nikiforov (??),
+Dmitrii Nikiforov (nds@keva.tusur.ru),
 Alinka Morgunenko (??),
 Igor Polyakov (??)
 Oleg Rachkovan  (??)
+Vlad Shipovskoi (??)
+Marina Meita (somekindofcookiemonster@gmail.com)
+Oleg Lobanov (??)
+
+Using third party:
+QDbf: arial79@gmail.com, https://code.google.com/p/qdbf/
+
 " > README
 
