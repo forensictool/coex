@@ -39,9 +39,32 @@ int main(int argc, char *argv[])
 		<< " absolute path = " << fileInfo.absoluteFilePath().toStdString() << "\n"
 		<< "\n";
 	
-	QDbf::QDbfTable table;
-	if (!table.open(fileInfo.absoluteFilePath())) {
-		std::cout << "file open error\n\n";
+	QDbf::QDbfTable table(fileInfo.absoluteFilePath());
+	
+	/*IBM866,
+       Windows1251,
+        
+	setCodepage(QDbfTable::Codepage codepage)*/
+	
+	if (!table.open()) {
+		std::cout << "file open error: ";
+		
+		QDbf::QDbfTable::DbfTableError err = table.error();
+		
+		if (err == QDbf::QDbfTable::NoError)
+			std::cout << "NoError";
+		if (err == QDbf::QDbfTable::OpenError)
+			std::cout << "OpenError";
+		if (err == QDbf::QDbfTable::ReadError)
+			std::cout << "ReadError";
+		if (err == QDbf::QDbfTable::WriteError)
+			std::cout << "WriteError";
+		if (err == QDbf::QDbfTable::PermissionsError)
+			std::cout << "PermissionsError";
+		if (err == QDbf::QDbfTable::UnspecifiedError)
+			std::cout << "UnspecifiedError";
+
+		std::cout << "\n\n";
 		return -1;
 	}
 
