@@ -21,7 +21,7 @@ QString TaskSearchArchive::help() {
 };
 
 QString TaskSearchArchive::name() {
-    return "search Archive";
+    return "Search Archives";
 };
 
 QString TaskSearchArchive::author() {

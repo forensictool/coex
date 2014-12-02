@@ -18,7 +18,7 @@ QString TaskMessengers::help() {
 };
 
 QString TaskMessengers::name() {
-	return "messengers";
+	return "ICQ";
 };
 
 QString TaskMessengers::author() {

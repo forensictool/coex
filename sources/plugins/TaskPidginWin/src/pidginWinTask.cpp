@@ -20,7 +20,7 @@ QString TaskPidginWin::help() {
 };
 
 QString TaskPidginWin::name() {
-	return "pidgin-win";
+	return "Pidgin Win";
 };
 
 QString TaskPidginWin::author() {

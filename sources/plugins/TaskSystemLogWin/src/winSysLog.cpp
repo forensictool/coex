@@ -14,7 +14,7 @@ QString TaskSystemLogWin::help() {
 };
 
 QString TaskSystemLogWin::name() {
-	return "system-log-win";
+	return "SystemLogWin";
 };
 
 QString TaskSystemLogWin::author() {

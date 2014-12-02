@@ -26,7 +26,7 @@ QString TaskSkypeWin::help() {
 };
 
 QString TaskSkypeWin::name() {
-	return "skype-win";
+	return "SkypeWin";
 };
 
 QString TaskSkypeWin::author() {

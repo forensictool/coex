@@ -122,9 +122,10 @@ Dmitrii Nikiforov (nds@keva.tusur.ru),
 Alinka Morgunenko (??),
 Igor Polyakov (??)
 Oleg Rachkovan  (??)
-Vlad Shipovskoi (??)
-Marina Meita (somekindofcookiemonster@gmail.com)
+Vladislav Shipovskoi (??)
+Marina Meyta (somekindofcookiemonster@gmail.com)
 Oleg Lobanov (??)
+Serakov Andrey (??)
 
 Using third party:
 QDbf: arial79@gmail.com, https://code.google.com/p/qdbf/

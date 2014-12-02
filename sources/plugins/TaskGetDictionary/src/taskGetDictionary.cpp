@@ -23,15 +23,15 @@ QString TaskGetDictionary::help() {
 };
 
 QString TaskGetDictionary::name() {
-  return "getDictionary";
+  return "CreateDictionaryPasswords";
 };
 
 QString TaskGetDictionary::author() {
-  return "unknown";
+  return "Dmitrii Nikiforov";
 };
 
 QString TaskGetDictionary::description() {
-  return "getDictionary task";
+  return "CreateDictionaryPasswords";
 };
 
 bool TaskGetDictionary::isSupportOS(const coex::ITypeOperationSystem *os) {

@@ -18,7 +18,7 @@ QString TaskExample::help() {
 };
 
 QString TaskExample::name() {
-	return "example";
+	return "Example";
 };
 
 QString TaskExample::author() {

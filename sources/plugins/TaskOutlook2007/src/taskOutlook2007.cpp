@@ -18,7 +18,7 @@ QString taskOutlook2007::help() {
 };
 
 QString taskOutlook2007::name() {
-    return "TaskOutlook2007";
+    return "Outlook2007";
 };
 
 QString taskOutlook2007::author() {
