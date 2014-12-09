@@ -5,6 +5,7 @@
 		<field name="application">Chrome</field>
 		<field name="doc_type">history</field>
 		<field name="history_url">http://fff</field>
+  	<field name="history_title">blabla</field>
 		<field name="history_date">date</field>
 	</doc>
 	<doc>
@@ -13,6 +14,7 @@
 		<field name="application">Chrome</field>
 		<field name="doc_type">history</field>
 		<field name="history_url">http://fff</field>
+  	<field name="history_title">blabla2</field>
 		<field name="history_date">date</field>
 	</doc>
 </add>

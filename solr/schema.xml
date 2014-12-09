@@ -12,6 +12,7 @@
    
 <!--  browser's fields   -->
    <field name="history_url" type="text" indexed="true" stored="true"/>
+   <field name="history_title" type="text" indexed="true" stored="true"/>   
    <field name="history_date" type="text" indexed="true" stored="true"/>
    <field name="bookmark_url" type="text" indexed="true" stored="true"/>
    <field name="bookmark_name" type="text" indexed="true" stored="true"/>
