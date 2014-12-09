@@ -1,0 +1,13 @@
+<add>
+	<!-- Comment: id must be generated as bookmark_MD5(url+name+name_browser) -->
+	<doc>
+		<field name="id">download_c0ee9eb3b28210b249dfda5cc802698a</field>
+		<field name="application">Chrome</field>
+		<field name="doc_type">download</field>
+		<field name="download_url">http://dlcdnet.asus.com/pub/ASUS/nb/DriversForWin8/WiFI/Wifi_Intel_Win7_64_VER15704.zip</field>
+		<field name="download_path">C:\Users\blacksc\Desktop\hammerhead-ktu84p-factory-35ea0277.tgz</field>
+		<field name="download_date">13057215779518656</field>
+		<field name="download_size">463349092</field>
+		<field name="download_referrer">https://developers.google.com/android/nexus/images?hl=ru</field>
+	</doc>
+</add>

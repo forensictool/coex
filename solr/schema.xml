@@ -14,6 +14,12 @@
    <field name="history_url" type="text" indexed="true" stored="true"/>
    <field name="history_title" type="text" indexed="true" stored="true"/>   
    <field name="history_date" type="text" indexed="true" stored="true"/>
+   <field name="keyword_term" type="text" indexed="true" stored="true"/>
+   <field name="download_url" type="text" indexed="true" stored="true"/>
+   <field name="download_path" type="text" indexed="true" stored="true"/>
+   <field name="download_date" type="text" indexed="true" stored="true"/>
+   <field name="download_size" type="text" indexed="true" stored="true"/>
+   <field name="download_referrer" type="text" indexed="true" stored="true"/>
    <field name="bookmark_url" type="text" indexed="true" stored="true"/>
    <field name="bookmark_name" type="text" indexed="true" stored="true"/>
    <field name="bookmark_other" type="text" indexed="true" stored="true"/>
