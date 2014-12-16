@@ -1,0 +1,564 @@
+{
+   "checksum": "2a1a55626afe67f31ca3693710c0a54a",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13053208197956328",
+            "id": "75",
+            "meta_info": {
+               "stars.id": "ssc_8aceafc1a9c1fd4f",
+               "stars.isSynced": "true"
+            },
+            "name": "Яндекс",
+            "sync_transaction_version": "54",
+            "type": "url",
+            "url": "http://www.yandex.ru/"
+         }, {
+            "date_added": "13051623335593501",
+            "id": "76",
+            "meta_info": {
+               "stars.id": "ssc_5089e09b4154a82e",
+               "stars.isSynced": "true",
+               "stars.pageData": "Ig5sS3cyY3I4RmdPeWROTQ==",
+               "stars.type": "2"
+            },
+            "name": "Новости",
+            "sync_transaction_version": "83",
+            "type": "url",
+            "url": "https://vk.com/feed"
+         }, {
+            "date_added": "13010161523321057",
+            "id": "77",
+            "name": "BitTorrent трекер RuTracker.org (ex torrents.ru)",
+            "sync_transaction_version": "21",
+            "type": "url",
+            "url": "http://rutracker.org/forum/index.php"
+         }, {
+            "date_added": "13013687812652433",
+            "id": "78",
+            "name": "Главная :: Torrents.vtomske.ru",
+            "type": "url",
+            "url": "http://torrents.vtomske.ru/forum/"
+         }, {
+            "date_added": "13038944531193277",
+            "id": "79",
+            "name": "Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/"
+         }, {
+            "date_added": "13038944456870413",
+            "id": "80",
+            "name": "Codeacademy",
+            "type": "url",
+            "url": "http://www.codecademy.com/"
+         }, {
+            "date_added": "13051037813686042",
+            "id": "81",
+            "name": "Интерактивные онлайн-курсы по HTML и CSS — HTML Academy",
+            "type": "url",
+            "url": "http://htmlacademy.ru/"
+         }, {
+            "date_added": "13051039539247456",
+            "id": "82",
+            "name": "htmlbook.ru | Для тех, кто делает сайты",
+            "type": "url",
+            "url": "http://htmlbook.ru/"
+         }, {
+            "date_added": "13052902303954285",
+            "id": "83",
+            "name": "Фриланс сайт №1. Фрилансеры, вакансии удаленно, работа на дому, freelance : FL.ru",
+            "type": "url",
+            "url": "https://www.fl.ru/projects/"
+         }, {
+            "date_added": "13052902271939285",
+            "id": "84",
+            "name": "JavaRush - логин",
+            "type": "url",
+            "url": "http://javarush.ru/login.html"
+         }, {
+            "date_added": "13053189795356033",
+            "id": "85",
+            "name": "Battlelog / Battlefield 3",
+            "type": "url",
+            "url": "http://battlelog.battlefield.com/bf3/ru/"
+         }, {
+            "date_added": "13053932685087762",
+            "id": "86",
+            "name": "Горячее / pikabu.ru - Все",
+            "type": "url",
+            "url": "http://pikabu.ru/"
+         }, {
+            "date_added": "13045377359901346",
+            "id": "87",
+            "name": "Система сетевого обучения",
+            "type": "url",
+            "url": "http://79.136.240.154:8050/moodle/"
+         }, {
+            "date_added": "13054901722326998",
+            "id": "88",
+            "name": "0000112: Исследовать логи и инфу от chrome - MantisBT",
+            "type": "url",
+            "url": "http://mantis.keva.su/view.php?id=112"
+         }, {
+            "date_added": "13057513503248553",
+            "id": "90",
+            "meta_info": {
+               "stars.id": "ssc_8f6e5da05bdf3eb2",
+               "stars.isSynced": "true"
+            },
+            "name": "Почта",
+            "sync_transaction_version": "81",
+            "type": "url",
+            "url": "http://mail.yandex.ru/?win=145&clid=2154483"
+         } ],
+         "date_added": "13057013360862106",
+         "date_modified": "13057479399053688",
+         "id": "1",
+         "name": "Панель закладок",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13029003250444458",
+            "id": "25",
+            "name": "''Исток2''. Радиолампы - почтой. Неоновые и газоразрядные лампы и индикаторы.",
+            "type": "url",
+            "url": "http://www.istok2.com/catalog/7/"
+         }, {
+            "date_added": "13029003262692458",
+            "id": "26",
+            "name": "Наборы Для Сборки Часов На Газоразрядных Индикаторах - Продам-Отдам, Услуги - Форум по радиоэлектронике",
+            "type": "url",
+            "url": "http://forum.cxem.net/index.php?showtopic=121059"
+         }, {
+            "date_added": "13029003271131458",
+            "id": "27",
+            "name": "20 самых нужных профессий в мире - BBC Russian - Экономика",
+            "type": "url",
+            "url": "http://www.bbc.co.uk/russian/business/2013/04/130326_wanted_migrants_clickable.shtml"
+         }, {
+            "date_added": "13029003273875458",
+            "id": "28",
+            "name": "Астрофотография в каждый дом / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/200640/"
+         }, {
+            "date_added": "13029003276331458",
+            "id": "29",
+            "name": "Купить Nokia 3310 всего за 1450 рублей",
+            "type": "url",
+            "url": "http://mobilelegends.ru/goods/%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C-nokia-3310"
+         }, {
+            "date_added": "13029003279052458",
+            "id": "30",
+            "name": "Что нужно делать смолоду или как стать богатым айтишником / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/152995/"
+         }, {
+            "date_added": "13029003280884458",
+            "id": "31",
+            "name": "Whiteboarding (пишем код на доске на собеседованиях) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/201772/"
+         }, {
+            "date_added": "13029003291923458",
+            "id": "32",
+            "name": "Разработка игры на Unity3d, обзор ассетов + немного о паблишинге / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202066/"
+         }, {
+            "date_added": "13029003293416458",
+            "id": "33",
+            "name": "Raspberry Pi — HD медиаплеер / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202236/"
+         }, {
+            "date_added": "13029003294660458",
+            "id": "34",
+            "name": "Сколько лет глазам человека? / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202250/"
+         }, {
+            "date_added": "13029003295860458",
+            "id": "35",
+            "name": "Крошечный Excel на чистом JavaScript (30 строк кода) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202304/"
+         }, {
+            "date_added": "13029003297100458",
+            "id": "36",
+            "name": "Apple Campus ",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/198952/"
+         }, {
+            "date_added": "13029003301316458",
+            "id": "37",
+            "name": "Солнечная батарея “PlanarSun” — краудфандинговый проект от российского изобретателя / Блог компании Простая наука / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/company/gtv/blog/195528/"
+         }, {
+            "date_added": "13029003302955458",
+            "id": "38",
+            "name": "Google Street View добрался и до Большого адронного коллайдера / Блог компании CloudsNN / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/company/cloudsnn/blog/195398/"
+         }, {
+            "date_added": "13029003483177754",
+            "id": "39",
+            "name": "Часы на газоразрядных индикаторах / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/170551/"
+         }, {
+            "date_added": "13029528142454448",
+            "id": "40",
+            "name": "Microsoft открыла центр противодействия киберпреступности / Новости software / 3DNews - Daily Digital Digest",
+            "type": "url",
+            "url": "http://www.3dnews.ru/778829"
+         }, {
+            "date_added": "13029528168048448",
+            "id": "41",
+            "name": "Гоночка на JavaScript (30 строк кода) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202556/"
+         }, {
+            "date_added": "13029528171623448",
+            "id": "42",
+            "name": "Крошечная змейка на JavaScript (30 строк кода) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202476/"
+         }, {
+            "date_added": "13029528176680448",
+            "id": "43",
+            "name": "«Все работы хороши», а программист — лучшая! / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202558/"
+         }, {
+            "date_added": "13029528185390880",
+            "id": "44",
+            "name": "Список покупок / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202550/"
+         }, {
+            "date_added": "13029528190438880",
+            "id": "45",
+            "name": "Программирование, как новый вид человеческой деятельности / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202748/"
+         }, {
+            "date_added": "13029528192806880",
+            "id": "46",
+            "name": "Stasis — изометрическая, научно-фантастическая point-and-click адвенчура (Kickstarter Campaign) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/202100/"
+         }, {
+            "date_added": "13029528197895880",
+            "id": "47",
+            "name": "Немножко ИБ на ночь, или базовые понятия идентификации и аутентификации обьектов и пользователей / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/203152/"
+         }, {
+            "date_added": "13029539440899425",
+            "id": "48",
+            "name": "Беспроводной HDMI — в каждую квартиру / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/203164/"
+         }, {
+            "date_added": "13029661804352608",
+            "id": "49",
+            "name": "Старая, добрая «The Matrix» или визуализатор для матрицы версии один / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/198106/"
+         }, {
+            "date_added": "13029671320182971",
+            "id": "50",
+            "name": "Tomsk State University of Control Systems and Radioelectronics - Computer Systems - DreamSpark Premium | Academic Software Discounts",
+            "type": "url",
+            "url": "http://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?ws=d1a5a7dc-ca8b-e011-969d-0030487d8897&vsro=8"
+         }, {
+            "date_added": "13039097718553486",
+            "id": "51",
+            "name": "Собираем карманный лазер / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/215353/"
+         }, {
+            "date_added": "13049999012360970",
+            "id": "52",
+            "name": "Матрёшка Z / узнать больше, купить в Амперке",
+            "type": "url",
+            "url": "http://amperka.ru/collection/kits/product/matryoshka-z"
+         }, {
+            "date_added": "13049999025013970",
+            "id": "53",
+            "name": "Get over here!",
+            "type": "url",
+            "url": "http://pikabu.ru/story/get_over_here_2468548"
+         }, {
+            "date_added": "13049999027900970",
+            "id": "54",
+            "name": "Готовим Кофе",
+            "type": "url",
+            "url": "http://pikabu.ru/story/gotovim_kofe_2467522"
+         }, {
+            "date_added": "13049999030372970",
+            "id": "55",
+            "name": "GameTutorials | Talk to me like a three-year-old programming tutorials",
+            "type": "url",
+            "url": "http://www.gametutorials.com/"
+         }, {
+            "date_added": "13049999033023402",
+            "id": "56",
+            "name": "Основы программирования на C / С++ (Си++) для начинающих и новичков",
+            "type": "url",
+            "url": "http://cppstudio.com/"
+         }, {
+            "date_added": "13049999035446402",
+            "id": "57",
+            "name": "Визы для стартапов: как открыть собственное дело за рубежом (часть 1) / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/229581/"
+         }, {
+            "date_added": "13049999040510402",
+            "id": "58",
+            "name": "[DC Comics] Вселенная DC - Супермен, Бэтмен, Зелёный фонарь, Флэш, Чудо-Женщина и многие другие (3789 выпусков) [1938-2014 гг., CBR, RUS] (ОБНОВЛЕНО 5 июля 2014 год",
+            "type": "url",
+            "url": "http://rutracker.org/forum/viewtopic.php?t=3527512"
+         }, {
+            "date_added": "13049999044213402",
+            "id": "59",
+            "name": "Star Wars / Звёздные войны (700 выпусков) (Dark Horse Comics) [1977-2012, CBR, RUS] Обновлено 26.12.2012 :: RuTracker.org (ex torrents.ru)",
+            "type": "url",
+            "url": "http://rutracker.org/forum/viewtopic.php?t=1549032"
+         }, {
+            "date_added": "13051039504927456",
+            "id": "60",
+            "name": "Unity3D + Google Services: мультиплеер для вашего проекта на Android и iOS / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/230377/"
+         }, {
+            "date_added": "13051039509625456",
+            "id": "61",
+            "name": "Книги, которые должен прочитать Java программист: от новичка до профессионала / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/153373/"
+         }, {
+            "date_added": "13051039514390456",
+            "id": "62",
+            "name": "Топ-5 самых впечатляющих книг, которые должен прочесть каждый разработчик ПО / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/135897/"
+         }, {
+            "date_added": "13051039519398456",
+            "id": "63",
+            "name": "MAXimal :: algo",
+            "type": "url",
+            "url": "http://e-maxx.ru/algo/"
+         }, {
+            "date_added": "13051039523621456",
+            "id": "64",
+            "name": "Много бесплатных книг по программированию / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/191312/"
+         }, {
+            "date_added": "13051039526656456",
+            "id": "65",
+            "name": "Что почитать по веб разработке / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/77179/"
+         }, {
+            "date_added": "13051039534924456",
+            "id": "66",
+            "name": "htmlforum.ru",
+            "type": "url",
+            "url": "http://htmlforum.ru/"
+         }, {
+            "date_added": "13051039537175456",
+            "id": "67",
+            "name": "Веб-дизайн",
+            "type": "url",
+            "url": "http://webdesign-master.ru/design/"
+         }, {
+            "date_added": "13045377359901346",
+            "id": "68",
+            "name": "Система сетевого обучения",
+            "type": "url",
+            "url": "http://79.136.240.154:8050/moodle/"
+         }, {
+            "date_added": "13052902264422285",
+            "id": "69",
+            "name": "Global Talent | IT",
+            "type": "url",
+            "url": "http://aiesec.ru/students/gtalent/it"
+         }, {
+            "date_added": "13054816258561271",
+            "id": "70",
+            "name": "ГАРАНТ - Законодательство (кодексы, законы, указы, постановления) РФ, аналитика, комментарии, практика.",
+            "type": "url",
+            "url": "http://www.garant.ru/"
+         }, {
+            "date_added": "13054816265731271",
+            "id": "71",
+            "name": "\"Консультант Плюс\" - законодательство РФ: кодексы, законы, указы, постановления Правительства Российской Федерации, нормативные акты",
+            "type": "url",
+            "url": "http://www.consultant.ru/"
+         }, {
+            "date_added": "13055316366836665",
+            "id": "72",
+            "name": "Самое популярное на AliExpress в вашем регионе",
+            "type": "url",
+            "url": "http://activities.aliexpress.com/ru/bestselling.php"
+         }, {
+            "date_added": "13055316377811665",
+            "id": "73",
+            "name": "Купить интернет-магазин — Shop-Script 5",
+            "type": "url",
+            "url": "http://www.shop-script.ru/pricing/"
+         }, {
+            "date_added": "13055316381435665",
+            "id": "74",
+            "name": "Доставка с Taobao, Aliexpress, Alibaba за 5 дней! Доставка с интернет-магазинов Китая.",
+            "type": "url",
+            "url": "http://www.alibaba-service.ru/"
+         } ],
+         "date_added": "13057013360862106",
+         "date_modified": "13055316381435665",
+         "id": "2",
+         "name": "Другие закладки",
+         "type": "folder"
+      },
+      "sync_transaction_version": "83",
+      "synced": {
+         "children": [ {
+            "date_added": "13055561639318972",
+            "id": "5",
+            "name": "Почему лучше использовать Python в качестве первого языка программирования / DEVACADEMY",
+            "type": "url",
+            "url": "http://devacademy.ru/posts/pochemu-luchshe-ispolzovat-python-v-kachestve-pervogo-yazyika-programmirovaniya/"
+         }, {
+            "date_added": "13032120021531760",
+            "id": "6",
+            "meta_info": {
+               "stars.id": "1C35E76F-95EC-465D-A9D6-662A5C27E203",
+               "stars.imageData": "Ej8KN2h0dHA6Ly93d3cuc3AtZmFuLnJ1L3VwbG9hZC9pYmxvY2svM2Y3L3Jlc2l6ZV9ibGFjay5wbmcQkAMYrAI=",
+               "stars.isSynced": "true"
+            },
+            "name": "Южный Парк, Саус Парк, фан-сайт, онлайн просмотр, и море позитива",
+            "type": "url",
+            "url": "http://www.sp-fan.ru/"
+         }, {
+            "date_added": "13032636190830220",
+            "id": "7",
+            "name": "«Matrix ASCII» — самой старой «живой» раздаче торрент-файла исполнилось 10 лет / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/207056/"
+         }, {
+            "date_added": "13033850874731921",
+            "id": "8",
+            "name": "Как начать писать игры / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/160547/"
+         }, {
+            "date_added": "13033850878923921",
+            "id": "9",
+            "name": "Machine Learning. Курс от Яндекса для тех, кто хочет провести новогодние каникулы с пользой / Блог компании Яндекс / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/company/yandex/blog/208034/"
+         }, {
+            "date_added": "13033850880731921",
+            "id": "10",
+            "name": "Python: вещи, которых вы могли не знать / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/207988/"
+         }, {
+            "date_added": "13033850905124921",
+            "id": "11",
+            "name": "Получение «зеленого света» в сервисе GreenLight: советы и рекомендации / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/208420/"
+         }, {
+            "date_added": "13037004658562535",
+            "id": "12",
+            "name": "Крупнейшая битва в истории EVE Online: уничтожено кораблей на $200 000 / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/210690/"
+         }, {
+            "date_added": "13037004666729535",
+            "id": "13",
+            "name": "Unity3D для начинающих — Туториал 1 / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/112287/"
+         }, {
+            "date_added": "13037004669489535",
+            "id": "14",
+            "name": "Codecademy",
+            "type": "url",
+            "url": "http://www.codecademy.com/ru/sign_in"
+         }, {
+            "date_added": "13037004671129535",
+            "id": "15",
+            "name": "Лабиринт | Книжный интернет-магазин: купить книги, новинки, бестселлеры",
+            "type": "url",
+            "url": "http://www.labirint.ru/"
+         }, {
+            "date_added": "13037004674122535",
+            "id": "16",
+            "name": "Делаем автополив комнатного цветка на Arduino за 15 минут / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/210814/"
+         }, {
+            "date_added": "13037004675706535",
+            "id": "17",
+            "name": "Создаем прототип игры Flappy Bird под Android на LibGDX / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/212383/"
+         }, {
+            "date_added": "13037004683928967",
+            "id": "18",
+            "name": "Пишем платформер на Python, используя pygame / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/193888/"
+         }, {
+            "date_added": "13038069429439868",
+            "id": "19",
+            "name": "Snake Game in Python | Virtualanup",
+            "type": "url",
+            "url": "http://virtualanup.com/snake-game-in-python/"
+         }, {
+            "date_added": "13038943554032718",
+            "id": "20",
+            "name": "Самодельный фазовый лазерный дальномер / Хабрахабр",
+            "type": "url",
+            "url": "http://habrahabr.ru/post/213749/"
+         }, {
+            "date_added": "13038943557847718",
+            "id": "21",
+            "name": "Python 3 - Программирование на Python 3",
+            "type": "url",
+            "url": "http://python-3.ru/"
+         }, {
+            "date_added": "13038943561111718",
+            "id": "22",
+            "name": "Программирование аркадных игр и обучение информатике",
+            "type": "url",
+            "url": "http://programarcadegames.com/index.php?chapter=conditional_statements&lang=ru#section_3"
+         }, {
+            "date_added": "13038943563497718",
+            "id": "23",
+            "name": "Программирование и игры: PyGame: Сцены и меню...",
+            "type": "url",
+            "url": "http://plambir.blogspot.ru/2009/11/2.html"
+         }, {
+            "date_added": "13042342089240555",
+            "id": "24",
+            "name": "POGODAVTOMSKE.RU - сайт о погоде в Томске",
+            "type": "url",
+            "url": "http://m.pogodavtomske.ru/"
+         } ],
+         "date_added": "13057013360862106",
+         "date_modified": "13055561639318972",
+         "id": "3",
+         "name": "Закладки на мобильном",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

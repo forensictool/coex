@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+  <doc>
+    <field name="id">keyword_search_term_a8dc0a9d61c3d5cd221020aa0b947f95</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">2гис томск</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_2f3b040d1e658da6a70240b6e3afec29</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">CSMA/CD</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_6089cc6ab7e8133b567f7a43ed135eac</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">FDDI</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_5b4ee5c63ab09996e9fbee726d5711df</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">IEEE 802.3</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_fa656e78af10622a28f76fafbf7ae9cf</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ZOOM - software developer</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_1a77cc4635e1b28ec266c0631328e93a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">arch linux готовый</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_23462e87707909c7e2306b5458284ce8</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">arch linux готовый образ</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_3e36b38496ed8d08cb88be49d92809fe</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">archlinux</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_22d4a0f9f598d913c363f8af41195cb1</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">archlinux готовый </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_f3f26b6f5b4bdf9ceba1549e87ac7fa4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">asus zenbook ux32vd</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8647b685fd15c338e9e358f4d30ab238</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ qt windows </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_40129ef0d6d93da071ccc66cdb4cbee4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ qt windows tutorial</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_bc03867438242f80a0c9ce6caa89e802</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ qt в windows</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_db949da2227e546c49af0c3a617c44df</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ qt как взять данные из файла</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_0818f7d91ec29a68e36c612b32d312ce</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ qt логи chrome</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_0ba95434a74b1fd28dbb79ae033a8d09</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">c++ русские буквы </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_a6df01c97bebd8426211d79d7dc0bcab</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">chrome пароли</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_62339404411efd9e33e6a678a87bdcd2</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_55d7b363d765e8f77957a385a8f41f8c</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_fc085467738036a6701d7e16ce7e7c03</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet 802.3</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_867149c003b0877497b3f1c5ab711571</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet filetype:PPT</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_2499ecfd98a81350fb785bfe53248977</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet rj 45 </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_4a9559590bcdb43da39ee3df09220eff</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet rj 45 цвета</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_1df84df0d682b98854c83a9ebcb187a1</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet метод доступа</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_ecad65fdc9dd33e88ae72aab96bdd8c9</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet презентация</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_0fa62d8f7fa24f0158eeba85346eb13d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet презентация  filetype:PPT</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_57b5025a8f55a9195aa408b9b018f8be</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethernet стандарты</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_9f055ccf0f6262cd4a1b20f6eff450da</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ethrenet filetype:PPT</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_668311c15ed77b30e90bc80d979b7dfc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">exp(-((x-4)^2+(y-4)^2)^2/1000) + exp(-((x +4)^2+(y+4)^2)^2/1000) + 0.1exp(-((x +4)^2+(y+4)^2)^2)+0.1exp(-((x -4)^2+(y-4)^2)^2)</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_f5263e7282040ea2943f98f17adeb3e2</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">float L(float xp, int n, int i) </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_5b8c9a3e28561998df081d0e4cec6d70</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">google</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8888fcc149a7645b3e41aaccf5a291d3</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">google поиск презентаций</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_393d7368b078f5a225b767ed88aeb4ff</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">install device isn't specified</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8b54d872196f452fccf6483abd224826</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">mac адрес</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_36cd7118260fe55914bb5c30dcb74314</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">misha collins</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_23bbb7fce3f32a75ceee2fb0d3d3badb</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">miui nexus 5</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_83d6d22f78de0a6a3696bea5c74781e1</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">miui nexus 5 торрент</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_297ed7d857850b1a367d0a7f7c8df8dc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">nexus  5 вернуть к заводскому виду</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_399c0f2e7bf9e4c6dc3b2a01d60e03c8</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_9f2c144f4ee3c2f439eca2d1f2b8dcae</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_2630ef117a5682780af431d1366dd6ba</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt hello world</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_4624101f75b0dcae983cffe79303a10b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt visual studio 2013 </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_03f62c3e232e94a761667a13b694795d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt windows</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_b2c671cc9705d8e60dce580a61c7d483</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">qt и visual studio</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_aff9f3a80dba6127390ecc9b1b4c74c5</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">sizeof c++ </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_e8171a90bf25ae9bcb43fd393eb97348</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">skype</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_e255ae53c509e6737076da1afb7813b5</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">sublime</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_049e0bfcb8417b60ae6adaa70fbc881d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">teamviewer</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_13752eaf64d23914d018cf4730e0494c</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">this program is unavailable in your country</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_3b83c24e58a179c0fe12c3bd349408a0</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">this program only supports asus notebook </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_058bfd494464e07af349ab3ac21e4cda</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">turbik</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_88aeb3520311a119f28799c93d410584</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">usbwriter</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_54ebe51f7da1303d16152997943cbb5f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">virtualbox настроить сеть между двумя виртуальными машинами</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_95257f30d8d69fa73e9e89e1e2cfef4e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">windows xp </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_28450da3b415b28bc688aa96a8274b06</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">windows xp vmware</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_76be7c4b7dc3377da7df7354d8d822ba</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">windows xp расшарить папку</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_3e18eb1e72f91b774ae322b3a310502f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">windows xp расшарить папку отключить пароль</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_57bbb1fff28405c1ee0930c5881d45ba</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">МАС-адрес</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_edfc6b0f0983c50d40f74dae80a5f0be</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">Пользуясь  полиномом  Лагранжа 5-й  степени,  найти  значения функции в точке</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_f31b7bbd82697846b739341b8fe30634</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">Пользуясь полиномом  Лагранжа 5-й  степени,  найти  значения </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8ae9bb6b690f0c441f144d046cb7c0e5</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">возможно у вас нет прав на использование сетевого ресурса </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_935c1f474ce9fd27275e5b6d12389f12</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">восстановить загрузчик windows 7</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_6e7c813f178603438db959bb7e29bee5</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">где хранятся логи chrome</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_44fa367c92c6d44c065e133705ba0e3b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">гора Хротгару </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_52b04a65e323ff8b5ea8a8321ad0489f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">испа</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_a1b16d341dd9df43d427679c7f967114</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">как восстановить загрузчик windows 7 из-под linux ubuntu</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_2b71326b173f683b58df27536706c0a2</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">как убрать все гиперссылки word</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_74dcd670fd41d0e9682c748c7a21bccb</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">канальный уровень модели osi</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_e1d5550563a2ff3385d19090595d9b74</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">канальный уровень модели osi </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_393d3ed15503a684194b16b52dad3c10</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">канальный уровень модели osi уровень llc</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_71ffc00dd4cd26bfef065574d9ff03f3</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">канальный уровень модели osi уровень mac</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_b3c32a0067173897602f7a1554b2d4bd</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">логи chrome</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_d0a6d6b14b749abe0378a5417a14d4a9</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">мясо для стейка томск</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_ba49cfce7aead7143bca506745c1f993</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">подключить сетевой диск в командной строке</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_b752e7226df69516ae7e94519c34b3e4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">подключить сетевой диск в командной строке </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_5e0d0cd900c12794aa2bcfc8cf18dc5e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск в google</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_467c2deb66cee00b7f80dd9c854ccbdc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск презентаций</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_28c2d41d9902b2e5bafdce72570cd186</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск презентаций </field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_6358711abfa23f4ded79095979f0461e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск презентаций :ppt</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_46035f9f26da616eab32571122c5e32f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск презентаций ppt</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8cfcf105c6f5e42ab86ec17d7d71c012</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">поиск презентаций в google</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_83fab5bb0a9d334c2be094778cdd0af4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">праховы скалы</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_2ff0068dfd8ca673ef8575f06b9bdc79</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">расшарить папку windows xp</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_26458136eaceb8429b9b401cbbe542a6</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ростелеком</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_333c67ba3b1f9e68520da8f5d5c3c036</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">сверхъестественное</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_0744a27f484426263773eaa5b251a102</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">технология ethernet презентация</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_e224bf9489c0af9d229a0dc67ed57b5d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">томск zoom</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_4f930b72d2e4b33af373ec39336a712f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">томск мясо для стейка</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_e86a515a66d61dc1bfac8ca12a1c7666</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">томск стейки</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_5faf85d9937d11f85a1fd19fa9bf4a11</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">томская энергосбытовая компания\</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_40c3ddeea4a553ec4a592558aa6bbafa</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">тусур расписание</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_b6b029f38ea1464be2c02d0cb7194f12</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">уровни osi</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_8cdfb1f5487501069fae2629853bed40</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">установка windows 7 и linux mint</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_a67867e35e347a4cc4ed0eb64f633f8f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">установка windows 7 на linux</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_c5c606f8701d44e9dc15bd5c11818157</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">фильмы про linux</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_70af9ccfb7011d1d30d87c7e70a779cc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">шлее qt 5</field>
+  </doc>
+  <doc>
+    <field name="id">keyword_search_term_6703ac2af6c19f3a1a4983851020999b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">search_term</field>
+    <field name="keyword_term">ыеуфь</field>
+  </doc>
+</add>

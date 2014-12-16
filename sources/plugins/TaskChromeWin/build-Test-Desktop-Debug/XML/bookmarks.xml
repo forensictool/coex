@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+  <doc>
+    <field name="id">bookmark_2ce4440bbdbbc5c90e8fdda94c9a596a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.yandex.ru/</field>
+    <field name="bookmark_name">Яндекс</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_fb8af80b528fd8b633d511bb0664e7ac</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">https://vk.com/feed</field>
+    <field name="bookmark_name">Новости</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d85316ec049e2a85c6b2c4878c60f012</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://rutracker.org/forum/index.php</field>
+    <field name="bookmark_name">BitTorrent трекер RuTracker.org (ex torrents.ru)</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_2a9aed7c4a689983bef01525425f3871</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://torrents.vtomske.ru/forum/</field>
+    <field name="bookmark_name">Главная :: Torrents.vtomske.ru</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_bb29af0cb236f3bec541f8d2d84c6cbf</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/</field>
+    <field name="bookmark_name">Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_e196b60238d18b2af2875ddbfeaadf4e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.codecademy.com/</field>
+    <field name="bookmark_name">Codeacademy</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_0e3f3aaa7722a9c3b003c555e9124784</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://htmlacademy.ru/</field>
+    <field name="bookmark_name">Интерактивные онлайн-курсы по HTML и CSS — HTML Academy</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_beca6bd1645cf86398588c838e01b323</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://htmlbook.ru/</field>
+    <field name="bookmark_name">htmlbook.ru | Для тех, кто делает сайты</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_1e1c97bf0106714f09b5ebc4a82ef470</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">https://www.fl.ru/projects/</field>
+    <field name="bookmark_name">Фриланс сайт №1. Фрилансеры, вакансии удаленно, работа на дому, freelance : FL.ru</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_8b583f179d514ee53c26e6de030c4241</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://javarush.ru/login.html</field>
+    <field name="bookmark_name">JavaRush - логин</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_22ed6335c078a8117a6b204c8e43c2bd</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://battlelog.battlefield.com/bf3/ru/</field>
+    <field name="bookmark_name">Battlelog / Battlefield 3</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_1f89e876e61945c2f332f0cb33ee613b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://pikabu.ru/</field>
+    <field name="bookmark_name">Горячее / pikabu.ru - Все</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d0909078dbfa49c046cd9566fe20c9b3</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://79.136.240.154:8050/moodle/</field>
+    <field name="bookmark_name">Система сетевого обучения</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_5b25330b7e25f82fb6a4fcbfb94ef636</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://mantis.keva.su/view.php?id=112</field>
+    <field name="bookmark_name">0000112: Исследовать логи и инфу от chrome - MantisBT</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_7ea3291f58e062808ae420942d067782</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://mail.yandex.ru/?win=145&amp;clid=2154483</field>
+    <field name="bookmark_name">Почта</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d999fa754174f368ebc4012dc71d14d1</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.istok2.com/catalog/7/</field>
+    <field name="bookmark_name">''Исток2''. Радиолампы - почтой. Неоновые и газоразрядные лампы и индикаторы.</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_eb936a26a2bf8c26888317a7f7edb0c2</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://forum.cxem.net/index.php?showtopic=121059</field>
+    <field name="bookmark_name">Наборы Для Сборки Часов На Газоразрядных Индикаторах - Продам-Отдам, Услуги - Форум по радиоэлектронике</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_f4f6dd0c4c035210ca2b8c9c5658a298</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.bbc.co.uk/russian/business/2013/04/130326_wanted_migrants_clickable.shtml</field>
+    <field name="bookmark_name">20 самых нужных профессий в мире - BBC Russian - Экономика</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_c14ad10aac7de31c4d1de25acdffd6ec</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/200640/</field>
+    <field name="bookmark_name">Астрофотография в каждый дом / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_46f28d78b7a90dba27d6c0acce3de113</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://mobilelegends.ru/goods/%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C-nokia-3310</field>
+    <field name="bookmark_name">Купить Nokia 3310 всего за 1450 рублей</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_e85bb98ff09b0d00397cbc39b39f7e85</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/152995/</field>
+    <field name="bookmark_name">Что нужно делать смолоду или как стать богатым айтишником / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_8d5f74d8d9ac2bbc50f43bde138483b7</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/201772/</field>
+    <field name="bookmark_name">Whiteboarding (пишем код на доске на собеседованиях) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_5360ab09bc9edb21e6fa5e92eac99724</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202066/</field>
+    <field name="bookmark_name">Разработка игры на Unity3d, обзор ассетов + немного о паблишинге / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_685aede1824d0e81b3c1cf8021035b07</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202236/</field>
+    <field name="bookmark_name">Raspberry Pi — HD медиаплеер / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_79c35f1285f922339ff383c060b1179f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202250/</field>
+    <field name="bookmark_name">Сколько лет глазам человека? / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_49ff7dfa02dc917fbc6b97149ca52dbe</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202304/</field>
+    <field name="bookmark_name">Крошечный Excel на чистом JavaScript (30 строк кода) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_7d007eb93e80948491aef7c9fe1a0a6e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/198952/</field>
+    <field name="bookmark_name">Apple Campus </field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_5b7972a6f1d0a8b7f269e4e8124c17d7</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/company/gtv/blog/195528/</field>
+    <field name="bookmark_name">Солнечная батарея “PlanarSun” — краудфандинговый проект от российского изобретателя / Блог компании Простая наука / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_63d8ee82e69d1c3edef924ab5ec58a5f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/company/cloudsnn/blog/195398/</field>
+    <field name="bookmark_name">Google Street View добрался и до Большого адронного коллайдера / Блог компании CloudsNN / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_3c5cf7962fcc5c5b0b7f17721955734e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/170551/</field>
+    <field name="bookmark_name">Часы на газоразрядных индикаторах / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_e77e42770ab395d3a932082cf12dffa5</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.3dnews.ru/778829</field>
+    <field name="bookmark_name">Microsoft открыла центр противодействия киберпреступности / Новости software / 3DNews - Daily Digital Digest</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_f671ff5381e748c4514e214493248202</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202556/</field>
+    <field name="bookmark_name">Гоночка на JavaScript (30 строк кода) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_094dadb5b94675818cbbd51bd6931db6</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202476/</field>
+    <field name="bookmark_name">Крошечная змейка на JavaScript (30 строк кода) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_24f5f1f51d6a614a31accfc70db5afa7</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202558/</field>
+    <field name="bookmark_name">«Все работы хороши», а программист — лучшая! / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_7a547046bb314a1c66ae3d27289ca7dc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202550/</field>
+    <field name="bookmark_name">Список покупок / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_aef789f3c9cb0cd38e95e7faa1b25b63</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202748/</field>
+    <field name="bookmark_name">Программирование, как новый вид человеческой деятельности / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d6606e330b6d12364f61c6f176e05ec9</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/202100/</field>
+    <field name="bookmark_name">Stasis — изометрическая, научно-фантастическая point-and-click адвенчура (Kickstarter Campaign) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_569b8c34f1913e6cbf0f8d5543d27b48</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/203152/</field>
+    <field name="bookmark_name">Немножко ИБ на ночь, или базовые понятия идентификации и аутентификации обьектов и пользователей / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_232dd0ca10ca601e0a79a9e5cf3eba7b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/203164/</field>
+    <field name="bookmark_name">Беспроводной HDMI — в каждую квартиру / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_0d6746982f42cd801e62d7976cf6fc58</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/198106/</field>
+    <field name="bookmark_name">Старая, добрая «The Matrix» или визуализатор для матрицы версии один / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_f3f519c57695f3b5fa0a42c466e8870e</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?ws=d1a5a7dc-ca8b-e011-969d-0030487d8897&amp;vsro=8</field>
+    <field name="bookmark_name">Tomsk State University of Control Systems and Radioelectronics - Computer Systems - DreamSpark Premium | Academic Software Discounts</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_595be32bdd69a9d2cb2df6c770f44804</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/215353/</field>
+    <field name="bookmark_name">Собираем карманный лазер / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_f548b13ca2f33187fba554741e6148e4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://amperka.ru/collection/kits/product/matryoshka-z</field>
+    <field name="bookmark_name">Матрёшка Z / узнать больше, купить в Амперке</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_fb4e8f53923c3e23562fda1d8be03036</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://pikabu.ru/story/get_over_here_2468548</field>
+    <field name="bookmark_name">Get over here!</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_836907a6777cd6df945bf70bea4e06fe</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://pikabu.ru/story/gotovim_kofe_2467522</field>
+    <field name="bookmark_name">Готовим Кофе</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_40d4840c0761dfe8efd5fbe7007b86aa</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.gametutorials.com/</field>
+    <field name="bookmark_name">GameTutorials | Talk to me like a three-year-old programming tutorials</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d5d231219cac3c77d9a5175dd3870881</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://cppstudio.com/</field>
+    <field name="bookmark_name">Основы программирования на C / С++ (Си++) для начинающих и новичков</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_6b37b623ba1ce9337ba7f20abc758ef4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/229581/</field>
+    <field name="bookmark_name">Визы для стартапов: как открыть собственное дело за рубежом (часть 1) / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_3d04917531e283c40b6f50bd79179106</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://rutracker.org/forum/viewtopic.php?t=3527512</field>
+    <field name="bookmark_name">[DC Comics] Вселенная DC - Супермен, Бэтмен, Зелёный фонарь, Флэш, Чудо-Женщина и многие другие (3789 выпусков) [1938-2014 гг., CBR, RUS] (ОБНОВЛЕНО 5 июля 2014 год</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_2d5e6399f831df20eaccbcc242d66f0d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://rutracker.org/forum/viewtopic.php?t=1549032</field>
+    <field name="bookmark_name">Star Wars / Звёздные войны (700 выпусков) (Dark Horse Comics) [1977-2012, CBR, RUS] Обновлено 26.12.2012 :: RuTracker.org (ex torrents.ru)</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_1a483c6cb2ca8c3b99bfbe5f022c1f4f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/230377/</field>
+    <field name="bookmark_name">Unity3D + Google Services: мультиплеер для вашего проекта на Android и iOS / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_c893763ae9ccc8491fc96aee481f10b2</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/153373/</field>
+    <field name="bookmark_name">Книги, которые должен прочитать Java программист: от новичка до профессионала / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_311dad36746bc686d531a0ebeba8c454</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/135897/</field>
+    <field name="bookmark_name">Топ-5 самых впечатляющих книг, которые должен прочесть каждый разработчик ПО / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_1b51a0db72ceb4511b16925ae85d63b8</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://e-maxx.ru/algo/</field>
+    <field name="bookmark_name">MAXimal :: algo</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_4b7cc7b4648ed9d95f40e5a278e59656</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/191312/</field>
+    <field name="bookmark_name">Много бесплатных книг по программированию / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d0ac60ff07899c79a9a3ce920bda5f16</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/77179/</field>
+    <field name="bookmark_name">Что почитать по веб разработке / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_87d5485098c4f76180e12aa670daa5bc</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://htmlforum.ru/</field>
+    <field name="bookmark_name">htmlforum.ru</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_058480844c0b3a756ff10e5a329539f3</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://webdesign-master.ru/design/</field>
+    <field name="bookmark_name">Веб-дизайн</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d0909078dbfa49c046cd9566fe20c9b3</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://79.136.240.154:8050/moodle/</field>
+    <field name="bookmark_name">Система сетевого обучения</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d4f1d7008e5500b62bcaeabc3a526b7b</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://aiesec.ru/students/gtalent/it</field>
+    <field name="bookmark_name">Global Talent | IT</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_91f4fae1c93480d0eab403d6c2f413a7</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.garant.ru/</field>
+    <field name="bookmark_name">ГАРАНТ - Законодательство (кодексы, законы, указы, постановления) РФ, аналитика, комментарии, практика.</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9b53d580210908d3b64a77b83800c466</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.consultant.ru/</field>
+    <field name="bookmark_name"> - законодательство РФ: кодексы, законы, указы, постановления Правительства Российской Федерации, нормативные акты</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_49b6b2a70db53ad750e05775403ea9a9</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://activities.aliexpress.com/ru/bestselling.php</field>
+    <field name="bookmark_name">Самое популярное на AliExpress в вашем регионе</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9636f8fa4a06e21fa2050dcab1f9aceb</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.shop-script.ru/pricing/</field>
+    <field name="bookmark_name">Купить интернет-магазин — Shop-Script 5</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_b1a86b0aaf7476e11ae9e4e38cbfc34d</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.alibaba-service.ru/</field>
+    <field name="bookmark_name">Доставка с Taobao, Aliexpress, Alibaba за 5 дней! Доставка с интернет-магазинов Китая.</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_0486898a8a7dfe3df752d36e0c5a4f5a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://devacademy.ru/posts/pochemu-luchshe-ispolzovat-python-v-kachestve-pervogo-yazyika-programmirovaniya/</field>
+    <field name="bookmark_name">Почему лучше использовать Python в качестве первого языка программирования / DEVACADEMY</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_157b16a7d9cc5301723ea65b8eaef878</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.sp-fan.ru/</field>
+    <field name="bookmark_name">Южный Парк, Саус Парк, фан-сайт, онлайн просмотр, и море позитива</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_d33180bdcfd73afca08eb787515a8354</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/207056/</field>
+    <field name="bookmark_name">«Matrix ASCII» — самой старой «живой» раздаче торрент-файла исполнилось 10 лет / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_8cbbbf44ab3f058b9c09c0b9b0a55b80</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/160547/</field>
+    <field name="bookmark_name">Как начать писать игры / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_5f239683918ee4fd9c49381852dccaff</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/company/yandex/blog/208034/</field>
+    <field name="bookmark_name">Machine Learning. Курс от Яндекса для тех, кто хочет провести новогодние каникулы с пользой / Блог компании Яндекс / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_dbf4601728da3c284d8d2051931e2f96</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/207988/</field>
+    <field name="bookmark_name">Python: вещи, которых вы могли не знать / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_1464020da8ac8028ca3d7e98f54cae65</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/208420/</field>
+    <field name="bookmark_name">Получение «зеленого света» в сервисе GreenLight: советы и рекомендации / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9f343129588d0a2cd5263fbdcd696c24</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/210690/</field>
+    <field name="bookmark_name">Крупнейшая битва в истории EVE Online: уничтожено кораблей на $200 000 / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9a50f43bb63f603179fe634e0f13ade4</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/112287/</field>
+    <field name="bookmark_name">Unity3D для начинающих — Туториал 1 / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_efdaf67a0e7d1f8106b12719977fd403</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.codecademy.com/ru/sign_in</field>
+    <field name="bookmark_name">Codecademy</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_c69d57e041fb8d1a902ee1c73e372cae</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://www.labirint.ru/</field>
+    <field name="bookmark_name">Лабиринт | Книжный интернет-магазин: купить книги, новинки, бестселлеры</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_911992fa75791787681e3c9e90542db1</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/210814/</field>
+    <field name="bookmark_name">Делаем автополив комнатного цветка на Arduino за 15 минут / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9ebd7c255b999360c9271f716394fac8</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/212383/</field>
+    <field name="bookmark_name">Создаем прототип игры Flappy Bird под Android на LibGDX / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_6329fa610d12dcc69d4ee63d385c52e6</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/193888/</field>
+    <field name="bookmark_name">Пишем платформер на Python, используя pygame / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_df8a54fb3b625531658c79197d91826a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://virtualanup.com/snake-game-in-python/</field>
+    <field name="bookmark_name">Snake Game in Python | Virtualanup</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_fd42ed06e0be324f57a89e5d6c5c4079</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://habrahabr.ru/post/213749/</field>
+    <field name="bookmark_name">Самодельный фазовый лазерный дальномер / Хабрахабр</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_0378e14fa43ce667d6b1278bbb11506a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://python-3.ru/</field>
+    <field name="bookmark_name">Python 3 - Программирование на Python 3</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9d2eb0f7757d1f3c3da0a93d19ae845a</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://programarcadegames.com/index.php?chapter=conditional_statements&amp;lang=ru#section_3</field>
+    <field name="bookmark_name">Программирование аркадных игр и обучение информатике</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_2b10dd4fc3b945f4aa10d859b64e05f7</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://plambir.blogspot.ru/2009/11/2.html</field>
+    <field name="bookmark_name">Программирование и игры: PyGame: Сцены и меню...</field>
+  </doc>
+  <doc>
+    <field name="id">bookmark_9d32a9985e4bf710b6a9b76e54bd270f</field>
+    <field name="application">Chrome</field>
+    <field name="doc_type">bookmarks</field>
+    <field name="bookmark_url">http://m.pogodavtomske.ru/</field>
+    <field name="bookmark_name">POGODAVTOMSKE.RU - сайт о погоде в Томске</field>
+  </doc>
+</add>
