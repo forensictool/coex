@@ -111,7 +111,7 @@ downloads\_ url\_ chains.url FROM downloads, downloads\_ url\_ chains WHERE down
 
 Пример таблицы downloads можно увидеть на рисунке~\ref{down:down}.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \center{\includegraphics[width=0.9\linewidth]{down}}
 \caption{Таблица downloads}
 \label{down:down}
@@ -119,21 +119,19 @@ downloads\_ url\_ chains.url FROM downloads, downloads\_ url\_ chains WHERE down
 
 Таблица  keyword\_search\_terms содержит информацию о поисковых запросах (рис.~\ref{key:key}). SQL запрос: SELECT DISTINCT term FROM keyword\_search\_terms.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \center{\includegraphics[width=0.9\linewidth]{key}}
 \caption{Таблица keyword\_search\_terms}
 \label{key:key}
 \end{figure}
 
-Таблица  urls содержит информацию о посещенных ресурсах (адрес, заголовок, время последнего посещения). SQL запрос: SELECT url,title,last\_visit\_time FROM urls. Данная таблица приведена на рисунке~\ref{urls:urls}.
+Таблица  urls содержит информацию о посещенных ресурсах (адрес, заголовок, время последнего посещения). SQL запрос: SELECT url,title,last\_visit\_time FROM urls. Данная таблица приведена на рисунке~\ref{urls:urls}. На рисунке~\ref{chains:chains}, приведена таблица downloads\_url\_chains.
 
 \begin{figure}[h!]
 \center{\includegraphics[width=0.9\linewidth]{urls}}
 \caption{Таблица urls}
 \label{urls:urls}
 \end{figure}
-
-Ниже, на рисунке~\ref{chains:chains}, приведена таблица downloads\_url\_chains.
 
 \begin{figure}[h!]
 \center{\includegraphics[width=0.9\linewidth]{chains}}
@@ -144,18 +142,21 @@ downloads\_ url\_ chains.url FROM downloads, downloads\_ url\_ chains WHERE down
 Как можно увидеть из рисунка~\ref{bookmarks:bookmarks}, структура файла Bookmarks такова: имеется заголовок <<roots>> --- корень, после которого следует подзаголовок <<bookmark\_bar>>, в  теле которого находятся все закладки, расположенные на панели закладок. Тело разбито на блоки, в которых находится такая информация, как дата добавления, адрес ресурса, заголовок страницы. Также присутствует подзаголовок <<other>>, в теле которого находятся все остальные закладки.
 
 
+
 В файле Preferences хранится вся возможная информация о настройке браузера. Необходимая информация (версия,  директория загрузки и сохранённый логин) была найдена простым поиском слов (chrome\_version, default\_directory\_download, username) в файле.
 
 \subsubsection{Алгоритм работы модуля}
 
-Блок-схема алгоритма парсинга файла Bookmarks представлена на рисунке~\ref{bookmarks_parsing:bookmarks_parsing}.
 
+Блок-схема алгоритма парсинга файла Bookmarks представлена на рисунке~\ref{bookmarks_parsing:bookmarks_parsing}.
 % блок-схема парсинга файла Bookmarks
-\begin{figure}[h!]
+\begin{figure}[h]
 \center{\includegraphics[width=0.6\linewidth]{bookmarks_parsing}}
 \caption{Блок-схема алгоритма парсинга файла Bookmarks}
 \label{bookmarks_parsing:bookmarks_parsing}
 \end{figure}
+
+
 
 Извлечение подстроки из строки осуществляется с помощью регулярного выражения: \textbackslash "(.*)\textbackslash".*\textbackslash"(.*)\textbackslash".
 Например есть строка "name": "Яндекс", данное регулярное выражение возвращает 2 подстроки name и Яндекс. Из строки "url": "http://www.yandex.ru/" будет найдено url и http://www.yandex.ru/ .Нам необходимы только подстроки с названием страницы и адресом. 
@@ -229,11 +230,11 @@ downloads\_ url\_ chains.url FROM downloads, downloads\_ url\_ chains WHERE down
 другой информации (версия приложения, логин аккаунта google) из приложения Google Chrome.
 
 \subsubsection{Задачи на слудующий семестр}
-Задачи на следующий семестр:
 \begin{enumerate}
-  \item нормализовать формат даты;
-  \item реализовать рекурсивный обход файловой системы для нахождения необходимых файлов;
-  \item поиск другой информации приложения Google Chrome.
+  \item Добавить модуль к общему комплексу.
+  \item Нормализовать формат даты.
+  \item Реализовать рекурсивный обход файловой системы для нахождения необходимых файлов.
+  \item Поиск другой информации приложения Google Chrome.
 \end{enumerate}
 
 \clearpage
