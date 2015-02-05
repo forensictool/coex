@@ -2,6 +2,7 @@
 #include <QString>
 #include <QDebug>
 #include <QDataStream>
+#include <QDirIterator>
 #include <QXmlStreamWriter>
 #include <QFileInfo>
 #include <QDateTime>
@@ -20,12 +21,12 @@ QString TaskImageVerifier::help()
 
 QString TaskImageVerifier::name()
 {
-    return "PidginWin";
+    return "Image Verify";
 };
 
 QString TaskImageVerifier::author()
 {
-    return "Unknow";
+    return "Ilya Bokov";
 };
 
 QString TaskImageVerifier::description()
@@ -71,7 +72,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             write_field(xmlWriter, "id", id);
             write_field(xmlWriter, "application", "images");
@@ -84,7 +85,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -186,32 +187,39 @@ void verify_image(QString imagename, QXmlStreamWriter *xmlWriter)
         }
     }
     file.close();
-    qDebug() << "file name =" << imagename << " header =" << buffer.toHex() << " image_result =" << result << " contains_archive= " << containsarchive;
+    //qDebug() << "file path =" << imagename << " header =" << buffer.toHex() << " image_result =" << result << " contains_archive= " << containsarchive;
     start.writeImage(path, result, *xmlWriter, 2, id, datecreate, datemodify, containsarchive);
 }
 
 //int main(int argc, char *argv[])
 bool TaskImageVerifier::execute(const coex::IConfig *config)
 {
-    QString xmlpath(config->outputFolder() + "xml.xml");
+    if (m_bDebug) {
+        std::cout << "Debug mode on.\n";
+        std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+        std::cout << "---------------------------------------------------------" << std::endl;
+    };
+    {
+        QDir dir(config->outputFolder());
+        dir.mkdir("images");
+    }
+
+    QString xmlpath(config->outputFolder() + "/images/image_report.xml");
     QFile xmlfile(xmlpath);
     xmlfile.open(QFile::WriteOnly);
     QXmlStreamWriter xmlWriter(&xmlfile);
     XMLwriter start;
     start.writeImage(NULL, NULL, xmlWriter, 1, NULL, NULL, NULL, NULL);
-    verify_image(config->inputFolder() + "pic_bmp.bmp", &xmlWriter);
-    /*verify_image("pic_gif.gif", &xmlWriter);
-    verify_image("pic_jpg.jpg", &xmlWriter);
-    verify_image("pic_tiff.tiff", &xmlWriter);
-    verify_image("pic_png.png", &xmlWriter);
-    verify_image("text_bmp.bmp", &xmlWriter);
-    verify_image("text_gif.gif", &xmlWriter);
-    verify_image("text_jpg.jpg", &xmlWriter);
-    verify_image("text_tiff.tiff", &xmlWriter);
-    verify_image("text_png.png", &xmlWriter);
-    verify_image("archive_jpg.jpg", &xmlWriter);
-    verify_image("archive_png.png", &xmlWriter);*/
+    QDirIterator fileListDirit(config->inputFolder(), QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    while (fileListDirit.hasNext()) {
+        QString str = QString("%1").arg(fileListDirit.next());
+        QFileInfo fInfo(str);
+        QFile file(fInfo.absoluteFilePath());
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            verify_image(str, &xmlWriter);
+    }
     start.writeImage(NULL, NULL, xmlWriter, 3, NULL, NULL, NULL, NULL);
+    std::cout << " *  *  * Report created\n";
     return true;
 }
 
