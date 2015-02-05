@@ -102,26 +102,26 @@ QT_BEGIN_NAMESPACE
 
 static inline uint readUInt(const uchar *data)
 {
-    return (data[0]) + (data[1]<<8) + (data[2]<<16) + (data[3]<<24);
+    return (data[0]) + (data[1] << 8) + (data[2] << 16) + (data[3] << 24);
 }
 
 static inline ushort readUShort(const uchar *data)
 {
-    return (data[0]) + (data[1]<<8);
+    return (data[0]) + (data[1] << 8);
 }
 
 static inline void writeUInt(uchar *data, uint i)
 {
     data[0] = i & 0xff;
-    data[1] = (i>>8) & 0xff;
-    data[2] = (i>>16) & 0xff;
-    data[3] = (i>>24) & 0xff;
+    data[1] = (i >> 8) & 0xff;
+    data[2] = (i >> 16) & 0xff;
+    data[3] = (i >> 24) & 0xff;
 }
 
 static inline void writeUShort(uchar *data, ushort i)
 {
     data[0] = i & 0xff;
-    data[1] = (i>>8) & 0xff;
+    data[1] = (i >> 8) & 0xff;
 }
 
 static inline void copyUInt(uchar *dest, const uchar *src)
@@ -205,7 +205,7 @@ static int inflate(Bytef *dest, ulong *destLen, const Bytef *source, ulong sourc
         return Z_BUF_ERROR;
 
     stream.next_out = dest;
-    stream.avail_out = (uInt)*destLen;
+    stream.avail_out = (uInt) * destLen;
     if ((uLong)stream.avail_out != *destLen)
         return Z_BUF_ERROR;
 
@@ -229,7 +229,7 @@ static int inflate(Bytef *dest, ulong *destLen, const Bytef *source, ulong sourc
     return err;
 }
 
-static int deflate (Bytef *dest, ulong *destLen, const Bytef *source, ulong sourceLen)
+static int deflate(Bytef *dest, ulong *destLen, const Bytef *source, ulong sourceLen)
 {
     z_stream stream;
     int err;
@@ -237,7 +237,7 @@ static int deflate (Bytef *dest, ulong *destLen, const Bytef *source, ulong sour
     stream.next_in = (Bytef*)source;
     stream.avail_in = (uInt)sourceLen;
     stream.next_out = dest;
-    stream.avail_out = (uInt)*destLen;
+    stream.avail_out = (uInt) * destLen;
     if ((uLong)stream.avail_out != *destLen) return Z_BUF_ERROR;
 
     stream.zalloc = (alloc_func)0;
@@ -294,17 +294,16 @@ static QDateTime readMSDosDate(const uchar *src)
     quint64 uDate;
     uDate = (quint64)(dosDate >> 16);
     uint tm_mday = (uDate & 0x1f);
-    uint tm_mon =  ((uDate & 0x1E0) >> 5);
+    uint tm_mon = ((uDate & 0x1E0) >> 5);
     uint tm_year = (((uDate & 0x0FE00) >> 9) + 1980);
     uint tm_hour = ((dosDate & 0xF800) >> 11);
-    uint tm_min =  ((dosDate & 0x7E0) >> 5);
-    uint tm_sec =  ((dosDate & 0x1f) << 1);
+    uint tm_min = ((dosDate & 0x7E0) >> 5);
+    uint tm_sec = ((dosDate & 0x1f) << 1);
 
     return QDateTime(QDate(tm_year, tm_mon, tm_mday), QTime(tm_hour, tm_min, tm_sec));
 }
 
-struct LocalFileHeader
-{
+struct LocalFileHeader {
     uchar signature[4]; //  0x04034b50
     uchar version_needed[2];
     uchar general_purpose_bits[2];
@@ -317,15 +316,13 @@ struct LocalFileHeader
     uchar extra_field_length[2];
 };
 
-struct DataDescriptor
-{
+struct DataDescriptor {
     uchar crc_32[4];
     uchar compressed_size[4];
     uchar uncompressed_size[4];
 };
 
-struct CentralFileHeader
-{
+struct CentralFileHeader {
     uchar signature[4]; // 0x02014b50
     uchar version_made[2];
     uchar version_needed[2];
@@ -345,8 +342,7 @@ struct CentralFileHeader
     LocalFileHeader toLocalHeader() const;
 };
 
-struct EndOfDirectory
-{
+struct EndOfDirectory {
     uchar signature[4]; // 0x06054b50
     uchar this_disk[2];
     uchar start_of_directory_disk[2];
@@ -357,8 +353,7 @@ struct EndOfDirectory
     uchar comment_length[2];
 };
 
-struct FileHeader
-{
+struct FileHeader {
     CentralFileHeader h;
     QByteArray file_name;
     QByteArray extra_field;
@@ -401,26 +396,26 @@ class QZipPrivate
 {
 public:
     enum HostOS {
-	HostFAT      = 0,
-	HostAMIGA    = 1,
-	HostVMS      = 2,  // VAX/VMS
-	HostUnix     = 3,
-	HostVM_CMS   = 4,
-	HostAtari    = 5,  // what if it's a minix filesystem? [cjh]
-	HostHPFS     = 6,  // filesystem used by OS/2 (and NT 3.x)
-	HostMac      = 7,
-	HostZ_System = 8,
-	HostCPM      = 9,
-	HostTOPS20   = 10, // pkzip 2.50 NTFS
-	HostNTFS     = 11, // filesystem used by Windows NT
-	HostQDOS     = 12, // SMS/QDOS
-	HostAcorn    = 13, // Archimedes Acorn RISC OS
-	HostVFAT     = 14, // filesystem used by Windows 95, NT
-	HostMVS      = 15,
-	HostBeOS     = 16, // hybrid POSIX/database filesystem
-	HostTandem   = 17,
-	HostOS400    = 18,
-	HostOSX      = 19
+        HostFAT      = 0,
+        HostAMIGA    = 1,
+        HostVMS      = 2,  // VAX/VMS
+        HostUnix     = 3,
+        HostVM_CMS   = 4,
+        HostAtari    = 5,  // what if it's a minix filesystem? [cjh]
+        HostHPFS     = 6,  // filesystem used by OS/2 (and NT 3.x)
+        HostMac      = 7,
+        HostZ_System = 8,
+        HostCPM      = 9,
+        HostTOPS20   = 10, // pkzip 2.50 NTFS
+        HostNTFS     = 11, // filesystem used by Windows NT
+        HostQDOS     = 12, // SMS/QDOS
+        HostAcorn    = 13, // Archimedes Acorn RISC OS
+        HostVFAT     = 14, // filesystem used by Windows 95, NT
+        HostMVS      = 15,
+        HostBeOS     = 16, // hybrid POSIX/database filesystem
+        HostTandem   = 17,
+        HostOS400    = 18,
+        HostOSX      = 19
     };
 
     QZipPrivate(QIODevice *device, bool ownDev)
@@ -462,31 +457,31 @@ void QZipPrivate::fillFileInfo(int index, QZipReader::FileInfo &fileInfo) const
     const HostOS hostOS = HostOS(readUShort(header.h.version_made) >> 8);
     switch (hostOS) {
     case HostUnix:
-	mode = (mode >> 16) & 0xffff;
-	if (S_ISDIR(mode))
-	    fileInfo.isDir = true;
-	else if (S_ISREG(mode))
-	    fileInfo.isFile = true;
-	else if (S_ISLNK(mode))
-	    fileInfo.isSymLink = true;
-	fileInfo.permissions = modeToPermissions(mode);
-	break;
+        mode = (mode >> 16) & 0xffff;
+        if (S_ISDIR(mode))
+            fileInfo.isDir = true;
+        else if (S_ISREG(mode))
+            fileInfo.isFile = true;
+        else if (S_ISLNK(mode))
+            fileInfo.isSymLink = true;
+        fileInfo.permissions = modeToPermissions(mode);
+        break;
     case HostFAT:
     case HostNTFS:
     case HostHPFS:
     case HostVFAT:
-	fileInfo.permissions |= QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther;
-	if ((mode & FILE_ATTRIBUTE_READONLY) == 0)
-	    fileInfo.permissions |= QFile::WriteOwner | QFile::WriteUser | QFile::WriteGroup | QFile::WriteOther;
-	if ((mode & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY) {
-	    fileInfo.isDir = true;
-	    fileInfo.permissions |= QFile::ExeOwner | QFile::ExeUser | QFile::ExeGroup | QFile::ExeOther;
-	} else {
-	    fileInfo.isFile = true;
-	}
-	break;
+        fileInfo.permissions |= QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther;
+        if ((mode & FILE_ATTRIBUTE_READONLY) == 0)
+            fileInfo.permissions |= QFile::WriteOwner | QFile::WriteUser | QFile::WriteGroup | QFile::WriteOther;
+        if ((mode & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY) {
+            fileInfo.isDir = true;
+            fileInfo.permissions |= QFile::ExeOwner | QFile::ExeUser | QFile::ExeGroup | QFile::ExeOther;
+        } else {
+            fileInfo.isFile = true;
+        }
+        break;
     default:
-	return; // we don't support anything else
+        return; // we don't support anything else
     }
     fileInfo.crc32 = readUInt(header.h.crc_32);
     fileInfo.size = readUInt(header.h.uncompressed_size);
@@ -511,9 +506,9 @@ class QZipWriterPrivate : public QZipPrivate
 public:
     QZipWriterPrivate(QIODevice *device, bool ownDev)
         : QZipPrivate(device, ownDev),
-        status(QZipWriter::NoError),
-	permissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner),
-        compressionPolicy(QZipWriter::AlwaysCompress)
+          status(QZipWriter::NoError),
+          permissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner),
+          compressionPolicy(QZipWriter::AlwaysCompress)
     {
     }
 
@@ -547,7 +542,7 @@ void QZipReaderPrivate::scanFiles()
     if (!dirtyFileTree)
         return;
 
-    if (! (device->isOpen() || device->open(QIODevice::ReadOnly))) {
+    if (!(device->isOpen() || device->open(QIODevice::ReadOnly))) {
         status = QZipReader::FileOpenError;
         return;
     }
@@ -637,11 +632,12 @@ void QZipWriterPrivate::addEntry(EntryType type, const QString &fileName, const 
     static const char *entryTypes[] = {
         "directory",
         "file     ",
-        "symlink  " };
-    ZDEBUG() << "adding" << entryTypes[type] <<":" << fileName.toUtf8().data() << (type == 2 ? (" -> " + contents).constData() : "");
+        "symlink  "
+    };
+    ZDEBUG() << "adding" << entryTypes[type] << ":" << fileName.toUtf8().data() << (type == 2 ? (" -> " + contents).constData() : "");
 #endif
 
-    if (! (device->isOpen() || device->open(QIODevice::WriteOnly))) {
+    if (!(device->isOpen() || device->open(QIODevice::WriteOnly))) {
         status = QZipWriter::FileOpenError;
         return;
     }
@@ -667,7 +663,7 @@ void QZipWriterPrivate::addEntry(EntryType type, const QString &fileName, const 
     if (compression == QZipWriter::AlwaysCompress) {
         writeUShort(header.h.compression_method, 8);
 
-       ulong len = contents.length();
+        ulong len = contents.length();
         // shamelessly copied form zlib
         len += (len >> 12) + (len >> 14) + 11;
         int res;
@@ -708,9 +704,9 @@ void QZipWriterPrivate::addEntry(EntryType type, const QString &fileName, const 
     //uchar external_file_attributes[4];
     quint32 mode = permissionsToMode(permissions);
     switch (type) {
-        case File: mode |= S_IFREG; break;
-        case Directory: mode |= S_IFDIR; break;
-        case Symlink: mode |= S_IFLNK; break;
+    case File: mode |= S_IFREG; break;
+    case Directory: mode |= S_IFDIR; break;
+    case Symlink: mode |= S_IFLNK; break;
     }
     writeUInt(header.h.external_file_attributes, mode << 16);
     writeUInt(header.h.offset_local_header, start_of_directory);
@@ -982,12 +978,12 @@ QByteArray QZipReader::fileData(const QString &fileName) const
 */
 bool QZipReader::extractAll(const QString &destinationDir) const
 {
-    qDebug()<<"Hello, it's me!!!";
+    qDebug() << "Hello, it's me!!!";
     QDir baseDir(destinationDir);
 
     // create directories first
     QList<FileInfo> allFiles = fileInfoList();
-    foreach (FileInfo fi, allFiles) {
+    foreach(FileInfo fi, allFiles) {
         const QString absPath = destinationDir + QDir::separator() + fi.filePath;
         if (fi.isDir) {
             if (!baseDir.mkpath(fi.filePath))
@@ -998,7 +994,7 @@ bool QZipReader::extractAll(const QString &destinationDir) const
     }
 
     // set up symlinks
-    foreach (FileInfo fi, allFiles) {
+    foreach(FileInfo fi, allFiles) {
         const QString absPath = destinationDir + QDir::separator() + fi.filePath;
         if (fi.isSymLink) {
             QString destination = QFile::decodeName(fileData(fi.filePath));
@@ -1016,7 +1012,7 @@ bool QZipReader::extractAll(const QString &destinationDir) const
         }
     }
 
-    foreach (FileInfo fi, allFiles) {
+    foreach(FileInfo fi, allFiles) {
         const QString absPath = destinationDir + QDir::separator() + fi.filePath;
         if (fi.isFile) {
             QFile f(absPath);
@@ -1274,7 +1270,7 @@ void QZipWriter::addDirectory(const QString &dirName)
     // separator is mandatory
     name = QDir::fromNativeSeparators(name);
     if (!name.endsWith(QLatin1Char('/')))
-	name += QLatin1Char('/');
+        name += QLatin1Char('/');
     d->addEntry(QZipWriterPrivate::Directory, name, QByteArray());
 }
 

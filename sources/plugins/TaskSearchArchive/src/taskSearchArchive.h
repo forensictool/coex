@@ -11,24 +11,24 @@
 
 class TaskSearchArchive : coex::ITask
 {
-	public:
-		TaskSearchArchive();
-		virtual QString help();
-		virtual QString name();
-		virtual QString author();
-		virtual QString description();
+public:
+    TaskSearchArchive();
+    virtual QString help();
+    virtual QString name();
+    virtual QString author();
+    virtual QString description();
 
-		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
-		virtual void setOption(QStringList);
-        QString listZip(QString);
-		virtual bool execute(const coex::IConfig *config);
-	private:
-		bool m_bDebug;
+    virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
+    virtual void setOption(QStringList);
+    QString listZip(QString zipFile);
+    virtual bool execute(const coex::IConfig *config);
+private:
+    bool m_bDebug;
 };
 
 extern "C"
 {
-	coex::ITask* createTask();
+    coex::ITask* createTask();
 }
 
 #endif // __TASK_SEARCH_ARCHIVE_H__

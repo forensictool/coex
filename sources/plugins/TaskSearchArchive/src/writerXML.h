@@ -31,13 +31,18 @@ public:
     bool opened(
     );
 
+    void writerFoudnArchive_field(
+        QString field_name,
+        QString field_value
+    );
+
     void writeFound(
-            QString pathWay,
-            QString archiveType,
-            QString suffix,
-            QString size,
-            QString password,
-            QString archiveFileList);
+        QString pathWay,
+        QString archiveType,
+        QString suffix,
+        QString size,
+        QString password,
+        QString archiveFileList);
 
     ~writerFoudnArchive();
 private:

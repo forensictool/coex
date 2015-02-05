@@ -73,7 +73,7 @@ class QZipReaderPrivate;
 class Q_GUI_EXPORT QZipReader
 {
 public:
-    QZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
+    QZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly);
 
     explicit QZipReader(QIODevice *device);
     ~QZipReader();
@@ -83,8 +83,7 @@ public:
     bool isReadable() const;
     bool exists() const;
 
-    struct FileInfo
-    {
+    struct FileInfo {
         FileInfo();
         FileInfo(const FileInfo &other);
         ~FileInfo();

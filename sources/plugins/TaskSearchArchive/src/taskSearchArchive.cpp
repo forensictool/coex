@@ -12,49 +12,56 @@
 #include <QDebug>
 #include <qtextcodec.h>
 
-TaskSearchArchive::TaskSearchArchive() {
+TaskSearchArchive::TaskSearchArchive()
+{
     m_bDebug = false;
 };
 
-QString TaskSearchArchive::help() {
+QString TaskSearchArchive::help()
+{
     return "\t--debug - viewing debug messages";
 };
 
-QString TaskSearchArchive::name() {
+QString TaskSearchArchive::name()
+{
     return "Search Archives";
 };
 
-QString TaskSearchArchive::author() {
+QString TaskSearchArchive::author()
+{
     return "Igor Polyakov";
 };
 
-QString TaskSearchArchive::description() {
+QString TaskSearchArchive::description()
+{
     return "task Search Archive";
 };
 
-bool TaskSearchArchive::isSupportOS(const coex::ITypeOperationSystem *os) {
+bool TaskSearchArchive::isSupportOS(const coex::ITypeOperationSystem *os)
+{
     return (os->platform() == "Windows");
 };
 
-void TaskSearchArchive::setOption(QStringList options) {
-/*
-*
-* */
-if(options.contains("--debug"))
-    m_bDebug = true;
+void TaskSearchArchive::setOption(QStringList options)
+{
+    /*
+    *
+    * */
+    if (options.contains("--debug"))
+        m_bDebug = true;
 };
 
 
-QString TaskSearchArchive::listZip (QString scwsd) {
-    QZipReader zip_reader(scwsd);
+QString TaskSearchArchive::listZip(QString zipFile)
+{
+    QZipReader zip_reader(zipFile);
     QString listZipFile;
     if (zip_reader.exists()) {
         // вывод информации об архиве
-        if(m_bDebug)
+        if (m_bDebug)
             qDebug() << "Number of items in the zip archive =" << zip_reader.count();
-        foreach (QZipReader::FileInfo info, zip_reader.fileInfoList()) {
-            if(info.isFile)
-            {
+        foreach(QZipReader::FileInfo info, zip_reader.fileInfoList()) {
+            if (info.isFile) {
                 listZipFile += info.filePath;
             }
             /*else if (info.isDir)
@@ -68,14 +75,15 @@ QString TaskSearchArchive::listZip (QString scwsd) {
 
         // распаковка архива по указанному пути
         //zip_reader.extractAll(QLatin1String("./"));
-        qDebug() << listZipFile;
+        //qDebug() << listZipFile;
     }
     return listZipFile;
 };
 
 
-bool TaskSearchArchive::execute(const coex::IConfig *config) {
-    if(m_bDebug) {
+bool TaskSearchArchive::execute(const coex::IConfig *config)
+{
+    if (m_bDebug) {
         std::cout << "Debug mode on.\n";
         std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
         std::cout << "---------------------------------------------------------" << std::endl;
@@ -86,84 +94,74 @@ bool TaskSearchArchive::execute(const coex::IConfig *config) {
     }
 
     writerFoudnArchive searchArchive(config->outputFolder() + "//archive/found.xml");;
-    if(!searchArchive.opened())
-    {
+    if (!searchArchive.opened()) {
         std::cout << "Failed task :: Can't create output folder & files\n";
         return false;
     }
     QDirIterator fileListDirit(config->inputFolder(), QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-    while(fileListDirit.hasNext())
-    {
+    while (fileListDirit.hasNext()) {
         QString str = QString("%1").arg(fileListDirit.next());
         QFileInfo fInfo(str);
         QFile file(fInfo.absoluteFilePath());
-        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QString plainText = file.readLine().trimmed();
-            QString pathWay,archiveType,suffix,password,archiveFileList;
+            QString pathWay, archiveType, suffix, password, archiveFileList;
             QString size;
             //QByteArray plainText = QByteArray::fromHex(file.read(5));
             //QByteArray zipMagicWord = "504B030414";
             //if(plainText.toHex()==zipMagicWord.toHex())
 
-            if(plainText.contains(QRegExp("PK.*")))
-            {
-                if(plainText.contains(QRegExp("PK.14*")))
-                {
+            if (plainText.contains(QRegExp("PK.*"))) {
+                if (plainText.contains(QRegExp("PK.14*"))) {
                     archiveFileList = listZip(fInfo.absoluteFilePath());
                     suffix = fInfo.suffix();
                     archiveType = "ZIP";
                     password = "Yes";
-                    size = QString::number(fInfo.size(),10) + " b";
+                    size = QString::number(fInfo.size(), 10) + " b";
                     pathWay = fInfo.absoluteFilePath();
-                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
+                    searchArchive.writeFound(pathWay, archiveType, suffix, size, password, archiveFileList);
 
-                }
-                else if(plainText.contains(QRegExp("PK.*"))){
+                } else if (plainText.contains(QRegExp("PK.*"))) {
                     archiveFileList = listZip(fInfo.absoluteFilePath());
                     suffix = fInfo.suffix();
                     archiveType = "ZIP";
                     password = "No";
-                    size = QString::number(fInfo.size(),10) + " b";
+                    size = QString::number(fInfo.size(), 10) + " b";
                     pathWay = fInfo.absoluteFilePath();
-                    searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
+                    searchArchive.writeFound(pathWay, archiveType, suffix, size, password, archiveFileList);
 
                 }
-            }
-            else if(plainText.contains(QRegExp("Rar!.*")))
-            {
-                    suffix = fInfo.suffix();
-                    archiveType = "RAR";
-                    password = "No";
-                    size = QString::number(fInfo.size(),10) + " b";
-                    pathWay = fInfo.absoluteFilePath();
-                    //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
+            } else if (plainText.contains(QRegExp("Rar!.*"))) {
+                suffix = fInfo.suffix();
+                archiveType = "RAR";
+                password = "No";
+                size = QString::number(fInfo.size(), 10) + " b";
+                pathWay = fInfo.absoluteFilePath();
+                //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
 
-            }
-            else if(plainText.contains(QRegExp("*7zXZ.*")))
-            {
-                    suffix = fInfo.suffix();
-                    archiveType = "XZ"; //да есть такой формат.
-                    password = "No";
-                    size = QString::number(fInfo.size(),10) + " b";
-                    pathWay = fInfo.absoluteFilePath();
-                    //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
+            } else if (plainText.contains(QRegExp("*7zXZ.*"))) {
+                suffix = fInfo.suffix();
+                archiveType = "XZ"; //да есть такой формат.
+                password = "No";
+                size = QString::number(fInfo.size(), 10) + " b";
+                pathWay = fInfo.absoluteFilePath();
+                //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);
 
+            } else if (plainText.contains(QRegExp("7z.*"))) {
+                suffix = fInfo.suffix();
+                archiveType = "7 ZIP";
+                password = "No";
+                size = QString::number(fInfo.size(), 10) + " b";
+                pathWay = fInfo.absoluteFilePath();
+                //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);/
             }
-            else if(plainText.contains(QRegExp("7z.*")))
-            {
-                    suffix = fInfo.suffix();
-                    archiveType = "7 ZIP";
-                    password = "No";
-                    size = QString::number(fInfo.size(),10) + " b";
-                    pathWay = fInfo.absoluteFilePath();
-                    //searchArchive.writeFound(pathWay,archiveType,suffix,size,password,archiveFileList);/
-            }
+        };
     };
-};
-return true;
+    std::cout << " *  *  * Report created\n";
+    return true;
 };
 
-coex::ITask* createTask() {
+coex::ITask* createTask()
+{
     return (coex::ITask*)(new TaskSearchArchive());
 }
