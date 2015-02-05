@@ -1,15 +1,15 @@
-#ifndef __IMAGE_VERIFY_TASK_H__
-#define __IMAGE_VERIFY_TASK_H__
+#ifndef __TASK_CHROME_WIN_H__
+#define __TASK_CHROME_WIN_H__
 
 #include "coex.h"
 
 #include <QString>
 #include <QStringList>
 
-class TaskImageVerifier : coex::ITask
+class TaskChromeWin : coex::ITask
 {
 	public:
-        TaskImageVerifier();
+        TaskChromeWin();
 		virtual QString help();
 		virtual QString name();
 		virtual QString author();
@@ -27,4 +27,4 @@ extern "C"
 	coex::ITask* createTask();
 }
 
-#endif // __IMAGE_VERIFY_TASK_H__
+#endif // __TASK_CHROME_WIN_H__

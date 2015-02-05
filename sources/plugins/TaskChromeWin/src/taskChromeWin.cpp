@@ -1,13 +1,53 @@
 #include <QFile>
-#include <QtSql>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlRecord>
 #include <QRegExp>
 #include <QXmlStreamWriter>
 #include <QCryptographicHash>
+#include <QDebug>
+#include <QDir>
+#include "taskChromeWin.h"
 
-void readandwriteBookmarks();
-void prefrences();
-void sqlHistory();
-void write();
+TaskChromeWin::TaskChromeWin()
+{
+    m_bDebug = false;
+};
+
+QString TaskChromeWin::help()
+{
+    return "\t--debug - viewing debug messages";
+};
+
+QString TaskChromeWin::name()
+{
+    return "Google Chrome for Windows";
+};
+
+QString TaskChromeWin::author()
+{
+    return "Vladislav Shipovskoi";
+};
+
+QString TaskChromeWin::description()
+{
+    return "search Info in Chrome browser";
+};
+
+bool TaskChromeWin::isSupportOS(const coex::ITypeOperationSystem *os)
+{
+    return (os->platform() == "Windows");
+};
+
+void TaskChromeWin::setOption(QStringList options)
+{
+    /*
+    *
+    * */
+    if (options.contains("--debug"))
+        m_bDebug = true;
+};
 
 
 class XMLwriter
@@ -33,7 +73,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             /*id=MD5(url+Chrome)*/
             write_field(xmlWriter, "id", id);
@@ -44,7 +84,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -59,7 +99,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             /*id = MD5(name+value+time+Chrome)*/
             write_field(xmlWriter, "id", id);
@@ -71,7 +111,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -87,7 +127,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             /*id = MD5(download+dowload_url+dowload_time+"Chrome)*/
             write_field(xmlWriter, "id", id);
@@ -101,7 +141,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -117,7 +157,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             /*id = MD5(keyword_term+"Chrome")*/
             write_field(xmlWriter, "id", id);
@@ -127,7 +167,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -143,7 +183,7 @@ public:
             xmlWriter.writeStartElement("add");
         }
 
-        if (mode == 2) {
+        else if (mode == 2) {
             xmlWriter.writeStartElement("doc");
             /*id = MD5(preferences_param_value+"Chrome")*/
             write_field(xmlWriter, "id", id);
@@ -154,7 +194,7 @@ public:
             xmlWriter.writeEndElement();
         }
 
-        if (mode == 3) {
+        else if (mode == 3) {
             xmlWriter.writeEndElement();
             xmlWriter.writeEndDocument();
         }
@@ -163,24 +203,15 @@ public:
 
 };
 
-int main(int argc, char *argv[])
+void readandwriteBookmarks(QString output, QString input)
 {
-    QCoreApplication a(argc, argv);
-    QDir().mkdir("XML");
-    readandwriteBookmarks();
-    prefrences();
-    sqlHistory();
-}
-
-void readandwriteBookmarks()
-{
-    QFile file1("Bookmarks");
+    QFile file1(input + "Bookmarks");
     QRegExp rx("\"(.*)\".*\"(.*)\"");
     if (file1.open(QIODevice::ReadOnly)) {
         QTextStream stream1(&file1);
         QString str, url, name;
 
-        QString path("XML/bookmarks.xml");
+        QString path(output + "bookmarks.xml");
         QFile file(path);
         file.open(QFile::WriteOnly);
         QXmlStreamWriter xmlWriter(&file);
@@ -215,18 +246,17 @@ void readandwriteBookmarks()
 
 }
 
-void sqlHistory()
+void sqlHistory(QString output, QString input)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("History");
-    QString path1("XML/history.xml");
-    QString path2("XML/download_history.xml");
-    QString path3("XML/search_term.xml");
+    db.setDatabaseName(input + "chromeXml/History");
+    QString path1(output + "history.xml");
+    QString path2(output + "download_history.xml");
+    QString path3(output + "search_term.xml");
 
     QFile file1(path1);
     QFile file2(path2);
     QFile file3(path3);
-
 
     file1.open(QFile::WriteOnly);
     file2.open(QFile::WriteOnly);
@@ -274,10 +304,10 @@ void sqlHistory()
     }
 }
 
-void prefrences()
-{
-    QFile file1("Preferences");
-    QString path("XML/preferences.xml");
+void prefrences(QString output, QString input){
+    QFile file1(input + "chromeXml/Preferences");
+    qDebug() << input << "chromeXml/Preferences";
+    QString path(output + "preferences.xml");
     QFile file2(path);
     file2.open(QFile::WriteOnly);
     QXmlStreamWriter xmlWriter(&file2);
@@ -305,11 +335,33 @@ void prefrences()
             if (i == 3)
                 break;
         }
-    } else
+    }
+    else
         qDebug() << "Error";
     start.writePreferences(NULL, NULL, xmlWriter, 3, NULL, NULL);
     file1.close();
     file2.close();
 }
 
+bool TaskChromeWin::execute(const coex::IConfig *config) {
+    if(m_bDebug) {
+        qDebug() << "===========================================\n\n";
+        qDebug() << "Debug mode ON\n";
+        qDebug() << "InputFolder: " << config->inputFolder() << "\n";
+    };
+    {
+        QDir dir(config->outputFolder());
+        dir.mkdir("chrome");
+        dir.mkdir("chrome/history");
+    }
+    readandwriteBookmarks(config->outputFolder(), config->inputFolder());
+    prefrences(config->outputFolder(), config->inputFolder());
+    sqlHistory(config->outputFolder(), config->inputFolder());
+    std::cout << " *  *  * Report created\n";
+    return true;
+}
 
+coex::ITask* createTask()
+{
+    return (coex::ITask*)(new TaskChromeWin());
+}

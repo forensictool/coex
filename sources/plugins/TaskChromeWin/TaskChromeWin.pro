@@ -13,7 +13,7 @@ QT -= gui
 CONFIG += dll
 
 SOURCES += \     
-    src/taskChromeWin.cpp
+	src/taskChromeWin.cpp
 
-HEADERS +=  #\
-    #src/TaskImageVerifier.h
+HEADERS += \
+        src/taskChromeWin.h

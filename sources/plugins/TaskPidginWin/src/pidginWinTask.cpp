@@ -256,6 +256,7 @@ bool TaskPidginWin::execute(const coex::IConfig *config) {
         }
     };
 	return true;
+
 };
 
 coex::ITask* createTask() {
