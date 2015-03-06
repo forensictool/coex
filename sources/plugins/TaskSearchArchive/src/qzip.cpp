@@ -52,7 +52,7 @@
 #include <qdir.h>
 #include <QLatin1Char>
 
-#include "zlib.h"
+#include "zlib.h" // try installing zlib1g-dev
 
 #if defined(Q_OS_WIN)
 #  undef S_IFREG
