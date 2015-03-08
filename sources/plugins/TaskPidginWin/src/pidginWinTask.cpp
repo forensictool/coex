@@ -1,75 +1,82 @@
 #include "pidginWinTask.h"
 #include "writerMessages.h"
+/*!
+    \brief Класс для обработки логов Pidgin
+    \author Polyakov Igor
+    \version 1.0
+    \date Март 2015 года
+    \warning Данный класс создан только в учебных целях
 
-#include <QDirIterator>
-#include <QString>
-#include <QRegExp>
-#include <QFile>
-#include <QDebug>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QTextStream>
-#include <QCryptographicHash>
-
-TaskPidginWin::TaskPidginWin() {
+    Обычный дочерний класс, который отнаследован от ранее созданного класса coex
+*/
+TaskPidginWin::TaskPidginWin()
+{
     m_bDebug = false;
 };
 
-QString TaskPidginWin::help() {
-	return "\t--debug - viewing debug messages";
+QString TaskPidginWin::help()
+{
+    return "\t--debug - viewing debug messages";
 };
 
-QString TaskPidginWin::name() {
-	return "PidginWin";
+QString TaskPidginWin::name()
+{
+    return "PidginWin";
 };
 
-QString TaskPidginWin::author() {
-	return "Igor Polyakov";
+QString TaskPidginWin::author()
+{
+    return "Igor Polyakov";
 };
 
-QString TaskPidginWin::description() {
-	return "Task is search logs of Pidgin for WINDOWS";
+QString TaskPidginWin::description()
+{
+    return "Task is search logs of Pidgin for WINDOWS";
 };
 
-bool TaskPidginWin::isSupportOS(const coex::ITypeOperationSystem *os) {
-	return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
+bool TaskPidginWin::isSupportOS(const coex::ITypeOperationSystem *os)
+{
+    return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
 };
 
-void TaskPidginWin::setOption(QStringList options) {
-	/*
-	* 
-	* */
-	if(options.contains("--debug"))
-	m_bDebug = true;
+void TaskPidginWin::setOption(QStringList options)
+{
+    /*
+    *
+    * */
+    if (options.contains("--debug"))
+        m_bDebug = true;
 };
 
-void processingContactListPidgin(QString inputFile, QString outPath){
+/*!
+Вычитывает xml файл контактов Pidgin с данными. Преобразует к нужному формату.
+\param[out] outPath Папка в которой лежат собранные данные
+\param[in] inputFile Путь к обрабатываемому файлу
+*/
+
+void TaskPidginWin::processingContactListPidgin(QString inputFile, QString outPath)
+{
     QXmlStreamReader xmlReader;
-    QFile fileXmlContacts (inputFile);
+    QFile fileXmlContacts(inputFile);
     xmlReader.setDevice(&fileXmlContacts);
     writerMessagesPidgin pidginContacts(outPath + "//pidgin/contacts.xml", "pidgin");
     QString accountPidgin, protoPidgin, namePidgin, emailPidgin;
     QString nameElem = "";
-    if(fileXmlContacts.open(QIODevice::ReadOnly))
-    {
+    if (fileXmlContacts.open(QIODevice::ReadOnly)) {
         xmlReader.readNext();
-        while(!xmlReader.atEnd() && !xmlReader.hasError())
-        {
+        while (!xmlReader.atEnd() && !xmlReader.hasError()) {
             QXmlStreamReader::TokenType token = xmlReader.readNext();
-            if(token == QXmlStreamReader::StartDocument)
-            {
+            if (token == QXmlStreamReader::StartDocument) {
                 continue;
             }
-            if(token == QXmlStreamReader::StartElement)
-            {
+            if (token == QXmlStreamReader::StartElement) {
                 nameElem = xmlReader.name().toString();
 
                 if (xmlReader.name() == "buddy") {
-                    foreach(const QXmlStreamAttribute &attr, xmlReader.attributes()) {
+                    foreach(const QXmlStreamAttribute & attr, xmlReader.attributes()) {
                         if (attr.name().toString() == QLatin1String("account")) {
                             accountPidgin = attr.value().toString();
-                        }
-                        else if (attr.name().toString() == QLatin1String("proto")) {
+                        } else if (attr.name().toString() == QLatin1String("proto")) {
                             protoPidgin = attr.value().toString();
                         }
                     }
@@ -77,56 +84,49 @@ void processingContactListPidgin(QString inputFile, QString outPath){
                     emailPidgin = "";
                 }
             }
-            if(token == QXmlStreamReader::Characters) {
+            if (token == QXmlStreamReader::Characters) {
                 if (nameElem == "name")
-                emailPidgin += xmlReader.text().toString();
+                    emailPidgin += xmlReader.text().toString();
                 else if (nameElem == "alias")
-                namePidgin += xmlReader.text().toString();
+                    namePidgin += xmlReader.text().toString();
             }
-            if(token == QXmlStreamReader::EndElement)
-            {
+            if (token == QXmlStreamReader::EndElement) {
                 if (xmlReader.name() == "buddy") {
                     accountPidgin = accountPidgin.trimmed();
                     protoPidgin = protoPidgin.trimmed();
                     namePidgin = namePidgin.trimmed();
                     emailPidgin = emailPidgin.trimmed();
-                    pidginContacts.writeContactList(accountPidgin,protoPidgin,namePidgin,emailPidgin);
+                    pidginContacts.writeContactList(accountPidgin, protoPidgin, namePidgin, emailPidgin);
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         qDebug() << "could not opening contacts file \r\n";
     };
 
 };
 
-void processingAccountPidgin(QString inputFile, QString outPath){
-    QFile foundFile (inputFile);
+/*!
+Вычитывает xml файл аккаунта Pidgin. Преобразует к нужному формату
+\param[out] outPath Папка в которой лежат собранные данные
+\param[in] inputFile Путь к обрабатываемому файлу
+*/
+void TaskPidginWin::processingAccountPidgin(QString inputFile, QString outPath)
+{
+    QFile foundFile(inputFile);
     writerMessagesPidgin pidginAccount(outPath + "//pidgin/accounts.xml", "pidgin");
     QXmlStreamReader xmlReader;
     xmlReader.setDevice(&foundFile);
     QString name, email, protocol, password, nameElem = "";
-    if(foundFile.open(QIODevice::ReadOnly))
-    {
+    if (foundFile.open(QIODevice::ReadOnly)) {
         xmlReader.readNext();
-        while(!xmlReader.atEnd() && !xmlReader.hasError())
-        {
-            //qDebug() << "cyrcle";
+        while (!xmlReader.atEnd() && !xmlReader.hasError()) {
             QXmlStreamReader::TokenType token = xmlReader.readNext();
-
-            // пропускаем рутовый элемент документа
-            if(token == QXmlStreamReader::StartDocument)
-            {
+            if (token == QXmlStreamReader::StartDocument) {
                 continue;
             }
-            if(token == QXmlStreamReader::StartElement)
-            {
-                // запоминаем имя текущего элемента
+            if (token == QXmlStreamReader::StartElement) {
                 nameElem = xmlReader.name().toString();
-
-                // когда встречаем элемент то вычищаем наши переменные
                 if (xmlReader.name() == "account") {
                     name = "";
                     email = "";
@@ -134,56 +134,49 @@ void processingAccountPidgin(QString inputFile, QString outPath){
                     password = "";
                 }
             }
-
-            // запоминаем текст исходя из имени элемента
-            if(token == QXmlStreamReader::Characters) {
-                if(nameElem == "alias")
-                name += xmlReader.text().toString();
+            if (token == QXmlStreamReader::Characters) {
+                if (nameElem == "alias")
+                    name += xmlReader.text().toString();
                 else if (nameElem == "password")
-                password += xmlReader.text().toString();
+                    password += xmlReader.text().toString();
                 else if (nameElem == "protocol")
-                protocol += xmlReader.text().toString();
+                    protocol += xmlReader.text().toString();
                 else if (nameElem == "name")
-                email += xmlReader.text().toString();
+                    email += xmlReader.text().toString();
             }
-
-            // все когда встречаем элемент конца то сбрасываем все данные в writer
-            if(token == QXmlStreamReader::EndElement)
-            {
+            if (token == QXmlStreamReader::EndElement) {
                 if (xmlReader.name() == "account") {
                     name = name.trimmed();
                     email = email.trimmed();
                     protocol = protocol.trimmed();
                     password = password.trimmed();
-                    pidginAccount.writeAccountInfo(name,email,protocol,password);
+                    pidginAccount.writeAccountInfo(name, email, protocol, password);
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         qDebug() << "Could not opening accounts.xml file \r\n";
     };
 };
-
-void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
-
-    QString md5Id = QCryptographicHash::hash( fileInfo.filePath().toAscii(), QCryptographicHash::Sha1 ).toHex();
+/*!
+Вычитывает логи Pidgin. Формат файлов html, txt. Преобразует к нужному формату
+\param[out] outPath Папка в которой лежат собранные данные
+\param[in] inputFile Путь к обрабатываемому файлу
+*/
+void TaskPidginWin::processingLogPidgin(QFileInfo  fileInfo, QString outputPath)
+{
+    QString md5Id = QCryptographicHash::hash(fileInfo.filePath().toAscii(), QCryptographicHash::Sha1).toHex();
 
     writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + md5Id + ".xml", "pidgin");
-    QString time, author,message, chatID, account, data, namePidgin;
+    QString time, author, message, chatID, account, data, namePidgin;
 
     QFile fileLogs(fileInfo.absoluteFilePath());
     QRegExp rxHead, rxBody;
 
-    if (fileLogs.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        if (fileInfo.suffix() == "html")
-        {
+    if (fileLogs.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        if (fileInfo.suffix() == "html") {
             rxHead.setPattern(".*h3.*with (.*) at (.*) \\d{2}:\\d{2}:\\d{2} on (.*) .*\\((.*)\\)");
-        }
-        else if (fileInfo.suffix() == "txt")
-        {
+        } else if (fileInfo.suffix() == "txt") {
             rxHead.setPattern(".* with (.*) at (.*) on (.*) \\((.*)\\)");
         }
         QString line = fileLogs.readLine();//read first line, get interesting info)
@@ -192,73 +185,66 @@ void processingLogPidgin(QFileInfo  fileInfo, QString outputPath){
         account = rxHead.cap(3);
         data = rxHead.cap(2);
         namePidgin = rxHead.cap(4);
-        if (fileInfo.suffix() == "html")
-        {
+        if (fileInfo.suffix() == "html") {
             rxBody.setPattern(".*(\\d{2}:\\d{2}:\\d{2}).*b\\>(.*):\\<\\/b.*font\\>(.*)\\<br");
-        }
-        else if (fileInfo.suffix() == "txt")
-        {
+        } else if (fileInfo.suffix() == "txt") {
             rxBody.setPattern("\\((.*\\d{2}:\\d{2}:\\d{2})\\) (.*): (.*)");
         }
 
-        while(!fileLogs.atEnd())
-        {
+        while (!fileLogs.atEnd()) {
             line = fileLogs.readLine(); // read all file
             rxBody.indexIn(line);
             time = rxBody.cap(1);
             author = rxBody.cap(2);
             message = rxBody.cap(3);
-            pidginMessages.writeMessage(chatID, account, namePidgin, author,data + " " + time,message);
+            pidginMessages.writeMessage(chatID, account, namePidgin, author, data + " " + time, message);
         }
-    }
-    else
-    {
+    } else {
         qDebug() << "could not opening log file: " << fileInfo.absolutePath() << "\r\n";
     }
 };
-
-bool TaskPidginWin::execute(const coex::IConfig *config) {
-	if(m_bDebug) {
+/*!
+Некий main класса TaskPidginWin
+\param[in] config конфиг с путями входными, выходными
+\return Возвращает статус исполнения таска
+*/
+bool TaskPidginWin::execute(const coex::IConfig *config)
+{
+    if (m_bDebug) {
         qDebug() << "===========================================\n\n";
         qDebug() << "Debug mode ON\n";
         qDebug() << "InputFolder: " << config->inputFolder() << "\n";
-	};
-    {
-        QDir dir(config->outputFolder());
-        dir.mkdir("pidgin");
-        dir.mkdir("pidgin/messages");
+    };
 
-    }
-    //QString path = config->inputFolder() + "/Users/";
-    QString path = config->inputFolder();
+    QDir dir(config->outputFolder());
+    dir.mkdir("pidgin");
+    dir.mkdir("pidgin/messages");
+
     QRegExp pidginPathAccount(".*purple/accounts.xml");
     QRegExp pidginPathContact(".*purple/blist.xml");
     QRegExp pidginPathLogHtml(".*purple/logs.*html");
     QRegExp pidginPathLogTxt(".*purple/logs.*txt");
 
-    QDirIterator dirPath (path, QDir::Files | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
-    while(dirPath.hasNext())
-    {
-        if (dirPath.filePath().contains(pidginPathAccount))
-        {
-            processingAccountPidgin(dirPath.filePath(), config->outputFolder());
+    TaskPidginWin account, contact, log;
+
+    QDirIterator dirPath(config->inputFolder(), QDir::Files | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
+    while (dirPath.hasNext()) {
+        if (dirPath.filePath().contains(pidginPathAccount)) {
+            account.processingAccountPidgin(dirPath.filePath(), config->outputFolder());
             dirPath.next();
-        }
-        else if (dirPath.filePath().contains(pidginPathContact))
-        {
-            processingContactListPidgin(dirPath.filePath(), config->outputFolder());
+        } else if (dirPath.filePath().contains(pidginPathContact)) {
+            contact.processingContactListPidgin(dirPath.filePath(), config->outputFolder());
             dirPath.next();
-        }
-        else if ( dirPath.filePath().contains(pidginPathLogTxt) || dirPath.next().contains(pidginPathLogHtml) )
-        {
-            processingLogPidgin(dirPath.fileInfo(), config->outputFolder());
+        } else if (dirPath.filePath().contains(pidginPathLogTxt) || dirPath.next().contains(pidginPathLogHtml)) {
+            log.processingLogPidgin(dirPath.fileInfo(), config->outputFolder());
             dirPath.next();
         }
     };
-	return true;
+    return true;
 
 };
 
-coex::ITask* createTask() {
-	return (coex::ITask*)(new TaskPidginWin());
+coex::ITask* createTask()
+{
+    return (coex::ITask*)(new TaskPidginWin());
 }

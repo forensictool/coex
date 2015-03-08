@@ -3,11 +3,16 @@
 
 #include "coex.h"
 
-#include <QString>
+#include <QCryptographicHash>
+#include <QDateTime>
+#include <QDebug>
+#include <QDirIterator>
 #include <QFile>
+#include <QRegExp>
+#include <QString>
+#include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include <QDateTime>
 
 class TaskPidginWin : coex::ITask
 {
@@ -21,6 +26,18 @@ class TaskPidginWin : coex::ITask
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
+        void processingContactListPidgin(
+                QString inputFile,
+                QString outPath
+        );
+        void processingAccountPidgin(
+                QString inputFile,
+                QString outPath
+        );
+        void processingLogPidgin(
+                QFileInfo  fileInfo,
+                QString outputPath
+        );
 	private:
 		bool m_bDebug;
 };
