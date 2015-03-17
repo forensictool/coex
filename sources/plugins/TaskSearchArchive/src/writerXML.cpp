@@ -8,17 +8,6 @@
 #include <QTextStream>
 #include <QCryptographicHash>
 
-writerXML::writerXML()
-{
-}
-writerXML::~writerXML()
-{
-}
-bool writerXML::opened()
-{
-    return m_bOpened;
-}
-
 bool writerFoudnArchive::opened()
 {
     return m_bOpened;

@@ -51,7 +51,11 @@ void TaskSearchArchive::setOption(QStringList options)
         m_bDebug = true;
 };
 
-
+/*!
+Вывод информации об zip архиве
+\param[out] QString listZipFile список файлов архива
+\param[in] QString zipFile файл архива
+*/
 QString TaskSearchArchive::listZip(QString zipFile)
 {
     QZipReader zip_reader(zipFile);
@@ -72,27 +76,30 @@ QString TaskSearchArchive::listZip(QString zipFile)
                     qDebug() << "SymLink:" << info.filePath;*/
             listZipFile += "\t";
         }
-
-        // распаковка архива по указанному пути
-        //zip_reader.extractAll(QLatin1String("./"));
-        //qDebug() << listZipFile;
     }
     return listZipFile;
 };
 
+/*!
+Определение типа архива по его заголовку
+\param[out] QString ---
+\param[in] QString path файл архива
+*/
+void TaskSearchArchive::determineTypeArchive(QString path)
+{
+/*
+*/
+}
 
 bool TaskSearchArchive::execute(const coex::IConfig *config)
 {
     if (m_bDebug) {
         std::cout << "Debug mode on.\n";
         std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
-        std::cout << "---------------------------------------------------------" << std::endl;
+        std::cout << "---------------TaskSearchArchive::execute-----------------" << std::endl;
     };
-    {
-        QDir dir(config->outputFolder());
-        dir.mkdir("archive");
-    }
-
+    QDir dir(config->outputFolder());
+    dir.mkdir("archive");
     writerFoudnArchive searchArchive(config->outputFolder() + "//archive/found.xml");;
     if (!searchArchive.opened()) {
         std::cout << "Failed task :: Can't create output folder & files\n";
@@ -100,6 +107,7 @@ bool TaskSearchArchive::execute(const coex::IConfig *config)
     }
     QDirIterator fileListDirit(config->inputFolder(), QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     while (fileListDirit.hasNext()) {
+
         QString str = QString("%1").arg(fileListDirit.next());
         QFileInfo fInfo(str);
         QFile file(fInfo.absoluteFilePath());
@@ -107,9 +115,6 @@ bool TaskSearchArchive::execute(const coex::IConfig *config)
             QString plainText = file.readLine().trimmed();
             QString pathWay, archiveType, suffix, password, archiveFileList;
             QString size;
-            //QByteArray plainText = QByteArray::fromHex(file.read(5));
-            //QByteArray zipMagicWord = "504B030414";
-            //if(plainText.toHex()==zipMagicWord.toHex())
 
             if (plainText.contains(QRegExp("PK.*"))) {
                 if (plainText.contains(QRegExp("PK.14*"))) {

@@ -2,6 +2,7 @@
 #define __WRITER_XML_H__
 
 #include "coex.h"
+#include "taskSearchArchive.h"
 
 #include <QString>
 #include <QFile>
@@ -9,21 +10,7 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
-class writerXML
-{
-public:
-    writerXML();
-
-    bool opened();
-    void writeInfo();
-    void writeMessage();
-
-    ~writerXML();
-private:
-    bool m_bOpened;
-};
-
-class writerFoudnArchive : writerXML
+class writerFoudnArchive : TaskSearchArchive
 {
 public:
     writerFoudnArchive(QString fileType);
