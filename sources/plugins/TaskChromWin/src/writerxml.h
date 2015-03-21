@@ -23,14 +23,15 @@ public:
     bool opened(
     );
 
-    void writeField(
-        QString field_name,
-        QString field_value
-    );
-    void writePreferences(
-        QString name,
-        QString value
-    );
+    void writeField(QString field_name,QString field_value);
+    void writePreferences(QString name,QString value);
+    void writeBookmarks(QString name,QString value, QString title);
+
+    void writeHistory(QString name, QString url,QString date);
+    void writeHistoryDowload(QString dowload_path, QString dowload_url,QString dowload_referrer,QString dowload_size,QString dowload_time_start,QString dowload_time_end);
+    void writeHistorySearch(QString term);
+
+
     ~writerXML();
 private:
     QFile *m_pFile;

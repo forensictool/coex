@@ -9,6 +9,7 @@ INCLUDEPATH += ../../include/
 OBJECTS_DIR = tmp/
 
 QT -= gui
+QT += sql
 
 CONFIG += dll
 

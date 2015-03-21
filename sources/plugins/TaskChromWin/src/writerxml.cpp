@@ -43,10 +43,7 @@ void writerXML::writeField(
         m_pXmlWriter->writeEndElement();
     }
 }
-void writerXML::writePreferences(
-    QString name,
-    QString value
-)
+void writerXML::writePreferences(QString name,QString value)
 {
     if (!m_bOpened)return;
 
@@ -61,3 +58,78 @@ void writerXML::writePreferences(
 
     m_pXmlWriter->writeEndElement();
 }
+
+void writerXML::writeBookmarks(QString name, QString value,QString title)
+{
+    if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash((value + name).toAscii(), QCryptographicHash::Md5).toHex();
+
+    m_pXmlWriter->writeStartElement("doc");
+    writeField("doc_type", "bookmarks");
+    writeField("id", "chrome_" + md5Id);
+    writeField("application", "chrome");
+    writeField("bookmarks_param_name", name);
+    writeField("bookmarks_param_title", title);
+    writeField("bookmarks_param_value", value);
+
+    m_pXmlWriter->writeEndElement();
+
+}
+
+void writerXML::writeHistory(QString name, QString url, QString date)
+{
+    if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash((name + url + date).toAscii(), QCryptographicHash::Md5).toHex();
+
+    m_pXmlWriter->writeStartElement("doc");
+    writeField("doc_type", "history");
+    writeField("id", "chrome_" + md5Id);
+    writeField("application", "chrome");
+    writeField("bookmarks_param_name", name);
+    writeField("bookmarks_param_url", url);
+    writeField("bookmarks_param_date", date);
+
+    m_pXmlWriter->writeEndElement();
+}
+
+void writerXML::writeHistoryDowload(QString dowload_path, QString dowload_url,QString dowload_referrer,QString dowload_size,QString dowload_time_start,QString dowload_time_end)
+{
+    if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash(("download" + dowload_url + dowload_time_start + "Chrome").toAscii(), QCryptographicHash::Md5).toHex();
+
+    m_pXmlWriter->writeStartElement("doc");
+    writeField("doc_type", "history");
+    writeField("id", "chrome_" + md5Id);
+    writeField("application", "chrome");
+    writeField("bookmarks_param_path", dowload_path);
+    writeField("bookmarks_param_url", dowload_url);
+    writeField("bookmarks_param_referrer", dowload_referrer);
+    writeField("bookmarks_param_size", dowload_size);
+    writeField("bookmarks_param_time_start", dowload_time_start);
+    writeField("bookmarks_param_time_end", dowload_time_end);
+
+    m_pXmlWriter->writeEndElement();
+
+
+}
+
+void writerXML::writeHistorySearch(QString term)
+{
+    if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash((term + "Chrome").toAscii(), QCryptographicHash::Md5).toHex();
+
+    m_pXmlWriter->writeStartElement("doc");
+    writeField("doc_type", "history");
+    writeField("id", "chrome_" + md5Id);
+    writeField("application", "chrome");
+    writeField("bookmarks_param_term", term);
+
+    m_pXmlWriter->writeEndElement();
+
+
+}
+

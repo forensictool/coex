@@ -13,6 +13,8 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 class TaskChromWin : coex::ITask
 {
@@ -27,6 +29,8 @@ class TaskChromWin : coex::ITask
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
         void prefrences(QString input, QString output);
+        void bookmarks(QString input, QString output);
+        void history(QString input, QString output);
 	private:
 		bool m_bDebug;
 };
