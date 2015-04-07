@@ -3,30 +3,18 @@
 
 #include "coex.h"
 
-#include <QString>
+#include <iostream>
+#include <QCryptographicHash>
+#include <QDateTime>
+#include <QDirIterator>
 #include <QFile>
+#include <QRegExp>
+#include <QString>
+#include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include <QDateTime>
 
-class writerMessages
-{
-public:
-    writerMessages();
-
-    bool opened();
-
-      //about pidgin log file
-     void writeInfo();
-
-    //like pidgin
-    void writeMessage();
-    ~writerMessages();
-private:
-    bool m_bOpened;
-};
-
-class writerMessagesPidgin : writerMessages
+class writerMessagesPidgin
 {
 public:
     writerMessagesPidgin(QString fileName, QString messangerName);

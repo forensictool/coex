@@ -1,31 +1,4 @@
-
 #include "writerMessages.h"
-
-#include <iostream>
-#include <QDirIterator>
-#include <QString>
-#include <QRegExp>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QTextStream>
-#include <QCryptographicHash>
-
-writerMessages::writerMessages()
-{
-}
-writerMessages::~writerMessages()
-{
-}
-bool writerMessages::opened()
-{
-    return m_bOpened;
-}
-
-bool writerMessagesPidgin::opened()
-{
-    return m_bOpened;
-}
 
 writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerName)
 {
@@ -53,6 +26,11 @@ writerMessagesPidgin::~writerMessagesPidgin()
     m_pXmlWriter->writeEndDocument();
     delete m_pXmlWriter;
     delete m_pFile;
+}
+
+bool writerMessagesPidgin::opened()
+{
+    return m_bOpened;
 }
 
 void writerMessagesPidgin::writeAccountInfo_field(
@@ -116,8 +94,6 @@ void writerMessagesPidgin::writeContactList(
 
     m_pXmlWriter->writeEndElement();
 }
-
-
 
 void writerMessagesPidgin::writeMessage(
     QString chathID,
