@@ -1,21 +1,5 @@
 #include "skypeWinTask.h"
-#include "writerMessages.h"
-
-#include <iostream>
-#include <QDirIterator>
-#include <QString>
-#include <QRegExp>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QTextStream>
-#include <QSqlDatabase>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlError>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlRecord>
-#include <QDateTime>
-#include <QTextStream>
+#include "writerMessagesSkype.h"
 
 TaskSkypeWin::TaskSkypeWin() {
 	m_bDebug = false;
@@ -51,16 +35,15 @@ void TaskSkypeWin::setOption(QStringList options) {
 
 bool TaskSkypeWin::execute(const coex::IConfig *config) {
 	// example usage options
-    if(m_bDebug)
-    {
-        std::cout << "Debug mode ON\n";
-        std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+    if (m_bDebug) {
+        qDebug() << "===============TaskSkypeWin================\n\n";
+        qDebug() << "Debug mode ON\n";
+        qDebug() << "InputFolder: " << config->inputFolder() << "\n";
     };
-	{
-		QDir dir(config->outputFolder());
-		dir.mkdir("skype");
-	}
-	
+
+    QDir dir(config->outputFolder());
+    dir.mkdir("skype");
+
 	QString path = config->inputFolder() + "/Users/";
 	QStringList  listOfSkypeUser;
 
@@ -70,7 +53,7 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
     writerMessagesSkype skypeCalls (config->outputFolder() + "//skype/calls.xml");
     if(!skypeMessages.opened()||!skypeContacts.opened()||!skypeAccouts.opened()||!skypeCalls.opened())
     {
-        std::cout << "Failed task :: Can't create output folder & files\n";
+        qDebug() << "Failed task :: Can't create output folder & files\n";
         return false;
     }
 	QRegExp skypePathLog(".*Skype.*main.db");
@@ -103,12 +86,11 @@ bool TaskSkypeWin::execute(const coex::IConfig *config) {
                 << "Messages" << "ContactGroups" << "Videos" << "SMSes"
                 << "CallMembers" << "ChatMembers" << "Alerts" << "Conversations"
                 << "Participants" << "VideoMessages";*/
-            QString sql;
+            QString sql = "select skypename, fullName, emails, ipcountry from  Accounts;";
             QSqlQuery query(db);
-            QSqlRecord rec = query.record();
-            sql = "select skypename, fullName, emails, ipcountry from  Accounts;";
-            query.exec(sql);
+            QSqlRecord rec;
             rec = query.record();
+            query.exec(sql);
             while (query.next())
             {
                 {

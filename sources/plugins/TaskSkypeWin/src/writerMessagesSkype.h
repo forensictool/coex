@@ -1,39 +1,22 @@
-#ifndef __WRITER_MESSAGES_H__
-#define __WRITER_MESSAGES_H__
+#ifndef __WRITER_MESSAGES_SKYPE_H__
+#define __WRITER_MESSAGES_SKYPE_H__
 
 #include "coex.h"
 
-#include <QString>
+#include <QCryptographicHash>
+#include <QDateTime>
 #include <QFile>
+#include <QRegExp>
+#include <QString>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include <QDateTime>
 
-class writerMessages
-{
-public:
-    writerMessages();
-
-    bool opened();
-
-      //about pidgin log file
-     void writeInfo();
-
-    //like pidgin
-    void writeMessage();
-    ~writerMessages();
-private:
-    bool m_bOpened;
-};
-
-
-class writerMessagesSkype : writerMessages
+class writerMessagesSkype
 {
 public:
     writerMessagesSkype(QString fileResult);
 
-    bool opened(
-    );
+    bool opened();
 
     // like skype
     void writeSkype_field(
@@ -54,8 +37,6 @@ public:
         QString current_video_audience
     );
 
-
-    // like skype contact
     void writeContacts(
         QString skypename ,
         QString fullName,
@@ -82,4 +63,4 @@ private:
     bool m_bOpened;
 };
 
-#endif // __WRITER_MESSAGES_H__
+#endif // __WRITER_MESSAGES_SKYPE_H__

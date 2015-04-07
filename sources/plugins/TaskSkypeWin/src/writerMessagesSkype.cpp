@@ -1,35 +1,4 @@
-#include <QCryptographicHash>
-#include <QRegExp>
-#include "writerMessages.h"
-
-writerMessages::writerMessages()
-{
-}
-writerMessages::~writerMessages()
-{
-}
-bool writerMessages::opened()
-{
-}
-
-bool writerMessagesSkype::opened()
-{
-    return m_bOpened;
-}
-
-void writerMessagesSkype::writeSkype_field(
-    QString field_name,
-    QString field_value
-)
-{
-    if(!field_value.isEmpty())
-    {
-        m_pXmlWriter->writeStartElement("field");
-        m_pXmlWriter->writeAttribute("name", field_name);
-        m_pXmlWriter->writeCharacters(field_value);
-        m_pXmlWriter->writeEndElement();
-    }
-}
+#include "writerMessagesSkype.h"
 
 //constructor
 writerMessagesSkype::writerMessagesSkype(
@@ -51,7 +20,7 @@ writerMessagesSkype::writerMessagesSkype(
     m_pXmlWriter->writeStartDocument();
     m_pXmlWriter->writeStartElement("add");
 }
-//destructor
+
 writerMessagesSkype::~writerMessagesSkype()
 {
     m_pXmlWriter->writeEndElement();
@@ -61,6 +30,24 @@ writerMessagesSkype::~writerMessagesSkype()
     delete m_pFile;
 }
 
+bool writerMessagesSkype::opened()
+{
+    return m_bOpened;
+}
+
+void writerMessagesSkype::writeSkype_field(
+    QString field_name,
+    QString field_value
+)
+{
+    if(!field_value.isEmpty())
+    {
+        m_pXmlWriter->writeStartElement("field");
+        m_pXmlWriter->writeAttribute("name", field_name);
+        m_pXmlWriter->writeCharacters(field_value);
+        m_pXmlWriter->writeEndElement();
+    }
+}
 // like skype
 void writerMessagesSkype::writeMessage(
         QString author,

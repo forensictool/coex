@@ -3,10 +3,20 @@
 
 #include "coex.h"
 
-#include <QString>
+#include <QDebug>
+#include <QDateTime>
+#include <QDirIterator>
 #include <QFile>
+#include <QRegExp>
+#include <QSqlDatabase>
+#include <QString>
+#include <QTextStream>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlRecord>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-
 
 class TaskSkypeWin : coex::ITask
 {
