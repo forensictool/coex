@@ -1,30 +1,4 @@
-
 #include "writerMessages.h"
-
-#include <iostream>
-#include <QDirIterator>
-#include <QString>
-#include <QRegExp>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QTextStream>
-
-writerMessages::writerMessages()
-{
-}
-writerMessages::~writerMessages()
-{
-}
-bool writerMessages::opened()
-{
-	return m_bOpened;
-}
-
-bool writerMessagesPidgin::opened()
-{
-    return m_bOpened;
-}
 
 writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerName)
 {
@@ -32,7 +6,6 @@ writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerNa
     m_pFile = new QFile(fileName);
     if (!m_pFile->open(QIODevice::Append))
     {
-        //std::cout << " failed task\n";
         m_bOpened = false;
         return;
     }
@@ -53,7 +26,11 @@ writerMessagesPidgin::~writerMessagesPidgin()
     delete m_pFile;
 }
 
-//about account.xml file
+bool writerMessagesPidgin::opened()
+{
+    return m_bOpened;
+}
+
 void writerMessagesPidgin::writeAccountInfo(
     QString name,
     QString email,
@@ -70,7 +47,6 @@ void writerMessagesPidgin::writeAccountInfo(
     m_pXmlWriter->writeEndElement();
 }
 
-//about contacts.xml file
 void writerMessagesPidgin::writeContactList(
     QString account,
     QString protocol,
@@ -87,7 +63,6 @@ void writerMessagesPidgin::writeContactList(
     m_pXmlWriter->writeEndElement();
 }
 
-//about log file
 void writerMessagesPidgin::writeInfoLog(
     QString chathID,
     QString account,
@@ -104,7 +79,6 @@ void writerMessagesPidgin::writeInfoLog(
     m_pXmlWriter->writeEndElement();
 }
 
-//like pidgin
 void writerMessagesPidgin::writeMessage(
     QString author,
     QString dataTime,
