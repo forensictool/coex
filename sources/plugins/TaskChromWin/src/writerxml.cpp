@@ -9,7 +9,6 @@ writerXML::writerXML(QString fileName)
 {
     m_bOpened = true;
     m_pFile = new QFile(fileName);
-    qDebug()<<"efewfwef" << fileName;
     if (!m_pFile->open(QIODevice::Append)) {
         m_bOpened = false;
         return;

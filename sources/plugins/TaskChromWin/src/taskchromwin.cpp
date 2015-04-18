@@ -181,8 +181,7 @@ void TaskChromWin::history(QString input, QString output)
 
 void TaskChromWin::extension(QString input, QString output)
 {
-    QString directory="/home/svv/workspace/qt/Projects/1/untitled/Extensions";
-    QDirIterator iterator (directory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    QDirIterator iterator (input, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     QRegExp rx("\"(.*)\".*\"(.*)\"");
     writerXML bookm(output + "/chrome/ext.xml");
     while(iterator.hasNext())
@@ -237,10 +236,9 @@ bool TaskChromWin::execute(const coex::IConfig *config)
 
     TaskChromWin pref,book,hist,ext;
     QDirIterator dirPath(config->inputFolder(), QDir::Files | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
-    QString in="/home/svv/workspace/qt/gpo/coex.git/tmp/test-data/Windows7_Ult/chromeXml/Extensions/";
     while (dirPath.hasNext())
     {
-        qDebug() << dirPath.filePath();
+        if (m_bDebug)qDebug() << dirPath.filePath();
         if (dirPath.filePath().contains(chromePrefPath))
         {
             pref.prefrences(dirPath.filePath(), config->outputFolder());
@@ -255,7 +253,7 @@ bool TaskChromWin::execute(const coex::IConfig *config)
         }
         dirPath.next();
     }
-    ext.extension(in, config->outputFolder());
+    ext.extension(config->inputFolder() + "/chromeXml/Extensions/", config->outputFolder());
 
 
     return true;
