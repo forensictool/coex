@@ -14,7 +14,9 @@
 //#include <QTextStream>
 //#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-
+/*!
+ * \brief The writerXML class
+ */
 class writerXML : TaskChromWin
 {
 public:
@@ -22,15 +24,25 @@ public:
 
     bool opened(
     );
-
+    /*! 
+     * \brief writeField
+     * \param field_name
+     * \param field_value
+     */
     void writeField(QString field_name,QString field_value);
     void writePreferences(QString name,QString value);
     void writeBookmarks(QString name,QString value, QString title);
-
-    void writeHistory(QString name, QString url,QString date);
+    /*!
+     * \brief writeHistory
+     * \param name
+     * \param url
+     * \param date
+     * \
+     */
+    void writeHistory(QString name, QString url,QString visit_count,QString date);
     void writeHistoryDowload(QString dowload_path, QString dowload_url,QString dowload_referrer,QString dowload_size,QString dowload_time_start,QString dowload_time_end);
     void writeHistorySearch(QString term);
-
+    void writeExt(QString name);
 
     ~writerXML();
 private:

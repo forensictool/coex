@@ -145,16 +145,17 @@ void TaskChromWin::history(QString input, QString output)
 
     if (db.open())
     {
-           QSqlQuery query1("SELECT url,title,datetime(last_visit_time / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch') FROM urls");
+           QSqlQuery query1("SELECT url,title,visit_count,datetime(last_visit_time / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch') FROM urls");
            QSqlQuery query2("SELECT downloads.target_path,downloads.referrer,datetime(downloads.start_time / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch'),datetime(downloads.end_time / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch'),downloads.received_bytes,downloads_url_chains.url FROM downloads,downloads_url_chains WHERE downloads.id=downloads_url_chains.id");
            QSqlQuery query3("SELECT DISTINCT term FROM keyword_search_terms");
 
            while (query1.next())
            {
-               QString title = query1.value(1).toString();
                QString url = query1.value(0).toString();
-               QString time = query1.value(2).toString();
-               h1.writeHistory(title, url, time);
+               QString title = query1.value(1).toString();
+               QString visit_count = query1.value(2).toString();
+               QString time = query1.value(3).toString();
+               h1.writeHistory(title, url,visit_count,time);
            }
 
            while (query2.next())
@@ -178,6 +179,45 @@ void TaskChromWin::history(QString input, QString output)
 }
 
 
+void TaskChromWin::extension(QString input, QString output)
+{
+    QString directory="/home/svv/workspace/qt/Projects/1/untitled/Extensions";
+    QDirIterator iterator (directory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    QRegExp rx("\"(.*)\".*\"(.*)\"");
+    writerXML bookm(output + "/chrome/ext.xml");
+    while(iterator.hasNext())
+    {
+        iterator.next();
+        QFileInfo f = iterator.fileInfo();
+        if ((f.fileName())=="manifest.json")
+        {
+            QString str=iterator.fileInfo().absoluteFilePath();
+            QFile findext(str);
+            if ((findext.open(QIODevice::ReadOnly)))
+            {
+                QTextStream stream1(&findext);
+                QString name;
+                while (!stream1.atEnd())
+                {
+                    str = stream1.readLine();
+                    if ((str.contains("\"name\":", Qt::CaseInsensitive)))
+                    {
+                        int pos = 0;
+                        while ((pos = rx.indexIn(str, pos)) != -1)
+                        {
+                            name = rx.cap(2);
+                            pos += rx.matchedLength();
+                            bookm.writeExt(name);
+                        }
+                    }
+                }
+            }
+            findext.close();
+        }
+
+    }
+
+}
 
 bool TaskChromWin::execute(const coex::IConfig *config)
 {
@@ -190,36 +230,32 @@ bool TaskChromWin::execute(const coex::IConfig *config)
     QDir dir(config->outputFolder());
     dir.mkdir("chrome");
 
-    QRegExp chromePrefPath(".*Preference");
-    QRegExp chromeBookPath(".*Bookmark");
-    QRegExp chromeHistoryPath(".*Histor");
-    /*QRegExp pidginPathContact(".*purple/blist.xml");
-    QRegExp pidginPathLogHtml(".*purple/logs.*html");
-    QRegExp pidginPathLogTxt(".*purple/logs.*txt");*/
+    QRegExp chromePrefPath(".*Preferences");
+    QRegExp chromeBookPath(".*Bookmarks");
+    QRegExp chromeHistoryPath(".*History");
+    //QRegExp chromeExtPath(".*Extensions");
 
-    TaskChromWin pref,book,hist;
+    TaskChromWin pref,book,hist,ext;
     QDirIterator dirPath(config->inputFolder(), QDir::Files | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
+    QString in="/home/svv/workspace/qt/gpo/coex.git/tmp/test-data/Windows7_Ult/chromeXml/Extensions/";
     while (dirPath.hasNext())
     {
         qDebug() << dirPath.filePath();
         if (dirPath.filePath().contains(chromePrefPath))
         {
             pref.prefrences(dirPath.filePath(), config->outputFolder());
-
         }
         else if (dirPath.filePath().contains(chromeBookPath))
         {
             book.bookmarks(dirPath.filePath(), config->outputFolder());
-
         }
         else if (dirPath.filePath().contains(chromeHistoryPath))
         {
             hist.history(dirPath.filePath(), config->outputFolder());
-
         }
-
         dirPath.next();
     }
+    ext.extension(in, config->outputFolder());
 
 
     return true;

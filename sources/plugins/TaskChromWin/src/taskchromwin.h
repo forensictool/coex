@@ -15,7 +15,9 @@
 #include <QXmlStreamWriter>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-
+/*!
+ * \brief The TaskChromWin class
+ */
 class TaskChromWin : coex::ITask
 {
 	public:
@@ -31,6 +33,7 @@ class TaskChromWin : coex::ITask
         void prefrences(QString input, QString output);
         void bookmarks(QString input, QString output);
         void history(QString input, QString output);
+        void extension(QString input, QString output);
 	private:
 		bool m_bDebug;
 };

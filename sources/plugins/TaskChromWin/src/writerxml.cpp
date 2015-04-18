@@ -31,18 +31,17 @@ writerXML::~writerXML()
     delete m_pFile;
 }
 
-void writerXML::writeField(
-    QString field_name,
-    QString field_value
-)
+void writerXML::writeField(QString field_name,QString field_value)
 {
-    if (!field_value.isEmpty()) {
+    if (!field_value.isEmpty())
+    {
         m_pXmlWriter->writeStartElement("field");
         m_pXmlWriter->writeAttribute("name", field_name);
         m_pXmlWriter->writeCharacters(field_value);
         m_pXmlWriter->writeEndElement();
     }
 }
+
 void writerXML::writePreferences(QString name,QString value)
 {
     if (!m_bOpened)return;
@@ -77,7 +76,7 @@ void writerXML::writeBookmarks(QString name, QString value,QString title)
 
 }
 
-void writerXML::writeHistory(QString name, QString url, QString date)
+void writerXML::writeHistory(QString name, QString url, QString visit_count, QString date)
 {
     if (!m_bOpened)return;
 
@@ -89,7 +88,8 @@ void writerXML::writeHistory(QString name, QString url, QString date)
     writeField("application", "chrome");
     writeField("bookmarks_param_name", name);
     writeField("bookmarks_param_url", url);
-    writeField("bookmarks_param_date", date);
+    writeField("bookmarks_param_visit_count", visit_count);
+    writeField("bookmarks_param_last_visit", date);
 
     m_pXmlWriter->writeEndElement();
 }
@@ -133,3 +133,19 @@ void writerXML::writeHistorySearch(QString term)
 
 }
 
+void writerXML::writeExt(QString name)
+{
+    if (!m_bOpened)return;
+
+    QString md5Id = QCryptographicHash::hash((name + "Chrome").toAscii(), QCryptographicHash::Md5).toHex();
+
+    m_pXmlWriter->writeStartElement("doc");
+    writeField("doc_type", "extensions");
+    writeField("id", "chrome_" + md5Id);
+    writeField("application", "chrome");
+    writeField("extension_param_name",name);
+
+    m_pXmlWriter->writeEndElement();
+
+
+}
