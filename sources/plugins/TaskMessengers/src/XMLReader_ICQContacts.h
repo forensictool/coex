@@ -4,6 +4,9 @@
 //#include <QtXml>
 #include <QVector>
 //#include "ICQContact.h"
+/*!
+ * \brief The XMLReader_ICQContacts class
+ */
 
 class XMLReader_ICQContacts {
 	public:

@@ -15,16 +15,30 @@ writerMessages::writerMessages()
 writerMessages::~writerMessages()
 {
 }
+
+/*!
+ * \brief writerMessages::opened
+ * \return
+ */
 bool writerMessages::opened()
 {
     return m_bOpened;
 }
 
+/*!
+ * \brief writerMessagesPidgin::opened
+ * \return
+ */
 bool writerMessagesPidgin::opened()
 {
     return m_bOpened;
 }
 
+/*!
+ * \brief writerMessagesPidgin::writerMessagesPidgin
+ * \param fileName
+ * \param messangerName
+ */
 writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerName)
 {
     m_bOpened = true;
@@ -44,6 +58,9 @@ writerMessagesPidgin::writerMessagesPidgin(QString fileName, QString messangerNa
     //m_pXmlWriter->writeAttribute("Messenger" ,messangerName);
 }
 
+/*!
+ * \brief writerMessagesPidgin::~writerMessagesPidgin
+ */
 writerMessagesPidgin::~writerMessagesPidgin()
 {
     m_pXmlWriter->writeEndElement();
@@ -53,6 +70,11 @@ writerMessagesPidgin::~writerMessagesPidgin()
     delete m_pFile;
 }
 
+/*!
+ * \brief writerMessagesPidgin::writeAccountInfo_field
+ * \param field_name
+ * \param field_value
+ */
 void writerMessagesPidgin::writeAccountInfo_field(
     QString field_name,
     QString field_value
@@ -66,7 +88,14 @@ void writerMessagesPidgin::writeAccountInfo_field(
         m_pXmlWriter->writeEndElement();
     }
 }
-//about account.xml file
+
+/*!
+ * \brief about account.xml file - writerMessagesPidgin::writeAccountInfo
+ * \param name
+ * \param email
+ * \param protocol
+ * \param password
+ */
 void writerMessagesPidgin::writeAccountInfo(
     QString name,
     QString email,
@@ -91,7 +120,11 @@ void writerMessagesPidgin::writeAccountInfo(
     m_pXmlWriter->writeEndElement();
 }
 
-//about contacts.xml file
+/*!
+ * \brief about contacts.xml file - writerMessagesPidgin::writeContactList
+ * \param emal
+ * \param name
+ */
 void writerMessagesPidgin::writeContactList(
         QString emal,
         QString name
@@ -111,7 +144,15 @@ void writerMessagesPidgin::writeContactList(
     m_pXmlWriter->writeEndElement();
 }
 
-
+/*!
+ * \brief writerMessagesPidgin::writeMessage
+ * \param chathID
+ * \param account
+ * \param protocol
+ * \param author
+ * \param dataTime
+ * \param message
+ */
 
 void writerMessagesPidgin::writeMessage(
     QString chathID,

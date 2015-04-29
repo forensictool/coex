@@ -8,7 +8,10 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QDateTime>
-
+/*!
+ * \brief The TaskMessengers class
+ * 
+ */
 class TaskMessengers : coex::ITask
 {
 	public:
@@ -17,7 +20,11 @@ class TaskMessengers : coex::ITask
 		virtual QString name();
 		virtual QString author();
 		virtual QString description();
-
+        /*!
+         * \brief isSupportOS
+         * \param os
+         * \return 
+         */
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList);
 		virtual bool execute(const coex::IConfig *config);

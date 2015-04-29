@@ -9,6 +9,9 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
+/*!
+ * \brief The writerMessages class
+ */
 class writerMessages
 {
 public:
@@ -26,6 +29,9 @@ private:
     bool m_bOpened;
 };
 
+/*!
+ * \brief The writerMessagesPidgin class
+ */
 class writerMessagesPidgin : writerMessages
 {
 public:
