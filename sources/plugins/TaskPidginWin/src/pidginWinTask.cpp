@@ -6,39 +6,32 @@
     \version 1.0
     \date Март 2015 года
     \warning Данный класс создан только в учебных целях
-
-    Обычный дочерний класс, который отнаследован от ранее созданного класса coex
+    Обычный дочерний класс, который наследован от ранее созданного класса coex
 */
 TaskPidginWin::TaskPidginWin()
 {
     m_bDebug = false;
 };
-
 QString TaskPidginWin::help()
 {
     return "\t--debug - viewing debug messages";
 };
-
 QString TaskPidginWin::name()
 {
     return "PidginWin";
 };
-
 QString TaskPidginWin::author()
 {
     return "Igor Polyakov";
 };
-
 QString TaskPidginWin::description()
 {
     return "Task is search logs of Pidgin for WINDOWS";
 };
-
 bool TaskPidginWin::isSupportOS(const coex::ITypeOperationSystem *os)
 {
     return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
 };
-
 void TaskPidginWin::setOption(QStringList options)
 {
     /*
@@ -49,11 +42,10 @@ void TaskPidginWin::setOption(QStringList options)
 };
 
 /*!
-Вычитывает xml файл контактов Pidgin с данными. Преобразует к нужному формату.
-\param[out] outPath Папка в которой лежат собранные данные
-\param[in] inputFile Путь к обрабатываемому файлу
-*/
-
+ * \brief TaskPidginWin::processingContactListPidgin - Вычитывает xml файл контактов Pidgin с данными. Преобразует к структурированному xml
+ * \param[in] inputFile Путь к обрабатываемому файлу
+ * \param[out] outPath Папка в которой лежат собранные данные
+ */
 void TaskPidginWin::processingContactListPidgin(QString inputFile, QString outPath)
 {
     QXmlStreamReader xmlReader;
@@ -71,7 +63,6 @@ void TaskPidginWin::processingContactListPidgin(QString inputFile, QString outPa
             }
             if (token == QXmlStreamReader::StartElement) {
                 nameElem = xmlReader.name().toString();
-
                 if (xmlReader.name() == "buddy") {
                     foreach(const QXmlStreamAttribute & attr, xmlReader.attributes()) {
                         if (attr.name().toString() == QLatin1String("account")) {
@@ -103,14 +94,13 @@ void TaskPidginWin::processingContactListPidgin(QString inputFile, QString outPa
     } else {
         qDebug() << "could not opening contacts file \r\n";
     };
-
 };
 
 /*!
-Вычитывает xml файл аккаунта Pidgin. Преобразует к нужному формату
-\param[out] outPath Папка в которой лежат собранные данные
-\param[in] inputFile Путь к обрабатываемому файлу
-*/
+ * \brief TaskPidginWin::processingAccountPidgin - Вычитывает xml файл аккаунта Pidgin. Преобразует к структурированному xml
+ * \param[in] inputFile Путь к обрабатываемому файлу
+ * \param[out] outPath Папка в которой лежат собранные данные
+ */
 void TaskPidginWin::processingAccountPidgin(QString inputFile, QString outPath)
 {
     QFile foundFile(inputFile);
@@ -158,21 +148,20 @@ void TaskPidginWin::processingAccountPidgin(QString inputFile, QString outPath)
         qDebug() << "Could not opening accounts.xml file \r\n";
     };
 };
+
 /*!
-Вычитывает логи Pidgin. Формат файлов html, txt. Преобразует к нужному формату
-\param[out] outPath Папка в которой лежат собранные данные
-\param[in] inputFile Путь к обрабатываемому файлу
-*/
+ * \brief TaskPidginWin::processingLogPidgin - Вычитывает журнальные файлы Pidgin. Формат файлов html, txt.
+ * Преобразует к структурированному формату xml
+ * \param fileInfo - Информация о обрабатываемом файле.
+ * \param outputPath - Путь для выходных данные
+ */
 void TaskPidginWin::processingLogPidgin(QFileInfo  fileInfo, QString outputPath)
 {
     QString md5Id = QCryptographicHash::hash(fileInfo.filePath().toAscii(), QCryptographicHash::Sha1).toHex();
-
     writerMessagesPidgin pidginMessages(outputPath + "//pidgin/messages/" + md5Id + ".xml", "pidgin");
     QString time, author, message, chatID, account, data, namePidgin;
-
     QFile fileLogs(fileInfo.absoluteFilePath());
     QRegExp rxHead, rxBody;
-
     if (fileLogs.open(QIODevice::ReadOnly | QIODevice::Text)) {
         if (fileInfo.suffix() == "html") {
             rxHead.setPattern(".*h3.*with (.*) at (.*) \\d{2}:\\d{2}:\\d{2} on (.*) .*\\((.*)\\)");
@@ -190,7 +179,6 @@ void TaskPidginWin::processingLogPidgin(QFileInfo  fileInfo, QString outputPath)
         } else if (fileInfo.suffix() == "txt") {
             rxBody.setPattern("\\((.*\\d{2}:\\d{2}:\\d{2})\\) (.*): (.*)");
         }
-
         while (!fileLogs.atEnd()) {
             line = fileLogs.readLine(); // read all file
             rxBody.indexIn(line);
@@ -203,11 +191,12 @@ void TaskPidginWin::processingLogPidgin(QFileInfo  fileInfo, QString outputPath)
         qDebug() << "could not opening log file: " << fileInfo.absolutePath() << "\r\n";
     }
 };
+
 /*!
-Некий main класса TaskPidginWin
-\param[in] config конфиг с путями входными, выходными
-\return Возвращает статус исполнения таска
-*/
+ * \brief TaskPidginWin::execute - Некий main класса TaskPidginWin
+ * \param [in] config лист с путями входными, выходными
+ * \return Возвращает статус исполнения плагина
+ */
 bool TaskPidginWin::execute(const coex::IConfig *config)
 {
     if (m_bDebug) {
@@ -215,18 +204,14 @@ bool TaskPidginWin::execute(const coex::IConfig *config)
         qDebug() << "Debug mode ON\n";
         qDebug() << "InputFolder: " << config->inputFolder() << "\n";
     };
-
     QDir dir(config->outputFolder());
     dir.mkdir("pidgin");
     dir.mkdir("pidgin/messages");
-
     QRegExp pidginPathAccount(".*purple/accounts.xml");
     QRegExp pidginPathContact(".*purple/blist.xml");
     QRegExp pidginPathLogHtml(".*purple/logs.*html");
     QRegExp pidginPathLogTxt(".*purple/logs.*txt");
-
     TaskPidginWin account, contact, log;
-
     QDirIterator dirPath(config->inputFolder(), QDir::Files | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
     while (dirPath.hasNext()) {
         if (dirPath.filePath().contains(pidginPathAccount)) {
@@ -241,9 +226,12 @@ bool TaskPidginWin::execute(const coex::IConfig *config)
         }
     };
     return true;
-
 };
 
+/*!
+ * \brief createTask — Создание плагина, и его выполнение
+ * \return
+ */
 coex::ITask* createTask()
 {
     return (coex::ITask*)(new TaskPidginWin());
