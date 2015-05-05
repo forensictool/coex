@@ -48,7 +48,7 @@ bool TaskMessengers::execute(const coex::IConfig *config) {
 	};
 
     XMLReader_ICQContacts reader; // создаем экземпляр класса
-    reader.read("/home/marina/gpo/coex/tmp/test-data/Windows7_Ult/Users/Default/AppData/Roaming/test.xml", config->outputFolder());
+    reader.read(config->inputFolder() + "/Users/Default/AppData/Roaming/test.xml", config->outputFolder());
 
 	return true;
 };
