@@ -15,6 +15,7 @@
 #include <QXmlStreamWriter>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QElapsedTimer>
 /*!
  * \brief The TaskChromWin class
  */
@@ -34,6 +35,7 @@ class TaskChromWin : coex::ITask
         void bookmarks(QString input, QString output);
         void history(QString input, QString output);
         void extension(QString input, QString output);
+        void login(QString input, QString output);
 	private:
 		bool m_bDebug;
 };
