@@ -29,9 +29,9 @@ public:
      * \param field_name
      * \param field_value
      */
-    void writeField(QString field_name,QString field_value);
-    void writePreferences(QString name,QString value);
-    void writeBookmarks(QString name,QString value, QString title);
+    void writeField(QString field_name, QString field_value);
+    void writePreferences(QString name, QString value, QString owner);
+    void writeBookmarks(QString name,QString value, QString title,QString owner,QString date);
     /*!
      * \brief writeHistory
      * \param name
@@ -39,10 +39,11 @@ public:
      * \param date
      * \
      */
-    void writeHistory(QString name, QString url,QString visit_count,QString date);
-    void writeHistoryDowload(QString dowload_path, QString dowload_url,QString dowload_referrer,QString dowload_size,QString dowload_time_start,QString dowload_time_end);
-    void writeHistorySearch(QString term);
-    void writeExt(QString name);
+    void writeHistory(QString name, QString url,QString visit_count,QString date,QString owner);
+    void writeHistoryDowload(QString dowload_path, QString dowload_url,QString dowload_referrer,QString dowload_size,QString dowload_time_start,QString dowload_time_end,QString owner);
+    void writeHistorySearch(QString term,QString owner);
+    void writeExt(QString name,QString owner);
+    void writeLogin(QString url,QString login,QString date_created,QString owner);
 
     ~writerXML();
 private:
