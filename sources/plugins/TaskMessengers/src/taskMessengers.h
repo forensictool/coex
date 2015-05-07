@@ -8,10 +8,8 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QDateTime>
-/*!
- * \brief The TaskMessengers class
- * 
- */
+
+
 class TaskMessengers : coex::ITask
 {
 	public:

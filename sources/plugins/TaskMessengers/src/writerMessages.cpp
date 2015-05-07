@@ -16,19 +16,13 @@ writerMessages::~writerMessages()
 {
 }
 
-/*!
- * \brief writerMessages::opened
- * \return
- */
+
 bool writerMessages::opened()
 {
     return m_bOpened;
 }
 
-/*!
- * \brief writerMessagesPidgin::opened
- * \return
- */
+
 bool writerMessagesPidgin::opened()
 {
     return m_bOpened;
