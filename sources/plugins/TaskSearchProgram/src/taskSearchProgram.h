@@ -1,5 +1,5 @@
-#ifndef __TASK_EXAMPLE_H__
-#define __TASK_EXAMPLE_H__
+#ifndef __TASK_ProgramSearch_H__
+#define __TASK_ProgramSearch_H__
 
 #include "coex.h"
 
@@ -9,10 +9,10 @@
 #include <QXmlStreamWriter>
 #include <QDateTime>
 
-class TaskExample : coex::ITask
+class TaskProgramSearch : coex::ITask
 {
 	public:
-		TaskExample();
+        TaskProgramSearch();
 		virtual QString help();
 		virtual QString name();
 		virtual QString author();
@@ -21,6 +21,7 @@ class TaskExample : coex::ITask
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList);
 		virtual bool execute(const coex::IConfig *config);
+
 	private:
 		bool m_bDebug;
 };
@@ -30,4 +31,4 @@ extern "C"
 	coex::ITask* createTask();
 }
 
-#endif // __TASK_EXAMPLE__
+#endif // __TASK_ProgramSearch__
