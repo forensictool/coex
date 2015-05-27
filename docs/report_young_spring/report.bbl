@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \def\selectlanguageifdefined#1{
 \expandafter\ifx\csname date#1\endcsname\relax
 \else\language\csname l@#1\endcsname\fi}
@@ -57,5 +57,18 @@
 {Справочник по XML-стандартам [Электронный
   ресурс]}~// {msdn.microsoft.com:[сайт]}. URL:
   http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
+
+\bibitem{registry}
+\selectlanguageifdefined{english}
+{Windows Registry [Электронный ресурс]}~//
+  {forensicswiki.org:[сайт]}.
+\newblock {[2015]}. URL: http://forensicswiki.org/wiki/Windows\_Registry.{}
+
+\bibitem{msdn}
+\selectlanguageifdefined{english}
+{Registry [Электронный ресурс]}~//
+  {msdn.microsoft.com:[сайт]}.
+\newblock {[2015]}. URL:
+  https://msdn.microsoft.com/en-us/library/windows/desktop/ms724871%28v=vs.85%29.aspx.{}
 
 \end{thebibliography}
