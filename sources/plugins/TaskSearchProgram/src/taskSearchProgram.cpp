@@ -18,7 +18,7 @@
 #include <sys/types.h>
 
 TaskProgramSearch::TaskProgramSearch() {
-    m_bDebug = true;
+    m_bDebug = false;
 };
 
 QString TaskProgramSearch::help() {
@@ -54,12 +54,6 @@ void WinXP(QString input, QString out)
     writerSearchProgram ara(out + "/katalogi.xml");
     writerSearchProgram brb(out + "/install_katalogi.xml");
     int i, j, k, m, flag = 0, per;
- /*   QFile file (out + "/katalogi.txt");
-    file.open(QIODevice::WriteOnly);
-    QTextStream stream(&file);
-    QFile file1 (out + "/install_katalogi.txt");
-    file1.open(QIODevice::WriteOnly);
-    QTextStream stream1(&file1);*/
     QString ProgramFilesXP[] = { input + "/Program Files/Common Files", input + "/Program Files/ComPlus Applications", input + "/Program Files/Internet Explorer", input + "/Program Files/Messenger", input + "/Program Files/Online Services", input + "/Program Files/Outlook Express", input + "/Program Files/Windows NT", input + "/Program Files/Common Files", input + "/Program Files/ComPlus Applications", input + "/Program Files/Internet Explorer", input + "/Program Files/Messenger", input + "/Program Files/microsoft frontpage", input + "/Program Files/Movie Maker", input + "/Program Files/MSN Gaming Zone", input + "/Program Files/NetMeeting", input + "/Program Files/Online Services", input + "/Program Files/Outlook Express", input + "/Program Files/Uninstall Information", input + "/Program Files/Windows Media Player", input + "/Program Files/Windows NT", input + "/Program Files/WindowsUpdate", input + "/Program Files/xerox" };
     QString CommonFilesXP[] = { input + "/Program Files/Common Files/Microsoft Shared", input + "/Program Files/Common Files/microsoft shared", input + "/Program Files/Common Files/ODBC", input + "/Program Files/Common Files/Services", input + "/Program Files/Common Files/SpeechEngines", input + "/Program Files/Common Files/System", input + "/Program Files/Common Files/Microsoft Shared", input + "/Program Files/Common Files/MSSoap", input + "/Program Files/Common Files/ODBC", input + "/Program Files/Common Files/Services", input + "/Program Files/Common Files/SpeechEngines", input + "/Program Files/Common Files/System" };
     QString ProgramFiles86XP[] = { input + "/Program Files (x86)/Common Files", input + "/Program Files (x86)/Internet Explorer", input + "/Program Files (x86)/microsoft shared", input + "/Program Files (x86)/Movie Maker", input + "/Program Files (x86)/MSN", input + "/Program Files (x86)/MSN Gaming Zone", input + "/Program Files (x86)/NetMeeting", input + "/Program Files (x86)/Outlook Express", input + "/Program Files (x86)/speechengines", input + "/Program Files (x86)/system", input + "/Program Files (x86)/Uninstall Information", input + "/Program Files (x86)/Windows Media Player", input + "/Program Files (x86)/Windows Media Player[Strings]", input + "/Program Files (x86)/Windows NT"};
@@ -95,7 +89,6 @@ void WinXP(QString input, QString out)
 
             for (j = 0; j < Prlist.size(); j++)
             {
-               /* stream << ProgramFiles[j] << "\n";*/
                 ara.writeProgram(ProgramFiles[j], ProgramFilesName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(ProgramFilesXP)/sizeof(ProgramFilesXP[0]); m++)
@@ -108,12 +101,9 @@ void WinXP(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                /*    stream1 << ProgramFiles[j] << "\n";*/
                     brb.writeProgram(ProgramFiles[j], ProgramFilesName[j]);
                 }
             }
-         /*   stream << "\n";
-            stream1 << "\n";*/
 
             QDir dirC(input + "/Program Files/Common Files");
             dirC.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
@@ -130,7 +120,6 @@ void WinXP(QString input, QString out)
 
             for (j = 0; j < Colist.size(); j++)
             {
-              /*  stream << CommonFiles[j] << "\n";*/
                 ara.writeProgram(CommonFiles[j], CommonFilesName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(CommonFilesXP)/sizeof(CommonFilesXP[0]); m++)
@@ -143,12 +132,9 @@ void WinXP(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-               /*     stream1 << CommonFiles[j] << "\n";*/
                     brb.writeProgram(CommonFiles[j], CommonFilesName[j]);
                 }
             }
-         /*   stream << "\n";
-            stream1 << "\n";*/
         }
         if (c[i] == input + "/Program Files (x86)")
         {
@@ -167,7 +153,6 @@ void WinXP(QString input, QString out)
 
             for (j = 0; j < Pr86list.size(); j++)
             {
-         /*       stream << ProgramFilesx86[j] << "\n";*/
                 ara.writeProgram(ProgramFilesx86[j], ProgramFilesx86Name[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(ProgramFiles86XP)/sizeof(ProgramFiles86XP[0]); m++)
@@ -180,12 +165,9 @@ void WinXP(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-               /*     stream1 << ProgramFilesx86[j] << "\n";*/
                     brb.writeProgram(ProgramFilesx86[j], ProgramFilesx86Name[j]);
                 }
             }
-       /*     stream << "\n";
-            stream1 << "\n";*/
 
             QDir dirC86(input + "/Program Files (x86)/Common Files");
             dirC86.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
@@ -202,7 +184,6 @@ void WinXP(QString input, QString out)
 
             for (j = 0; j < Co86list.size(); j++)
             {
-              /*  stream << CommonFilesx86[j] << "\n";*/
                 ara.writeProgram(CommonFilesx86[j], CommonFilesx86Name[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(CommonFiles86XP)/sizeof(CommonFiles86XP[0]); m++)
@@ -215,12 +196,9 @@ void WinXP(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                /*    stream1 << CommonFilesx86[j] << "\n";*/
                     brb.writeProgram(CommonFilesx86[j], CommonFilesx86Name[j]);
                 }
             }
-         /*   stream << "\n";
-            stream1 << "\n";*/
         }
         if (c[i] == input + "/Documents and Settings")
         {
@@ -254,7 +232,6 @@ void WinXP(QString input, QString out)
 
                     for (k = 0; k < Blist.size(); k++)
                     {
-                   /*     stream << buff[k] << "\n";*/
                         ara.writeProgram(buff[k], buffName[k]);
                         flag = 0;
                         for (m = 0; m < sizeof(ApplicationData)/sizeof(ApplicationData[0]); m++)
@@ -267,12 +244,9 @@ void WinXP(QString input, QString out)
                         }
                         if (flag != 1)
                         {
-                    /*        stream1 << buff[k] << "\n";*/
                             brb.writeProgram(buff[k], buffName[k]);
                         }
                     }
-              /*      stream << "\n";
-                    stream1 << "\n";*/
 
                     if (Documents[j] != input + "/Documents and Settings/All Users")
                     {
@@ -291,7 +265,6 @@ void WinXP(QString input, QString out)
 
                         for (k = 0; k < B1list.size(); k++)
                         {
-                       /*     stream << buff1[k] << "\n";*/
                             ara.writeProgram(buff1[k], buff1Name[k]);
                             flag = 0;
                             for (m = 0; m < sizeof(LocalSettings)/sizeof(LocalSettings[0]); m++)
@@ -304,31 +277,20 @@ void WinXP(QString input, QString out)
                             }
                             if (flag != 1)
                             {
-                         /*       stream1 << buff1[k] << "\n";*/
                                 brb.writeProgram(buff1[k], buff1Name[k]);
                             }
                         }
-                   /*     stream << "\n";
-                        stream1 << "\n";*/
                     }
                 }
             }
         }
     }
-  /*  file.close();
-    file1.close();*/
 }
 void Win_7_8(QString input, QString out)
 {
     writerSearchProgram ara(out + "/katalogi.xml");
     writerSearchProgram brb(out + "/install_katalogi.xml");
     int i, j, m, flag = 0, per;
-/*    QFile file (out + "/katalogi.txt");
-    file.open(QIODevice::WriteOnly);
-    QTextStream stream(&file);
-    QFile file1 (out + "/install_katalogi.txt");
-    file1.open(QIODevice::WriteOnly);
-    QTextStream stream1(&file1);*/
     QString ProgramFiles78[] = { input + "/Program Files/Common Files", input + "/Program Files/DVD Maker", input + "/Program Files/Embedded Lockdown Manager", input + "/Program Files/Internet Explorer", input + "/Program Files/Microsoft.NET", input + "/Program Files/Microsoft Games", input + "/Program Files/MSBuild", input + "/Program Files/Reference Assemblies", input + "/Program Files/Uninstall Information", input + "/Program Files/Windows Defender", input + "/Program Files/Windows Journal", input + "/Program Files/Windows Mail", input + "/Program Files/Windows Media Player", input + "/Program Files/Windows Multimedia Platform", input + "/Program Files/Windows NT", input + "/Program Files/Windows Photo Viewer", input + "/Program Files/Windows Portable Devices", input + "/Program Files/Windows Sidebar", input + "/Program Files/WindowsApps", input + "/Program Files/WindowsPowerShell"};
     QString CommonFiles78[] = { input + "/Program Files/Common Files/microsoft shared", input + "/Program Files/Common Files/Microsoft Shared", input + "/Program Files/Common Files/Services", input + "/Program Files/Common Files/System", input + "/Program Files/Common Files/SpeechEngines"};
     QString ProgramFiles78x32[] = { input + "/Program Files (x86)/Common Files", input + "/Program Files (x86)/Internet Explorer", input + "/Program Files (x86)/Microsoft.NET", input + "/Program Files (x86)/MSBuild", input + "/Program Files (x86)/Reference Assemblies", input + "/Program Files (x86)/Uninstall Information", input + "/Program Files (x86)/Windows Defender", input + "/Program Files (x86)/Windows Mail", input + "/Program Files (x86)/Windows Media Player", input + "/Program Files (x86)/Windows Multimedia Platform", input + "/Program Files (x86)/Windows NT", input + "/Program Files (x86)/Windows Photo Viewer", input + "/Program Files (x86)/Windows Portable Devices", input + "/Program Files (x86)/Windows Sidebar", input + "/Program Files (x86)/WindowsPowerShell"};
@@ -367,7 +329,6 @@ void Win_7_8(QString input, QString out)
             for (j = 0; j < Prlist.size(); j++)
             {
                 ara.writeProgram(ProgramFiles[j], ProgramFilesName[j]);
-              /*  stream << ProgramFiles[j] << "\n";*/
                 flag = 0;
                 for (m = 0; m < sizeof(ProgramFiles78)/sizeof(ProgramFiles78[0]); m++)
                 {
@@ -379,12 +340,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                 /*   stream1 << ProgramFiles[j] << "\n";*/
                     brb.writeProgram(ProgramFiles[j], ProgramFilesName[j]);
                 }
             }
-       /*     stream << "\n";
-            stream1 << "\n";*/
 
             QDir dirC(input + "/Program Files/Common Files");
             dirC.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
@@ -401,7 +359,6 @@ void Win_7_8(QString input, QString out)
 
             for (j = 0; j < Colist.size(); j++)
             {
-            /*    stream << CommonFiles[j] << "\n";*/
                 ara.writeProgram(CommonFiles[j], CommonFilesName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(CommonFiles78)/sizeof(CommonFiles78[0]); m++)
@@ -414,12 +371,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-            /*        stream1 << CommonFiles[j] << "\n";*/
                     brb.writeProgram(CommonFiles[j], CommonFilesName[j]);
                 }
             }
-         /*   stream << "\n";
-            stream1 << "\n";*/
         }
         if (c[i] == input + "/Program Files (x86)")
         {
@@ -438,7 +392,6 @@ void Win_7_8(QString input, QString out)
 
             for (j = 0; j < Pr86list.size(); j++)
             {
-             /*   stream << ProgramFilesx86[j] << "\n";*/
                 ara.writeProgram(ProgramFilesx86[j], ProgramFilesx86Name[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(ProgramFiles78x32)/sizeof(ProgramFiles78x32[0]); m++)
@@ -451,12 +404,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                /*    stream1 << ProgramFilesx86[j] << "\n";*/
                     brb.writeProgram(ProgramFilesx86[j], ProgramFilesx86Name[j]);
                 }
             }
-         /*   stream << "\n";
-            stream1 << "\n";*/
 
             QDir dirC86(input + "/Program Files (x86)/Common Files");
             dirC86.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
@@ -473,7 +423,6 @@ void Win_7_8(QString input, QString out)
 
             for (j = 0; j < Co86list.size(); j++)
             {
-             /*   stream << CommonFilesx86[j] << "\n";*/
                 ara.writeProgram(CommonFilesx86[j], CommonFilesx86Name[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(CommonFiles78x32)/sizeof(CommonFiles78x32[0]); m++)
@@ -486,12 +435,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-              /*      stream1 << CommonFilesx86[j] << "\n";*/
                     brb.writeProgram(CommonFilesx86[j], CommonFilesx86Name[j]);
                 }
             }
-       /*     stream << "\n";
-            stream1 << "\n";*/
         }
         if (c[i] == input + "/ProgramData")
         {
@@ -510,7 +456,6 @@ void Win_7_8(QString input, QString out)
 
             for (j = 0; j < Prolist.size(); j++)
             {
-             /*   stream << ProgramData[j] << "\n";*/
                 ara.writeProgram(ProgramData[j], ProgramDataName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(ProgramData78)/sizeof(ProgramData78[0]); m++)
@@ -523,12 +468,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-               /*     stream1 << ProgramData[j] << "\n";*/
                     brb.writeProgram(ProgramData[j], ProgramDataName[j]);
                 }
             }
-        /*    stream << "\n";
-            stream1 << "\n";*/
         }
     }
 
@@ -563,7 +505,6 @@ void Win_7_8(QString input, QString out)
 
             for (j=0; j < Blist.size(); j++)
             {
-             /*   stream << buffLocal[j] << "\n";*/
                 ara.writeProgram(buffLocal[j], buffLocalName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(Local78)/sizeof(Local78[0]); m++)
@@ -576,12 +517,9 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                /*    stream1 << buffLocal[j] << "\n";*/
                     brb.writeProgram(buffLocal[j], buffLocalName[j]);
                 }
             }
-        /*    stream << "\n";
-            stream1 << "\n";*/
 
             QDir dirUAR(Users[i] + "/AppData/Roaming");
             dirUAR.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
@@ -598,7 +536,6 @@ void Win_7_8(QString input, QString out)
 
             for (j = 0; j < Brlist.size(); j++)
             {
-           /*     stream << buffRoaming[j] << "\n";*/
                 ara.writeProgram(buffRoaming[j], buffRoamingName[j]);
                 flag = 0;
                 for (m = 0; m < sizeof(Roaming78)/sizeof(Roaming78[0]); m++)
@@ -611,29 +548,23 @@ void Win_7_8(QString input, QString out)
                 }
                 if (flag != 1)
                 {
-                /*    stream1 << buffRoaming[j] << "\n";*/
                     brb.writeProgram(buffRoaming[j], buffRoamingName[j]);
                 }
             }
-       /*     stream << "\n";
-            stream1 << "\n";*/
         }
     }
-/*    file.close();
-    file1.close();*/
 }
 
 
 bool TaskProgramSearch::execute(const coex::IConfig *config) {
-	if(m_bDebug) {
+    if(m_bDebug)
+    {
 		std::cout << "  !!! debug mode on.\n";
         std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
-	};
+    }
     QString input = config->inputFolder(), output = config->outputFolder();
-    int m = 0;
-    std::cout << "OC XP? Yes - 1; No - 2\n";
-    std::cin >> m;
-    if ( m == 1 ) WinXP(input, output);
+
+    if ( config->typeOS()->toString().toStdString() == "Windows XP" ) WinXP(input, output);
     else Win_7_8(input, output);
 
 	return true;
