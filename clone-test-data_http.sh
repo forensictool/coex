@@ -7,7 +7,7 @@ fi
 
 echo " * clone or pull 'coex-testdata.git'";
 if [ ! -d $TESTDATA ]; then
-  git clone http://gitlab.keva.su/gpo/coex-testdata.git $TESTDATA
+  git clone http://gitlab2.keva.su/gpo/coex-testdata.git $TESTDATA
 else
   cd $TESTDATA
   git pull
