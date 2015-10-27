@@ -19,6 +19,10 @@ echo -ne " * delete all '*.o'"
 find . -iname '*.o' -delete
 echo $OK
 
+echo -ne " * delete all 'moc*.*'"
+find . -iname 'moc*.*' -delete
+echo $OK
+
 echo -ne " * delete all 'tmp'"
 find . -iname 'tmp' -delete
 echo $OK

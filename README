@@ -6,6 +6,8 @@ Folder 'examples' has some examples.
 
 Folder 'thirdparty' has some "alien" packages.
 
+Folder 'solr' has some file for SolrDB.
+
 File 'clean.sh' - script for clean temporary files
 
 File 'build.sh' - script for build coex (without clean temporary files)
@@ -16,9 +18,10 @@ File 'test.sh' - script for test-run (use tmp/) after build
 
 File 'clone-test-data.sh' - script for clone repository test-data to tmp/
 
+File 'clone-test-data_http.sh' - script for clone repository use http
+
 File 'README' - this file
 
 steps for test runs:
 1. call script ./clone-test-data.sh
 2. call script ./test.sh
-
