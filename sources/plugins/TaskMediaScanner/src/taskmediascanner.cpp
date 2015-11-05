@@ -1,62 +1,42 @@
-#include <QCoreApplication>
-#include <QFile>
-#include <QString>
-#include <QDebug>
-#include <QXmlStreamWriter>
-#include <QFileInfo>
-#include <QDateTime>
-#include <QCryptographicHash>
-#include <QDir>
-#include <QDirIterator>
-#include <QStringList>
+#include "taskmediascanner.h"
+#include "writerxml.h"
 
-
-class XMLwriter
+TaskMediaScanner::TaskMediaScanner()
 {
-
-public:
-void write_field(QXmlStreamWriter &xmlWriter,QString sName,QString sValue)
-{
-    xmlWriter.writeStartElement("field");
-    xmlWriter.writeAttribute("name",sName);
-    xmlWriter.writeCharacters(sValue);
-    xmlWriter.writeEndElement();
-}
-
-public:
-void writeMedia(QString path,QXmlStreamWriter &xmlWriter,int mode,QString id,QString datecreate,QString datemodify,QString type,bool meta)
-{
-    if (mode==1)
-    {
-            xmlWriter.setAutoFormatting(true);
-            xmlWriter.setAutoFormattingIndent(2);
-            xmlWriter.writeStartDocument();
-            xmlWriter.writeStartElement("add");
-    }
-
-    if (mode==2)
-    {
-            xmlWriter.writeStartElement("doc");
-            write_field(xmlWriter,"id",id);
-            write_field(xmlWriter,"application","media_scanner");
-            write_field(xmlWriter,"doc_type",type);
-            write_field(xmlWriter,"media_path",path);
-            write_field(xmlWriter,"image_datecreate",datecreate);
-            write_field(xmlWriter,"image_datemodify",datemodify);
-            if (meta == 0)
-            {
-                xmlWriter.writeEndElement();
-            }
-    }
-
-    if (mode==3)
-    {
-        xmlWriter.writeEndElement();
-        xmlWriter.writeEndDocument();
-    }
-}
-
+    m_bDebug = false;
 };
+
+QString TaskMediaScanner::help()
+{
+    return "\t--debug - viewing debug messages";
+};
+
+QString TaskMediaScanner::name()
+{
+    return "MediaScanner";
+};
+
+QString TaskMediaScanner::author()
+{
+    return "Ilya Bokov";
+};
+
+QString TaskMediaScanner::description()
+{
+    return "Task is search logs of Browser Chrome for WINDOWS";
+};
+
+bool TaskMediaScanner::isSupportOS(const coex::ITypeOperationSystem *os)
+{
+    return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
+};
+
+void TaskMediaScanner::setOption(QStringList options)
+{
+    if (options.contains("--debug"))
+        m_bDebug = true;
+};
+
 
 void read_id3(QFile &file, QXmlStreamWriter &xmlWriter)
 {
@@ -244,20 +224,29 @@ void scan_media(QString medianame, QXmlStreamWriter *xmlWriter)
     }
 }
 
-int main(int argc, char *argv[])
+
+bool TaskMediaScanner::execute(const coex::IConfig *config)
 {
-    QCoreApplication a(argc, argv);
+    if (m_bDebug) {
+        qDebug() << "==========TaskMediaScanner::execute==========\n\n";
+        qDebug() << "Debug mode ON\n";
+        qDebug() << "InputFolder: " << config->inputFolder() << "\n";
+    };
+
+    QDir dir(config->outputFolder());
+    QDir dir2(config->inputFolder());
+    dir.mkdir("media");
     QStringList extensions = (QStringList() << "*.png" << "*.jpg" << "*.tiff" << "*.gif" << "*.bmp" << "*.jpeg" << "*.tif"
                                             << "*.mp4" << "*.mkv" << "*.avi" << "*.wmv" << "*.wma" << "*.mp3" << "*.flac" << "*.ape"
                                             << "*.mov" << "*.wav" << "*.wave");
-    QDir dir("D:\\University\\Testfolder");
-    QString xmlpath("D:\\University\\Testfolder\\Xml.xml");
+
+    QString xmlpath(dir.absolutePath()+"/media/media.xml");
     QFile xmlfile(xmlpath);
     xmlfile.open(QFile::WriteOnly);
     QXmlStreamWriter xmlWriter(&xmlfile);
     XMLwriter start;
     start.writeMedia(NULL,xmlWriter,1,NULL,NULL,NULL,NULL,NULL);
-    QDirIterator fileListDirit("D:\\University\\Testfolder", extensions, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    QDirIterator fileListDirit(dir2.absolutePath(), extensions, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     while (fileListDirit.hasNext())
     {
         QString str = QString("%1").arg(fileListDirit.next());
@@ -267,4 +256,11 @@ int main(int argc, char *argv[])
             scan_media(str, &xmlWriter);
     }
     start.writeMedia(NULL,xmlWriter,3,NULL,NULL,NULL,NULL,NULL);
+
+    return true;
+}
+
+coex::ITask* createTask()
+{
+    return (coex::ITask*)(new TaskMediaScanner());
 }
