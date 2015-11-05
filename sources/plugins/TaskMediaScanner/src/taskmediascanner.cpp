@@ -1,5 +1,4 @@
 #include "taskmediascanner.h"
-#include "writerxml.h"
 
 TaskMediaScanner::TaskMediaScanner()
 {
@@ -28,7 +27,7 @@ QString TaskMediaScanner::description()
 
 bool TaskMediaScanner::isSupportOS(const coex::ITypeOperationSystem *os)
 {
-    return (os->platform() == "Windows" && (os->version() == "XP" || os->version() == "7"));
+    return (os->platform() == "Windows");
 };
 
 void TaskMediaScanner::setOption(QStringList options)
@@ -38,7 +37,7 @@ void TaskMediaScanner::setOption(QStringList options)
 };
 
 
-void read_id3(QFile &file, QXmlStreamWriter &xmlWriter)
+void TaskMediaScanner::readId3(QFile &file, QXmlStreamWriter &xmlWriter)
 {
     QByteArray buffer, header, title, artist, album, year, all;
     if (file.open(QIODevice::ReadOnly))
@@ -54,16 +53,15 @@ void read_id3(QFile &file, QXmlStreamWriter &xmlWriter)
     file.close();
     QString titlestr(title), artstr(artist), albumstr(album), yearstr(year);
     xmlWriter.writeStartElement("metadata");
-    XMLwriter start;
-    start.write_field(xmlWriter, "title",titlestr);
-    start.write_field(xmlWriter, "artist",artstr);
-    start.write_field(xmlWriter, "album",albumstr);
-    start.write_field(xmlWriter, "year",yearstr);
+    writeField(xmlWriter, "title", titlestr);
+    writeField(xmlWriter, "artist", artstr);
+    writeField(xmlWriter, "album", albumstr);
+    writeField(xmlWriter, "year", yearstr);
     xmlWriter.writeEndElement();
     xmlWriter.writeEndElement();
 }
 
-void read_jfif(QFile &file, QXmlStreamWriter &xmlWriter)
+void TaskMediaScanner::readJfif(QFile &file, QXmlStreamWriter &xmlWriter)
 {
     QByteArray all, width, height, xres, yres, bpp, densunit;
     int pointer;
@@ -124,18 +122,17 @@ void read_jfif(QFile &file, QXmlStreamWriter &xmlWriter)
             break;
     }
     xmlWriter.writeStartElement("metadata");
-    XMLwriter start;
-    start.write_field(xmlWriter, "bits per pixel",strbpp);
-    start.write_field(xmlWriter, "width",strw);
-    start.write_field(xmlWriter, "height",strh);
-    start.write_field(xmlWriter, "density units",strdens);
-    start.write_field(xmlWriter, "x resolution",strx);
-    start.write_field(xmlWriter, "y resolution",stry);
+    writeField(xmlWriter, "bits per pixel", strbpp);
+    writeField(xmlWriter, "width", strw);
+    writeField(xmlWriter, "height", strh);
+    writeField(xmlWriter, "density units", strdens);
+    writeField(xmlWriter, "x resolution", strx);
+    writeField(xmlWriter, "y resolution", stry);
     xmlWriter.writeEndElement();
     xmlWriter.writeEndElement();
 }
 
-void read_riff(QFile &file, QXmlStreamWriter &xmlWriter)
+void TaskMediaScanner::readRiff(QFile &file, QXmlStreamWriter &xmlWriter)
 {
     QByteArray all, width, height, chnl, smpl;
     int pointer, wdint, htint;
@@ -168,16 +165,15 @@ void read_riff(QFile &file, QXmlStreamWriter &xmlWriter)
     QString strwd = QString::number(wdint);
     QString strht = QString::number(htint);
     xmlWriter.writeStartElement("metadata");
-    XMLwriter start;
-    start.write_field(xmlWriter, "video width",strwd);
-    start.write_field(xmlWriter, "video height",strht);
-    start.write_field(xmlWriter, "audio channels",strch);
-    start.write_field(xmlWriter, "audio sample rate",strsmpl);
+    writeField(xmlWriter, "video width", strwd);
+    writeField(xmlWriter, "video height", strht);
+    writeField(xmlWriter, "audio channels", strch);
+    writeField(xmlWriter, "audio sample rate", strsmpl);
     xmlWriter.writeEndElement();
     xmlWriter.writeEndElement();
 }
 
-void scan_media(QString medianame, QXmlStreamWriter *xmlWriter)
+void TaskMediaScanner::scanMedia(QString medianame, QXmlStreamWriter *xmlWriter)
 {
     QStringList videoexts = (QStringList() << "mp4" << "mkv" << "avi" << "wmv" << "mov");
     QStringList imageexts = (QStringList() << "png" << "jpg" << "tiff" << "gif" << "bmp" << "jpeg" << "tif");
@@ -185,7 +181,6 @@ void scan_media(QString medianame, QXmlStreamWriter *xmlWriter)
     QFile file(medianame);
     QFileInfo fileinfo(medianame);
     QByteArray md5;
-    XMLwriter start;
     QString id, path, datecreate, datemodify, ext, type;
     bool meta = 0;
     path = fileinfo.canonicalFilePath();
@@ -208,20 +203,63 @@ void scan_media(QString medianame, QXmlStreamWriter *xmlWriter)
         }
     }
     file.close();
-    qDebug()<<"file name ="<<medianame;
-    start.writeMedia(path,*xmlWriter,2,id,datecreate,datemodify,type,meta);
+    writeMedia(path, *xmlWriter, 2, id, datecreate, datemodify, type, meta);
     if (meta == 1 && ext == "mp3")
     {
-        read_id3(file, *xmlWriter);
+        readId3(file, *xmlWriter);
     }
     else if (meta == 1 && ext == "jpg")
     {
-        read_jfif(file, *xmlWriter);
+        readJfif(file, *xmlWriter);
     }
     else if (meta == 1 && ext == "avi")
     {
-        read_riff(file, *xmlWriter);
+        readRiff(file, *xmlWriter);
     }
+}
+
+void TaskMediaScanner::writeField(QXmlStreamWriter &xmlWriter, QString sName, QString sValue)
+{
+    xmlWriter.writeStartElement("field");
+    xmlWriter.writeAttribute("name", sName);
+    xmlWriter.writeCharacters(sValue);
+    xmlWriter.writeEndElement();
+}
+
+void TaskMediaScanner::writeMedia(QString path, QXmlStreamWriter &xmlWriter, int mode, QString id, QString datecreate, QString datemodify, QString type, bool meta)
+{
+    if (mode == 2)
+    {
+        xmlWriter.writeStartElement("doc");
+        writeField(xmlWriter, "id", id);
+        writeField(xmlWriter, "application", "media_scanner");
+        writeField(xmlWriter, "doc_type", type);
+        writeField(xmlWriter, "media_path", path);
+        writeField(xmlWriter, "image_datecreate", datecreate);
+        writeField(xmlWriter, "image_datemodify", datemodify);
+        if (meta == 0)
+        {
+            xmlWriter.writeEndElement();
+        }
+    }
+    else if (mode == 1)
+    {
+        xmlWriter.setAutoFormatting(true);
+        xmlWriter.setAutoFormattingIndent(2);
+        xmlWriter.writeStartDocument();
+        xmlWriter.writeStartElement("add");
+    }
+    else if (mode == 3)
+    {
+        xmlWriter.writeEndElement();
+        xmlWriter.writeEndDocument();
+    }
+    /*default
+    {
+        qDebug() << "something going wrong\n";
+        xmlWriter.writeEndElement();
+        xmlWriter.writeEndDocument();
+    }*/
 }
 
 
@@ -232,31 +270,26 @@ bool TaskMediaScanner::execute(const coex::IConfig *config)
         qDebug() << "Debug mode ON\n";
         qDebug() << "InputFolder: " << config->inputFolder() << "\n";
     };
-
-    QDir dir(config->outputFolder());
-    QDir dir2(config->inputFolder());
-    dir.mkdir("media");
+    QDir inputDir(config->inputFolder());
+    QDir outputDir(config->outputFolder());
+    outputDir.mkdir("media");
     QStringList extensions = (QStringList() << "*.png" << "*.jpg" << "*.tiff" << "*.gif" << "*.bmp" << "*.jpeg" << "*.tif"
-                                            << "*.mp4" << "*.mkv" << "*.avi" << "*.wmv" << "*.wma" << "*.mp3" << "*.flac" << "*.ape"
-                                            << "*.mov" << "*.wav" << "*.wave");
-
-    QString xmlpath(dir.absolutePath()+"/media/media.xml");
-    QFile xmlfile(xmlpath);
+                              << "*.mp4" << "*.mkv" << "*.avi" << "*.wmv" << "*.wma" << "*.mp3" << "*.flac" << "*.ape"
+                              << "*.mov" << "*.wav" << "*.wave");
+    QFile xmlfile(outputDir.absolutePath() + "/media/media.xml");
     xmlfile.open(QFile::WriteOnly);
     QXmlStreamWriter xmlWriter(&xmlfile);
-    XMLwriter start;
-    start.writeMedia(NULL,xmlWriter,1,NULL,NULL,NULL,NULL,NULL);
-    QDirIterator fileListDirit(dir2.absolutePath(), extensions, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    writeMedia(NULL, xmlWriter, 1, NULL, NULL, NULL, NULL, NULL);
+    QDirIterator fileListDirit(inputDir.absolutePath(), extensions, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     while (fileListDirit.hasNext())
     {
         QString str = QString("%1").arg(fileListDirit.next());
         QFileInfo fInfo(str);
         QFile file(fInfo.absoluteFilePath());
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            scan_media(str, &xmlWriter);
+            scanMedia(str, &xmlWriter);
     }
-    start.writeMedia(NULL,xmlWriter,3,NULL,NULL,NULL,NULL,NULL);
-
+    writeMedia(NULL, xmlWriter, 3, NULL, NULL, NULL, NULL, NULL);
     return true;
 }
 

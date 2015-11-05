@@ -3,18 +3,16 @@
 
 #include "coex.h"
 
-#include <QCoreApplication>
-#include <QFile>
-#include <QString>
-#include <QDebug>
-#include <QXmlStreamWriter>
-#include <QFileInfo>
-#include <QDateTime>
 #include <QCryptographicHash>
+#include <QDateTime>
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
+#include <QFile>
+#include <QFileInfo>
+#include <QString>
 #include <QStringList>
-
+#include <QXmlStreamWriter>
 
 class TaskMediaScanner : coex::ITask
 {
@@ -28,10 +26,12 @@ class TaskMediaScanner : coex::ITask
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
-        void read_id3(QFile &file, QXmlStreamWriter &xmlWriter);
-        void read_jfif(QFile &file, QXmlStreamWriter &xmlWriter);
-        void read_riff(QFile &file, QXmlStreamWriter &xmlWriter);
-        void scan_media(QString medianame, QXmlStreamWriter *xmlWriter);
+        void readId3(QFile &file, QXmlStreamWriter &xmlWriter);
+        void readJfif(QFile &file, QXmlStreamWriter &xmlWriter);
+        void readRiff(QFile &file, QXmlStreamWriter &xmlWriter);
+        void scanMedia(QString medianame, QXmlStreamWriter *xmlWriter);
+        void writeField(QXmlStreamWriter &xmlWriter,QString sName,QString sValue);
+        void writeMedia(QString path,QXmlStreamWriter &xmlWriter,int mode,QString id,QString datecreate,QString datemodify,QString type,bool meta);
 	private:
 		bool m_bDebug;
 };

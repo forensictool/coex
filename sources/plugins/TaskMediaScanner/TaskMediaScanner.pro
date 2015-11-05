@@ -13,8 +13,6 @@ QT += sql
 
 CONFIG += dll
 
-SOURCES += 	src/taskmediascanner.cpp \
-			src/writerxml.cpp
+SOURCES += 	src/taskmediascanner.cpp
 
-HEADERS += src/taskmediascanner.h \
-			src/writerxml.h
+HEADERS += src/taskmediascanner.h
