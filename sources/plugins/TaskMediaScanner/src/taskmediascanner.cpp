@@ -23,7 +23,7 @@ QString TaskMediaScanner::author()
 
 QString TaskMediaScanner::description()
 {
-    return "Task is search logs of Browser Chrome for WINDOWS";
+    return "Task is scanner media files";
 };
 
 bool TaskMediaScanner::isSupportOS(const coex::ITypeOperationSystem *os)
