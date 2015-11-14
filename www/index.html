@@ -1,0 +1,98 @@
+<head>
+	<title>Охуенный коекс</title>
+	<link rel="stylesheet" href="style.css"/>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="owl.carousel.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="owl.carousel.min.js"></script>
+</head>
+<body class="site-body">
+	<aside class="left-block">
+		<div class="container">
+		  <div class="laptop">
+			<div class="content">
+			  <div class="slide">
+				  <img class="img-slide" src="image.png">
+				  <div class="text-slide">Охуенно! Эта шутка просто сносит крышу<br/><span class="text-author">Конев А.А</span></div>
+			  </div>
+			  <div class="slide">
+				  <ul class="txt txt-laptop">
+					<li></li>        
+					<li></li>
+					<li class="thin"></li>
+					<li class="thin"></li>
+				  </ul>
+			  </div>
+			</div>
+			<div class="btm"></div>
+			<div class="shadow"></div>
+		  </div>
+		</div>
+	</aside>
+	<main class="site-main">
+		<header class="site-header">
+			<h1>Система <span>Coex</span></h1>
+		</header>
+		
+		<nav class="site-menu">
+			<a href="#info" class="site-part">Почему</a>
+		</nav>
+		
+		<section id="info">
+			<h2>Почему мы охуенные</h2>
+			<div class="description">Мы охуенные потому что у нас нет аналогов, наш код написан лучшими программистами кафедры и протестирован лучшими троллями с нее.</div>
+		</section>
+		
+		<section id="capa">
+			<h2>Что именно оухенно у нас</h2>
+		</section>
+		
+		<section id="install">
+			<h2>Как охуенно нас поставить</h2>
+		</section>
+		
+		<section id="consist">
+			<h2>Что охуенного мы задействовали</h2>
+			<div class="description">При таком дезигне Польша все ещё существует.</div>
+		</section>
+	</main>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.content').owlCarousel({
+		loop:true,
+		margin:10,
+		nav:false,
+		items: 1,
+		autoplay:true,
+		autoplayTimeout:45000,
+	})
+	$('.spec-slider').owlCarousel({
+		loop:false,
+		margin:10,
+		nav:true,
+		autoplay:true,
+		autoplayTimeout:7000,
+		navText: ["<",">"],
+		responsive : {
+			320 : {
+				items: 1,
+			},
+			410 : {
+				items: 2,
+			},
+			620 : {
+				items: 3,
+			},
+			830 : {
+				items: 4,
+			},
+			1040 : {
+				items: 5,
+			},
+		}
+	})
+});
+</script>
+</body>
