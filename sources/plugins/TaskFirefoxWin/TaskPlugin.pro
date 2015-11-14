@@ -9,11 +9,10 @@ INCLUDEPATH += ../../include/
 OBJECTS_DIR = tmp/
 
 QT -= gui
+QT += sql
 
 CONFIG += dll
 
-SOURCES += \
-    src/taskFirefox.cpp
+SOURCES += src/taskFirefox.cpp
 
-HEADERS += \
-    src/taskFirefox.h
+HEADERS += src/taskFirefox.h

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-qmake-qt4 TaskPlugin.pro
+qmake-qt4
 make
 

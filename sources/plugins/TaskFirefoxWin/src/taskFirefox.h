@@ -19,7 +19,7 @@ class TaskExample : coex::ITask
 		virtual QString description();
 
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
-		virtual void setOption(QStringList);
+		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
 	private:
 		bool m_bDebug;
@@ -30,4 +30,4 @@ extern "C"
 	coex::ITask* createTask();
 }
 
-#endif // __TASK_FIREFOX__
+#endif // __TASK_FIREFOX_H__
