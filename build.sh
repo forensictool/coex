@@ -1,7 +1,7 @@
 #!/bin/bash
 CURRPWD=$(echo "`pwd`")
 SOURCES=$(echo "`pwd`/sources")
-OK=" ..... ok"
+OK="OK"
 
 LOGFILE="$CURRPWD/logs/log_build.log"
 ERRORLOGFILE="$CURRPWD/logs/errorlog_build.log"
@@ -12,7 +12,7 @@ fi
 
 echo $SOURCES > $LOGFILE
 
-echo -ne " * build 'coex'"
+printf " > build %-27s" "'coex'"
 cd $SOURCES/app/
 
 qmake-qt4
@@ -30,14 +30,14 @@ if [ $? -ne 0 ]; then
 fi
 echo $OK
 
-echo " * * build plugins"
+echo " > build plugins:"
 cd $SOURCES/plugins
 for D in `find ./ -mindepth 1 -maxdepth 1 -type d `
 do
 	cd $SOURCES/plugins
 	cd $D
 	DIRNAME=$(basename "`pwd`")
-	echo -ne " * build '$DIRNAME'"
+	printf  " --> build %-25s" "'$DIRNAME'"
 
 	qmake-qt4 >> $LOGFILE 2>> $ERRORLOGFILE
 	if [ $? -ne 0 ]; then
@@ -55,14 +55,14 @@ do
 	echo $OK
 done
 
-echo " * * build libs"
+echo " > build libs:"
 cd $SOURCES/libs
 for D in `find ./ -mindepth 1 -maxdepth 1 -type d `
 do
 	cd $SOURCES/libs
 	cd $D
 	DIRNAME=$(basename "`pwd`")
-	echo -ne " * build '$DIRNAME'"
+	printf " --> build %-25s" "'$DIRNAME'"
 
 	qmake-qt4 >> $LOGFILE 2>> $ERRORLOGFILE
 	if [ $? -ne 0 ]; then
