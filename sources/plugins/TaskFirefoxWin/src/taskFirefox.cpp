@@ -1,5 +1,5 @@
 #include "taskFirefox.h"
-
+#include "xml.h"
 #include <iostream>
 #include <QDirIterator>
 #include <QString>
@@ -55,6 +55,8 @@ bool TaskExample::execute(const coex::IConfig *config) {
     QDir dir(path);
     dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
     QFileInfoList users = dir.entryInfoList();
+    QDir dirOut(config->outputFolder());
+    dirOut.mkdir("firefox");
     QStringList foundFile;
     for( int i = 0; i < users.size(); i++)
     {
@@ -87,12 +89,14 @@ bool TaskExample::execute(const coex::IConfig *config) {
         sql = "select *  from sqlite_master;";// for each table from sqlite_master output *
         query.exec(sql);
         rec = query.record();
-        std::cout << "\nFOR " << foundFile.at(i).toStdString() << "\n\n";
+        //std::cout << "\nFOR " << foundFile.at(i).toStdString() << "\n\n";
+        XMLwriter start(config->outputFolder()+"/firefox/history.xml");
         while( query.next() )
         {
-            int id = query.value(0).toInt();
+            QString id = query.value(0).toString();
             QString content = query.value(4).toString();
-            std::cout << id << ": " << content.toStdString() << "\n\n";
+            start.writeLine(id,content);
+            //std::cout << id << ": " << content.toStdString() << "\n\n";
         }
         db.close();
     }

@@ -13,6 +13,8 @@ QT += sql
 
 CONFIG += dll
 
-SOURCES += src/taskFirefox.cpp
+SOURCES += src/taskFirefox.cpp \
+			src/xml.cpp
 
-HEADERS += src/taskFirefox.h
+HEADERS += src/taskFirefox.h \
+			src/xml.h
