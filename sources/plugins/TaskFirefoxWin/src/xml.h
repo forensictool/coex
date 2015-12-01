@@ -12,19 +12,20 @@
 
 class XMLwriter
 {
-public:
-    write_field(QString field_name, QString field_value);
-    writeFile(QString fileName);
+    public:
 
-    bool opened();
-    void writeLine(QString id, QString content);
+        XMLwriter(const QString fileName);
 
+        void writeField(QString field_name, QString field_value);
+        bool opened();
+        void writeLine(QString id, QString content);
 
-    ~writeFile();
-private:
-    QFile *m_pFile;
-    QXmlStreamWriter* m_pXmlWriter;
-    bool m_bOpened;
+        ~XMLwriter();
+
+    private:
+        QFile *m_pFile;
+        QXmlStreamWriter* m_pXmlWriter;
+        bool m_bOpened;
 };
 
 #endif // __XML_H__

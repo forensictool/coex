@@ -90,12 +90,12 @@ bool TaskExample::execute(const coex::IConfig *config) {
         query.exec(sql);
         rec = query.record();
         //std::cout << "\nFOR " << foundFile.at(i).toStdString() << "\n\n";
-        XMLwriter start(config->outputFolder()+"/firefox/history.xml");
+        XMLwriter xmlOut(config->outputFolder()+"/firefox/history.xml");
         while( query.next() )
         {
             QString id = query.value(0).toString();
             QString content = query.value(4).toString();
-            start.writeLine(id,content);
+            xmlOut.writeField(id,content);
             //std::cout << id << ": " << content.toStdString() << "\n\n";
         }
         db.close();
