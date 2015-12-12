@@ -1,7 +1,7 @@
 #!/bin/bash
 papackage_name="coex"
 version=$(git describe --long)
-maintainer="$(git config user.name)"
+maintainer="$(git config user.name)" 
 echo "|----------------------------------------------------------------------------------------|"
 echo "$  papackage_name ($version) ; urgency=low" 
 git tag -l | sort -u -r | while read TAG ; do

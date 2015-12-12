@@ -22,9 +22,11 @@ mkdir -p debian/usr/share/applications
 mkdir -p debian/usr/share/icons/hicolor/64x64/apps
 cp  avatar-63.jpg ./debian/usr/share/icons/hicolor/64x64/apps
 
-##Plugins for COEX Binary 
-mkdir -p debian/usr/coex/sources/plugins
-cp -R sources/plugins/ ./debian/usr/coex/sources/plugins
+##Plugins and libs for COEX Binary 
+mkdir -p debian/usr/coex/plugins
+mkdir -p debian/usr/coex/libs
+cp -R bin/plugins/ ./debian/usr/coex/plugins
+cp -R bin/libs/ ./debian/usr/coex/libs
 
 ## Dock and Manual
 touch debian/usr/share/doc/$papackage_name/copyrigth
@@ -54,6 +56,8 @@ echo "Architecture: $platform" >> debian/DEBIAN/control
 echo "Depends: g++ (>= 4.8.4), libqt4-opengl (>= 4:4.7.2), libqtcore4 (>= 4:4.8.0),libqt4-xml (>= 4:4.5.3),libgtk2.0-0 (>= 2.24.0),libqtgui4 (>= 4:4.6.1)" >> debian/DEBIAN/control
 echo "Maintainer: $maintainer" >> debian/DEBIAN/control
 echo "Description: Project KIBEVS-1401: Computer forensics" >> debian/DEBIAN/control
+
+## The Applications 
 echo "Name=$papackage_name">debian/usr/share/applications/coex.desktop
 echo "Comment=$papackage_name for forensics">>debian/usr/share/applications/coex.desktop
 echo "GenericName= tool of forensics">>debian/usr/share/applications/coex.desktop
