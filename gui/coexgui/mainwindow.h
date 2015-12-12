@@ -28,6 +28,9 @@ public slots:
 public:
     Ui::MainWindow *ui;
     QLabel *label;
+    QLabel *label_2;
+    QString inputdir;
+    QString outputdir;
 };
 
 #endif // MAINWINDOW_H

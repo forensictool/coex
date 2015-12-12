@@ -14,3 +14,5 @@ project/computer_examination/computer_examination
 docs/tex/gpo.pdf
 bin
 tmp
+
+moc_*

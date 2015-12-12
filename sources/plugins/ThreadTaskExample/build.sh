@@ -2,4 +2,3 @@
 
 qmake-qt4
 make
-

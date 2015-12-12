@@ -11,7 +11,7 @@ if [ ! -d $TESTDATA ]; then
   exit
 fi
 
-echo " * clean '$TESTS'";
+echo " > clean '$TESTS'";
 if [ ! -d $TESTS ]; then
   mkdir $TESTS;
 else

@@ -1,28 +1,28 @@
 #!/bin/bash
-OK=" ..... ok"
+OK="OK"
 
-echo -ne " * delete folder 'bin'"
+printf " > delete folder %-20s" "'bin'"
 rm -rf 'bin'
 echo $OK
 
-echo -ne " * delete folder 'logs'"
+printf " > delete folder %-20s" "'logs'"
 rm -rf 'logs'
 echo $OK
 
 cd sources
 
-echo -ne " * delete all 'Makefile'"
+printf " > delete all %-23s" "'Makefile'"
 find . -iname 'Makefile' -delete
 echo $OK
 
-echo -ne " * delete all '*.o'"
+printf " > delete files %-21s" "'object'"
 find . -iname '*.o' -delete
 echo $OK
 
-echo -ne " * delete all 'moc*.*'"
+printf " > delete files %-21s" "'moc'"
 find . -iname 'moc*.*' -delete
 echo $OK
 
-echo -ne " * delete all 'tmp'"
+printf " > delete files %-21s" "'tmp'"
 find . -iname 'tmp' -delete
 echo $OK
