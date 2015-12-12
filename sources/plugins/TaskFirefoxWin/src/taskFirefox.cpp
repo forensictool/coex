@@ -86,7 +86,7 @@ bool TaskExample::execute(const coex::IConfig *config) {
         QString sql;
         QSqlQuery query(db);
         QSqlRecord rec = query.record();
-        sql = "select *  from sqlite_master;";// for each table from sqlite_master output *
+        sql = "select * from moz_places;";// for each table from sqlite_master output *
         query.exec(sql);
         rec = query.record();
         //std::cout << "\nFOR " << foundFile.at(i).toStdString() << "\n\n";
@@ -94,7 +94,7 @@ bool TaskExample::execute(const coex::IConfig *config) {
         while( query.next() )
         {
             QString id = query.value(0).toString();
-            QString content = query.value(4).toString();
+            QString content = query.value(1).toString();
             xmlOut.writeField(id,content);
             //std::cout << id << ": " << content.toStdString() << "\n\n";
         }
