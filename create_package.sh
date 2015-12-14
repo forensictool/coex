@@ -79,3 +79,5 @@ echo $name
 fakeroot dpkg-deb --build ./debian
 
 mv debian.deb $name
+
+rm -r debian/
