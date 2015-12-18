@@ -71,6 +71,7 @@ void MainWindow::on_pushButton_3_clicked()
     else
     {
         QMessageBox msgBox;
+        msgBox.setWindowIcon(QIcon(QPixmap("../coexgui/icon.png")));
         QSpacerItem* horizontalSpacer = new QSpacerItem(300, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
         msgBox.setText( "please chose input and output directory" );
         QGridLayout* layout = (QGridLayout*)msgBox.layout();
