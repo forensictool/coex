@@ -15,6 +15,14 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
+
+    model = new QStringListModel(this);
+    QDir myDir("../../sources/plugins/");
+    QStringList allFiles = myDir.entryList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+    model->setStringList(allFiles);
+
+    ui->listView->setModel(model);
+
 }
 
 MainWindow::~MainWindow()
@@ -52,8 +60,12 @@ void MainWindow::on_pushButton_3_clicked()
         connect (proc, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ; // ловим когда процесс что то выдал
         connect (proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ; // ловим когда процесс выдал ошибку
         connect (proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ; //ловим когда процесс закончил работу
+        QString command;
+        QStringList args;
+        command="./coex";
+        args<<"-i"<<inputdir<<"-o"<<outputdir;
 
-        proc->start("/bin/bash", QStringList() << "-c" << "ls -l");
+        proc->start(command,args);
 
     }
     else
@@ -90,5 +102,5 @@ void MainWindow::onFinished(int /*result*/)
     QGridLayout* layout = (QGridLayout*)msgBox.layout();
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
+    //emit exit();
 }
-
