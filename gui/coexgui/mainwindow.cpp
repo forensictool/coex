@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
 
     model = new QStringListModel(this);
-    QDir myDir("../../sources/plugins/");
+    QDir myDir("../sources/plugins/");
     QStringList allFiles = myDir.entryList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
     model->setStringList(allFiles);
 
@@ -37,7 +37,7 @@ void MainWindow::on_pushButton_clicked()
                                QDir::currentPath(),
                                QFileDialog::ShowDirsOnly
                                | QFileDialog::DontResolveSymlinks);
-    ui->label->setText(inputdir);
+    //ui->label->setText(inputdir);
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -47,7 +47,7 @@ void MainWindow::on_pushButton_2_clicked()
                                QDir::currentPath(),
                                QFileDialog::ShowDirsOnly
                                | QFileDialog::DontResolveSymlinks);
-    ui->label_2->setText(outputdir);
+    //ui->label_2->setText(outputdir);
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -71,9 +71,10 @@ void MainWindow::on_pushButton_3_clicked()
     else
     {
         QMessageBox msgBox;
-        msgBox.setWindowIcon(QIcon(QPixmap("../coexgui/icon.png")));
+        msgBox.setWindowIcon(QIcon(QPixmap("../gui/coexgui/icon.png")));
+        msgBox.setWindowTitle("coex");
         QSpacerItem* horizontalSpacer = new QSpacerItem(300, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-        msgBox.setText( "please chose input and output directory" );
+        msgBox.setText( QString::fromUtf8("Пожалуйста выберите папки"));
         QGridLayout* layout = (QGridLayout*)msgBox.layout();
         layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
         msgBox.exec();
@@ -98,8 +99,10 @@ void MainWindow::wrongMessage()
 void MainWindow::onFinished(int /*result*/)
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("coex");
+    msgBox.setWindowIcon(QIcon(QPixmap("../gui/coexgui/icon.png")));
     QSpacerItem* horizontalSpacer = new QSpacerItem(300, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    msgBox.setText( "done" );
+    msgBox.setText(QString::fromUtf8("Выполнено"));
     QGridLayout* layout = (QGridLayout*)msgBox.layout();
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
