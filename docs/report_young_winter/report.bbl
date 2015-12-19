@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{fedotovforenzika}
+\selectlanguageifdefined{russian}
+Федотов~Николай~Николаевич. {Форензика -
+  компьютерная криминалистика}.
+\newblock Юрид. мир, 2007.
+\newblock 432~с.{}
+
+\bibitem{progit}
+\selectlanguageifdefined{russian}
+{Scott Chacon}. {Pro Git : professional version control}.
+\newblock 2011. URL: http://progit.org/ebook/progit.pdf.{}
+
+\bibitem{qtdoc}
+\selectlanguageifdefined{russian}
+{Qt Documentation [Электронный ресурс]}~//
+  {qt-project.org:[сайт]}.
+\newblock 2013. URL: http://qt-project.org/doc.{}
+
+\bibitem{qtcross}
+\selectlanguageifdefined{russian}
+{Всё о кроссплатформенном
+  программировании - Qt [Электронный
+  ресурс]}~// {doc.crossplatform.ru:[сайт]}.
+\newblock 2013. URL: http://doc.crossplatform.ru/qt.{}
+
+\bibitem{xml}
+\selectlanguageifdefined{russian}
+{Справочник по XML-стандартам [Электронный
+  ресурс]}~// {msdn.microsoft.com:[сайт]}. URL:
+  http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
+
+\end{thebibliography}
