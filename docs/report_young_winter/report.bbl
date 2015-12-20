@@ -17,25 +17,50 @@
 \bibitem{progit}
 \selectlanguageifdefined{russian}
 {Scott Chacon}. {Pro Git : professional version control}.
-\newblock 2011. URL: http://progit.org/ebook/progit.pdf.{}
+\newblock 2011. --- Режим доступа:
+  http://progit.org/ebook/progit.pdf.{}
 
 \bibitem{qtdoc}
 \selectlanguageifdefined{russian}
-{Qt Documentation [Электронный ресурс]}~//
-  {qt-project.org:[сайт]}.
-\newblock 2013. URL: http://qt-project.org/doc.{}
+{Qt Documentation [Электронный ресурс]}. --- Режим
+  доступа: http://qt-project.org/doc.{}
 
 \bibitem{qtcross}
 \selectlanguageifdefined{russian}
 {Всё о кроссплатформенном
-  программировании - Qt [Электронный
-  ресурс]}~// {doc.crossplatform.ru:[сайт]}.
-\newblock 2013. URL: http://doc.crossplatform.ru/qt.{}
+  программировании - Qt [Электронный ресурс]}.
+  --- Режим доступа: http://doc.crossplatform.ru/qt.{}
 
 \bibitem{xml}
 \selectlanguageifdefined{russian}
 {Справочник по XML-стандартам [Электронный
-  ресурс]}~// {msdn.microsoft.com:[сайт]}. URL:
+  ресурс]}. --- Режим доступа:
   http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
+
+\bibitem{nixp}
+\selectlanguageifdefined{russian}
+{Проблема с NO\_PUBKEY: как получить GPG-ключ и
+  добавить его в базу apt? [Электронный
+  ресурс]}. --- Режим доступа:
+  http://www.nixp.ru/recipes/4.html.{}
+
+\bibitem{anosov}
+\selectlanguageifdefined{russian}
+{Создаем собственный deb-репозиторий (на
+  примере создания репозитория для Komodo Edit)
+  [Электронный ресурс]}. --- Режим доступа:
+  http://anosov.me/2011/07/make-own-deb-repository/.{}
+
+\bibitem{deb_package_howto}
+\selectlanguageifdefined{russian}
+{Как собрать бинарный deb пакет: подробное
+  HowTo [Электронный ресурс]}. --- Режим доступа:
+  http://habrahabr.ru/post/78094/.{}
+
+\bibitem{deb_man}
+\selectlanguageifdefined{russian}
+{Руководство начинающего разработчика Debian
+  [Электронный ресурс]}. --- Режим доступа:
+  https://www.debian.org/doc/manuals/maint-guide/dreq.ru.html.{}
 
 \end{thebibliography}
