@@ -152,6 +152,14 @@ p {display:block; margin:10px 0;}
 .fclogn .row_submit span input,
 .addcomtx textarea {padding:0; display:block; margin:0; border:0; vertical-align:top; outline:none; background:0;}
 
+.flex{	
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: flex-start;
+}
 .site-main{
 	display: block;
 	min-width: 320px;
@@ -212,17 +220,22 @@ section{
 	display: block; 
 	position: relative; 
 	overflow: hidden;
+	padding-bottom: 2em;
 }
-section .sect-block{
+.sect-block{
 	margin: 0 auto;
     width: 50%;
     min-width: 320px;
+}
+.sect-block>img{
+	width: 100%;
+	height: auto;
 }
 .sect-block h2 {
 	font-size: 62px;
     font-weight: 500;
     text-align: center;
-    margin: 1em;
+    margin: 1em 0;
 }
 .sect-block .description{
 	padding: 0 1em 0.5em;
@@ -240,16 +253,11 @@ section .sect-block{
 	color: #fff;
 }
 
-#capa{
+#capa, #consist{
 	background-color: #f2f2f6;
 }
 .modules{ 
-	display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-around;
-    align-items: flex-start;
+
 }
 
 .module{display: inline-block; padding: 20px; width: 200px}
@@ -257,9 +265,24 @@ section .sect-block{
 .module h3{ font-weight: 300; text-align: center; }
 .module .decr-mod{ text-align: justify; }
 
+.install-block{
+	min-width: 320px;
+}
+
+.git-url{
+	display: block;
+}
+.git-url img{ display: block; }
+.git-url span{ display: block; text-align: center;}
 
 .site-footer{ 
 	background-color: #515151; 
-	display: flex;
 	color: #fff;
+	min-width: 320px;
+	overflow: hidden;
 }
+#consist .sect-block .description{ padding-top: 0.5em; }
+.site-footer .copyrights{ width: 100%; padding: 10px; }
+.site-footer .copyrights a { color: #6F6F6F; display: block; text-decoration: none; }
+.site-footer .copyrights a:hover{ color: #fff; }
+.site-footer .copyrights span{ display: block; color: #6F6F6F; }
