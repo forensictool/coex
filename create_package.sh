@@ -49,7 +49,7 @@ cat bin/README  > debian/usr/share/doc/$papackage_name/README
 platform="all"
 maintainer_name="$(git config user.name)"
 maintainer_email="$(git config user.email)"
-#size="$(du -s -k debian/)"
+size="$(du -hks debian/ | awk '{print $1}')"
 echo "Package: $papackage_name" > debian/DEBIAN/control
 echo "Version: $version" >> debian/DEBIAN/control
 echo "Section: admin" >> debian/DEBIAN/control
@@ -57,7 +57,7 @@ echo "Priority: optional" >> debian/DEBIAN/control
 echo "Architecture: $platform" >> debian/DEBIAN/control
 echo "Depends: g++ (>= 4.8.4), libqt4-opengl (>= 4:4.7.2), libqtcore4 (>= 4:4.8.0),libqt4-xml (>= 4:4.5.3),libgtk2.0-0 (>= 2.24.0),libqtgui4 (>= 4:4.6.1)" >> debian/DEBIAN/control
 echo "Maintainer: $maintainer_name <$maintainer_email>" >> debian/DEBIAN/control
-#echo "Installed-Size: $size" >> debian/DEBIAN/control
+echo "Installed-Size: $size" >> debian/DEBIAN/control
 echo "Description: Project KIBEVS-1401: Computer forensics" >> debian/DEBIAN/control
 
 ## The Applications 
