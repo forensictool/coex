@@ -45,19 +45,17 @@
   программировании - Qt [Электронный ресурс]}.
   --- Режим доступа: http://doc.crossplatform.ru/qt.{}
 
+\bibitem{gitlab}
+\selectlanguageifdefined{english}
+{Code, test and deploy together [Электронный ресурс]}. ---
+  Режим доступа: https://about.gitlab.com/ (дата
+  обращения: 25.10.2015).{}
+
 \bibitem{xml}
 \selectlanguageifdefined{russian}
 {Справочник по XML-стандартам [Электронный
   ресурс]}. --- Режим доступа:
   http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
-
-\bibitem{nixp}
-\selectlanguageifdefined{russian}
-{Проблема с NO\_PUBKEY: как получить GPG-ключ и
-  добавить его в базу apt? [Электронный
-  ресурс]}. --- Режим доступа:
-  http://www.nixp.ru/recipes/4.html (дата обращения:
-  25.11.2015).{}
 
 \bibitem{anosov}
 \selectlanguageifdefined{russian}
@@ -66,6 +64,14 @@
   [Электронный ресурс]}. --- Режим доступа:
   http://anosov.me/2011/07/make-own-deb-repository/ (дата
   обращения: 20.11.2015).{}
+
+\bibitem{nixp}
+\selectlanguageifdefined{russian}
+{Проблема с NO\_PUBKEY: как получить GPG-ключ и
+  добавить его в базу apt? [Электронный
+  ресурс]}. --- Режим доступа:
+  http://www.nixp.ru/recipes/4.html (дата обращения:
+  25.11.2015).{}
 
 \bibitem{deb_package_howto}
 \selectlanguageifdefined{russian}

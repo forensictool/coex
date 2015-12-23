@@ -5,50 +5,51 @@ The style file: utf8gost705u.bst
 Database file #1: lit.bib
 Warning--empty journal in qtdoc
 Warning--empty journal in qtcross
+Warning--empty journal in gitlab
 Warning--empty journal in xml
-Warning--empty journal in nixp
 Warning--empty journal in anosov
+Warning--empty journal in nixp
 Warning--empty journal in deb_package_howto
 Warning--empty journal in deb_man
-You've used 11 entries,
+You've used 12 entries,
             2964 wiz_defined-function locations,
-            712 strings with 7075 characters,
-and the built_in function-call counts, 2066 in all, are:
-= -- 253
-> -- 27
+            715 strings with 7218 characters,
+and the built_in function-call counts, 2213 in all, are:
+= -- 270
+> -- 28
 < -- 4
-+ -- 15
++ -- 16
 - -- 4
-* -- 67
-:= -- 233
-add.period$ -- 30
-call.type$ -- 11
+* -- 73
+:= -- 249
+add.period$ -- 32
+call.type$ -- 12
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 122
-empty$ -- 272
+cite$ -- 20
+duplicate$ -- 132
+empty$ -- 293
 format.name$ -- 4
-if$ -- 557
+if$ -- 596
 int.to.chr$ -- 0
-int.to.str$ -- 11
+int.to.str$ -- 12
 missing$ -- 0
-newline$ -- 61
+newline$ -- 65
 num.names$ -- 12
-pop$ -- 93
+pop$ -- 101
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 54
+skip$ -- 58
 stack$ -- 0
 substring$ -- 6
-swap$ -- 42
+swap$ -- 44
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 7
+warning$ -- 8
 while$ -- 5
-width$ -- 13
-write$ -- 144
-(There were 7 warnings)
+width$ -- 14
+write$ -- 154
+(There were 8 warnings)
