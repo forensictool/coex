@@ -1,0 +1,89 @@
+\begin{thebibliography}{10}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{fedotovforenzika}
+\selectlanguageifdefined{russian}
+Федотов~Николай~Николаевич. {Форензика -
+  компьютерная криминалистика}.
+\newblock Юрид. мир, 2007.
+\newblock 432~с.{}
+
+\bibitem{progit}
+\selectlanguageifdefined{russian}
+{Scott Chacon}. {Pro Git : professional version control}.
+\newblock 2011. --- Режим доступа:
+  http://progit.org/ebook/progit.pdf.{}
+
+\bibitem{lvovskyi}
+\selectlanguageifdefined{russian}
+{С.М. Львовский}. {Набор и вёрстка в системе
+  \LaTeX}.
+\newblock МЦНМО, 2006.
+\newblock {С.}~448.{}
+
+\bibitem{latexrus}
+\selectlanguageifdefined{russian}
+{И. А. Чеботаев, П. З. Котельников}. {\LaTeXe\
+  по-русски}.
+\newblock Сибирский Хронограф, 2004.
+\newblock 489~с.{}
+
+\bibitem{qtdoc}
+\selectlanguageifdefined{russian}
+{Qt Documentation [Электронный ресурс]}. --- Режим
+  доступа: http://qt-project.org/doc.{}
+
+\bibitem{qtcross}
+\selectlanguageifdefined{russian}
+{Всё о кроссплатформенном
+  программировании - Qt [Электронный ресурс]}.
+  --- Режим доступа: http://doc.crossplatform.ru/qt.{}
+
+\bibitem{gitlab}
+\selectlanguageifdefined{english}
+{Code, test and deploy together [Электронный ресурс]}. ---
+  Режим доступа: https://about.gitlab.com/ (дата
+  обращения: 25.10.2015).{}
+
+\bibitem{xml}
+\selectlanguageifdefined{russian}
+{Справочник по XML-стандартам [Электронный
+  ресурс]}. --- Режим доступа:
+  http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
+
+\bibitem{anosov}
+\selectlanguageifdefined{russian}
+{Создаем собственный deb-репозиторий (на
+  примере создания репозитория для Komodo Edit)
+  [Электронный ресурс]}. --- Режим доступа:
+  http://anosov.me/2011/07/make-own-deb-repository/ (дата
+  обращения: 20.11.2015).{}
+
+\bibitem{nixp}
+\selectlanguageifdefined{russian}
+{Проблема с NO\_PUBKEY: как получить GPG-ключ и
+  добавить его в базу apt? [Электронный
+  ресурс]}. --- Режим доступа:
+  http://www.nixp.ru/recipes/4.html (дата обращения:
+  25.11.2015).{}
+
+\bibitem{deb_package_howto}
+\selectlanguageifdefined{russian}
+{Как собрать бинарный deb пакет: подробное
+  HowTo [Электронный ресурс]}. --- Режим доступа:
+  http://habrahabr.ru/post/78094/ (дата обращения: 12.10.2015).{}
+
+\bibitem{deb_man}
+\selectlanguageifdefined{russian}
+{Руководство начинающего разработчика Debian
+  [Электронный ресурс]}. --- Режим доступа:
+  https://www.debian.org/doc/manuals/maint-guide/dreq.ru.html (дата
+  обращения: 30.10.2015).{}
+
+\end{thebibliography}

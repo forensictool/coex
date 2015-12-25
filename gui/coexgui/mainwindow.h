@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QtGui>
 
 namespace Ui
 {
@@ -12,6 +13,8 @@ namespace Ui
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+signals:
+    void exit();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -28,6 +31,11 @@ public slots:
 public:
     Ui::MainWindow *ui;
     QLabel *label;
+    QLabel *label_2;
+    QString inputdir;
+    QString outputdir;
+    QStringListModel *model;
+
 };
 
 #endif // MAINWINDOW_H

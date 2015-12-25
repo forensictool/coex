@@ -5,6 +5,8 @@
 #include <QVector>
 #include <iostream>
 
+#include <QObject>
+
 namespace coex
 {
 	class ITypeOperationSystem {
@@ -66,8 +68,24 @@ namespace coex
 			virtual bool execute(const coex::IConfig *config) = 0;
 	};
 	
-	
-	// next code will be deprecated
+	class IThreadTask : public QObject
+	{
+		public:
+			virtual ~IThreadTask(){};
+			virtual QString help() = 0;
+			virtual QString name() = 0;
+			virtual QString author() = 0;
+			virtual QString description() = 0;
+
+			virtual bool isSupportOS(const coex::ITypeOperationSystem *os) = 0;
+			virtual void setOption(QStringList) = 0;
+			virtual void init(const coex::IConfig *config) = 0;
+
+		public slots:
+			virtual bool execute() = 0;
+	};
+
+	// next code will  be deprecated
 	enum typeOS
 	{
 		ceUnknown,
@@ -92,5 +110,7 @@ namespace coex
 		typeOS os;
 	};
 }
+
+Q_DECLARE_INTERFACE (coex::IThreadTask, "IThreadTask");
 
 #endif //__COEX_H__

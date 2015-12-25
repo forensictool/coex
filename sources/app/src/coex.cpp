@@ -18,6 +18,7 @@
 #include <QDir>
 #include <QVector>
 
+#include <QThread>
 
 int main(int argc, char* argv[])
 {
@@ -45,11 +46,13 @@ int main(int argc, char* argv[])
 
 	typedef coex::IDetectOperationSystem* (*funcCreateDetectOperationSystem) ();
 	typedef coex::ITask* (*funcCreateTask) ();
+    typedef coex::IThreadTask* (*funcCreateThreadTask) ();
 	
 	QDir dirPlugins(app.applicationDirPath() + "/plugins");
 	
 	QVector<coex::IDetectOperationSystem*> detectOS;
 	QVector<coex::ITask*> tasks;
+    QVector<coex::IThreadTask*> threads;
 	QVector<QLibrary*> plugins;
 	
 	
@@ -84,6 +87,15 @@ int main(int argc, char* argv[])
 				tasks.push_back(task);
 			}
 			
+            funcCreateThreadTask createThreadTask = (funcCreateThreadTask)(plugin->resolve("createThreadTask"));
+            if(createThreadTask)
+            {
+                bIsPlugin = true;
+                coex::IThreadTask* thread = createThreadTask();
+                std::cout << "OK \n ----> Found threadTask '" << thread->name().toStdString() << "' by '" << thread->author().toStdString() << "' ";
+                threads.push_back(thread);
+            }
+
 			if (bIsPlugin) {
 				plugins.push_back(plugin);
 			} else {
@@ -117,17 +129,39 @@ int main(int argc, char* argv[])
 	}
     std::cout << " --> Detected OS: '" << config->typeOS()->toString().toStdString() << "'\n";
 
+    // run threads
+    foreach (coex::IThreadTask* thread, threads)
+    {
+        if(thread->isSupportOS(config->typeOS()))
+        {
+            std::cout << " --> Run thread: '" << thread->name().toStdString() << "' by '" << thread->author().toStdString() << "'\n";
+            std::cout << " ----> Init . . .";
+            thread->init(config);
+            std::cout << "OK\n";
+            QThread* t = new QThread();
+            std::cout << " ----> Running . . .";
+            QObject::connect(t, SIGNAL(started()), thread, SLOT(execute()));
+            QObject::connect(t, SIGNAL(finished()), thread, SLOT(deleteLater()));
+            thread->moveToThread(t);
+            t->start();
+            std::cout << "OK\n";
+        }
+    }
 
 	// found and run tasks
-    std::cout << " > Executing tasks . . .\n";
-	{
-		for (int i = 0; i < tasks.size(); i++) {
-			
-			if (tasks[i]->isSupportOS(config->typeOS())) {
-                std::cout << " --> Execute task: '" << tasks[i]->name().toStdString() << "' by '" << tasks[i]->author().toStdString() << "' \n";
-				tasks[i]->execute(config);
-			}
-		}
-	}
-    return 0;
+    if(tasks.size())
+    {
+        std::cout << " > Executing tasks . . .\n";
+        {
+            for (int i = 0; i < tasks.size(); i++) {
+
+                if (tasks[i]->isSupportOS(config->typeOS())) {
+                    std::cout << " --> Execute task: '" << tasks[i]->name().toStdString() << "' by '" << tasks[i]->author().toStdString() << "' \n";
+                    tasks[i]->execute(config);
+                }
+            }
+        }
+    }
+    //std::cout << " > Job done. Press Ctrl+C for exit\n";
+    return 0;//app.exec();
 }

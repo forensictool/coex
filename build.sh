@@ -108,8 +108,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 echo "
 Thanks for using our software.
 
-Product: coex
-Version: 0.2.`git rev-list HEAD --count`
+Product: COEX
+Version: `git describe --long`
 Date: `date`
 Address: Russia, Tomsk, st. Lenina, 40
 Organization: TUSUR
