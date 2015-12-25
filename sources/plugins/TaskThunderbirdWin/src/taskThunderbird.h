@@ -12,9 +12,9 @@
 class XMLwriter
 {
 	public:
-		void XMLwriter::write_field(QXmlStreamWriter &xmlWriter, QString sName, QString sValue);
-		void XMLwriter::writeFile(QXmlStreamWriter &xmlWriter, int mode, QString name);
-		void XMLwriter::writeMessage(QXmlStreamWriter &xmlWriter, QString date, QString from, QString to, QString text);
+        void write_field(QXmlStreamWriter &xmlWriter, QString sName, QString sValue);
+        void writeFile(QXmlStreamWriter &xmlWriter, int mode, QString name);
+        void writeMessage(QXmlStreamWriter &xmlWriter, QString date, QString from, QString to, QString text);
 };
 
 class TaskExample : coex::ITask
@@ -30,8 +30,8 @@ class TaskExample : coex::ITask
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
 
-		void TaskExample::openfile(QString input, QXmlStreamWriter *xmlWriter);
-		void TaskExample::pars(QString str, QXmlStreamWriter *xmlWriter);
+        void openfile(QString input, QXmlStreamWriter *xmlWriter);
+        void pars(QString str, QXmlStreamWriter *xmlWriter);
 	private:
 		bool m_bDebug;
 };
