@@ -22,7 +22,7 @@ if [ $? -ne 0 ]; then
 	exit;
 fi
 
-make >> $LOGFILE 2>> $ERRORLOGFILE
+make -j`nproc` >> $LOGFILE 2>> $ERRORLOGFILE
 if [ $? -ne 0 ]; then
 	echo ""
 	echo "ERRORS, log look in file: $ERRORLOGFILE"
@@ -46,7 +46,7 @@ do
 		exit;
 	fi
 
-	make >> $LOGFILE 2>> $ERRORLOGFILE
+	make -j`nproc` >> $LOGFILE 2>> $ERRORLOGFILE
 	if [ $? -ne 0 ]; then
 		echo ""
 		echo "ERRORS, log look in file: $ERRORLOGFILE"
@@ -71,7 +71,7 @@ do
 		exit;
 	fi
 
-	make >> $LOGFILE 2>> $ERRORLOGFILE
+	make -j`nproc` >> $LOGFILE 2>> $ERRORLOGFILE
 	if [ $? -ne 0 ]; then
 		echo ""
 		echo "ERRORS, log look in file: $ERRORLOGFILE"
@@ -126,6 +126,7 @@ Vladislav Shipovskoi (??)
 Marina Meyta (somekindofcookiemonster@gmail.com)
 Oleg Lobanov (??)
 Serakov Andrey (??)
+Maxim Kucher (??)
 
 Using third party:
 QDbf: arial79@gmail.com, https://code.google.com/p/qdbf/
