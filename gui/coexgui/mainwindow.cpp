@@ -12,15 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
-    //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
-    //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
-
     model = new QStringListModel(this);
-    QDir myDir("../sources/plugins/");
+    QDir myDir("../../sources/plugins/");
     QStringList allFiles = myDir.entryList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
     model->setStringList(allFiles);
-
     ui->listView->setModel(model);
 
 }
@@ -34,44 +29,42 @@ void MainWindow::on_pushButton_clicked()
 {
    inputdir = QFileDialog::getExistingDirectory(this,
                                QString::fromUtf8("Открыть папку"),
-                               QDir::currentPath(),
+                               QDir::homePath(),
                                QFileDialog::ShowDirsOnly
                                | QFileDialog::DontResolveSymlinks);
-    //ui->label->setText(inputdir);
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     outputdir = QFileDialog::getExistingDirectory(this,
                                QString::fromUtf8("Открыть папку"),
-                               QDir::currentPath(),
+                               QDir::homePath(),
                                QFileDialog::ShowDirsOnly
                                | QFileDialog::DontResolveSymlinks);
-    //ui->label_2->setText(outputdir);
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
     if ((inputdir.length() && outputdir.length()) != 0)
     {
-        QProcess *proc= new QProcess();
-        ui->textBrowser->clear();
-        proc->setProcessChannelMode(QProcess::MergedChannels); // Устанавливаем, что вывод (и ошибки и прочее) будет валиться в один канал
-        connect (proc, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ; // ловим когда процесс что то выдал
-        connect (proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ; // ловим когда процесс выдал ошибку
-        connect (proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ; //ловим когда процесс закончил работу
-        QString command;
-        QStringList args;
-        command="./coex";
-        args<<"-i"<<inputdir<<"-o"<<outputdir;
+        proc= new QProcess;
 
-        proc->start(command,args);
+        QStringList args;
+
+        ui->textBrowser->clear();
+        proc->setProcessChannelMode(QProcess::MergedChannels);
+
+        connect (proc, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ;
+        connect (proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ;
+        connect (proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ;
+        args<<"-i"<<inputdir<<"-o"<<outputdir;
+        proc->start("./coex",args);
 
     }
     else
     {
         QMessageBox msgBox;
-        msgBox.setWindowIcon(QIcon(QPixmap("../gui/coexgui/icon.png")));
+        msgBox.setWindowIcon(QIcon(QPixmap("icon.png")));
         msgBox.setWindowTitle("coex");
         QSpacerItem* horizontalSpacer = new QSpacerItem(300, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
         msgBox.setText( QString::fromUtf8("Пожалуйста выберите папки"));
@@ -80,6 +73,18 @@ void MainWindow::on_pushButton_3_clicked()
         msgBox.exec();
 
     }
+}
+
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    build = new QProcess;
+    build->setProcessChannelMode(QProcess::MergedChannels);
+    connect (build, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ;
+    connect (build, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ;
+    connect (build, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ;
+    build->start("./build.sh");
 }
 
 void MainWindow::rightMessage()
@@ -100,7 +105,7 @@ void MainWindow::onFinished(int /*result*/)
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle("coex");
-    msgBox.setWindowIcon(QIcon(QPixmap("../gui/coexgui/icon.png")));
+    msgBox.setWindowIcon(QIcon(QPixmap("icon.png")));
     QSpacerItem* horizontalSpacer = new QSpacerItem(300, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     msgBox.setText(QString::fromUtf8("Выполнено"));
     QGridLayout* layout = (QGridLayout*)msgBox.layout();
@@ -108,3 +113,5 @@ void MainWindow::onFinished(int /*result*/)
     msgBox.exec();
     //emit exit();
 }
+
+
