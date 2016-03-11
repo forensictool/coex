@@ -36,7 +36,7 @@
     <normaloff>:/icons/icon.png</normaloff>:/icons/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="OpenDir">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -49,7 +49,7 @@
      <string>Открыть папку</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="SaveDir">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -62,7 +62,7 @@
      <string>Сохранить в папку</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="RunCoex">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -104,7 +104,10 @@
      <set>QAbstractItemView::NoEditTriggers</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="BuildCoex">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -114,7 +117,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Build</string>
+     <string>Сборка</string>
     </property>
    </widget>
   </widget>
