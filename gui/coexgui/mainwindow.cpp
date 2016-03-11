@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_OpenDir_clicked()
 {
    inputdir = QFileDialog::getExistingDirectory(this,
                                QString::fromUtf8("Открыть папку"),
@@ -34,7 +34,7 @@ void MainWindow::on_pushButton_clicked()
                                | QFileDialog::DontResolveSymlinks);
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_SaveDir_clicked()
 {
     outputdir = QFileDialog::getExistingDirectory(this,
                                QString::fromUtf8("Открыть папку"),
@@ -43,7 +43,7 @@ void MainWindow::on_pushButton_2_clicked()
                                | QFileDialog::DontResolveSymlinks);
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_RunCoex_clicked()
 {
     if ((inputdir.length() && outputdir.length()) != 0)
     {
@@ -77,7 +77,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_BuildCoex_clicked()
 {
     build = new QProcess;
     build->setProcessChannelMode(QProcess::MergedChannels);
@@ -113,5 +113,3 @@ void MainWindow::onFinished(int /*result*/)
     msgBox.exec();
     //emit exit();
 }
-
-

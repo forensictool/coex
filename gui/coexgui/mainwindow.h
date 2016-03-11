@@ -21,10 +21,10 @@ public:
     ~MainWindow();
 
 public slots:
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
-    void on_pushButton_4_clicked();
+    void on_OpenDir_clicked();
+    void on_SaveDir_clicked();
+    void on_BuildCoex_clicked();
+    void on_RunCoex_clicked();
     void rightMessage();
     void wrongMessage();
     void onFinished(int);
@@ -38,6 +38,7 @@ public:
     QStringListModel *model;
     QProcess *proc;
     QProcess *build;
+
 
 };
 
