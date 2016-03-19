@@ -10,29 +10,39 @@
 #include <QDateTime>
 
 
-class TaskMessengers : coex::ITask
+class TaskMessengers : public coex::IThreadTask
 {
-	public:
-		TaskMessengers();
-		virtual QString help();
-		virtual QString name();
-		virtual QString author();
-		virtual QString description();
+    Q_OBJECT
+    Q_INTERFACES(coex::IThreadTask)
+
+    public:
+        TaskMessengers();
+        ~TaskMessengers();
+        virtual QString help();
+        virtual QString name();
+        virtual QString author();
+        virtual QString description();
         /*!
          * \brief isSupportOS
          * \param os
-         * \return 
+         * \return
          */
-		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
-		virtual void setOption(QStringList);
-		virtual bool execute(const coex::IConfig *config);
-	private:
-		bool m_bDebug;
+
+        bool isSupportOS(const coex::ITypeOperationSystem *os);
+        void setOption(QStringList);
+        void init(const coex::IConfig *config);
+
+    public slots:
+        bool execute();
+
+    private:
+        bool m_pbDebug;
+        const coex::IConfig *m_pConfig;
 };
 
 extern "C"
 {
-	coex::ITask* createTask();
+    coex::IThreadTask* createThreadTask();
 }
 
 #endif // __TASK_MESSENGERS_H__

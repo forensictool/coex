@@ -1,58 +1,75 @@
 #include "taskMessengers.h"
+#include "writerMessages.h"
 #include "XMLReader_ICQContacts.h"
-#include <iostream>
-#include <QDirIterator>
+
 #include <QString>
 #include <QRegExp>
 #include <QFile>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QTextStream>
+#include <QDebug>
+#include <QStringList>
 
-TaskMessengers::TaskMessengers() {
-	m_bDebug = false;
-};
+TaskMessengers::TaskMessengers() : m_pbDebug(false)
+{
 
-QString TaskMessengers::help() {
-	return "\t--debug - viewing debug messages";
-};
+}
 
-QString TaskMessengers::name() {
-	return "ICQ";
-};
+TaskMessengers::~TaskMessengers(){}
 
-QString TaskMessengers::author() {
-	return "Marina Meyta";
-};
+QString TaskMessengers::help()
+{
+    return "\t--debug - viewing debug messages";
+}
 
-QString TaskMessengers::description() {
-	return "messengers task";
-};
+QString TaskMessengers::name()
+{
+    return "ICQ";
+}
 
-bool TaskMessengers::isSupportOS(const coex::ITypeOperationSystem *os) {
-	return (os->platform() == "Windows");
-};
+QString TaskMessengers::author()
+{
+    return "Marina Meyta";
+}
 
-void TaskMessengers::setOption(QStringList options) {
-	/*
-	 * 
-	 * */
-	if(options.contains("--debug"))
-		m_bDebug = true;
-};
+QString TaskMessengers::description()
+{
+    return "messengers task";
+}
 
-bool TaskMessengers::execute(const coex::IConfig *config) {
-	if(m_bDebug) {
-		std::cout << "  !!! debug mode on.\n";
-		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
-	};
+bool TaskMessengers::isSupportOS(const coex::ITypeOperationSystem *os)
+{
+    return (os->platform() == "Windows");
+}
+
+void TaskMessengers::setOption(QStringList options)
+{
+    if(options.contains("--debug"))
+        m_pbDebug = true;
+}
+
+void TaskMessengers::init(const coex::IConfig *config)
+{
+    m_pConfig = config;
+    m_pbDebug = m_pConfig->isDebugEnable();
+}
+
+bool TaskMessengers::execute()
+{
+    if(m_pbDebug) {
+        qDebug() << "DEBUG MOD";
+        qDebug() << QString("Input folder %1").arg(m_pConfig->inputFolder());
+        qDebug() << QString("Output folder %1").arg(m_pConfig->outputFolder());
+    };
 
     XMLReader_ICQContacts reader; // создаем экземпляр класса
-    reader.read(config->inputFolder() + "/Users/Default/AppData/Roaming/test.xml", config->outputFolder());
+    reader.read(m_pConfig->inputFolder() + "/Users/Default/AppData/Roaming/test.xml", m_pConfig->outputFolder());
 
-	return true;
-};
+    return true;
+}
 
-coex::ITask* createTask() {
-	return (coex::ITask*)(new TaskMessengers());
+coex::IThreadTask* createThreadTask()
+{
+    return (new TaskMessengers());
 }
