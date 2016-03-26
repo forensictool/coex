@@ -23,10 +23,10 @@ mkdir -p debian/usr/share/icons/hicolor/64x64/apps
 cp  avatar-63.jpg ./debian/usr/share/icons/hicolor/64x64/apps
 
 ##Plugins and libs for COEX Binary 
-mkdir -p debian/usr/coex/plugins
-mkdir -p debian/usr/coex/libs
-cp -R bin/plugins/ ./debian/usr/coex
-cp -R bin/libs/ ./debian/usr/coex
+##mkdir -p debian/usr/coex/plugins
+##mkdir -p debian/usr/coex/libs
+cp -R bin/plugins/ ./debian/usr/bin
+cp -R bin/libs/ ./debian/usr/bin
 
 ## Dock and Manual
 touch debian/usr/share/doc/$papackage_name/copyrigth
