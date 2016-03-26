@@ -13,7 +13,7 @@ Vladislav Shipovskoy
 ----
 About
 ----
-Плагин находит на жестком диске установленную версию браузера Google Chrome, и считывает данные об истории посещений, поисковых запросах, загруженных файлах, закладках, версии браузера, установленных расширениях и учетных записях. Затем выводит эти данные в формат XML.
+TaskChromeWin searches for an installed copy of Google Chrome after which it reads internet history, search history, download history, bookmarks, browser version, installed extensions and accounts data. After that the plugin writes the data to and XML file.
 
 ----
 Required OS
@@ -34,38 +34,43 @@ Methods
 void TaskChromWin::prefrences(QString input, QString output)
 ```
 
-* QString input - путь до папки, где находится браузер
-* QString output - путь до папки, куда плагин записывает выходной XML файл
-Вычитывает json файл preferences, в котором хранятся данные о версии, настройках и текущем пользователе. Преобразует к нужному формату.
+* QString input - Path to browser
+* QString output - Path to an XML file (output)
+
+Reads "preferences" file which contains version, settings and current user data.
 
 ```
 void TaskChromWin::bookmarks(QString input, QString output)
 ```
 
-* QString input - путь до папки, где находится браузер
-* QString output - путь до папки, куда плагин записывает выходной XML файл
-Метод считывает данные о закладках. 
+* QString input - Path to browser
+* QString output - Path to an XML file (output)
+
+Reads bookmarks.
 
 ```
 void TaskChromWin::history(QString input, QString output)
 ```
 
-* QString input - путь до папки, где находится браузер
-* QString output - путь до папки, куда плагин записывает выходной XML файл
-Метод считывает данные об истории посещений.
+* QString input - Path to browser
+* QString output - Path to an XML file (output)
+
+Reads browser history.
 
 ```
 void TaskChromWin::extension(QString input, QString output)
 ```
 
-* QString input - путь до папки, где находится браузер
-* QString output - путь до папки, куда плагин записывает выходной XML файл
-Метод считывает данные о дополнениях Chrome.
+* QString input - Path to browser
+* QString output - Path to an XML file (output)
+
+Reads installed extensions data.
 
 ```
 void TaskChromWin::login(QString input, QString output)
 ```
 
-* QString input - путь до папки, где находится браузер
-* QString output - путь до папки, куда плагин записывает выходной XML файл
-Метод считывает данные о сохраненных логинах учетных записей.
+* QString input - Path to browser
+* QString output - Path to an XML file (output)
+
+Reads saved logins.
