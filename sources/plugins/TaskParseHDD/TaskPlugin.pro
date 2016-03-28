@@ -13,7 +13,7 @@ QT -= gui
 CONFIG += dll
 
 SOURCES += \
-    src/scanHdd.cpp
+    src/parseHdd.cpp
 
 HEADERS += \
     src/parseHdd.h

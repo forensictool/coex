@@ -16,3 +16,4 @@ bin
 tmp
 *.deb
 moc_*
+*plugin.sh
