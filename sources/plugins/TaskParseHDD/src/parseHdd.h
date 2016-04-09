@@ -1,13 +1,15 @@
-#ifndef __TASK_SCANHDD_H__
-#define __TASK_SCANHDD_H__
+#ifndef __TASK_PARSEHDD_H__
+#define __TASK_PARSEHDD_H__
 
 #include "coex.h"
-
-#include <QString>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QDateTime>
+#include <iostream>
+#include <QFileInfo>
+#include <QDirIterator>
+#include <QDebug>
+#include <QList>
+#include <QStringList>
+#include <QDir>
+#include <QFileInfoList>
 
 class TaskParseHDD : coex::ITask
 {

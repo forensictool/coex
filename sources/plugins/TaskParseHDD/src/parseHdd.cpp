@@ -1,16 +1,5 @@
 #include "parseHdd.h"
-
-#include <iostream>
-#include <QDirIterator>
-#include <QString>
-#include <QRegExp>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QTextStream>
-#include <QDebug>
-#include <QFileInfo>
-#include <QDirIterator>
+#include "hdd.h"
 
 TaskParseHDD::TaskParseHDD() {
 	m_bDebug = false;
@@ -48,25 +37,24 @@ void TaskParseHDD::setOption(QStringList options) {
 bool TaskParseHDD::execute(const coex::IConfig *config) {
 	if(m_bDebug) {
 		std::cout << "  !!! debug mode on.\n";
-		std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
-	};
-
-    qDebug() << "it's working!";
+        std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
+    };
 
     QDirIterator dirPath(config->inputFolder(), QDir::Files |QDir::Dirs| QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
-    QString filename=config->outputFolder().append("Data.txt");
-    QFile file(filename);
-    if (file.open(QIODevice::WriteOnly))
+    QList<QDir> dirlist;
+    dirlist.append(QDir(config->inputFolder()));
+
+    while (dirPath.hasNext())
     {
-        QTextStream stream(&file);
-        while (dirPath.hasNext())
-        {
-            QFileInfo info(dirPath.filePath());
-            QString path = info.absoluteFilePath();
-            stream << path << endl;
-            dirPath.next();
-        }
+        dirlist.append(QDir(dirPath.next()));
     }
+
+//    Hdd storedhdd(dirlist);
+//    QString wildcard = "*.jpg";
+//    QFileInfoList outputlist = storedhdd.getFiles(wildcard);
+//    foreach(QFileInfo file, outputlist){
+//        qDebug() << file.absoluteFilePath();
+//    }
 
 	return true;
 };
