@@ -29,3 +29,91 @@ $  papackage_name (0.1-28-g080fc7c) ; urgency=low
  * deleted main.cpp and fixed header
  -- Andrey <alaghal@mail.ru> Sat, 12 Dec 2015 15:49:28 +0600 --
 |----------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------|
+$  papackage_name (0.1-43-g59b4cc1) ; urgency=low
+
+*[Current]
+ * #11 : fix copy files
+ * kucher imgs added
+ * made report pattern
+ * update #10: add rus text and icon msgBox
+ * new report folder
+ * update #10: add icon msgBox
+ * update #10: add list plugins
+ * add plugin thunderbirdwin
+ * update #11: add email maintainer
+ * update #11: fix print email in changelog
+ * update #11: remove tmp data in create_package.sh & remove create_deb.sh
+ * update #4 fix output
+ * update #11 :add file HistoryOfChange, fixed create_package.sh, fixed gen_changelog.sh
+ * #5 Wow, so javascripts, more htmls, such WEB
+ * update #16: added support threadtasks into app (possibly, it is do not works correct)
+ * update #16: added example for creating Tasks, that support QThread.
+ * added 'moc_*' into gitignore
+ * update #16: added IThreadTask interface class
+ * update #11 :add file HistoryOfChange, fixed create_package.sh, fixed gen_changelog.sh
+ * update #10: add icon,rename mainwindow, inability to perform without input and output directory
+ * update #11 :add icon & fix depends package
+ * change outlog clean.sh
+ * fix TaskFirefoxWin build crash
+ * add md5sum calc in script create_package & changelog show difference between last tag and current version
+ * update #4 xml out
+ * Adding a script *.deb package dependencies to run
+ * changed output app info
+ * changed output build.sh info
+ * close #15: fixed segmentation fault
+ * #5 Redesisgn + Add new content + UTF-8 fix
+ * update #10: gui v0.1
+ * update #11: fix maintainer name
+ * update #11: init deb script & changelog script
+ * Update #5: ver prealpha 1.2 created
+ * close #13: fix error \"not positioned on a valid record\"
+ * remove trash files
+ * deleted main.cpp and fixed header
+ * deleted main.cpp and fixed header
+ -- Andrey alaghal@mail.ru Sat, 19 Dec 2015 16:51:30 +0600 --
+|----------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------|
+$  papackage_name (0.1-43-g59b4cc1) ; urgency=low
+
+*[Current]
+ * #11 : fix copy files
+ * kucher imgs added
+ * made report pattern
+ * update #10: add rus text and icon msgBox
+ * new report folder
+ * update #10: add icon msgBox
+ * update #10: add list plugins
+ * add plugin thunderbirdwin
+ * update #11: add email maintainer
+ * update #11: fix print email in changelog
+ * update #11: remove tmp data in create_package.sh & remove create_deb.sh
+ * update #4 fix output
+ * update #11 :add file HistoryOfChange, fixed create_package.sh, fixed gen_changelog.sh
+ * #5 Wow, so javascripts, more htmls, such WEB
+ * update #16: added support threadtasks into app (possibly, it is do not works correct)
+ * update #16: added example for creating Tasks, that support QThread.
+ * added 'moc_*' into gitignore
+ * update #16: added IThreadTask interface class
+ * update #11 :add file HistoryOfChange, fixed create_package.sh, fixed gen_changelog.sh
+ * update #10: add icon,rename mainwindow, inability to perform without input and output directory
+ * update #11 :add icon & fix depends package
+ * change outlog clean.sh
+ * fix TaskFirefoxWin build crash
+ * add md5sum calc in script create_package & changelog show difference between last tag and current version
+ * update #4 xml out
+ * Adding a script *.deb package dependencies to run
+ * changed output app info
+ * changed output build.sh info
+ * close #15: fixed segmentation fault
+ * #5 Redesisgn + Add new content + UTF-8 fix
+ * update #10: gui v0.1
+ * update #11: fix maintainer name
+ * update #11: init deb script & changelog script
+ * Update #5: ver prealpha 1.2 created
+ * close #13: fix error \"not positioned on a valid record\"
+ * remove trash files
+ * deleted main.cpp and fixed header
+ * deleted main.cpp and fixed header
+ -- Andrey alaghal@mail.ru Sun, 20 Dec 2015 01:20:53 +0600 --
+|----------------------------------------------------------------------------------------|
