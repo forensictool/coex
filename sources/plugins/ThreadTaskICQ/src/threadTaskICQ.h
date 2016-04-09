@@ -1,5 +1,5 @@
-#ifndef __TASK_MESSENGERS_H__
-#define __TASK_MESSENGERS_H__
+#ifndef __THREAD_TASK_ICQ_H__
+#define __THREAD_TASK_ICQ_H__
 
 #include "coex.h"
 
@@ -10,23 +10,18 @@
 #include <QDateTime>
 
 
-class TaskMessengers : public coex::IThreadTask
+class ThreadTaskICQ : public coex::IThreadTask
 {
     Q_OBJECT
     Q_INTERFACES(coex::IThreadTask)
 
     public:
-        TaskMessengers();
-        ~TaskMessengers();
+        ThreadTaskICQ();
+        ~ThreadTaskICQ();
         virtual QString help();
         virtual QString name();
         virtual QString author();
         virtual QString description();
-        /*!
-         * \brief isSupportOS
-         * \param os
-         * \return
-         */
 
         bool isSupportOS(const coex::ITypeOperationSystem *os);
         void setOption(QStringList);
@@ -45,4 +40,4 @@ extern "C"
     coex::IThreadTask* createThreadTask();
 }
 
-#endif // __TASK_MESSENGERS_H__
+#endif // __THREAD_TASK_ICQ_H__

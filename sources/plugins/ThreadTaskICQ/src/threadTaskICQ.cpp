@@ -1,4 +1,4 @@
-#include "taskMessengers.h"
+#include "threadTaskICQ.h"
 #include "writerMessages.h"
 #include "XMLReader_ICQContacts.h"
 
@@ -9,54 +9,53 @@
 #include <QXmlStreamWriter>
 #include <QTextStream>
 #include <QDebug>
-//#include <QStringList>
 #include <QDirIterator>
 
-TaskMessengers::TaskMessengers() : m_pbDebug(false)
+ThreadTaskICQ::ThreadTaskICQ() : m_pbDebug(false)
 {
 
 }
 
-TaskMessengers::~TaskMessengers(){}
+ThreadTaskICQ::~ThreadTaskICQ(){}
 
-QString TaskMessengers::help()
+QString ThreadTaskICQ::help()
 {
     return "\t--debug - viewing debug messages";
 }
 
-QString TaskMessengers::name()
+QString ThreadTaskICQ::name()
 {
     return "ICQ";
 }
 
-QString TaskMessengers::author()
+QString ThreadTaskICQ::author()
 {
     return "Marina Meyta";
 }
 
-QString TaskMessengers::description()
+QString ThreadTaskICQ::description()
 {
-    return "messengers task";
+    return "ICQ task for parsing XML-files with ICQ contacts";
 }
 
-bool TaskMessengers::isSupportOS(const coex::ITypeOperationSystem *os)
+bool ThreadTaskICQ::isSupportOS(const coex::ITypeOperationSystem *os)
 {
     return (os->platform() == "Windows");
 }
 
-void TaskMessengers::setOption(QStringList options)
+void ThreadTaskICQ::setOption(QStringList options)
 {
     if(options.contains("--debug"))
         m_pbDebug = true;
 }
 
-void TaskMessengers::init(const coex::IConfig *config)
+void ThreadTaskICQ::init(const coex::IConfig *config)
 {
     m_pConfig = config;
     m_pbDebug = m_pConfig->isDebugEnable();
 }
 
-bool TaskMessengers::execute()
+bool ThreadTaskICQ::execute()
 {
     if(m_pbDebug)
     {
@@ -87,5 +86,5 @@ bool TaskMessengers::execute()
 
 coex::IThreadTask* createThreadTask()
 {
-    return (new TaskMessengers());
+    return (new ThreadTaskICQ());
 }

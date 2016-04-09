@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-TARGET = TaskMessengers
+TARGET = treadTaskICQ
 
 DESTDIR = ../../../bin/plugins
 
@@ -12,10 +12,10 @@ QT -= gui
 
 CONFIG += dll
 
-SOURCES +=  src/taskMessengers.cpp\
+SOURCES +=  src/threadTaskICQ.cpp\
             src/writerMessages.cpp\
             src/XMLReader_ICQContacts.cpp \
 
-HEADERS +=  src/taskMessengers.h\
+HEADERS +=  src/threadTaskICQ.h\
             src/writerMessages.h\
             src/XMLReader_ICQContacts.h \
