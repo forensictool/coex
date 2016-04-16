@@ -16,19 +16,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     about.cpp \
     settings.cpp \
-    messageerror.cpp \
     messagedone.cpp
 
 HEADERS  += mainwindow.h \
     about.h \
     settings.h \
-    messageerror.h \
     messagedone.h
 
 FORMS    += mainwindow.ui \
     about.ui \
     settings.ui \
-    messageerror.ui \
     messagedone.ui
 
 RESOURCES += \

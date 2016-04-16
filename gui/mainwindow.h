@@ -9,7 +9,6 @@
 #include "ui_about.h"
 #include "settings.h"
 #include "ui_settings.h"
-#include "messageerror.h"
 #include "messagedone.h"
 #include <QMessageBox>
 
@@ -40,7 +39,8 @@ public slots:
     void setInputDir(QString in);
 public:
     Ui::MainWindow *ui;
-    QProcess proc;
+    QProcess *proc;
+    QDialog *set;
 
 private:
     QString input_dir;

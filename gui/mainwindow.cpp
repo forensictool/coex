@@ -1,9 +1,8 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow)
 {
+    set = new settings(this);
     ui->setupUi(this);
 }
 
@@ -26,47 +25,50 @@ void MainWindow::on_actionInfo_triggered()
 
 void MainWindow::on_actionSettings_triggered()
 {
-    settings *set = new settings(this);
-    connect(set, SIGNAL(changeOutputValue(QString)), this, SLOT(setOutDir(QString)));
-    connect(set, SIGNAL(changeInputValue(QString)), this, SLOT(setInputDir(QString)));
-    set -> show();
 
+        set -> show();
+        connect(set, SIGNAL(changeOutputValue(QString)), this, SLOT(setOutDir(QString)));
+        connect(set, SIGNAL(changeInputValue(QString)), this, SLOT(setInputDir(QString)));
 }
 
 void MainWindow::on_actionStart_triggered()
 {
+    proc= new QProcess;
     qDebug() << input_dir << output_dir;
     if ((input_dir.length() && output_dir.length()) != 0)
         {
+
                 QStringList args;
                 ui->coextext->clear();
-                proc.setProcessChannelMode(QProcess::MergedChannels);
-                connect (&proc, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ;
-                connect (&proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ;
-                connect (&proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ;
+                proc->setProcessChannelMode(QProcess::MergedChannels);
+                connect (proc, SIGNAL(readyReadStandardOutput()), this, SLOT(rightMessage())) ;
+                connect (proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ;
+                connect (proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ;
                 args<<"-i"<<input_dir<<"-o"<<output_dir;
-                proc.start("./coex.sh",args);
+                proc->start("./test.sh",args);
 
         }
         else
-        {
-        qDebug() << "ololo";
-            messageerror *error = new messageerror(this);
-            error -> show();
-        }
+            {
+                QMessageBox msgBox;
+                msgBox.setText("Для начала работы выберите директории в настройках");
+                msgBox.setWindowTitle("coex");
+                QPixmap exportSuccess(":/prefix1/settings");
+                msgBox.setWindowIcon(exportSuccess);
+                msgBox.exec();
+            }
 }
 
 void MainWindow::rightMessage()
 {
-    QString output(QString::fromLocal8Bit(static_cast<QProcess *>(sender())->readAllStandardOutput()));
-    ui->coextext->append(output);
+    ui->coextext->append(QString(proc->readAll()));
 }
 
 void MainWindow::wrongMessage()
 {
-    QString output(static_cast<QProcess *>(sender())->readAllStandardOutput ());
+
     ui->coextext->setTextColor(Qt::red);
-    ui->coextext->append(output);
+    ui->coextext->append(QString(proc->readAll()));
 
 }
 

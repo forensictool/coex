@@ -48,6 +48,6 @@ void settings::on_save_clicked()
 {
     emit changeInputValue(inputdir);
     emit changeOutputValue(outputdir);
-    close();
+    hide();
 
 }
