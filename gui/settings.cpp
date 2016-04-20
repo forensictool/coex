@@ -38,16 +38,9 @@ void settings::on_output_clicked()
 
 }
 
-void settings::on_exit_clicked()
-{
-    close();
-}
-
-
 void settings::on_save_clicked()
 {
     emit changeInputValue(inputdir);
     emit changeOutputValue(outputdir);
-    hide();
 
 }

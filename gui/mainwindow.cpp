@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow)
 {
     set = new settings(this);
@@ -45,7 +46,7 @@ void MainWindow::on_actionStart_triggered()
                 connect (proc, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage())) ;
                 connect (proc, SIGNAL(finished(int)), this, SLOT(onFinished(int))) ;
                 args<<"-i"<<input_dir<<"-o"<<output_dir;
-                proc->start("./test.sh",args);
+                proc->start("../../bin/coex",args);
 
         }
         else
@@ -61,13 +62,15 @@ void MainWindow::on_actionStart_triggered()
 
 void MainWindow::rightMessage()
 {
-    ui->coextext->append(QString(proc->readAll()));
+    ui->coextext->append(QString(proc->readAll())); 
+    qDebug()<<QString(proc->readAll());
 }
 
 void MainWindow::wrongMessage()
 {
 
     ui->coextext->setTextColor(Qt::red);
+
     ui->coextext->append(QString(proc->readAll()));
 
 }

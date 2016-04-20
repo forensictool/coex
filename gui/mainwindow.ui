@@ -93,12 +93,12 @@ p, li { white-space: pre-wrap; }
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <addaction name="actionStart"/>
    <addaction name="actionSettings"/>
-   <addaction name="actionExit"/>
    <addaction name="actionInfo"/>
+   <addaction name="actionExit"/>
   </widget>
   <action name="actionStart">
    <property name="icon">

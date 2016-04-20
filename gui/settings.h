@@ -22,8 +22,6 @@ public slots:
 
     void on_output_clicked();
 
-    void on_exit_clicked();
-
 public:
     Ui::settings *ui;
     QString inputdir;
