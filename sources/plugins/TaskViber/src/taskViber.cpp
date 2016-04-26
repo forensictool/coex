@@ -98,7 +98,7 @@ void Viber_Thumbnails(QString thumbnails, QString katvib, QString output)
 }
 
 
-void Viber_7_8_10(QString input, QString out, QString output)
+void Viber_XP_7_8_10(QString input, QString out, QString output)
 {
 
     if (!(QDir(output + "/Viber").exists()==true) )
@@ -362,7 +362,7 @@ void Win_7_8_10(QString input, QString out)
                             Avatars = Vibakk[j] + "/Avatars";
                             Thumbnails = Vibakk[j] + "/Thumbnails";
                             FullPath = Vibakk[j] + "/" + "viber.db";
-                            Viber_7_8_10(FullPath, KatalogiViber[j], out);
+                            Viber_XP_7_8_10(FullPath, KatalogiViber[j], out);
                             Viber_Avatars(Avatars, KatalogiViber[j], out);
                             Viber_Thumbnails(Thumbnails, KatalogiViber[j], out);
                         }
@@ -377,7 +377,73 @@ void Win_7_8_10(QString input, QString out)
 
 void WinXP(QString input, QString out)
 {
-    /*Написать для Windows XP*/
+    int per, i, schetchik, k, m, j;
+    QString FullPath, buff, Avatars, Thumbnails;
+
+    QDir dirU(input + "/Documents and Settings");
+    dirU.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
+    dirU.setSorting(QDir::Name);
+    QFileInfoList Uslist = dirU.entryInfoList();
+    QString Users[Uslist.size()];
+    for (per = 0; per < Uslist.size(); per++)
+    {
+        QFileInfo fileInfo = Uslist.at(per);
+        Users[per] = input + "/Documents and Settings/" + fileInfo.fileName();
+    }
+
+    for (i = 0; i < Uslist.size(); i++)
+    {
+        if ((Users[i] != input + "/Documents and Settings/All Users") && (Users[i] != input + "/Documents and Settings/Default User") && (Users[i] != input + "/Documents and Settings/Public") && (Users[i] != input + "/Documents and Settings/Все пользователи"))
+        {
+            QDir dirUAR(Users[i] + "/Application Data");
+            dirUAR.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
+            dirUAR.setSorting(QDir::Name);
+            QFileInfoList Brlist = dirUAR.entryInfoList();
+            QString buffRoaming[Brlist.size()];
+            schetchik = 0;
+            for (per = 0; per < Brlist.size(); per++)
+            {
+                QFileInfo fileInfo = Brlist.at(per);
+                buffRoaming[per] = Users[i] + "/Application Data/" + fileInfo.fileName();
+                schetchik++;
+            }
+
+            for (k = 0; k < schetchik; k++)
+            {
+                if (buffRoaming[k] == Users[i] + "/Application Data/ViberPC")
+                {
+
+                    QDir dirVib(buffRoaming[k]);
+                    dirVib.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden );
+                    dirVib.setSorting(QDir::Name);
+                    QFileInfoList Viblist = dirVib.entryInfoList();
+                    QString Vibakk[Viblist.size()];
+                    QString KatalogiViber[Viblist.size()];
+                    for (m = 0; m < Viblist.size(); m++)
+                    {
+                        QFileInfo fileInfo = Viblist.at(m);
+                        Vibakk[m] = buffRoaming[k] + "/" + fileInfo.fileName();
+                        KatalogiViber[m] = fileInfo.fileName();
+                    }
+
+                    for (j = 0; j < m; j++)
+                    {
+                        buff = "";
+                        buff = KatalogiViber[j];
+                        if ((buff[0] == '7') &&(buff[1] == '9'))
+                        {
+                            Avatars = Vibakk[j] + "/Avatars";
+                            Thumbnails = Vibakk[j] + "/Thumbnails";
+                            FullPath = Vibakk[j] + "/" + "viber.db";
+                            Viber_XP_7_8_10(FullPath, KatalogiViber[j], out);
+                            Viber_Avatars(Avatars, KatalogiViber[j], out);
+                            Viber_Thumbnails(Thumbnails, KatalogiViber[j], out);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
