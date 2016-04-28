@@ -1,10 +1,17 @@
 #include "mainwindow.h"
+#include <QSettings>
+#include <QCloseEvent>
+
 
 
 MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow)
 {
     set = new settings(this);
     ui->setupUi(this);
+
+    QSettings settings;
+    restoreGeometry(settings.value("WindowGeometry", geometry()).toByteArray());
+    restoreState(settings.value("WindowState").toByteArray());
 }
 
 MainWindow::~MainWindow()
@@ -15,6 +22,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionExit_triggered()
 {
     close();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QSettings settings;
+    settings.setValue("WindowGeometry", saveGeometry());
+    settings.setValue("WindowState", saveState());
+    QMainWindow::closeEvent(event);
 }
 
 void MainWindow::on_actionInfo_triggered()
@@ -35,7 +50,6 @@ void MainWindow::on_actionSettings_triggered()
 void MainWindow::on_actionStart_triggered()
 {
     proc= new QProcess;
-    qDebug() << input_dir << output_dir;
     if ((input_dir.length() && output_dir.length()) != 0)
         {
 
@@ -62,15 +76,13 @@ void MainWindow::on_actionStart_triggered()
 
 void MainWindow::rightMessage()
 {
-    ui->coextext->append(QString(proc->readAll())); 
-    qDebug()<<QString(proc->readAll());
+    ui->coextext->append(QString(proc->readAll()));
 }
 
 void MainWindow::wrongMessage()
 {
 
     ui->coextext->setTextColor(Qt::red);
-
     ui->coextext->append(QString(proc->readAll()));
 
 }
@@ -81,8 +93,6 @@ void MainWindow::onFinished(int /*result*/)
     done->show();
 
 }
-
-
 
 void MainWindow::setInputDir(QString in)
 {

@@ -180,7 +180,7 @@
         <item row="3" column="0">
          <widget class="QCheckBox" name="searchprogramm">
           <property name="text">
-           <string>Programm</string>
+           <string>Program</string>
           </property>
          </widget>
         </item>

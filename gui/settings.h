@@ -17,20 +17,21 @@ public:
     explicit settings(QWidget *parent = 0);
     ~settings();
 
-public slots:
+private slots:
     void on_input_clicked();
-
     void on_output_clicked();
+    void on_save_clicked();
 
-public:
+
+private:
     Ui::settings *ui;
     QString inputdir;
     QString outputdir;
+    //QString SettingsFile;
+    void readsettings();
 signals:
     void changeInputValue(QString var);
     void changeOutputValue(QString var);
-private slots:
-    void on_save_clicked();
 };
 
 #endif // SETTINGS_H
