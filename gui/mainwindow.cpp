@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     ui->setupUi(this);
 
     QSettings settings;
+    input_dir = settings.value("inputdir:", "").toString();
+    output_dir = settings.value("outputdir:", "").toString();
     restoreGeometry(settings.value("WindowGeometry", geometry()).toByteArray());
     restoreState(settings.value("WindowState").toByteArray());
 }

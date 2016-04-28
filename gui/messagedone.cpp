@@ -1,5 +1,7 @@
 #include "messagedone.h"
 #include "ui_messagedone.h"
+#include "settings.h"
+#include <QDesktopServices>
 
 messagedone::messagedone(QWidget *parent) :
     QDialog(parent),
@@ -16,4 +18,11 @@ messagedone::~messagedone()
 void messagedone::on_donebutton_clicked()
 {
     close();
+}
+
+void messagedone::on_pushButton_clicked()
+{
+    QSettings settings;
+    QString outText = settings.value("outputdir:", "").toString();
+    QDesktopServices::openUrl(QUrl(outText, QUrl::TolerantMode));
 }

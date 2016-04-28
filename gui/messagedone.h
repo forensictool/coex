@@ -17,6 +17,7 @@ public:
 
 private slots:
     void on_donebutton_clicked();
+    void on_pushButton_clicked();
 
 private:
     Ui::messagedone *ui;

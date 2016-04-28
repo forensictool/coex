@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/prefix1">
-        <file alias="file">blank-file-xxl.png</file>
-        <file alias="run">start_512.png</file>
-        <file alias="exit">exit-512.png</file>
-        <file alias="settings">settings-512.png</file>
-        <file alias="info">info-512.png</file>
+        <file alias="file">file.png</file>
+        <file alias="run">start.png</file>
+        <file alias="exit">exit.png</file>
+        <file alias="settings">settings.png</file>
+        <file alias="info">info.png</file>
         <file alias="coex">coex.png</file>
         <file alias="done">success.png</file>
     </qresource>
