@@ -7,6 +7,8 @@
 
 #include <QObject>
 
+class Hdd;
+
 namespace coex
 {
 	class ITypeOperationSystem {
@@ -42,6 +44,8 @@ namespace coex
 
 			virtual bool getArgumentsValues(int, char**, QString) = 0;
 			virtual bool isDebugEnable() const = 0;
+
+            Hdd *parsedHdd;
 	};
 	
 	/* interface for

@@ -2,6 +2,7 @@
 #define __CONFIG_H__
 
 #include "coex.h"
+#include "hdd.h"
 #include <QString>
 #include <QMap>
 #include <iostream>
@@ -24,6 +25,8 @@ class Config : coex::IConfig {
 		//parse Arguments
 		virtual bool getArgumentsValues(int, char **, QString);
 		virtual bool isDebugEnable() const ;
+
+        Hdd *parsedHdd;
 
 	private:
 		coex::ITypeOperationSystem* m_pTypeOS;

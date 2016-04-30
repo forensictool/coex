@@ -2,7 +2,7 @@
 #include "hdd.h"
 
 TaskParseHDD::TaskParseHDD() {
-	m_bDebug = false;
+    m_bDebug = false;
 };
 
 QString TaskParseHDD::help() {
@@ -40,21 +40,11 @@ bool TaskParseHDD::execute(const coex::IConfig *config) {
         std::cout << "InputFolder: " << config->inputFolder().toStdString() << "\n";
     };
 
-    QDirIterator dirPath(config->inputFolder(), QDir::Files |QDir::Dirs| QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
-    QList<QDir> dirlist;
-    dirlist.append(QDir(config->inputFolder()));
-
-    while (dirPath.hasNext())
-    {
-        dirlist.append(QDir(dirPath.next()));
+    QString wildcard = "*.jpg";
+    QFileInfoList outputlist = config->storedHdd.getFiles(wildcard);
+    foreach(QFileInfo file, outputlist){
+        qDebug() << file.absoluteFilePath();
     }
-
-//    Hdd storedhdd(dirlist);
-//    QString wildcard = "*.jpg";
-//    QFileInfoList outputlist = storedhdd.getFiles(wildcard);
-//    foreach(QFileInfo file, outputlist){
-//        qDebug() << file.absoluteFilePath();
-//    }
 
 	return true;
 };

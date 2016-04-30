@@ -5,14 +5,15 @@
 #include <QFileInfo>
 #include <QStringList>
 #include <QDir>
+#include <QDirIterator>
 
 class Hdd
 {
     private:
-        QList<QDir> *infoList;
+        QList<QDir> infoList;
 
     public:
-        Hdd(QList<QDir> *list);
+        Hdd(QString path);
         ~Hdd();
         QFileInfoList getFiles(QStringList wildcardlist);
         QFileInfoList getFiles(QString wildcard);

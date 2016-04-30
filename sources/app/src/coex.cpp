@@ -2,6 +2,7 @@
 #include "coex.h"
 #include "helpers.h"
 #include "config.h"
+#include "hdd.h"
 
 #include <unistd.h>
 #include <QCoreApplication>
@@ -128,6 +129,13 @@ int main(int argc, char* argv[])
 		return -3;
 	}
     std::cout << " --> Detected OS: '" << config->typeOS()->toString().toStdString() << "'\n";
+
+    // scan hdd
+    std::cout << " > Running hdd parser\n";
+    Hdd parsedHdd(config->inputFolder());
+    //config->parsedHdd = new Hdd(config->inputFolder());
+
+    std::cout << "Parsing is done\n";
 
     // run threads
     foreach (coex::IThreadTask* thread, threads)
