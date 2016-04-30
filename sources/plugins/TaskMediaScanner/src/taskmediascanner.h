@@ -2,12 +2,12 @@
 #define __TASK_MEDIA_H__
 
 #include "coex.h"
+#include "hdd.h"
 
 #include <QCryptographicHash>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
-#include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
 #include <QString>
@@ -29,7 +29,7 @@ class TaskMediaScanner : coex::ITask
         void readId3(QFile &file, QXmlStreamWriter &xmlWriter);
         void readJfif(QFile &file, QXmlStreamWriter &xmlWriter);
         void readRiff(QFile &file, QXmlStreamWriter &xmlWriter);
-        void scanMedia(QString medianame, QXmlStreamWriter *xmlWriter);
+        void scanMedia(QFileInfo medianame, QXmlStreamWriter *xmlWriter);
         void writeField(QXmlStreamWriter &xmlWriter,QString sName,QString sValue);
         void writeMedia(QString path,QXmlStreamWriter &xmlWriter,int mode,QString id,QString datecreate,QString datemodify,QString type,bool meta);
 	private:

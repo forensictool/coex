@@ -36,6 +36,12 @@ void TaskMediaScanner::setOption(QStringList options)
         m_bDebug = true;
 };
 
+const QStringList extensions = (QStringList() << "*.png" << "*.jpg" << "*.tiff" << "*.gif" << "*.bmp" << "*.jpeg" << "*.tif"
+                          << "*.mp4" << "*.mkv" << "*.avi" << "*.wmv" << "*.wma" << "*.mp3" << "*.flac" << "*.ape"
+                          << "*.mov" << "*.wav" << "*.wave");
+const QStringList videoexts = (QStringList() << "mp4" << "mkv" << "avi" << "wmv" << "mov");
+const QStringList imageexts = (QStringList() << "png" << "jpg" << "tiff" << "gif" << "bmp" << "jpeg" << "tif");
+const QStringList musicexts = (QStringList() << "wma" << "mp3" << "flac" << "ape" << "wav" << "wave");
 
 void TaskMediaScanner::readId3(QFile &file, QXmlStreamWriter &xmlWriter)
 {
@@ -173,20 +179,16 @@ void TaskMediaScanner::readRiff(QFile &file, QXmlStreamWriter &xmlWriter)
     xmlWriter.writeEndElement();
 }
 
-void TaskMediaScanner::scanMedia(QString medianame, QXmlStreamWriter *xmlWriter)
+void TaskMediaScanner::scanMedia(QFileInfo fileInfo, QXmlStreamWriter *xmlWriter)
 {
-    QStringList videoexts = (QStringList() << "mp4" << "mkv" << "avi" << "wmv" << "mov");
-    QStringList imageexts = (QStringList() << "png" << "jpg" << "tiff" << "gif" << "bmp" << "jpeg" << "tif");
-    QStringList musicexts = (QStringList() << "wma" << "mp3" << "flac" << "ape" << "wav" << "wave");
-    QFile file(medianame);
-    QFileInfo fileinfo(medianame);
+    QFile file(fileInfo.absoluteFilePath());
     QByteArray md5;
     QString id, path, datecreate, datemodify, ext, type;
     bool meta = 0;
-    path = fileinfo.canonicalFilePath();
-    datecreate = fileinfo.created().toString();
-    datemodify = fileinfo.lastModified().toString();
-    ext = fileinfo.suffix();
+    path = fileInfo.absoluteFilePath();
+    datecreate = fileInfo.created().toString();
+    datemodify = fileInfo.lastModified().toString();
+    ext = fileInfo.suffix();
     if (videoexts.contains(ext))
         type = "video";
     else if (imageexts.contains(ext))
@@ -254,12 +256,6 @@ void TaskMediaScanner::writeMedia(QString path, QXmlStreamWriter &xmlWriter, int
         xmlWriter.writeEndElement();
         xmlWriter.writeEndDocument();
     }
-    /*default
-    {
-        qDebug() << "something going wrong\n";
-        xmlWriter.writeEndElement();
-        xmlWriter.writeEndDocument();
-    }*/
 }
 
 
@@ -270,26 +266,19 @@ bool TaskMediaScanner::execute(const coex::IConfig *config)
         qDebug() << "Debug mode ON\n";
         qDebug() << "InputFolder: " << config->inputFolder() << "\n";
     };
-    QDir inputDir(config->inputFolder());
     QDir outputDir(config->outputFolder());
     outputDir.mkdir("media");
-    QStringList extensions = (QStringList() << "*.png" << "*.jpg" << "*.tiff" << "*.gif" << "*.bmp" << "*.jpeg" << "*.tif"
-                              << "*.mp4" << "*.mkv" << "*.avi" << "*.wmv" << "*.wma" << "*.mp3" << "*.flac" << "*.ape"
-                              << "*.mov" << "*.wav" << "*.wave");
     QFile xmlfile(outputDir.absolutePath() + "/media/media.xml");
     xmlfile.open(QFile::WriteOnly);
     QXmlStreamWriter xmlWriter(&xmlfile);
     writeMedia(NULL, xmlWriter, 1, NULL, NULL, NULL, NULL, NULL);
-    QDirIterator fileListDirit(inputDir.absolutePath(), extensions, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
-    while (fileListDirit.hasNext())
+    QFileInfoList files = config->parsedHdd->getFiles(extensions);
+    foreach (QFileInfo fileInfo, files)
     {
-        QString str = QString("%1").arg(fileListDirit.next());
-        QFileInfo fInfo(str);
-        QFile file(fInfo.absoluteFilePath());
-        if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            scanMedia(str, &xmlWriter);
+        scanMedia(fileInfo, &xmlWriter);
     }
     writeMedia(NULL, xmlWriter, 3, NULL, NULL, NULL, NULL, NULL);
+    xmlfile.close();
     return true;
 }
 

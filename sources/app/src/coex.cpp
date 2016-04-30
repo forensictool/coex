@@ -132,10 +132,9 @@ int main(int argc, char* argv[])
 
     // scan hdd
     std::cout << " > Running hdd parser\n";
-    Hdd parsedHdd(config->inputFolder());
-    //config->parsedHdd = new Hdd(config->inputFolder());
+    config->parsedHdd = new Hdd(config->inputFolder());
 
-    std::cout << "Parsing is done\n";
+    std::cout << " > Parsing is done\n";
 
     // run threads
     foreach (coex::IThreadTask* thread, threads)
