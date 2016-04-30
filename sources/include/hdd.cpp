@@ -3,11 +3,11 @@
 Hdd::Hdd(QString path){
     QDirIterator dirPath(path, QDir::Files |QDir::Dirs| QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
     QList<QDir> dirlist;
-    dirlist->append(QDir(path));
+    dirlist.append(QDir(path));
 
     while (dirPath.hasNext())
     {
-        dirlist->append(QDir(dirPath.next()));
+        dirlist.append(QDir(dirPath.next()));
     }
 
     this->infoList = dirlist;
