@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: report.aux
+The style file: utf8gost705u.bst
+Database file #1: lit.bib
+Warning--empty journal in qtdoc
+Warning--empty journal in qtcross
+Warning--empty journal in gitlab
+Warning--empty journal in xml
+You've used 8 entries,
+            2964 wiz_defined-function locations,
+            703 strings with 6271 characters,
+and the built_in function-call counts, 1623 in all, are:
+= -- 202
+> -- 24
+< -- 4
++ -- 12
+- -- 4
+* -- 49
+:= -- 183
+add.period$ -- 24
+call.type$ -- 8
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 92
+empty$ -- 209
+format.name$ -- 4
+if$ -- 440
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 0
+newline$ -- 49
+num.names$ -- 12
+pop$ -- 69
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 43
+stack$ -- 0
+substring$ -- 6
+swap$ -- 36
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 4
+while$ -- 5
+width$ -- 9
+write$ -- 114
+(There were 4 warnings)
