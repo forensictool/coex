@@ -13,7 +13,7 @@ SOURCES += src/coex.cpp \
 
 HEADERS += src/helpers.h \
 		   src/config.h \
-		../include/hdd.h		
+		../include/hdd.h
 
 OBJECTS_DIR = tmp/
 

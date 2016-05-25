@@ -1,16 +1,39 @@
 #include "hdd.h"
+#include <QDebug>
 
 Hdd::Hdd(QString path){
-    QDirIterator dirPath(path, QDir::Files |QDir::Dirs| QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
-    QList<QDir> dirlist;
-    dirlist.append(QDir(path));
+    QDirIterator dirPath(path, QDir::Dirs | QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
+    QList<QDir> dirList;
 
     while (dirPath.hasNext())
     {
-        dirlist.append(QDir(dirPath.next()));
+        QDir directory(dirPath.next());
+        if (!dirList.contains(directory))
+        {
+            dirList.append(directory);
+        }
     }
 
-    this->infoList = dirlist;
+    this->infoList = dirList;
+
+    //debug
+    /*
+    QFile file("/home/ventar/test/test.txt");
+    QStringList wildcard = (QStringList() << "*.jpg");
+    if (file.open(QIODevice::WriteOnly))
+    {
+        foreach(QDir directory, this->infoList)
+        {
+            QTextStream stream(&file);
+            stream << directory.absolutePath() << endl;
+            QFileInfoList list = directory.entryInfoList(QDir::Files | QDir::NoSymLinks | QDir::Hidden);
+            foreach (QFileInfo fileInfo, list)
+            {
+                stream << fileInfo.absoluteFilePath() << endl;
+            }
+        }
+    }
+    */
 }
 
 Hdd::~Hdd(){

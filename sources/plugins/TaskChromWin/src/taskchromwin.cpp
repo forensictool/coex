@@ -52,12 +52,12 @@ void TaskChromWin::setOption(QStringList options)
 };
 
 /*!
-Вычитывает json файл prefrences Chrome с данными. Преобразует к нужному формату.
+Вычитывает json файл Preferences Chrome с данными. Преобразует к нужному формату.
 \param[out] output Папка в которой лежат собранные данные
 \param[in] input Путь к обрабатываемому файлу
 */
 
-void TaskChromWin::prefrences(QString input, QString output)
+void TaskChromWin::preferences(QString input, QString output)
 {
     QFile findPref(input);
     QDateTime setTime = QDateTime::fromString (QString("1970-01-01T00:00:00"), Qt::ISODate);
@@ -255,47 +255,35 @@ void TaskChromWin::extension(QString input, QString output)
     QDateTime current = QDateTime::currentDateTime();
     uint msecs = setTime.time().msecsTo(current.time());
 
-    QDirIterator iterator (input, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    //QDirIterator iterator (input, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
     QRegExp rx("\"(.*)\".*\"(.*)\"");
     writerXML bookm(output + "/chrome/extensions_"+QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss")+(QString::number(msecs))+".xml");
-
 
     QFileInfo f1(input);
     QString owner=f1.owner();
 
-
-    while(iterator.hasNext())
+    QString str=f1.absoluteFilePath();
+    QFile findext(str);
+    if ((findext.open(QIODevice::ReadOnly)))
     {
-        iterator.next();
-        QFileInfo f = iterator.fileInfo();
-        if ((f.fileName())=="manifest.json")
+        QTextStream stream1(&findext);
+        QString name;
+        while (!stream1.atEnd())
         {
-            QString str=iterator.fileInfo().absoluteFilePath();
-            QFile findext(str);
-            if ((findext.open(QIODevice::ReadOnly)))
+            str = stream1.readLine();
+            if ((str.contains("\"name\":", Qt::CaseInsensitive)))
             {
-                QTextStream stream1(&findext);
-                QString name;
-                while (!stream1.atEnd())
+                int pos = 0;
+                while ((pos = rx.indexIn(str, pos)) != -1)
                 {
-                    str = stream1.readLine();
-                    if ((str.contains("\"name\":", Qt::CaseInsensitive)))
-                    {
-                        int pos = 0;
-                        while ((pos = rx.indexIn(str, pos)) != -1)
-                        {
-                            name = rx.cap(2);
-                            pos += rx.matchedLength();
-                            bookm.writeExt(name,owner);
-                        }
-                    }
+                    name = rx.cap(2);
+                    pos += rx.matchedLength();
+                    bookm.writeExt(name,owner);
                 }
             }
-            findext.close();
         }
-
     }
-
+    findext.close();
 }
 
 /*!
@@ -345,40 +333,42 @@ bool TaskChromWin::execute(const coex::IConfig *config)
     QDir dir(config->outputFolder());
     dir.mkdir("chrome");
 
-    QRegExp chromePrefPath(".*Preferences$");
-    QRegExp chromeBookPath(".*Bookmarks$");
-    QRegExp chromeHistoryPath(".*History$");
-    QRegExp chromeExtPath(".*Extensions$");
+    QString chromePrefPath("Preferences");
+    QString chromeBookPath("Bookmarks");
+    QString chromeHistoryPath("History");
+    QString chromeExtPath("manifest.json");
     QRegExp chromeLoginPath(".*LoginData$");
 
-    TaskChromWin pref,book,hist,ext,log;
-    QDirIterator dirPath(config->inputFolder(), QDir::Files |QDir::Dirs| QDir::NoSymLinks | QDir::Hidden, QDirIterator::Subdirectories);
+    QFileInfoList bookmarksList = config->parsedHdd->getFiles(chromeBookPath);
+    foreach (QFileInfo book, bookmarksList)
+    {
+        bookmarks(book.absoluteFilePath(), config->outputFolder());
+    }
+    QFileInfoList preferencesList = config->parsedHdd->getFiles(chromePrefPath);
+    foreach (QFileInfo pref, preferencesList)
+    {
+        preferences(pref.absoluteFilePath(), config->outputFolder());
+    }
+    QFileInfoList historyList = config->parsedHdd->getFiles(chromeHistoryPath);
+    foreach (QFileInfo hist, historyList)
+    {
+        history(hist.absoluteFilePath(), config->outputFolder());
+    }
+    QFileInfoList extensionList = config->parsedHdd->getFiles(chromeExtPath);
+    foreach (QFileInfo ext, extensionList)
+    {
+        extension(ext.absoluteFilePath(), config->outputFolder());
+    }
+    /*QDirIterator dirPath(config->inputFolder(), QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+
     while (dirPath.hasNext())
     {
-        if (m_bDebug)qDebug() << dirPath.filePath();
-
-        if (dirPath.filePath().contains(chromePrefPath))
+        if (dirPath.filePath().contains(chromeLoginPath))
         {
-            pref.prefrences(dirPath.filePath(), config->outputFolder());
-        }
-        else if (dirPath.filePath().contains(chromeBookPath))
-        {
-            book.bookmarks(dirPath.filePath(), config->outputFolder());
-        }
-        else if (dirPath.filePath().contains(chromeHistoryPath))
-        {
-            hist.history(dirPath.filePath(), config->outputFolder());
-        }
-        else if (dirPath.filePath().contains(chromeExtPath))
-        {
-            ext.extension(dirPath.filePath(), config->outputFolder());
-        }
-        else if (dirPath.filePath().contains(chromeLoginPath))
-        {
-            log.login(dirPath.filePath(), config->outputFolder());
+            login(dirPath.filePath(), config->outputFolder());
         }
         dirPath.next();
-    }
+    }*/
 
 
     return true;

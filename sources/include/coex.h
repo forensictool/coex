@@ -4,10 +4,9 @@
 #include <QString>
 #include <QVector>
 #include <iostream>
+#include "hdd.h"
 
 #include <QObject>
-
-class Hdd;
 
 namespace coex
 {

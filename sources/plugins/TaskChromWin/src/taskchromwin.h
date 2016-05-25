@@ -2,6 +2,7 @@
 #define __PIDGIN_WIN_TASK_H__
 
 #include "coex.h"
+#include "hdd.h"
 
 #include <QCryptographicHash>
 #include <QDateTime>
@@ -31,7 +32,7 @@ class TaskChromWin : coex::ITask
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
-        void prefrences(QString input, QString output);
+        void preferences(QString input, QString output);
         void bookmarks(QString input, QString output);
         void history(QString input, QString output);
         void extension(QString input, QString output);

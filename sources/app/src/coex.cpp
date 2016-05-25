@@ -2,7 +2,6 @@
 #include "coex.h"
 #include "helpers.h"
 #include "config.h"
-#include "hdd.h"
 
 #include <unistd.h>
 #include <QCoreApplication>
