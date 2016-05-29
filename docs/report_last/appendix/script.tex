@@ -1,0 +1,43 @@
+\ESKDappendix{}{\normalfont Disk usage logging script}\label{apx:diskusage}
+\begin{lstlisting}
+import os
+import sys
+from threading import Thread
+
+class IotopThread(Thread):
+    def __init__(self):
+        Thread.__init__(self, target=self.main)
+        self.daemon = True
+        self.time = 300
+    def main(self):
+        print "Starting 'iotop'"
+        os.system("iotop -botqqqk --iter={0} 
+          >> /var/log/iotop".format(self.time))
+        
+        sys.exit()
+        
+class TestPlugin(Thread):
+    def __init__(self):
+        Thread.__init__(self, target=self.main)
+        self.daemon = True
+    def main(self):
+        print "Starting 'testplugin.sh'"
+        os.system("/home/ventar/coex/test.sh")
+        
+        sys.exit()
+        
+io_thread = IotopThread()
+plugin_thread = TestPlugin()
+io_thread.start()
+plugin_thread.start()
+while (io_thread.isAlive() or plugin_thread.isAlive()):
+    pass
+with open("/var/log/iotop", "r") as infile:
+    file = infile.read()
+lines = file.split("\n")
+lines = [x for x in lines if "coex" in x]
+with open ("/home/ventar/result.txt", "w") as outfile:
+    for line in lines:
+        print line
+        outfile.write(line + "\n")
+\end{lstlisting}

@@ -10,19 +10,23 @@
  
  \textbf{ПРАВИТЬ!!!}
 
+
+ 
+Кучер М.В. -- программист, ответственный за разработку программного модуля для извлечения информации о пользовательских аккаунтах в мессенджере Viber.
+
+Мейта М.В. -- программист, документатор, ответственный за доработку архитектуры проекта, а также верстку необходимой документации в системе \LaTeX.
+
+Терещенко Ю.А. -- программист, ответственный за написание программного модуля для сбора сохраненных логинов и паролей браузера Mozilla Firefox.
+
+Шиповской В.В. -- программист, ответственный за дозработку графического интерфейса пользователя системы <<COEX>> и анализ данных, хранимых в NoSql БД Apache Solr.
+
+%-----------------------------------------------------------------------------------------------------------------------%
+
 Боков И.М. -- программист, ответственный за написание части системы для для нахождения медиа-файлов (аудио, видео, изображение) и извлечения мета-данных из них.
- 
-Кучер М.В. -- программист, ответственный за доработку программного модуля для определения операционной системы и создание репозитория проекта.
- 
+
 Лобанов О.В. -- программист, ответственный за разработку сайта проекта. 
 
-Мейта М.В. -- программист, документатор, ответственный за ... верстку необходимой документации в системе \LaTeX.
-
 Серяков А.В. -- программист, ответственный за написание части системы для сбора информации из почтового клиента MS Outlook и создание программного пакета с исходными файлами системы <<COEX>>.
-
-Терещенко Ю.А. -- программист, ответственный за написание части системы для сбора информации из систем мгновенного обмена сообщениями.
-
-Шиповской В.В. -- программист, ответственный за разработку графического интерфейса пользователя системы <<COEX>> и доработку программного модуля для нахождения медиа-файлов.
 
 
 
@@ -52,47 +56,51 @@
 \input{technical_things/git}
 \subsection{Система компьютерной вёрстки \TeX}
 \input{technical_things/tex}
+\subsection{Язык разметки Markdown}
+\input{technical_things/markdown}\label{sec:markdown}
 \subsection{Qt - кроссплатформенный инструментарий разработки ПО}
 \input{technical_things/qt_doc}
-\subsection{GitLab}
-\input{technical_things/gitlab}
+\subsection{GitHub}
+\input{technical_things/github}
 
 \section{Технические характеристики}
 \input{technical_things/technical_attributes}
 \subsection{Выбор единого формата выходных файлов}
 \input{technical_things/xml}
 
+\clearpage
 \section{Разработка программного обеспечения}
 \setcounter{figure}{0}
  
-% \subsection{Архитектура}
-% \input{technical_things/architech}
+\subsection{Архитектура}
+\input{technical_things/architech}
 
  % --------Отчет Макса---------------%
-% \newpage
-% \subsection{Плагин SearchProgram}
-% \input{individual_reports/kucher}
+\newpage
+\subsection{Плагин TaskViber}
+\input{individual_reports/kucher}
 
  % ---------Отчет Юры----------------%
-% \newpage
-% \subsection{ Доработка программного модуля TaskFirefoxWin }
-% \input{individual_reports/teresh}
+\newpage
+\subsection{ Сбор сохраненных логинов и паролей браузера Mozilla Firefox }
+\input{individual_reports/teresh}
+
 
  % ---------Отчет Влада--------------%
-% \newpage
-% \subsection{ Написание графического интерфейса пользователя для системы <<COEX>> }
-% \input{individual_reports/shipovskoy_1}
-% \newpage
-% \subsection{ Доработка программного модуля Media Scanner }
-% \input{individual_reports/shipovskoy_2}
+\newpage
+\subsection{ Графический интерфейс пользователя системы <<COEX>> }
+\input{individual_reports/ship_1}
+\newpage
+\subsection{ Анализ данных с помощью Apache Solr }
+\input{individual_reports/ship_2}
  
  % ---------Отчет Андрея--------------%
-% \newpage
+\newpage
 % \subsection{ Cбор информации из почтового клиента MS Outlook }
 % \input{individual_reports/seryakov_1}
 % \newpage
-% \subsection { Создание <<бинарного>> пакета DEB из исходных файлов программного комплекса <<COEX>> } 
-% \input{individual_reports/seryakov_2}
+\subsection {Создание <<бинарного>> пакета DEB из исходных файлов программного комплекса <<COEX>>} 
+\input{individual_reports/seryakov}
 
 %  % ---------Отчет Олега---------------%
 % \newpage 
@@ -100,9 +108,9 @@
 % \input{individual_reports/lobanov}
 
  % ---------Отчет Ильи---------------%
-% \newpage
+\newpage
 % \subsection{ Модульное тестирование } 
-% \input{individual_reports/bokov}
+\input{individual_reports/bokov}
 
  % ---------Отчет Марины--------------%
 \newpage
@@ -127,5 +135,11 @@
  \item актуальную версию программного комплекса для проведения компьютерной экспертизы;
  \item тестовые данные для работы с программным комплексом.
  \end{itemize}
+ 
+ \include{appendix/mdtohtml}
+ 
+ \include{appendix/Hdd}
+  
+ \include{appendix/script}
  
 \end{document}
