@@ -1,9 +1,0 @@
-<add>
-	<doc>
-		<!-- Comment: id must be generated as keyword_search_terms_MD5(keyword_term+application) -->
-    <field name="id">keyword_search_terms_a5d19f2508befd0a2325cbaacdd0f72a</field>
-    <field name="application">Chrome</field>
-    <field name="doc_type">keyword_search_terms</field>
-    <field name="keyword_term">google</field>
-  </doc>
-</add>
