@@ -35,16 +35,6 @@
 \item bool m\_bDebug - флаг для параметра --debug;
 \end{enumerate}
 
-На данный момент в проекте используется восемь классов. UML-диаграмма классов представлена на рисунке \ref{UML:UML}.
-
-\begin{figure}[h!]
-\center{\includegraphics[width=0.9\linewidth]{UML}}
-\caption{UML-диаграмма классов}
-\label{UML:UML}
-\end{figure}
-
-Классы taskSearchSyslogsWin, taskSearchPidginWin и taskSearchSkypeWin - наследники от класса task являются тасками. Класс winEventLog и \_EVENTLOGRECORD предназначины для конвертации журнальных файлов операционной системы Windows XP, а класс writerMessages для преобразования истории переписки.
-
 \subsubsection{Описание основных функций модуля системы}
 
 Любой модуль системы является классом-наследником от некоторого абстрактного класса используемого как основу для всех модулей программы (шаблон проектирования Factory method). Модуль содержит в себе 8 методов и 3 атрибута:
