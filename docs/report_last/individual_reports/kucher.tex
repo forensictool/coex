@@ -9,9 +9,9 @@
 \label{kucher_1:kucher_1}
 \end{figure}
 
-\subsubsection{Описание содержимого папки «ViberPC»}
+\subsubsection{Описание содержимого папки <<ViberPC>>}
 
-При изучении содержимого папки «ViberPC» было обнаружено, что интересующая информация содержится в папках, название которых – номер телефона (рис.~\ref{kucher_2:kucher_2}).
+При изучении содержимого папки <<ViberPC>> было обнаружено, что интересующая информация содержится в папках, название которых – номер телефона (рис.~\ref{kucher_2:kucher_2}).
 	
 
 \begin{figure}[h!]
@@ -21,15 +21,15 @@
 \end{figure} 
 
 \begin{itemize}
-  \item Папка «Avatars» – содержит изображения пользователей;
-  \item Папка «Thumbnails» – содержит все изображения, которые были отправлены и получены в ходе переписки;
-	«viber.db» – база данных (далее БД), в которой хранится информация о контактах, переписках, звонках.
-	БД «viber.db» – имеет формат SQLite format 3 (рис.~\ref{kucher_3:kucher_3}).
+  \item Папка <<Avatars>> – содержит изображения пользователей;
+  \item Папка <<Thumbnails>> – содержит все изображения, которые были отправлены и получены в ходе переписки;
+	<<viber.db>> – база данных (далее БД), в которой хранится информация о контактах, переписках, звонках.
+	БД <<viber.db>> – имеет формат SQLite format 3 (рис.~\ref{kucher_3:kucher_3}).
 \end{itemize}
  
 \begin{figure}[h!]
 \center{\includegraphics[width=0.3\linewidth]{kucher_3}}
-\caption{ Содержимое БД «viber.db» }
+\caption{ Содержимое БД <<viber.db>> }
 \label{kucher_3:kucher_3}
 \end{figure} 
 
@@ -45,19 +45,23 @@
 \textit{Select Contact.FirstName, ContactRelation.Number, OriginNumberInfo.AvatarPath From OriginNumberInfo, ContactRelation, Contact Where OriginNumberInfo.Number = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID}.
 
 Для получения информации о звонках которые осуществлялись через Viber, нужен следующий запрос: 
-\textit{select Contact.FirstName, Events.Direction, datetime(Events.TimeStamp, 'unixepoch') from Contact, Events, ContactRelation where Events.EventID = (select Calls.EventID from Calls) AND Events.Number = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID}.
+\textit{select Contact.FirstName, Events.Direction, datetime(Events.TimeStamp, \`unixepoch\') from Contact, Events, ContactRelation where Events.EventID = (select Calls.EventID from Calls) AND Events.Number = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID}.
 
 Для получения текста переписки с конкретным пользователем нужно знать его номер чата. Для получения всех номеров чата нужно воспользоваться следующим запросом: 
 \textit{Select ChatInfo.ChatID, Contact.FirstName, ChatInfo.TokenFrom ChatInfo, ContactRelation, Contactwhere ChatInfo.Token = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID}.
 
 Зная номер чата, можно получить текст переписки: 
-\textit{select Messages.Body, Contact.FirstName, Events.Direction, Messages.ThumbnailPath, datetime(Events.TimeStamp, 'unixepoch') from messages, Events, Contact, ContactRelation where Messages.EventID = Events.EventID and Events.Number = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID and Events.ChatID = @nomer\_chata}.
+\textit{select Messages.Body, Contact.FirstName, Events.Direction, Messages.ThumbnailPath, datetime(Events.TimeStamp, \`unixepoch\') from messages, Events, Contact, ContactRelation where Messages.EventID = Events.EventID and Events.Number = ContactRelation.Number and ContactRelation.ContactID = Contact.ContactID and Events.ChatID = @nomer\_chata}.
 
 \subsubsection{Описание плагина}
 
-Плагин «TaskViber» получает точку монтирования жесткого диска, с которого, в отличии от ОС, проверяет папку «ViberPC» у всех пользователей в ОС. Если папка «ViberPC» существует, то плагин извлекает информацию из аккаунтов, под которыми авторизовались с данного компьютера. Всю найденную информацию плагин сохраняет по указанному пути программного обеспечения «COEX». В папку «Avatars» (рис.~\ref{kucher_9:kucher_9}) копируются все найденные изображения пользователей. В папку «Thumbnails» (рис.~\ref{kucher_10:kucher_10}) копируются все изображения, которые были отправлены и получены в ходе переписки. В файле «Avatar Path.txt» находятся связи между изображениями пользователей, именами и номерами телефонов. В файле «Calls.txt» находятся описание звонков, которые осуществлялись через «Viber» (с кем был звонок, во сколько и кто кому звонил). В файле «Phone book.txt» находятся все номера телефонов и имена с мобильного телефона, на котором был зарегистрирован аккаунт в «Viber». В файле «Viber book.txt» находятся все номера телефонов и имена, которым можно позвонить через «Viber». В файле «Имя/номер messages.txt» содержится переписка с пользователем «Имя/номер» (с кем велась переписка, кто кому писал, что писал и во сколько писал).
+Плагин <<TaskViber>> получает точку монтирования жесткого диска, с которого, в отличии от ОС, проверяет папку <<ViberPC>> у всех пользователей в ОС. Если папка <<ViberPC>> существует, то плагин извлекает информацию из аккаунтов, под которыми авторизовались с данного компьютера. Всю найденную информацию плагин сохраняет по указанному пути программного обеспечения <<COEX>>. В папку <<Avatars>> (рис.~\ref{kucher_9:kucher_9}) копируются все найденные изображения пользователей. В папку <<Thumbnails>> (рис.~\ref{kucher_10:kucher_10}) копируются все изображения, которые были отправлены и получены в ходе переписки. В файле <<Avatar Path.txt>> находятся связи между изображениями пользователей, именами и номерами телефонов. В файле <<Calls.txt>> находятся описание звонков, которые осуществлялись через <<Viber>> (с кем был звонок, во сколько и кто кому звонил). В файле <<Phone book.txt>> находятся все номера телефонов и имена с мобильного телефона, на котором был зарегистрирован аккаунт в <<Viber>>. В файле <<Viber book.txt>> находятся все номера телефонов и имена, которым можно позвонить через <<Viber>>. В файле <<Имя/номер messages.txt>> содержится переписка с пользователем <<Имя/номер>> (с кем велась переписка, кто кому писал, что писал и во сколько писал).
 
+<<<<<<< Updated upstream
 Алгоритм работы плагина «TaskViber» представлен на рисунке~\ref{kucher_4:kucher_4}, алгоритм функции WinXP --- на рисунке~\ref{kucher_5:kucher_5}. Ниже также представлены алгоритмы работы Win\_7\_8\_10 (рис.~\ref{kucher_6:kucher_6}) и Viber\_XP\_7\_8\_10 (рис.~\ref{kucher_7:kucher_7}).
+=======
+Блок-схема алгоритма работы плагина <<TaskViber>> представлена на рисунке~\ref{kucher_4:kucher_4}, блок-схема функции WinXP --- на рисунке~\ref{kucher_5:kucher_5}. Ниже также представлены блок-схемы Win\_7\_8\_10 (рис.~\ref{kucher_6:kucher_6}) и Viber\_XP\_7\_8\_10 (рис.~\ref{kucher_7:kucher_7}).
+>>>>>>> Stashed changes
 
 Результат работы плагина представлен на рисунке~\ref{kucher_8:kucher_8}.
  
@@ -96,13 +100,13 @@
 
 \begin{figure}[h!]
 \center{\includegraphics[width=1\linewidth]{kucher_9}}
-\caption{ Содержимое папки «Avatars» }
+\caption{ Содержимое папки <<Avatars>> }
 \label{kucher_9:kucher_9}
 \end{figure} 
 
 \begin{figure}[h!]
 \center{\includegraphics[width=0.8\linewidth]{kucher_10}}
-\caption{ Содержимое папки «Thumbnails» }
+\caption{ Содержимое папки <<Thumbnails>> }
 \label{kucher_10:kucher_10}
 \end{figure} 
 
