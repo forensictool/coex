@@ -52,11 +52,11 @@
 
 Поскольку главный поток (основная программа) начинает цикл обработки событий, используя QCoreApplication::exec(), при получении сигнала finished(), сгенерированного контроллером, цикл обработки событий главного потока прерывается и главная программа успешно завершается. 
 
-Блок-схема алгоритма работы основной программы представлена на рисунке~\ref{main-qthreads:main-qthreads}, блок-схема контроллера --- на рисунке~\ref{controller-qthreads:controller-qthreads}. 
+Алгоритм работы основной программы представлен на рисунке~\ref{main-qthreads:main-qthreads}, контроллера --- на рисунке~\ref{controller-qthreads:controller-qthreads}. 
 
 \begin{figure}[h!]
 \center{\includegraphics[width=0.5\linewidth]{main-qthreads}}
-\caption{ Блок-схема алгоритма работы основной программы qthreads }
+\caption{ Алгоритм работы основной программы qthreads }
 \label{main-qthreads:main-qthreads}
 \end{figure}
 
@@ -64,7 +64,7 @@
 
 \begin{figure}[ht]
 \center{\includegraphics[width=0.3\linewidth]{controller-qthreads}}
-\caption{ Блок-схема алгоритма работы контроллера qthreads }
+\caption{ Алгоритм работы контроллера qthreads }
 \label{controller-qthreads:controller-qthreads}
 \end{figure}
 
