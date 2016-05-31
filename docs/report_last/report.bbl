@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \def\selectlanguageifdefined#1{
 \expandafter\ifx\csname date#1\endcsname\relax
 \else\language\csname l@#1\endcsname\fi}
@@ -6,6 +6,12 @@
 \ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
 \ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
 \ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{github}
+\selectlanguageifdefined{english}
+{Learn Git and GitHub without any code [Электронный ресурс]}.
+  --- Режим доступа: https://github.com/ (дата
+  обращения: 25.04.2016).{}
 
 \bibitem{fedotovforenzika}
 \selectlanguageifdefined{russian}
@@ -29,10 +35,16 @@
 
 \bibitem{latexrus}
 \selectlanguageifdefined{russian}
-{И. А. Чеботаев, П. З. Котельников}. {\LaTeXe\
+{И. А. Чеботаев, П. З. Котельников}. {\LaTeX\
   по-русски}.
 \newblock Сибирский Хронограф, 2004.
 \newblock 489~с.{}
+
+\bibitem{markdown}
+\selectlanguageifdefined{english}
+{Daring Fireball: MarkDown Syntax [Электронный ресурс]}. ---
+  Режим доступа: https://daringfireball.net/projects/syntax
+  (дата обращения: 12.04.2016).{}
 
 \bibitem{qtdoc}
 \selectlanguageifdefined{russian}
@@ -45,16 +57,43 @@
   программировании - Qt [Электронный ресурс]}.
   --- Режим доступа: http://doc.crossplatform.ru/qt.{}
 
-\bibitem{gitlab}
-\selectlanguageifdefined{english}
-{Code, test and deploy together [Электронный ресурс]}. ---
-  Режим доступа: https://about.gitlab.com/ (дата
-  обращения: 25.10.2015).{}
-
 \bibitem{xml}
 \selectlanguageifdefined{russian}
 {Справочник по XML-стандартам [Электронный
   ресурс]}. --- Режим доступа:
   http://msdn.microsoft.com/ru-ru/library/ms256177(v=vs.110).aspx.{}
+
+\bibitem{tecmint}
+\selectlanguageifdefined{english}
+{Tecmint: Linux Howtos, Tutorials and Guides [Электронный
+  ресурс]}. --- Режим доступа: http://www.tecmint.com/
+  (дата обращения: 15.03.2016).{}
+
+\bibitem{adobe}
+\selectlanguageifdefined{english}
+{PDF Reference, second edition. Adobe Portable Document Format, Version 1.3
+  [Электронный ресурс]}. --- Режим доступа:
+  https://partners.adobe.com/public/developer/en/pdf/PDFReference13.pdf
+  (дата обращения: 15.04.2016).{}
+
+\bibitem{signalsandslots}
+\selectlanguageifdefined{russian}
+{Сигналы и слоты [Электронный ресурс]}. ---
+  Режим доступа:
+  http://doc.crossplatform.ru/qt/4.3.2/signalsandslots.html (дата
+  обращения: 1.04.2016).{}
+
+\bibitem{threadsandprocesses}
+\selectlanguageifdefined{russian}
+{Процессы и потоки в Qt [Электронный ресурс]}.
+  --- Режим доступа: http://qt-doc.ru/processy-i-potoki-v-qt.html
+  (дата обращения: 1.04.2016).{}
+
+\bibitem{threads}
+\selectlanguageifdefined{russian}
+{Поддержка потоков в Qt [Электронный
+  ресурс]}. --- Режим доступа:
+  http://doc.crossplatform.ru/qt/4.4.3/threads.html (дата
+  обращения: 1.04.2016).{}
 
 \end{thebibliography}
