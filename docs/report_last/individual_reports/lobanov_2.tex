@@ -4,7 +4,7 @@
 
 Задание: написать плагин, который будет находить PDF документы со встроенными JavaScript сценариями (рис.~\ref{lob_8:lob_8}).
 
-\begin{figure}[!ht]
+\begin{figure}[h!]
 \center{\includegraphics[width=1\linewidth]{lob_8}}
 \caption{Вырезка из стандарта PDF 1.3}
 \label{lob_8:lob_8}
@@ -12,13 +12,13 @@
 
 Согласно этому стандарту, все JavaScript сценарии обрамляются обязательным ключом <<JS>>, поэтому задача сводится к обнаружению этого ключа в заголовочном блоке PDF документа. Для этого был реализован алгоритм (представлен на рисунке~\ref{lob_9:lob_9}). Результат работы плагина можно увидеть на рисунке~\ref{lob_10:lob_10}.
 
-\begin{figure}[!ht]
+\begin{figure}[h!]
 \center{\includegraphics[width=0.8\linewidth]{lob_10}}
 \caption{Результат работы плагина}
 \label{lob_10:lob_10}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[h!]
 \center{\includegraphics[width=0.8\linewidth]{lob_9}}
 \caption{Алгоритм поиска JavaScript в PDF}
 \label{lob_9:lob_9}
