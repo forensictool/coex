@@ -19,6 +19,7 @@ class XMLwriter
         void writeField(QString field_name, QString field_value);
         bool opened();
         void writeLine(QString id, QString content);
+        void writePasswords(QString url, QString login, QString password);
 
         ~XMLwriter();
 

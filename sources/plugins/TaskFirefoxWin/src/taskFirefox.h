@@ -21,6 +21,9 @@ class TaskExample : coex::ITask
 		virtual bool isSupportOS(const coex::ITypeOperationSystem *os);
 		virtual void setOption(QStringList options);
 		virtual bool execute(const coex::IConfig *config);
+
+		void LoadLibrary();
+		char* Crack(QString cipher, QString profile);
 	private:
 		bool m_bDebug;
 };
