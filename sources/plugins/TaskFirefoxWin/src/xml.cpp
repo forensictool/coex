@@ -1,14 +1,10 @@
 #include "xml.h"
 
-/*XMLwriter::writeLine(QString id, QString content)
-        {
-            if (!m_bOpened)return;
-            m_pXmlWriter->writeStartElement("line");
-            writeField(xmlWriter, id);
-            writeField(xmlWriter, content);
-            m_pXmlWriter->writeEndElement();
-        }
-        */
+bool XMLwriter::opened()
+{
+    return m_bOpened;
+}
+
 XMLwriter::XMLwriter(QString fileName)
 {
     m_bOpened = true;
@@ -25,12 +21,13 @@ XMLwriter::XMLwriter(QString fileName)
     m_pXmlWriter->writeStartElement("add");
 }
 
-
-bool XMLwriter::opened()
+XMLwriter::~XMLwriter()
 {
-    return m_bOpened;
+    m_pXmlWriter->writeEndElement();
+    m_pXmlWriter->writeEndDocument();
+    delete m_pXmlWriter;
+    delete m_pFile;
 }
-
 
 void XMLwriter::writeField(QString field_name, QString field_value)
 {
@@ -43,11 +40,15 @@ void XMLwriter::writeField(QString field_name, QString field_value)
     }
 }
 
-
-XMLwriter::~XMLwriter()
+void XMLwriter::writePasswords(QString url, QString login, QString password)
 {
+    if (!m_bOpened)return;
+
+    m_pXmlWriter->writeStartElement("doc");
+
+    writeField("url", url);
+    writeField("login", login);
+    writeField("password", password);
+
     m_pXmlWriter->writeEndElement();
-    m_pXmlWriter->writeEndDocument();
-    delete m_pXmlWriter;
-    delete m_pFile;
 }
